@@ -11,6 +11,9 @@ import argparse
 
 # ------------ macros ------------ #
 SAMPLE_RATE = 16e3
+ORG_CSV_PATH = 'ReCANVo/dataset_file_directory.csv'
+RENAME_CSV_PATH = 'ReCANVo/renamed_metadata.csv'
+AUDIO_DIR = 'ReCANVo/'
 
 
 # ----------------------- preprocessing functions ----------------------- #
@@ -42,9 +45,14 @@ def rename_audio_files(csv_path: str,
         old_path = os.path.join(audio_dir, org_name)
         new_path = os.path.join(audio_dir, new_name)
 
+        if not os.path.exists(old_path):
+            print(f"❌ File not found: {old_path}. Skipping renaming process.")
+            return  # Exit the function immediately if any file is missing
+
         os.rename(old_path, new_path)
         renamed_files.append((new_name, id, label, index))
 
+    # If renaming was successful, save the updated metadata
     renamed_df = pl.DataFrame(renamed_files, schema=["Filename", "ID", "Label", "Index"], orient="row")
     output_path = os.path.join(audio_dir, output_csv)
     renamed_df.write_csv(output_path)
@@ -229,16 +237,16 @@ def pipeline(rename: bool=False, limit: Union[int, None] = None):
     if rename:
         t0 = time.time()
         rename_audio_files(
-            "./ReCANVo/dataset_file_directory.csv",
-            "./ReCANVo/"
+            csv_path=ORG_CSV_PATH,
+            audio_dir=AUDIO_DIR,
         )
         print(f"📝 rename_audio_files completed in {time.time() - t0:.2f} seconds")
 
     # Step 2: Load audio metadata
     t0 = time.time()
     df = load_audio_metadata(
-        csv_path="./ReCANVo/renamed_metadata.csv",
-        audio_dir="./ReCANVo/",
+        csv_path=RENAME_CSV_PATH,
+        audio_dir=AUDIO_DIR,
         limit=limit
     )
     print(f"⏳ load_audio_metadata completed in {time.time() - t0:.2f} seconds")
