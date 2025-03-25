@@ -222,6 +222,7 @@ def pipeline(rename: bool=False, limit: Union[int, None] = None):
     """
     Pipeline to run all preprocessing functions with timing.
     """
+    print("🚀 Starting preprocessing pipeline...")
     start = time.time()
     
     # Step 1: Rename files
