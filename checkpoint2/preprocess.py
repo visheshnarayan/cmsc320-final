@@ -3,7 +3,9 @@ import polars as pl
 import numpy as np
 import os
 import librosa
+import scipy.signal as signal
 import polars as pl
+import soundfile as sf 
 from typing import Union, List, Dict
 import json
 import time
@@ -17,6 +19,187 @@ AUDIO_DIR = 'ReCANVo/'
 
 
 # ----------------------- preprocessing functions ----------------------- #
+import numpy as np
+import librosa
+import soundfile as sf  # Added soundfile for audio writing
+import scipy.signal as signal
+import os
+
+def save_audio_comparison(original_y: np.ndarray, 
+                           cleaned_y: np.ndarray, 
+                           sr: int, 
+                           filename: str, 
+                           output_dir: str = 'audio_comparisons') -> None:
+    """
+    Save original and cleaned audio files for side-by-side comparison.
+
+    Parameters:
+        original_y (np.ndarray): Original audio time series
+        cleaned_y (np.ndarray): Cleaned audio time series
+        sr (int): Sampling rate
+        filename (str): Base filename for saved audio files
+        output_dir (str): Directory to save comparison audio files
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    base_name = os.path.splitext(filename)[0]
+    original_path = os.path.join(output_dir, f"{base_name}_original.wav")
+    cleaned_path = os.path.join(output_dir, f"{base_name}_cleaned.wav")
+
+    sf.write(original_path, original_y, sr)
+    sf.write(cleaned_path, cleaned_y, sr)
+
+def clean_audio(y: np.ndarray, 
+                sr: int, 
+                denoise: bool = True, 
+                remove_silence: bool = True,
+                normalize: bool = True,
+                min_silence_duration: float = 0.3,
+                silence_threshold: float = -40) -> np.ndarray:
+    """
+    Enhanced audio cleaning function tailored for voice recordings of autistic individuals.
+
+    Parameters:
+        y (np.ndarray): Input audio time series
+        sr (int): Sampling rate
+        denoise (bool): Apply noise reduction
+        remove_silence (bool): Remove long silent segments
+        normalize (bool): Normalize audio amplitude
+        min_silence_duration (float): Minimum duration of silence to remove (in seconds)
+        silence_threshold (float): Decibel threshold for silence detection
+
+    Returns:
+        np.ndarray: Cleaned audio time series
+    """
+    cleaned_audio = y.copy()
+
+    if normalize:
+        cleaned_audio = librosa.util.normalize(cleaned_audio)
+
+    # Noise reduction using spectral gating
+    if denoise:
+        # Compute short-time Fourier transform (STFT)
+        stft = librosa.stft(cleaned_audio)
+        
+        # Compute magnitude and phase
+        mag, phase = librosa.magphase(stft)
+        
+        # Compute the noise threshold
+        noise_threshold = np.median(mag) * 0.5
+        
+        # Create a soft mask to reduce noise
+        mask = mag > noise_threshold
+        
+        # Apply the mask
+        cleaned_stft = stft * mask
+        
+        # Convert back to time domain
+        cleaned_audio = librosa.istft(cleaned_stft)
+
+    # Remove long silent segments
+    if remove_silence:
+        # Compute the frame size and hop length for silence detection
+        frame_length = int(sr * min_silence_duration)
+        hop_length = frame_length // 2
+
+        # Detect non-silent frames
+        non_silent_frames = librosa.effects.split(
+            cleaned_audio, 
+            top_db=abs(silence_threshold), 
+            frame_length=frame_length, 
+            hop_length=hop_length
+        )
+
+        # Reconstruct audio from non-silent segments
+        cleaned_audio = np.concatenate([
+            cleaned_audio[start:end] for start, end in non_silent_frames
+        ])
+
+    # Apply gentle high-pass filter to reduce low-frequency noise
+    b, a = signal.butter(6, 80 / (sr/2), btype='high')
+    cleaned_audio = signal.filtfilt(b, a, cleaned_audio)
+
+    return cleaned_audio
+
+def load_audio_metadata(csv_path: str,
+                        audio_dir: str,
+                        limit: Union[int, None] = None,
+                        clean_audio_params: dict = None,
+                        save_comparisons: bool = False,
+                        comparison_dir: str = 'audio_comparisons') -> pl.DataFrame:
+    """
+    Loads audio files from directory and returns a DataFrame with cleaned waveform and metadata.
+
+    Args:
+        csv_path (str): Path to the CSV file containing data.
+        audio_dir (str): Directory where audio files are stored.
+        limit (int, optional): Number of rows to load. If None, loads all.
+        clean_audio_params (dict, optional): Parameters for audio cleaning.
+        save_comparisons (bool): Whether to save original vs cleaned audio files
+        comparison_dir (str): Directory to save comparison audio files
+
+    Returns:
+        pl.DataFrame: DataFrame with columns: Filename, Audio, ID, Label, Duration, Index
+    """
+    df = pl.read_csv(csv_path)
+    if limit:
+        df = df.head(limit)
+
+    # Default cleaning parameters if not provided
+    default_clean_params = {
+        'denoise': True,
+        'remove_silence': True,
+        'normalize': True,
+        'min_silence_duration': 0.3,
+        'silence_threshold': -40
+    }
+    clean_params = default_clean_params if clean_audio_params is None else {**default_clean_params, **clean_audio_params}
+
+    audio_data = []
+
+    if save_comparisons is True:
+        comparison_count = len(df)  
+    else:
+        comparison_count = 0  
+
+    for idx, row in enumerate(df.iter_rows(named=True)):
+        file_name = row['Filename']
+        file_path = os.path.join(audio_dir, file_name)
+
+        # Load original audio
+        y, sr = librosa.load(file_path, sr=None)
+        
+        # Clean audio
+        cleaned_y = clean_audio(y, sr, **clean_params)
+
+        if save_comparisons and idx < comparison_count:
+            save_audio_comparison(
+                original_y=y, 
+                cleaned_y=cleaned_y, 
+                sr=sr, 
+                filename=file_name,
+                output_dir=comparison_dir
+            )
+        
+        duration = len(cleaned_y) / sr
+
+        audio_data.append((
+            file_name,
+            cleaned_y.tolist(),
+            row['ID'],
+            row['Label'],
+            duration,
+            row['Index']
+        ))
+
+    audio_df = pl.DataFrame(
+        audio_data,
+        schema=["Filename", "Audio", "ID", "Label", "Duration", "Index"],
+        orient='row'
+    )
+
+    return audio_df
+
+
 def rename_audio_files(csv_path: str,
                        audio_dir: str,
                        output_csv: str = "renamed_metadata.csv") -> None:
@@ -56,52 +239,7 @@ def rename_audio_files(csv_path: str,
     renamed_df = pl.DataFrame(renamed_files, schema=["Filename", "ID", "Label", "Index"], orient="row")
     output_path = os.path.join(audio_dir, output_csv)
     renamed_df.write_csv(output_path)
-
-
-def load_audio_metadata(csv_path: str,
-                        audio_dir: str,
-                        limit: Union[int, None] = None) -> pl.DataFrame:
-    """
-    Loads audio files from directory and returns a DataFrame with waveform and metadata.
-
-    Args:
-        csv_path (str): Path to the CSV file containing data.
-        audio_dir (str): Directory where audio files are stored.
-        limit (int, optional): Number of rows to load. If None, loads all.
-
-    Returns:
-        pl.DataFrame: DataFrame with columns: Filename, Audio, ID, Label, Duration, Index
-    """
-    df = pl.read_csv(csv_path)
-    if limit:
-        df = df.head(limit)
-
-    audio_data = []
-
-    for row in df.iter_rows(named=True):
-        file_name = row['Filename']
-        file_path = os.path.join(audio_dir, file_name)
-
-        y, sr = librosa.load(file_path, sr=None)
-        duration = len(y) / sr
-
-        audio_data.append((
-            file_name,
-            y.tolist(),
-            row['ID'],
-            row['Label'],
-            duration,
-            row['Index']
-        ))
-
-    audio_df = pl.DataFrame(
-        audio_data,
-        schema=["Filename", "Audio", "ID", "Label", "Duration", "Index"],
-        orient='row'
-    )
-
-    return audio_df
-
+    
 
 def compute_or_load_global_stats(ys: List[np.ndarray],
                                  sr: int,
@@ -226,9 +364,12 @@ def audio_to_spectrogram(y: np.ndarray,
     return S_fixed
 
 
-def pipeline(rename: bool=False, limit: Union[int, None] = None):
+def pipeline(rename: bool=False, 
+             limit: Union[int, None] = None,
+             clean_audio_params: dict = None,
+             save_comparisons: bool = False):
     """
-    Pipeline to run all preprocessing functions with timing.
+    Pipeline to run all preprocessing functions with timing and optional audio cleaning.
     """
     print("🚀 Starting preprocessing pipeline...")
     start = time.time()
@@ -242,12 +383,14 @@ def pipeline(rename: bool=False, limit: Union[int, None] = None):
         )
         print(f"📝 rename_audio_files completed in {time.time() - t0:.2f} seconds")
 
-    # Step 2: Load audio metadata
+    # Step 2: Load audio metadata with cleaning
     t0 = time.time()
     df = load_audio_metadata(
         csv_path=RENAME_CSV_PATH,
         audio_dir=AUDIO_DIR,
-        limit=limit
+        limit=limit,
+        clean_audio_params=clean_audio_params,
+        save_comparisons=save_comparisons
     )
     print(f"⏳ load_audio_metadata completed in {time.time() - t0:.2f} seconds")
 
@@ -294,9 +437,24 @@ if __name__ == '__main__':
         help='Limit the number of audio files to load and process'
     )
 
+    parser.add_argument(
+        '--save_comparisons',
+        action='store_true',
+        help='Save original vs cleaned audio files for comparison'
+    )
+
     args = parser.parse_args()
 
-    pipeline(
-        rename=args.rename,
-        limit=args.limit
+    custom_clean_params = {
+        'denoise': True,
+        'remove_silence': True,
+        'min_silence_duration': 0.5,
+        'silence_threshold': -35
+    }
+
+    df = pipeline(
+        rename=False, 
+        limit=None,
+        clean_audio_params=custom_clean_params,
+        save_comparisons=False
     )
