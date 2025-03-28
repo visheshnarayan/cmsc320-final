@@ -2,20 +2,22 @@
 import polars as pl
 import numpy as np
 import os
+import pickle
 import librosa
 import scipy.signal as signal
 import polars as pl
 import soundfile as sf 
 from typing import Union, List, Dict
+import matplotlib.pyplot as plt
 import json
 import time
 import argparse
 
 # ------------ macros ------------ #
 SAMPLE_RATE = 16e3
-ORG_CSV_PATH = 'ReCANVo/dataset_file_directory.csv'
-RENAME_CSV_PATH = 'ReCANVo/renamed_metadata.csv'
-AUDIO_DIR = 'ReCANVo/'
+ORG_CSV_PATH = './ReCANVo/dataset_file_directory.csv'
+RENAME_CSV_PATH = './ReCANVo/renamed_metadata.csv'
+AUDIO_DIR = './ReCANVo/'
 
 
 # ----------------------- preprocessing functions ----------------------- #
@@ -364,17 +366,18 @@ def audio_to_spectrogram(y: np.ndarray,
     return S_fixed
 
 
-def pipeline(rename: bool=False, 
+def pipeline(rename: bool = False, 
              limit: Union[int, None] = None,
              clean_audio_params: dict = None,
-             save_comparisons: bool = False):
+             save_comparisons: bool = False,
+             save_path: str = "processed_dataset.parquet") -> pl.DataFrame:
     """
     Pipeline to run all preprocessing functions with timing and optional audio cleaning.
+    Only supports saving to .parquet (not CSV) to handle arrays properly.
     """
     print("🚀 Starting preprocessing pipeline...")
     start = time.time()
     
-    # Step 1: Rename files
     if rename:
         t0 = time.time()
         rename_audio_files(
@@ -383,7 +386,6 @@ def pipeline(rename: bool=False,
         )
         print(f"📝 rename_audio_files completed in {time.time() - t0:.2f} seconds")
 
-    # Step 2: Load audio metadata with cleaning
     t0 = time.time()
     df = load_audio_metadata(
         csv_path=RENAME_CSV_PATH,
@@ -394,7 +396,6 @@ def pipeline(rename: bool=False,
     )
     print(f"⏳ load_audio_metadata completed in {time.time() - t0:.2f} seconds")
 
-    # Step 3: Compute or load global stats
     t0 = time.time()
     stats = compute_or_load_global_stats(df["Audio"].to_numpy(), sr=SAMPLE_RATE)
     print(f"🧮 compute_or_load_global_stats completed in {time.time() - t0:.2f} seconds")
@@ -404,7 +405,6 @@ def pipeline(rename: bool=False,
         print(f"  {k}: {v}")
     print()
 
-    # Step 4: Compute spectrograms
     t0 = time.time()
     df = df.with_columns([
         pl.col("Audio").map_elements(lambda y: audio_to_spectrogram(
@@ -416,10 +416,11 @@ def pipeline(rename: bool=False,
         ), return_dtype=pl.Object).alias("Spectrogram")
     ])
     print(f"🔊 Spectrogram generation completed in {time.time() - t0:.2f} seconds")
-
-    # Done
-    print(f"\n🏁 Full pipeline completed in {time.time() - start:.2f} seconds\n")
+    
+    print(f"🏁 Full pipeline completed in {time.time() - start:.2f} seconds\n")
     print(df)
+    
+    return df
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run preprocessing pipeline")
@@ -443,6 +444,12 @@ if __name__ == '__main__':
         help='Save original vs cleaned audio files for comparison'
     )
 
+    parser.add_argument(
+        '--save_data',
+        action='store_true',
+        help='Save the processed DataFrame to a pickle file'
+    )
+
     args = parser.parse_args()
 
     custom_clean_params = {
@@ -453,8 +460,18 @@ if __name__ == '__main__':
     }
 
     df = pipeline(
-        rename=False, 
+        rename=True, 
         limit=None,
         clean_audio_params=custom_clean_params,
         save_comparisons=False
     )
+
+    if args.save_data:
+        df = df.with_columns([
+            pl.col("Audio").map_elements(lambda y: np.array(y, dtype=np.float32).tolist(), return_dtype=pl.List(pl.Float32)),
+            pl.col("Spectrogram").map_elements(lambda s: np.array(s, dtype=np.float32).tolist(), return_dtype=pl.List(pl.List(pl.Float32)))
+        ])
+
+        with open("processed_data.pkl", "wb") as f:
+            pickle.dump(df, f)
+        print("💾 Saved processed DataFrame to 'processed_data.pkl'")
