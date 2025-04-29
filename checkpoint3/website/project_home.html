@@ -43,6 +43,85 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        /* Data table styling for Clarity template */
+        .data-table-container {
+          margin: 2rem 0;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+          overflow-x: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .data-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.9rem;
+          border: 1px solid #e0e4e6;
+          background-color: white;
+        }
+        
+        .data-table-header {
+          padding: 0.75rem 1rem;
+          background-color: #f5f7f8;
+          color: #505a5f;
+          text-align: left;
+          font-size: 0.85rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          border-bottom: 2px solid #e0e4e6;
+        }
+        
+        .data-table-datatype {
+          padding: 0.5rem 1rem;
+          color: #667883;
+          font-size: 0.75rem;
+          font-weight: normal;
+          background-color: #f9fafb;
+          border-bottom: 1px solid #e0e4e6;
+          font-family: Menlo, Monaco, "Courier New", monospace;
+        }
+        
+        .data-table-cell {
+          padding: 0.5rem 1rem;
+          border-top: 1px solid #e0e4e6;
+          color: #2a3439;
+          vertical-align: top;
+          font-size: 0.85rem;
+        }
+        
+        .data-table-cell code {
+          font-family: Menlo, Monaco, "Courier New", monospace;
+          font-size: 0.8rem;
+          color: #505a5f;
+          background-color: #f5f7f8;
+          padding: 0.2rem;
+          border-radius: 3px;
+        }
+        
+        .data-table-footer {
+          font-size: 0.75rem;
+          color: #667883;
+          padding: 0.75rem 1rem;
+          text-align: left;
+          background-color: #f9fafb;
+          border-top: 1px solid #e0e4e6;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+          background-color: #f9fafb;
+        }
+        
+        .data-table tbody tr:hover {
+          background-color: #f0f4f7;
+        }
+        
+        .data-table-truncated {
+          color: #8b9aa4;
+          font-style: italic;
+        }
+        </style>
 </head>
 
 <body>
@@ -620,6 +699,600 @@ def open_pickle(path: str) -> pl.DataFrame:
         df = pickle.load(f)
     return df
     </code></pre>
+
+    <h2>DataFrame Overview</h2>
+    
+    <p class="text">
+        The Dataframe is stored as a pkl containing key information about the audio including: Filename, Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is stored as a list of lists of floats, and the rest are strings or floats.
+    </p>
+    <div class="data-table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="data-table-header">Filename</th>
+              <th class="data-table-header">Audio</th>
+              <th class="data-table-header">ID</th>
+              <th class="data-table-header">Label</th>
+              <th class="data-table-header">Duration</th>
+              <th class="data-table-header">Index</th>
+              <th class="data-table-header">Spectrogram</th>
+            </tr>
+            <tr>
+              <td class="data-table-datatype">str</td>
+              <td class="data-table-datatype">list[f64]</td>
+              <td class="data-table-datatype">str</td>
+              <td class="data-table-datatype">str</td>
+              <td class="data-table-datatype">f64</td>
+              <td class="data-table-datatype">i64</td>
+              <td class="data-table-datatype">list[list[f64]]</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="data-table-cell">P01_dysregulation-sick_1.wav</td>
+              <td class="data-table-cell">[-0.107705, -0.120444, ...]</td>
+              <td class="data-table-cell">P01</td>
+              <td class="data-table-cell">dysregulation-sick</td>
+              <td class="data-table-cell">0.25542</td>
+              <td class="data-table-cell">1</td>
+              <td class="data-table-cell">[[1.065977, 0.518101, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P01_dysregulation-sick_2.wav</td>
+              <td class="data-table-cell">[0.145759, 0.148596, ...]</td>
+              <td class="data-table-cell">P01</td>
+              <td class="data-table-cell">dysregulation-sick</td>
+              <td class="data-table-cell">0.928798</td>
+              <td class="data-table-cell">2</td>
+              <td class="data-table-cell">[[1.004109, 0.631097, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P01_dysregulation-sick_3.wav</td>
+              <td class="data-table-cell">[0.034167, 0.022343, ...]</td>
+              <td class="data-table-cell">P01</td>
+              <td class="data-table-cell">dysregulation-sick</td>
+              <td class="data-table-cell">1.137778</td>
+              <td class="data-table-cell">3</td>
+              <td class="data-table-cell">[[0.113385, -0.084511, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P01_dysregulation-sick_4.wav</td>
+              <td class="data-table-cell">[-0.005172, -0.009896, ...]</td>
+              <td class="data-table-cell">P01</td>
+              <td class="data-table-cell">dysregulation-sick</td>
+              <td class="data-table-cell">3.645533</td>
+              <td class="data-table-cell">4</td>
+              <td class="data-table-cell">[[-0.463286, -0.999457, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P01_dysregulation-sick_5.wav</td>
+              <td class="data-table-cell">[-0.0023, -0.001397, ...]</td>
+              <td class="data-table-cell">P01</td>
+              <td class="data-table-cell">dysregulation-sick</td>
+              <td class="data-table-cell">0.394739</td>
+              <td class="data-table-cell">5</td>
+              <td class="data-table-cell">[[0.945787, 0.609868, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell" colspan="7" class="data-table-truncated">...</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P16_delighted_135.wav</td>
+              <td class="data-table-cell">[0.000027, 0.000085, ...]</td>
+              <td class="data-table-cell">P16</td>
+              <td class="data-table-cell">delighted</td>
+              <td class="data-table-cell">1.044898</td>
+              <td class="data-table-cell">135</td>
+              <td class="data-table-cell">[[-1.28051, -1.294608, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P16_delighted_136.wav</td>
+              <td class="data-table-cell">[0.016696, 0.013343, ...]</td>
+              <td class="data-table-cell">P16</td>
+              <td class="data-table-cell">delighted</td>
+              <td class="data-table-cell">0.638549</td>
+              <td class="data-table-cell">136</td>
+              <td class="data-table-cell">[[0.801103, 0.513365, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P16_delighted_137.wav</td>
+              <td class="data-table-cell">[0.008781, 0.005037, ...]</td>
+              <td class="data-table-cell">P16</td>
+              <td class="data-table-cell">delighted</td>
+              <td class="data-table-cell">0.766259</td>
+              <td class="data-table-cell">137</td>
+              <td class="data-table-cell">[[0.40735, 0.053851, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P16_delighted_138.wav</td>
+              <td class="data-table-cell">[0.015408, 0.010745, ...]</td>
+              <td class="data-table-cell">P16</td>
+              <td class="data-table-cell">delighted</td>
+              <td class="data-table-cell">0.743039</td>
+              <td class="data-table-cell">138</td>
+              <td class="data-table-cell">[[0.439509, 0.102873, ...], ...]</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">P16_delighted_139.wav</td>
+              <td class="data-table-cell">[-0.00114, -0.003822, ...]</td>
+              <td class="data-table-cell">P16</td>
+              <td class="data-table-cell">delighted</td>
+              <td class="data-table-cell">1.277098</td>
+              <td class="data-table-cell">139</td>
+              <td class="data-table-cell">[[0.294103, -0.048475, ...], ...]</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7" class="data-table-footer">
+                shape: (7,077, 7) | Dataset contains audio samples from multiple participants with various intent labels
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    
+      <h2>Data Exploration</h2>
+
+        <p class="text">
+        We explored the dataset to understand the distribution of labels and the characteristics of the audio samples. 
+        We visualized the distribution of labels using a bar plot, which showed that the dataset is relatively balanced across different intent categories.
+        </p>
+        <pre><code class="python">
+print(f"Dataframe shape: {df.shape}")
+df.describe()
+        </code></pre>
+        
+        
+
+        <div class="data-table-container">
+            Dataframe shape: (7077, 7)
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="data-table-header">statistic</th>
+                  <th class="data-table-header">Filename</th>
+                  <th class="data-table-header">Audio</th>
+                  <th class="data-table-header">ID</th>
+                  <th class="data-table-header">Label</th>
+                  <th class="data-table-header">Duration</th>
+                  <th class="data-table-header">Index</th>
+                  <th class="data-table-header">Spectrogram</th>
+                </tr>
+                <tr>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">f64</td>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">f64</td>
+                  <td class="data-table-datatype">f64</td>
+                  <td class="data-table-datatype">f64</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="data-table-cell">"count"</td>
+                  <td class="data-table-cell">"7077"</td>
+                  <td class="data-table-cell">7077.0</td>
+                  <td class="data-table-cell">"7077"</td>
+                  <td class="data-table-cell">"7077"</td>
+                  <td class="data-table-cell">7077.0</td>
+                  <td class="data-table-cell">7077.0</td>
+                  <td class="data-table-cell">7077.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"null_count"</td>
+                  <td class="data-table-cell">"0"</td>
+                  <td class="data-table-cell">0.0</td>
+                  <td class="data-table-cell">"0"</td>
+                  <td class="data-table-cell">"0"</td>
+                  <td class="data-table-cell">0.0</td>
+                  <td class="data-table-cell">0.0</td>
+                  <td class="data-table-cell">0.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"mean"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">1.240378</td>
+                  <td class="data-table-cell">154.396637</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"std"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">1.012603</td>
+                  <td class="data-table-cell">158.147559</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"min"</td>
+                  <td class="data-table-cell">"P01_bathroom_1.wav"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">"P01"</td>
+                  <td class="data-table-cell">"affectionate"</td>
+                  <td class="data-table-cell">0.08127</td>
+                  <td class="data-table-cell">1.0</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"25%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">0.592109</td>
+                  <td class="data-table-cell">36.0</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"50%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">0.940408</td>
+                  <td class="data-table-cell">104.0</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"75%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">1.520907</td>
+                  <td class="data-table-cell">216.0</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"max"</td>
+                  <td class="data-table-cell">"P16_social_9.wav"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">"P16"</td>
+                  <td class="data-table-cell">"yes"</td>
+                  <td class="data-table-cell">14.048073</td>
+                  <td class="data-table-cell">781.0</td>
+                  <td class="data-table-cell">null</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="8" class="data-table-footer">
+                    shape: (9, 8) | Dataset statistics summary for audio samples collection
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          
+        <pre><code class="python">
+df.null_count()
+        </code></pre>
+
+        <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="data-table-header">Filename</th>
+                  <th class="data-table-header">Audio</th>
+                  <th class="data-table-header">ID</th>
+                  <th class="data-table-header">Label</th>
+                  <th class="data-table-header">Duration</th>
+                  <th class="data-table-header">Index</th>
+                  <th class="data-table-header">Spectrogram</th>
+                </tr>
+                <tr>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                  <td class="data-table-datatype">u32</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                  <td class="data-table-cell">0</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="7" class="data-table-footer">
+                    shape: (1, 7) | Zero count table
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        
+        <p class="text">
+            YIPEEEEE 🎉
+            The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
+        </p>
+        <pre><code class="python">
+label_counts = df['Label'].value_counts()
+label_counts
+        </code></pre>
+
+        <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="data-table-header">Label</th>
+                  <th class="data-table-header">count</th>
+                </tr>
+                <tr>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">u32</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="data-table-cell">"bathroom"</td>
+                  <td class="data-table-cell">20</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"more"</td>
+                  <td class="data-table-cell">22</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"protest"</td>
+                  <td class="data-table-cell">21</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"social"</td>
+                  <td class="data-table-cell">634</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"request"</td>
+                  <td class="data-table-cell">419</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell" colspan="2" class="data-table-truncated">...</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"dysregulated"</td>
+                  <td class="data-table-cell">704</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"happy"</td>
+                  <td class="data-table-cell">61</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"delighted"</td>
+                  <td class="data-table-cell">1272</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"laugh"</td>
+                  <td class="data-table-cell">8</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"frustrated"</td>
+                  <td class="data-table-cell">1536</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2" class="data-table-footer">
+                    shape: (22, 2) | Count of audio samples by label category
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+        <p class="text">
+            There are discrepencies of how many labels exist per group. The mean is approximately 320, but there is a high deviation of nearly 500
+        </p>
+
+        <pre><code class="python">
+label_counts.describe()
+        </code></pre>
+
+        <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="data-table-header">statistic</th>
+                  <th class="data-table-header">Label</th>
+                  <th class="data-table-header">count</th>
+                </tr>
+                <tr>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">str</td>
+                  <td class="data-table-datatype">f64</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="data-table-cell">"count"</td>
+                  <td class="data-table-cell">"22"</td>
+                  <td class="data-table-cell">22.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"null_count"</td>
+                  <td class="data-table-cell">"0"</td>
+                  <td class="data-table-cell">0.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"mean"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">321.681818</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"std"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">551.158208</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"min"</td>
+                  <td class="data-table-cell">"affectionate"</td>
+                  <td class="data-table-cell">3.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"25%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">12.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"50%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">61.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"75%"</td>
+                  <td class="data-table-cell">null</td>
+                  <td class="data-table-cell">419.0</td>
+                </tr>
+                <tr>
+                  <td class="data-table-cell">"max"</td>
+                  <td class="data-table-cell">"yes"</td>
+                  <td class="data-table-cell">1885.0</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="data-table-footer">
+                    shape: (9, 3) | Statistical summary for label distribution
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <pre><code class="python">
+colors = plt.cm.viridis(np.linspace(0, 1, len(label_counts))) # pretty colors 
+plt.figure(figsize=(10, 6))
+plt.bar(label_counts['Label'], label_counts['count'], color=colors)
+plt.title('Distribution of Labels')
+plt.xlabel('Label')
+plt.ylabel('Count')
+plt.xticks(rotation=70) # so labels don't overlap
+plt.tight_layout()
+plt.show()
+        </code></pre>
+
+        <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
+        
+        <ul class="text">
+            <li class="text">Label Distribution: The dataset contains a variety of labels, with "frustrated" and "delighted" being the most common.</li>
+            <li class="text">Label Variety: Some participants exhibit a wide range of labels, while others are more consistent in their responses.</li>
+            <li class="text">Customized Approaches: The differences in label distribution across participants suggest that personalized models might be more effective (depending on model type).</li>
+        </ul>
+
+        <pre><code class="python">
+# Plot for each person
+participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count'))
+participant_label_counts = participant_label_counts.to_pandas()
+
+participant_ids = participant_label_counts['ID'].unique()
+n_cols = 4
+n_rows = 2
+
+# Create subplots
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(n_cols * 5, n_rows * 4), constrained_layout=True)
+fig.suptitle('Label Distribution per Participant', fontsize=16)
+
+for idx, participant_id in enumerate(participant_ids):
+    ax = axes[idx // n_cols, idx % n_cols]  # next subplot
+    data = participant_label_counts[participant_label_counts['ID'] == participant_id]
+    colors = plt.cm.viridis(np.linspace(0, 1, len(data['Label'])))
+    ax.bar(data['Label'], data['Count'], color=colors)
+    ax.set_title(f'Participant {participant_id}')
+    ax.set_xlabel('Label')
+    ax.set_ylabel('Count')
+    ax.tick_params(axis='x', rotation=70)
+
+plt.show()
+      </code></pre>
+
+      <img src="clarity/images/LabelDistributionPerParticipant.png" alt="Label Distribution Per Participant Bar Graph">
+
+        <p class="text">
+          This graph shows us that the length of audios vary as well. This means it is very important for the audio to be padded prior to training in order to prepare input features
+        </p>
+      
+        <pre><code class="python">
+df = df.with_columns([
+pl.col("Audio").map_elements(lambda a: len(a), return_dtype=pl.Float64).alias("Audio Length")
+])
+df['Audio Length'].describe()
+        </code></pre>
+
+        
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+            <tr>
+              <th class="data-table-header">statistic</th>
+              <th class="data-table-header">value</th>
+            </tr>
+            <tr>
+              <td class="data-table-datatype">str</td>
+              <td class="data-table-datatype">f64</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="data-table-cell">"count"</td>
+              <td class="data-table-cell">7077.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"null_count"</td>
+              <td class="data-table-cell">0.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"mean"</td>
+              <td class="data-table-cell">54700.662993</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"std"</td>
+              <td class="data-table-cell">44655.798259</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"min"</td>
+              <td class="data-table-cell">3584.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"25%"</td>
+              <td class="data-table-cell">26112.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"50%"</td>
+              <td class="data-table-cell">41472.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"75%"</td>
+              <td class="data-table-cell">67072.0</td>
+            </tr>
+            <tr>
+              <td class="data-table-cell">"max"</td>
+              <td class="data-table-cell">619520.0</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="data-table-footer">
+                shape: (9, 3) | Statistical summary for label distribution
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
 
     </div>
 
