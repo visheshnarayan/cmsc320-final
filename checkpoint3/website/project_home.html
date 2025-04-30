@@ -187,29 +187,9 @@
                 <p class="text"><span style="font-weight: bold">Eshan Khan</span>: Analyzed MFCC and pitch statistics across label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN architecture selection (D), supported training runs and validation of model outputs (E), assisted in visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial report (G).</p>
             </li>
         </ol>
-        
-        <!-- INTRODUCTION -->
+      </div>
 
-        <h1>
-            Introduction
-        </h1>
-        <p class="text">
-            Our project focuses on classifying non-verbal vocalizations from autistic individuals using machine learning.
-            These vocalizations—such as laughter, protest, or requests—carry important expressive intent, especially for individuals
-            who are minimally verbal or non-speaking.
-        </p>
-        <p class="text">
-            The central question we aim to answer is:
-            <span style="font-weight: bold;">Can we detect and distinguish different types of vocal intent (e.g., "yes", "no", "frustrated", "delighted") based on acoustic features and spectrograms of the audio?</span>
-            We explore whether statistical differences in pitch, frequency, and spectral entropy can be effectively leveraged
-            by ML models to make these classifications.
-        </p>
-        <p class="text">
-            This question is important because non-verbal communication plays a crucial role in how many autistic individuals
-            interact with the world. Building systems that can interpret these vocal cues more accurately has the potential
-            to improve assistive technologies, support caregivers, and advance research in inclusive communication tools.
-        </p>
-
+  <div class="container blog main">
     <!-- DATASET CURATION -->
         <h1>Data Curation</h1>
 
@@ -236,6 +216,8 @@
         <p class="text">
             We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV file that included labels, participant IDs, and file indices. All of this information was organized into a structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing 🥀).
         </p>
+  </div>
+  <div class="container blog main">
         <details>
             <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
         <pre><code class="python">
@@ -331,7 +313,8 @@ def load_audio_metadata(csv_path: str,
     )
         </code></pre> 
     </details>  
-
+  </div>
+    <div class="container blog main">
         <!-- EDA -->
 
         <h1 style="padding-top: 1em">Exploratory Data Analysis</h1>
@@ -339,7 +322,8 @@ def load_audio_metadata(csv_path: str,
         <p class="text">
             In this, we will overview all of our Exploratory Data Analysis (EDA) done to perform statistical tests on our features, develop assumption about signals in our data, and visualize it too of course. 
         </p>
-        
+    </div>
+    <div class="container blog main gray">
         <h2>Audio Preprocessing Pipeline Overview</h2>
         <p class="text">
             Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs for downstream tasks. The steps are as follows:
@@ -350,6 +334,8 @@ def load_audio_metadata(csv_path: str,
         <p class="text">
             This end-to-end pipeline ensures that raw audio recordings are systematically cleaned, transformed, and structured, making them ready for efficient modeling and analysis. We have provided the preprocessing code as well:
         </p>
+    </div>
+    <div class="container blog main">
         <details>
             <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Pipeline Code</summary>          
                 <pre><code class="python">
@@ -705,6 +691,8 @@ def open_pickle(path: str) -> pl.DataFrame:
     <p class="text">
         The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename, Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is stored as a list of lists of floats, and the rest are strings or floats.
     </p>
+  </div>
+  <div class="container blog main gray">  
     <div class="data-table-container">
         <table class="data-table">
           <thead>
@@ -831,7 +819,8 @@ def open_pickle(path: str) -> pl.DataFrame:
           </tfoot>
         </table>
       </div>
-    
+  </div>
+  <div class="container blog main">
       <h2>Data Exploration</h2>
 
         <p class="text">
@@ -842,9 +831,8 @@ def open_pickle(path: str) -> pl.DataFrame:
 print(f"Dataframe shape: {df.shape}")
 df.describe()
         </code></pre>
-        
-        
-
+  </div>
+  <div class="container blog main gray">
         <div class="data-table-container">
             Dataframe shape: (7077, 7)
             <table class="data-table">
@@ -971,7 +959,8 @@ df.describe()
               </tfoot>
             </table>
           </div>
-          
+  </div>     
+  <div class="container blog main">
           <p class="text">
               YIPEEEEE 🎉
               The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
@@ -980,7 +969,8 @@ df.describe()
           <pre><code class="python">
 df.null_count()
         </code></pre>
-
+  </div>
+  <div class="container blog main gray">
         <div class="data-table-container">
             <table class="data-table">
               <thead>
@@ -1023,14 +1013,16 @@ df.null_count()
               </tfoot>
             </table>
           </div>
-        
+  </div>
+  <div class="container blog main">
         <p class="text">We will now examine label distributions: </p>
 
         <pre><code class="python">
 label_counts = df['Label'].value_counts()
 label_counts
         </code></pre>
-
+  </div>
+  <div class="container blog main gray">
         <div class="data-table-container">
             <table class="data-table">
               <thead>
@@ -1097,7 +1089,8 @@ label_counts
               </tfoot>
             </table>
           </div>
-
+  </div>
+  <div class="container blog main">
         <p class="text">
             There are discrepencies of how many labels exist per group. The mean is approximately 320, but there is a high deviation of nearly 500
         </p>
@@ -1105,7 +1098,8 @@ label_counts
         <pre><code class="python">
 label_counts.describe()
         </code></pre>
-
+  </div>
+  <div class="container blog main gray">
         <div class="data-table-container">
             <table class="data-table">
               <thead>
@@ -1176,7 +1170,8 @@ label_counts.describe()
               </tfoot>
             </table>
           </div>
-
+  </div>
+  <div class="container blog main">
           <p class="text">
             The plot shows us that there is imbalance between labels. We should keep this into consideration during analysis and training. 
           </p>
@@ -1192,13 +1187,15 @@ plt.xticks(rotation=70) # so labels don't overlap
 plt.tight_layout()
 plt.show()
         </code></pre>
-
+  </div>
+  <div class="container blog main gray">
         <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
         
         <p class="text">
           Let us examine the distribution of labels by each participant: 
         </p>
-        
+  </div>
+  <div class="container blog main">
         <pre><code class="python">
 # Plot for each person
 participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count'))
@@ -1224,9 +1221,52 @@ ax.tick_params(axis='x', rotation=70)
           
 plt.show()
         </code></pre>
-        
-        <img src="clarity/images/LabelDistributionPerParticipant.png" alt="Label Distribution Per Participant Bar Graph">
-        
+  </div>
+
+  <div class="container blog max gray">
+    <div class="slide-menu">
+      <ul id="slide-menu">
+      </ul>
+    </div>
+      <div class="slideshow">
+          <div class="navigation">
+              <!-- Using FontAwesome Pro -->
+              <!-- <a class="button icon" id="prev_btn"><i class="fa-solid fa-left" ></i></a>
+              <a class="button icon" id="next_btn"><i class="fa-solid fa-right"></i></a> -->
+              <!-- Using FontAwesome Free -->
+              <a class="button icon" id="prev_btn"><i class="fa-solid fa-arrow-left"></i></a>
+              <a class="button icon" id="next_btn"><i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="slider">
+              <div class="slider-item">
+                  <img src="clarity/images/P01LabelDistribution.png" alt="P01 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P02LabelDistribution.png" alt="P02 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P03LabelDistribution.png" alt="P03 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P05LabelDistribution.png" alt="P05 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P06LabelDistribution.png" alt="P06 Label Distribution">
+              </div>
+              <div class="slider-item">
+                <img src="clarity/images/P08LabelDistribution.png" alt="P08 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P11LabelDistribution.png" alt="P11 Label Distribution">
+              </div>
+              <div class="slider-item">
+                  <img src="clarity/images/P16LabelDistribution.png" alt="P16 Label Distribution">
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="container blog main">
         <p class="text">
           Consider the distribution of labels by participant above. We find the following:
         </p>
@@ -1248,8 +1288,8 @@ df = df.with_columns([
 ])
 df['Audio Length'].describe()
       </code></pre>
-      
-        
+  </div>
+  <div class="container blog main gray">
         <div class="data-table-container">
           <table class="data-table">
             <thead>
@@ -1309,10 +1349,9 @@ df['Audio Length'].describe()
           </tfoot>
         </table>
       </div>
-
     </div>
+  </div>
 
-    
 
     <!-- Footer Page -->
     <footer>
