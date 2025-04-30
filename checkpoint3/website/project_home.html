@@ -234,7 +234,7 @@
         <h2>DataFrame creation</h2>
 
         <p class="text">
-            We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV file that included labels, participant IDs, and file indices. All of this information was organized into a structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization significantly reduced loading times and improved memory efficiency, preventing our kernel from crashing (so our kernel didn't crash 🥀).
+            We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV file that included labels, participant IDs, and file indices. All of this information was organized into a structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing 🥀).
         </p>
         <details>
             <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
@@ -341,13 +341,13 @@ def load_audio_metadata(csv_path: str,
         </p>
         
         <h2>Audio Preprocessing Pipeline Overview</h2>
-        <p>
+        <p class="text">
             Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs for downstream tasks. The steps are as follows:
         </p>
 
         <img src="clarity/images/preprocessing_pipeline.png" alt="Preprocessing Pipeline Flowchart">
 
-        <p>
+        <p class="text">
             This end-to-end pipeline ensures that raw audio recordings are systematically cleaned, transformed, and structured, making them ready for efficient modeling and analysis. We have provided the preprocessing code as well:
         </p>
         <details>
@@ -703,7 +703,7 @@ def open_pickle(path: str) -> pl.DataFrame:
     <h2>DataFrame Overview</h2>
     
     <p class="text">
-        The Dataframe is stored as a pkl containing key information about the audio including: Filename, Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is stored as a list of lists of floats, and the rest are strings or floats.
+        The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename, Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is stored as a list of lists of floats, and the rest are strings or floats.
     </p>
     <div class="data-table-container">
         <table class="data-table">
@@ -972,7 +972,12 @@ df.describe()
             </table>
           </div>
           
-        <pre><code class="python">
+          <p class="text">
+              YIPEEEEE 🎉
+              The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
+          </p>
+          
+          <pre><code class="python">
 df.null_count()
         </code></pre>
 
@@ -1019,10 +1024,8 @@ df.null_count()
             </table>
           </div>
         
-        <p class="text">
-            YIPEEEEE 🎉
-            The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
-        </p>
+        <p class="text">We will now examine label distributions: </p>
+
         <pre><code class="python">
 label_counts = df['Label'].value_counts()
 label_counts
@@ -1174,6 +1177,10 @@ label_counts.describe()
             </table>
           </div>
 
+          <p class="text">
+            The plot shows us that there is imbalance between labels. We should keep this into consideration during analysis and training. 
+          </p>
+
           <pre><code class="python">
 colors = plt.cm.viridis(np.linspace(0, 1, len(label_counts))) # pretty colors 
 plt.figure(figsize=(10, 6))
@@ -1188,12 +1195,10 @@ plt.show()
 
         <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
         
-        <ul class="text">
-            <li class="text">Label Distribution: The dataset contains a variety of labels, with "frustrated" and "delighted" being the most common.</li>
-            <li class="text">Label Variety: Some participants exhibit a wide range of labels, while others are more consistent in their responses.</li>
-            <li class="text">Customized Approaches: The differences in label distribution across participants suggest that personalized models might be more effective (depending on model type).</li>
-        </ul>
-
+        <p class="text">
+          Let us examine the distribution of labels by each participant: 
+        </p>
+        
         <pre><code class="python">
 # Plot for each person
 participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count'))
@@ -1208,31 +1213,42 @@ fig, axes = plt.subplots(n_rows, n_cols, figsize=(n_cols * 5, n_rows * 4), const
 fig.suptitle('Label Distribution per Participant', fontsize=16)
 
 for idx, participant_id in enumerate(participant_ids):
-    ax = axes[idx // n_cols, idx % n_cols]  # next subplot
-    data = participant_label_counts[participant_label_counts['ID'] == participant_id]
-    colors = plt.cm.viridis(np.linspace(0, 1, len(data['Label'])))
-    ax.bar(data['Label'], data['Count'], color=colors)
-    ax.set_title(f'Participant {participant_id}')
-    ax.set_xlabel('Label')
-    ax.set_ylabel('Count')
-    ax.tick_params(axis='x', rotation=70)
-
+ax = axes[idx // n_cols, idx % n_cols]  # next subplot
+data = participant_label_counts[participant_label_counts['ID'] == participant_id]
+colors = plt.cm.viridis(np.linspace(0, 1, len(data['Label'])))
+ax.bar(data['Label'], data['Count'], color=colors)
+ax.set_title(f'Participant {participant_id}')
+ax.set_xlabel('Label')
+ax.set_ylabel('Count')
+ax.tick_params(axis='x', rotation=70)
+          
 plt.show()
-      </code></pre>
-
-      <img src="clarity/images/LabelDistributionPerParticipant.png" alt="Label Distribution Per Participant Bar Graph">
-
+        </code></pre>
+        
+        <img src="clarity/images/LabelDistributionPerParticipant.png" alt="Label Distribution Per Participant Bar Graph">
+        
         <p class="text">
-          This graph shows us that the length of audios vary as well. This means it is very important for the audio to be padded prior to training in order to prepare input features
+          Consider the distribution of labels by participant above. We find the following:
         </p>
-      
+        <ul style="padding: 2em; display: flex; flex-direction: column; gap: 1em;" class="text">
+            <li><p class="text">Label Distribution: The dataset contains a variety of labels, with "frustrated" and "delighted" being the most common.</p></li>
+            <li><p class="text">Label Variety: Some participants exhibit a wide range of labels, while others are more consistent in their responses.</p></li>
+            <li><p class="text">Customized Approaches: The differences in label distribution across participants suggest that personalized models might be more effective (depending on model type).</p></li>
+        </ul>
+        
+        <p class="text">
+          We also examine the distribution in audio lengths. The variation in lengths tells us we must pad our audio prior to feature analysis.
+        </p>
+        
         <pre><code class="python">
 df = df.with_columns([
-pl.col("Audio").map_elements(lambda a: len(a), return_dtype=pl.Float64).alias("Audio Length")
+    pl.col("Audio").map_elements(
+      lambda a: len(a), return_dtype=pl.Float64
+    ).alias("Audio Length")
 ])
 df['Audio Length'].describe()
-        </code></pre>
-
+      </code></pre>
+      
         
         <div class="data-table-container">
           <table class="data-table">
