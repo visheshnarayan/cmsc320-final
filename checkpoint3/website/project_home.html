@@ -174,7 +174,7 @@
     </div>
   </div>
 
-
+  
   <div class="container blog main first" id="blog-main">
 
     <!-- CONTRIBUTIONS -->
@@ -1475,7 +1475,8 @@ df['Audio Length'].describe()
               <p class="text">Significant differences were found in <span style="font-weight: bold">MFCC-1</span> and
                 <span style="font-weight: bold">MFCC-3</span> (both <span style="font-weight: bold">p &lt; 0.001</span>,
                 Cohen's d &gt; 1.6), indicating differences in <span style="font-weight: bold">spectral slope</span> and
-                <span style="font-weight: bold">fine spectral variation</span>.</p>
+                <span style="font-weight: bold">fine spectral variation</span>.
+              </p>
             </li>
             <li>
               <p class="text"><span style="font-weight: bold">MFCC-2</span> showed <span style="font-weight: bold">no
@@ -1496,7 +1497,8 @@ df['Audio Length'].describe()
               <p class="text">Strong entropy differences were notably present between <code>"dysregulated"</code> and
                 <code>"delighted"</code>, and between <code>"selftalk"</code> and <code>"frustrated"</code>,
                 highlighting that spectral entropy can be a useful feature in distinguishing emotional states in
-                vocalizations.</p>
+                vocalizations.
+              </p>
             </li>
           </ul>
         </li>
@@ -1564,13 +1566,13 @@ df['Audio Length'].describe()
 
     <hr>
 
-    <h2>Null Hypothesis (H₀):</h2>
+    <h3>Null Hypothesis (H₀):</h>
     <p class="text">
       There is <span style="font-weight: bold">no difference</span> in pitch variability between vocalizations labeled
       as <code>yes</code> and <code>no</code>. The distributions of pitch standard deviation are the same for both
       groups.
     </p>
-    <h2>Alternative Hypothesis (H₁):</h2>
+    <h3>Alternative Hypothesis (H₁):</h2>
     <p class="text">
       There is a <span style="font-weight: bold">difference</span> in pitch variability between vocalizations labeled as
       <code>yes</code> and <code>no</code>. The distributions of pitch standard deviation are not the same for both
@@ -1578,7 +1580,7 @@ df['Audio Length'].describe()
     </p>
   </div>
   <div class="container blog main gray">
-    <h2>Group Means & Standard Deviations</h2>
+    <h3>Group Means & Standard Deviations</h3>
     <div class="data-table-container">
       <table class="data-table">
         <thead>
@@ -1599,7 +1601,7 @@ df['Audio Length'].describe()
       </table>
     </div>
 
-    <h2>Statistical Results Summary</h2>
+    <h3>Statistical Results Summary</h3>
 
     <div class="data-table-container">
       <table class="data-table">
@@ -1634,7 +1636,7 @@ df['Audio Length'].describe()
     </div>
   </div>
   <div class="container blog main">
-    <h2>Interpretation</h2>
+    <h3>Interpretation</h3>
 
     <p class="text">
       Since our p = 0.01 < alpha, we <span style="font-weight: bold">reject</span> the null hypothesis. We interpret
@@ -1660,7 +1662,7 @@ df['Audio Length'].describe()
     </ul>
     <details>
       <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
-    <pre><code class="python">
+      <pre><code class="python">
 def batch_pitch_extraction(audio_list: List,
                            max_samples_per_batch: int=50,
                            sr: int=SAMPLE_RATE) -> List[float]:
@@ -1778,21 +1780,23 @@ print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} second
   </code></pre>
 
     <p class="text">
-      yes samples: 100<br>
-      Mean pitch std: 19.8174<br>
-      Std of pitch std: 20.9069<br>
-      no samples: 12<br>
-      Mean pitch std: 114.9644<br>
-      Std of pitch std: 110.3390<br><br>
+      This process results in the following results:
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace;">yes samples: 100</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean pitch std: 19.8174</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Std of pitch std: 20.9069</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">no samples: 12</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean pitch std: 114.9644</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Std of pitch std: 110.3390<br><br></p>
 
-      === Hypothesis Test Results === <br>
-      Mann-Whitney U Statistic: 260.0 <br>
-      p-value: 0.0014043896888058 <br>
-      Cohen's d: -2.3706435406222472 <br>
-      Mean Difference: -95.14698434279867 <br>
-      Significant: True <br><br>
+    <p style="font-family: 'Courier New', Courier, monospace;">=== Hypothesis Test Results ===</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">Mann-Whitney U Statistic: 260.0</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">p-value: 0.0014043896888058</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">Cohen's d: -2.3706435406222472</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">Mean Difference: -95.14698434279867</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">Significant: True<br><br></p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🎶 Pitch Variability Test completed in 30.40 seconds</p>
 
-      🎶 Pitch Variability Test completed in 30.40 seconds
     </p>
 
     <ul style="padding-left: 20px; list-style-type: disc;">
@@ -1809,7 +1813,361 @@ print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} second
     <pre><code class="python">
 plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4)
             </code></pre>
+  </div>
 
+  <div class="container blog main">
+    <h2>Test 2: Mel Frequency Cepstral Coefficients (MFCCs) Mean Differences between "Yes" and "No" Vocalizations
+      (Pairwise Mann-Whitney U Test)</h2>
+
+    <p class="text">
+      This test evaluates whether there are statistically significant differences in <span
+        style="font-weight: bold">spectral shape</span> between vocalizations labeled as <code>"yes"</code> and
+      <code>"no"</code>, focusing on the <span style="font-weight: bold">mean values of the first three MFCCs</span>.
+    </p>
+
+    <h3>What are MFCCs?</h3>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-1</span>: Captures the overall <span
+            style="font-weight: bold">spectral slope</span> — indicates the energy balance between low and high
+          frequencies.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-2</span>: Captures the <span
+            style="font-weight: bold">curvature</span> of the spectral envelope — flat vs. peaked energy in the mid
+          frequencies.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-3</span>: Represents <span
+            style="font-weight: bold">fine-grained variation</span> — subtle changes or "ripples" in the spectral shape.
+        </p>
+      </li>
+      <li>
+        <p class="text">Higher-order MFCCs (4, 5, …) capture increasingly localized detail and high-frequency texture.
+        </p>
+      </li>
+    </ul>
+
+    <hr>
+
+    <h3>Test Setup</h3>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">Statistic</span>: Pairwise Mann-Whitney U test (non-parametric)
+        </p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Effect Size</span>: Cohen's d</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Input Features</span>: Mean of MFCC-1, MFCC-2, and MFCC-3 per
+          sample</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Groups Compared</span>: <code>"yes"</code> vs <code>"no"</code>
+          vocalizations</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Sample Size</span>: 100 samples for <code>"yes"</code>, 12
+          samples for <code>"no"</code></p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Alpha</span>: Will use a significance level of 0.05 </p>
+      </li>
+    </ul>
+
+    <hr>
+
+    <h3>Null Hypothesis (H₀):</h3>
+    <p class="text">
+      There are <span style="font-weight: bold">no significant differences</span> in the mean values of the first three
+      MFCCs (MFCC-1, MFCC-2, and MFCC-3) between vocalizations labeled as <code>"yes"</code> and <code>"no"</code>. The
+      distributions of these spectral shape measures are the same across both groups.
+    </p>
+    <h3>Alternative Hypothesis (H₁):</h3>
+    <p class="text">
+      There are <span style="font-weight: bold">significant differences</span> in the mean values of the first three
+      MFCCs (MFCC-1, MFCC-2, and MFCC-3) between vocalizations labeled as <code>"yes"</code> and <code>"no"</code>. The
+      distributions of these spectral shape measures vary between the two groups, indicating discriminative spectral
+      characteristics.
+    </p>
+  </div>
+  <div class="container blog main gray">
+    <h3>Group Means & Standard Deviations</h3>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">MFCC-1 Mean ± Std</th>
+            <th class="data-table-header">MFCC-2 Mean ± Std</th>
+            <th class="data-table-header">MFCC-3 Mean ± Std</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"Yes"</td>
+            <td class="data-table-cell">-323.365 ± 32.903</td>
+            <td class="data-table-cell">122.607 ± 18.428</td>
+            <td class="data-table-cell">-16.314 ± 15.998</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"No"</td>
+            <td class="data-table-cell">-262.130 ± 42.377</td>
+            <td class="data-table-cell">114.124 ± 25.801</td>
+            <td class="data-table-cell">-52.627 ± 27.668</td>
+          </tr>
+      </table>
+    </div>
+
+    <h3>Statistical Results Summary</h>
+
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">MFCC</th>
+            <th class="data-table-header">U Statistic</th>
+            <th class="data-table-header">p-value</th>
+            <th class="data-table-header">Cohen's d</th>
+            <th class="data-table-header">Mean Diff</th>
+            <th class="data-table-header">Significant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"MFCC-1"</td>
+            <td class="data-table-cell">158.0</td>
+            <td class="data-table-cell">3.277e-05</td>
+            <td class="data-table-cell">-1.803</td>
+            <td class="data-table-cell">-61.235</td>
+            <td class="data-table-cell">Yes</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"MFCC-2"</td>
+            <td class="data-table-cell">708.0</td>
+            <td class="data-table-cell">0.312</td>
+            <td class="data-table-cell">0.440</td>
+            <td class="data-table-cell">8.483</td>
+            <td class="data-table-cell">No</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"MFCC-3"</td>
+            <td class="data-table-cell">1048.0</td>
+            <td class="data-table-cell">2.557e-05</td>
+            <td class="data-table-cell">2.073</td>
+            <td class="data-table-cell">36.312</td>
+            <td class="data-table-cell">Yes</td>
+          </tr>
+      </table>
+    </div>
+  </div>
+  <div class="container blog main">
+    <h3>Interpretation</h3>
+
+    <p class="text">
+      Since our p-values for MFCC-1 (p = 3.277e-05) and MFCC-3 (p = 2.557e-05) are both below alpha = 0.05, we <span
+        style="font-weight: bold">reject</span> the null hypothesis for these coefficients. We interpret that:
+    </p>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-1</span> shows significant differences between
+          <code>"yes"</code> and <code>"no"</code> vocalizations, with a <span style="font-weight: bold">large negative
+            effect size</span> (Cohen's d = -1.803), indicating <code>"yes"</code> vocalizations have a steeper spectral
+          slope.
+        </p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-3</span> exhibits significant differences with an even
+          <span style="font-weight: bold">larger positive effect size</span> (Cohen's d = 2.073), showing that
+          <code>"yes"</code> vocalizations have more subtle spectral variations.
+        </p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCC-2</span> does not show a statistically significant
+          difference (p = 0.312), suggesting that the mid-frequency curvature is similar between the two vocalization
+          types.</p>
+      </li>
+    </ul>
+
+    <p class="text">
+      These results suggest that <span style="font-weight: bold">spectral slope</span> (MFCC-1) and <span
+        style="font-weight: bold">fine-grained spectral variation</span> (MFCC-3) are powerful discriminators between
+      <code>"yes"</code> and <code>"no"</code> vocalizations, while the <span style="font-weight: bold">mid-frequency
+        curvature</span> (MFCC-2) carries less discriminative information.
+    </p>
+
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+      <pre><code class="python">
+    def batch_mfcc_extraction(audio_list: List,
+                               max_samples_per_batch: int=50,
+                               sr: int=SAMPLE_RATE,
+                               n_coeffs: int=3) -> List[float]:
+        if len(audio_list) > max_samples_per_batch:
+            sample_indices = np.random.choice(len(audio_list), max_samples_per_batch, replace=False)
+            audio_list = [audio_list[i] for i in sample_indices]
+            
+        mfcc_means = []
+        for audio_array in audio_list:
+            audio_array = np.asarray(audio_array, dtype=np.float32)
+            mfccs = librosa.feature.mfcc(y=audio_array, sr=sr, n_mfcc=n_coeffs)
+            mfcc_mean = np.mean(mfccs, axis=1)
+            mfcc_means.append(mfcc_mean)
+            
+        return mfcc_means
+    
+    def mfcc_significance_test(df, max_batch_size=50, target_labels=["frustrated", "delighted"], n_coeffs=3):
+        label_audio_groups = {}
+        for label in target_labels:
+            label_audio_groups[label] = df.filter(pl.col("Label") == label)["Audio"].to_list()
+            
+        label_mfcc_means = {}
+        for label, audio_list in label_audio_groups.items():
+            label_mfcc_means[label] = batch_mfcc_extraction(
+                audio_list,
+                max_samples_per_batch=max_batch_size,
+                n_coeffs=n_coeffs,
+                sr=SAMPLE_RATE
+            )
+            mfcc_array = np.array(label_mfcc_means[label])
+            print(f"{label} samples: {len(mfcc_array)}")
+            
+            for i in range(n_coeffs):
+                print(f"  MFCC-{i+1} Mean: {np.mean(mfcc_array[:, i]):.4f}, Std: {np.std(mfcc_array[:, i]):.4f}")
+        
+        results = {}
+        for i in range(n_coeffs):
+            data1 = [x[i] for x in label_mfcc_means[target_labels[0]]]
+            data2 = [x[i] for x in label_mfcc_means[target_labels[1]]]
+            
+            u_statistic, p_value = scipy.stats.mannwhitneyu(data1, data2, alternative='two-sided')
+            mean1, std1 = np.mean(data1), np.std(data1)
+            mean2, std2 = np.mean(data2), np.std(data2)
+            
+            pooled_std = np.sqrt(((len(data1) - 1) * std1**2 + (len(data2) - 1) * std2**2) / 
+                                  (len(data1) + len(data2) - 2))
+            cohens_d = (mean1 - mean2) / pooled_std
+            
+            results[f"MFCC-{i+1}"] = {
+                'U Statistic': u_statistic,
+                'p-value': p_value,
+                'Cohen\'s d': cohens_d,
+                'Mean Difference': mean1 - mean2,
+                'Significant': p_value < 0.05
+            }
+        
+        print("\n=== MFCC Significance Test Results ===")
+        for k, v in results.items():
+            print(f"\n{k}")
+            for stat, val in v.items():
+                print(f"  {stat}: {val}")
+            
+        return results
+          </code></pre>
+    </details>
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+      <pre><code class="python">
+    # Box whisker and heatmap to visualize distribution of MFCC (compare means)
+    def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=SAMPLE_RATE, n_mfcc=3):
+        # Step 1: Prepare data
+        data = []
+        mfcc_data = {label: [] for label in labels}
+        
+        for label in labels:
+            for row in df.filter(pl.col("Label") == label).iter_rows(named=True):
+                y = np.array(row["Audio"])
+                mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
+                mfcc_mean = np.mean(mfccs, axis=1)
+                
+                # For boxplot
+                for i in range(n_mfcc):
+                    data.append({
+                        "MFCC": f"MFCC-{i+1}",
+                        "Value": mfcc_mean[i],
+                        "Label": label
+                    })
+                
+                # For heatmap
+                mfcc_data[label].append(mfcc_mean)
+        
+        # DataFrames
+        df_plot = pd.DataFrame(data)
+        heat_data = []
+        for label in labels:
+            means = np.mean(np.stack(mfcc_data[label]), axis=0)
+            row = [means[i] for i in range(n_mfcc)]
+            heat_data.append(row)
+        df_heat = pd.DataFrame(heat_data, columns=[f"MFCC-{i+1}" for i in range(n_mfcc)], index=[label.upper() for label in labels])
+        
+        # Step 2: Plot side-by-side
+        fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+        
+        # Boxplot
+        sns.boxplot(data=df_plot, x="MFCC", y="Value", hue="Label", ax=axes[0])
+        axes[0].set_title("MFCC Distribution (Boxplot)")
+        axes[0].grid(True)
+        
+        # Heatmap
+        sns.heatmap(df_heat, annot=True, fmt=".1f", cmap="viridis", ax=axes[1])
+        axes[1].set_title("MFCC Mean Comparison (Heatmap)")
+        axes[1].set_ylabel("Label")
+        axes[1].set_xlabel("MFCC Coefficient")
+        
+        plt.tight_layout()
+        plt.show()
+      </code></pre>
+    </details>
+    <pre><code class="python">
+    t0 = time.time()
+    results = mfcc_significance_test(df, max_batch_size=100, target_labels=["yes", "no"], n_coeffs=3)
+    print(f"\n🎛️ MFCC Significance Test completed in {time.time() - t0:.2f} seconds")
+    
+    # Visualize results
+    box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
+      </code></pre>
+
+    <p class="text">
+      This process results in the following results:
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace;">yes samples: 100</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">MFCC-1 Mean: -323.3647, Std: 32.9024
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">MFCC-2 Mean: 122.6066, Std: 18.4277
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">MFCC-3 Mean: -16.3141, Std: 15.9972
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace;">no samples: 12</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean pitch std: 114.9644</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Std of pitch std: 110.3390<br><br></p>
+
+    <p style="font-family: 'Courier New', Courier, monospace;">=== Hypothesis Test Results ===<br><br></p>
+
+    <p style="font-family: 'Courier New', Courier, monospace;">MFCC-1</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">U Statistic: 158.0</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">p-value: 3.277395269119212e-05</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Cohen's d: -1.8026657104492188</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean Difference: -61.2347412109375</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Significant: True<br><br></p>
+    <p style="font-family: 'Courier New', Courier, monospace;">MFCC-2</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">U Statistic: 708.0</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">p-value: 0.31188485986767844</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Cohen's d: 0.43969401717185974</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean Difference: 8.482711791992188</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Significant: False<br><br></p>
+    <p style="font-family: 'Courier New', Courier, monospace;">MFCC-3</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">U Statistic: 1048.0</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">p-value: 2.557395269119212e-05</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Cohen's d: 2.0729801654815674</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Mean Difference: 36.31230163574219</p>
+    <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Significant: True<br><br></p>
+    <pre><code class="python">
+box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
+  </code></pre>
   </div>
   </div>
 
