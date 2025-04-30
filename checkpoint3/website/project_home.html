@@ -875,7 +875,7 @@ def open_pickle(path: str) -> pl.DataFrame:
       </table>
     </div>
   </div>
-  
+
   <div class="container blog main">
     <h2>Data Exploration</h2>
 
@@ -1147,7 +1147,7 @@ label_counts
       </table>
     </div>
   </div>
-  
+
   <div class="container blog main">
     <p class="text">
       There are discrepencies of how many labels exist per group. The mean is approximately 320, but there is a high
@@ -1231,7 +1231,7 @@ label_counts.describe()
       </table>
     </div>
   </div>
-  
+
   <div class="container blog main">
     <p class="text">
       The plot shows us that there is imbalance between labels. We should keep this into consideration during analysis
@@ -1250,7 +1250,7 @@ plt.tight_layout()
 plt.show()
         </code></pre>
   </div>
-  
+
   <div class="container blog main">
     <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
 
@@ -1531,7 +1531,8 @@ df['Audio Length'].describe()
 
     <ul style="padding-left: 20px; list-style-type: disc;">
       <li>
-        <p class="text">Calculated using <span style="font-weight: bold"><code>librosa</code>'s PYIN algorithm</span>, which
+        <p class="text">Calculated using <span style="font-weight: bold"><code>librosa</code>'s PYIN algorithm</span>,
+          which
           estimates fundamental frequency (f₀) for voiced segments of an audio signal.</p>
       </li>
       <li>
@@ -1821,39 +1822,39 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
             </code></pre>
   </div>
 
-<div class="container blog main gray">
-  <h3 style="text-align: center;">Yes/No Spectrograms</h3>
-  <div class="slide-display">
-  <div class="slide-menu">
-      <ul class="dots" id="slide-menu">
+  <div class="container blog main gray">
+    <h3 style="text-align: center;">Yes/No Spectrograms</h3>
+    <div class="slide-display">
+      <div class="slide-menu">
+        <ul class="dots" id="slide-menu">
           <li class="dot active"></li>
           <li class="dot"></li>
           <li class="dot"></li>
           <li class="dot"></li>
-      </ul>
-  </div>
+        </ul>
+      </div>
 
-  <div class="slide-content", style="display: block;">
-    <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1">
-  </div>
+      <div class="slide-content" , style="display: block;">
+        <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1">
+      </div>
 
-  <div class="slide-content", style="display: none;">
-    <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2">
-  </div>
+      <div class="slide-content" , style="display: none;">
+        <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2">
+      </div>
 
-  <div class="slide-content", style="display: none;">
-    <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3">
-  </div>
+      <div class="slide-content" , style="display: none;">
+        <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3">
+      </div>
 
-  <div class="slide-content", style="display: none;">
-    <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4">
-  </div>
+      <div class="slide-content" , style="display: none;">
+        <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4">
+      </div>
 
-  <p class="caption">
-      The spectrograms above illustrate the differences in pitch variability between "yes" and "no" vocalizations. 
-  </p>
-</div>
-</div>
+      <p class="caption">
+        The spectrograms above illustrate the differences in pitch variability between "yes" and "no" vocalizations.
+      </p>
+    </div>
+  </div>
 
   <div class="container blog main">
     <h2>Test 2: Mel Frequency Cepstral Coefficients (MFCCs) Mean Differences between "Yes" and "No" Vocalizations
@@ -2212,6 +2213,31 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </code></pre>
   </div>
 
+  <div class="container blog main gray">
+    <h3 style="text-align: center;">Boxplot/Heatmap</h3>
+    <div class="slide-display">
+      <div class="slide-menu">
+        <ul class="dots" id="slide-menu">
+          <li class="dot active"></li>
+          <li class="dot"></li>
+        </ul>
+      </div>
+
+      <div class="slide-content" , style="display: block;">
+        <img src="clarity/images/MFCCDistributionBoxPlot.png" alt="MFCC Distribution Box Plot">
+      </div>
+
+      <div class="slide-content" , style="display: none;">
+        <img src="clarity/images/MFCCMeanComparisonHeatMap.png" alt="MFCC Mean Comparison Heat Map">
+      </div>
+
+      <p class="caption">
+        The boxplot shows the distribution of MFCC values for "yes" and "no" vocalizations, while the heatmap shows the
+        similartity between the means
+      </p>
+    </div>
+  </div>
+
   <div class="container blog main">
     <h2>Test 3: Spectral Entropy Differences Across Vocalization Labels (ANOVA & T-Tests)</h2>
 
@@ -2372,17 +2398,27 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
         <p class="text"><span style="font-weight: bold">Strong differences</span> in spectral entropy are observed
           between:
         <ul style="padding-left: 20px; list-style-type: circle;">
-          <li><p class="text"><code>"dysregulated"</code> and both <code>"selftalk"</code> & <code>"delighted"</code></p></li>
-          <li><p class="text"><code>"selftalk"</code> and <code>"frustrated"</code></p></li>
-          <li><p class="text"><code>"delighted"</code> and <code>"frustrated"</code></p></li>
+          <li>
+            <p class="text"><code>"dysregulated"</code> and both <code>"selftalk"</code> & <code>"delighted"</code></p>
+          </li>
+          <li>
+            <p class="text"><code>"selftalk"</code> and <code>"frustrated"</code></p>
+          </li>
+          <li>
+            <p class="text"><code>"delighted"</code> and <code>"frustrated"</code></p>
+          </li>
         </ul>
         </p>
       </li>
       <li>
         <p class="text"><span style="font-weight: bold">No significant difference</span> between:
         <ul style="padding-left: 20px; list-style-type: circle;">
-          <li><p class="text"><code>"dysregulated"</code> and <code>"frustrated"</code></p></li>
-          <li><p class="text"><code>"selftalk"</code> and <code>"delighted"</code></p></li>
+          <li>
+            <p class="text"><code>"dysregulated"</code> and <code>"frustrated"</code></p>
+          </li>
+          <li>
+            <p class="text"><code>"selftalk"</code> and <code>"delighted"</code></p>
+          </li>
         </ul>
         </p>
       </li>
@@ -2527,7 +2563,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
 
     <img src="clarity/images/SpectralEntropyAcrossLabels.png" alt="Spectral Entropy Across Labels">
   </div>
-  
+
 
   </div>
 
