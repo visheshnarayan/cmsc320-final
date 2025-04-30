@@ -126,7 +126,7 @@
   </style>
 </head>
 
-<body>
+<>
   <!-- Title Page -->
   <!-- Dark Theme Example: Change the background colour dark and change the following div "blog-title" into "blog-title white". -->
   <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
@@ -1420,6 +1420,375 @@ df['Audio Length'].describe()
       </table>
     </div>
   </div>
+
+  <div class="container blog main">
+    <h2>Spectograms of Unique Labels</h2>
+  
+    <p class="text">
+      This grid displays one <span style="font-weight: bold">Mel spectrogram</span> for each unique vocalization label in the dataset. Each spectrogram represents a <span style="font-weight: bold">single audio sample</span> randomly selected from that label group.
+    </p>
+  
+    <h3>What is a Spectrogram?</h3>
+  
+    <p class="text">
+      A spectrogram is a time-frequency visualization of sound. It shows how energy (brightness) is distributed across frequency bins (y-axis) over time (x-axis). Brighter regions indicate more intensity at that frequency and time.
+    </p>
+  
+    <hr>
+  
+    <h3>Interpretation Notes</h3>
+  
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">Flat colors at end of some labels</span>: You may notice that many spectrograms appear to <span style="font-weight: bold">suddenly turn into a solid blue color</span> after a certain point. This occurs because:</p>
+        <ul style="padding-left: 20px; list-style-type: circle;">
+          <li>
+            <p class="text">All spectrograms have been <span style="font-weight: bold">padded or cropped to a fixed width</span> (<code>target_length</code>), ensuring uniform input size for modeling.</p>
+          </li>
+          <li>
+            <p class="text">When the original audio sample is <span style="font-weight: bold">shorter than the target time length</span>, the remaining time frames are filled with <span style="font-weight: bold">zeros</span> — resulting in that flat, dark blue region on the right.</p>
+          </li>
+          <li>
+            <p class="text">This is done to make all inputs the same shape for consistent processing and modeling (e.g., embeddings or CNNs).</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  
+    <p class="text">
+      These spectrograms give an intuitive view of the <span style="font-weight: bold">acoustic patterns</span> present in each vocalization type — for example:
+    </p>
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><code>"YES"</code> shows low-frequency harmonics</p>
+      </li>
+      <li>
+        <p class="text"><code>"FRUSTRATED"</code> is noisier and denser</p>
+      </li>
+      <li>
+        <p class="text"><code>"SELF-TALK"</code> often contains repeating patterns</p>
+      </li>
+      <li>
+        <p class="text"><code>"GLEE"</code> and <code>"DELIGHTED"</code> appear more tonal or melodic</p>
+      </li>
+    </ul>
+  
+    <p class="text">
+      This kind of visualization helps validate that <span style="font-weight: bold">distinct spectral features</span> exist across labels, supporting downstream classification or clustering tasks.
+    </p>
+  
+    <hr>
+  
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Spectrogram Plot Code</summary>
+      <pre><code class="python">
+  def plot_unique_label_spectrograms_grid(df, n_rows=4, n_cols=6):
+      unique_labels = df.select("Label").unique().to_series().to_list()
+      total_plots = n_rows * n_cols
+      fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3))
+      axs = axs.flatten()
+      fig.suptitle("Unique Label Spectogram", fontsize=30)
+      
+      for idx, label in enumerate(unique_labels):
+          ax = axs[idx]
+          
+          # Get the first spectrogram for this label
+          row = df.filter(pl.col("Label") == label).row(0)
+          spectrogram = row[df.columns.index("Spectrogram")]
+          spectrogram_np = np.array(spectrogram, dtype=np.float32)
+          
+          if spectrogram_np.ndim == 2:
+              im = ax.imshow(spectrogram_np, aspect="auto", origin="lower", cmap="viridis")
+              ax.set_title(label.upper(), fontsize=18)
+              ax.set_xlabel("Time")
+              ax.set_ylabel("Freq")
+          else:
+              ax.axis("off")
+      
+      # Hide any unused axes
+      for j in range(len(unique_labels), len(axs)):
+          axs[j].axis("off")
+      
+      fig.tight_layout(rect=[0, 0, 1, 0.95])
+      plt.show()
+  
+  plot_unique_label_spectrograms_grid(df)
+      </code></pre>
+    </details>
+    <pre><code class="python">
+plot_unique_label_spectrograms_grid(df)
+    </code></pre> 
+  </div>
+
+  <div class="container blog max gray">
+    <div class="slideshow">
+      <div class="navigation">
+        <!-- Using FontAwesome Pro -->
+        <!-- <a class="button icon" id="prev_btn"><i class="fa-solid fa-left" ></i></a>
+              <a class="button icon" id="next_btn"><i class="fa-solid fa-right"></i></a> -->
+        <!-- Using FontAwesome Free -->
+        <a class="button icon" id="prev_btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class="button icon" id="next_btn"><i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="slider">
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/affectionate.png" alt="Affectionate Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/bathroom.png" alt="Bathroom Spectogram">
+      </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/delighted.png" alt="Delighted Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/dysregulated.png" alt="Dysregulated Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/dysregulation-bathroom.png" alt="Dysregulation-Bathroom Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/dysregulation-sick.png" alt="Dysregulation-Sick Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/frustrated.png" alt="Frustrated Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/glee.png" alt="Frustrated Glee">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/greeting.png" alt="Frustrated Greeting">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/happy.png" alt="Happy Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/help.png" alt="Help Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/hunger.png" alt="Hunger Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/laugh.png" alt="Laugh Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/laughter.png" alt="Laughter Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/more.png" alt="More Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/no.png" alt="No Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/protest.png" alt="Protest Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/request.png" alt="Request Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/selftalk.png" alt="Selftalk Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/social.png" alt="Social Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/tablet.png" alt="Tablet Spectogram">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/spectrograms/yes.png" alt="Yes Spectogram">
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class="container blog main">
+    <h2>2D Projection Setup for Audio Data Visualization</h2>
+  
+    <p class="text">
+      To visualize complex audio data, we extract key features, specifically Mel Frequency Cepstral Coefficients (MFCCs) and Pitch Variance, from the audio samples. These features are chosen for their ability to encapsulate the essential characteristics of sound.
+    </p>
+    
+    <p class="text">
+      The extracted features are then subjected to dimensionality reduction techniques to project them into a 2D space, facilitating easier visualization and interpretation. The methods used for this purpose include:
+    </p>
+  
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">PCA (Principal Component Analysis)</span>: Linear transformation technique to reduce the dimensionality while attempting to preserve as much variance as possible.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">t-SNE (t-Distributed Stochastic Neighbor Embedding)</span>: A non-linear approach, t-SNE is effective in visualizing high-dimensional data by maintaining local relationships in a lower-dimensional space.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">UMAP (Uniform Manifold Approximation and Projection)</span>: Another non-linear method that excels in preserving both local and global data structures, making it ideal for a nuanced exploration of audio features.</p>
+      </li>
+    </ul>
+  
+    <p class="text">
+      These projections allow us to visually analyze the clustering and distribution of audio samples, thereby providing insights into the inherent patterns and distinctions within the data.
+    </p>
+    
+    <p class="text">
+      We notice no clear clusters forming, requiring possible kernel tricks to get better separation.
+    </p>
+  
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Feature Extraction Code</summary>
+      <pre><code class="python">
+  # Get pitch variance as feature for audio projection
+  def get_pitch_var(y: List[float], sr: int=SAMPLE_RATE):
+      y_np = np.array(y, dtype=np.float64)
+      f0, voiced_flag, _ = librosa.pyin(
+          y_np,
+          sr=sr,
+          fmin=librosa.note_to_hz('C2'),
+          fmax=librosa.note_to_hz('C7')
+      )
+      if f0 is None:
+          return 0.0
+      f0_voiced = f0[voiced_flag]
+      return float(np.std(f0_voiced)) if len(f0_voiced) > 0 else 0.0
+  
+  # Gets MFCC means of signal (feature for audio projection)
+  def get_mfcc_means(y: List[float], sr: int = 16000, n_mfcc: int = 3) -> List[float]:
+      y_np = np.array(y, dtype=np.float32)
+      mfccs = librosa.feature.mfcc(y=y_np, sr=sr, n_mfcc=n_mfcc)
+      return np.mean(mfccs, axis=1).tolist()  # returns [mfcc-1, mfcc-2, mfcc-3]
+  
+  # Extract MFCC-1, MFCC-2, MFCC-3, and Pitch variance as features for PCA
+  df = df.with_columns([
+      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[0], return_dtype=pl.Float64).alias("MFCC-1"),
+      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[1], return_dtype=pl.Float64).alias("MFCC-2"),
+      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[2], return_dtype=pl.Float64).alias("MFCC-3"),
+      pl.col("Audio").map_elements(lambda y: get_pitch_var(y), return_dtype=pl.Float64).alias("PitchVar")
+  ])
+      </code></pre>
+    </details>
+  
+    <h3>Key Observations from 2D Projections</h3>
+    
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">Correlations between Features</span>:</p>
+        <ul style="padding-left: 20px; list-style-type: circle;">
+          <li>
+            <p class="text">Displays varying correlation strengths between audio features.</p>
+          </li>
+          <li>
+            <p class="text">Notable strong negative correlation between MFCC-1 and MFCC-3.</p>
+          </li>
+          <li>
+            <p class="text">Other pairs show weak to moderate correlations.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">2D PCA of Audio Features</span>:</p>
+        <ul style="padding-left: 20px; list-style-type: circle;">
+          <li>
+            <p class="text">Data points are broadly dispersed.</p>
+          </li>
+          <li>
+            <p class="text">No clear clustering by labels, suggesting limited effectiveness of PCA in separating types.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">UMAP Projection of Audio Features</span>:</p>
+        <ul style="padding-left: 20px; list-style-type: circle;">
+          <li>
+            <p class="text">Shows improved clustering compared to PCA.</p>
+          </li>
+          <li>
+            <p class="text">Distinct groups suggest better separation of features.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">t-SNE Projection of Audio Features</span>:</p>
+        <ul style="padding-left: 20px; list-style-type: circle;">
+          <li>
+            <p class="text">Exhibits tight clustering and clear separation between different audio labels.</p>
+          </li>
+          <li>
+            <p class="text">Indicates strong capability of t-SNE in capturing local relationships in data.</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D Projection Code</summary>
+      <pre><code class="python">
+  # Selecting MFCCs and Pitch variance as features for 2d projection
+  features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
+  corr = df[features].corr()  # Correlation matrix
+  plt.figure(figsize=(16, 16)) 
+  
+  plt.subplot(221)  # Heat map
+  sns.heatmap(data=corr, annot=True, cmap="coolwarm", xticklabels=features, yticklabels=features)
+  plt.title("Correlations between Features")
+  
+  # Prepare data for PCA, UMAP, and t-SNE
+  mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
+  X = df[mfccs].to_numpy()
+  labels = df["Label"].to_numpy()
+  
+  # Scaling the data
+  scaler = StandardScaler()
+  X_scaled = scaler.fit_transform(X)
+  
+  # PCA
+  pca = PCA(n_components=2)
+  X_pca = pca.fit_transform(X_scaled)
+  
+  # UMAP
+  reducer = umap.UMAP(n_components=2, random_state=42)
+  X_umap = reducer.fit_transform(X_scaled)
+  
+  # t-SNE
+  tsne = TSNE(n_components=2, random_state=42)
+  X_tsne = tsne.fit_transform(X_scaled)
+  
+  # Plot PCA
+  plt.subplot(222)
+  unique_labels = np.unique(labels)
+  for label in unique_labels:
+      idx = labels == label
+      plt.scatter(X_pca[idx, 0], X_pca[idx, 1], label=label, alpha=0.6)
+  plt.xlabel("PCA Component 1")
+  plt.ylabel("PCA Component 2")
+  plt.title("2D PCA of Audio Features")
+  plt.legend(loc="best", fontsize="small")
+  plt.grid(True)
+  
+  # Plot UMAP
+  plt.subplot(223)
+  for label in unique_labels:
+      idx = labels == label
+      plt.scatter(X_umap[idx, 0], X_umap[idx, 1], label=label, alpha=0.6)
+  plt.xlabel("UMAP Component 1")
+  plt.ylabel("UMAP Component 2")
+  plt.title("UMAP Projection of Audio Features")
+  plt.legend(loc="best", fontsize="small")
+  plt.grid(True)
+  
+  # Plot t-SNE
+  plt.subplot(224)
+  for label in unique_labels:
+      idx = labels == label
+      plt.scatter(X_tsne[idx, 0], X_tsne[idx, 1], label=label, alpha=0.6)
+  plt.xlabel("t-SNE Component 1")
+  plt.ylabel("t-SNE Component 2")
+  plt.title("t-SNE Projection of Audio Features")
+  plt.legend(loc="best", fontsize="small")
+  plt.grid(True)
+  
+  plt.tight_layout()
+  plt.show()
+      </code></pre>
+    </details>
+  </div>
+
   <div class="container blog main">
     <h1>Feature Extraction & Hypothesis Testing</h1>
     <section style="font-family: sans-serif; line-height: 1.6;">
