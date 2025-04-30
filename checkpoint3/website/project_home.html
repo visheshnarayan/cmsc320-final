@@ -1,31 +1,33 @@
 <html lang="en-GB">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clarity: A Minimalist Website Template for AI Research</title>
-    <meta name="description" content="We've presented Clarity, a minimalist and elegant website template for AI research.">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <meta name="robots" content="all">
-    <meta content="en_EN" property="og:locale">
-    <meta content="website" property="og:type">
-    <meta content="https://shikun.io/projects/clarity" property="og:url">
-    <meta content="Clarity" property="og:title">
-    <meta content="Website Template for AI Research" property="og:description">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clarity: A Minimalist Website Template for AI Research</title>
+  <meta name="description"
+    content="We've presented Clarity, a minimalist and elegant website template for AI research.">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta name="robots" content="all">
+  <meta content="en_EN" property="og:locale">
+  <meta content="website" property="og:type">
+  <meta content="https://shikun.io/projects/clarity" property="og:url">
+  <meta content="Clarity" property="og:title">
+  <meta content="Website Template for AI Research" property="og:description">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@your_twitter_id">
-    <meta name="twitter:description" content="Clarity: A Minimalist Website Template for AI Research">
-    <meta name="twitter:image:src" content="assets/figures/clarity.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@your_twitter_id">
+  <meta name="twitter:description" content="Clarity: A Minimalist Website Template for AI Research">
+  <meta name="twitter:image:src" content="assets/figures/clarity.png">
 
-    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/main_free.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="clarity/clarity.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
-    <link href="assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"/>
-    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
-    <script src="assets/scripts/navbar.js"></script> <!-- Comment to remove table of content. -->
-    <script type="text/x-mathjax-config">
+  <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/main_free.css" />
+  <link rel="stylesheet" type="text/css" media="all" href="clarity/clarity.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
+  <link href="assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+  <script src="assets/scripts/navbar.js"></script> <!-- Comment to remove table of content. -->
+  <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             "HTML-CSS": {
               scale: 95,
@@ -39,188 +41,230 @@
               }
           });
     </script>
-    <script type="text/javascript"
+  <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <style>
-        /* Data table styling for Clarity template */
-        .data-table-container {
-          margin: 2rem 0;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
-          overflow-x: auto;
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .data-table {
-          width: 100%;
-          border-collapse: collapse;
-          font-size: 0.9rem;
-          border: 1px solid #e0e4e6;
-          background-color: white;
-        }
-        
-        .data-table-header {
-          padding: 0.75rem 1rem;
-          background-color: #f5f7f8;
-          color: #505a5f;
-          text-align: left;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 0.02em;
-          border-bottom: 2px solid #e0e4e6;
-        }
-        
-        .data-table-datatype {
-          padding: 0.5rem 1rem;
-          color: #667883;
-          font-size: 0.75rem;
-          font-weight: normal;
-          background-color: #f9fafb;
-          border-bottom: 1px solid #e0e4e6;
-          font-family: Menlo, Monaco, "Courier New", monospace;
-        }
-        
-        .data-table-cell {
-          padding: 0.5rem 1rem;
-          border-top: 1px solid #e0e4e6;
-          color: #2a3439;
-          vertical-align: top;
-          font-size: 0.85rem;
-        }
-        
-        .data-table-cell code {
-          font-family: Menlo, Monaco, "Courier New", monospace;
-          font-size: 0.8rem;
-          color: #505a5f;
-          background-color: #f5f7f8;
-          padding: 0.2rem;
-          border-radius: 3px;
-        }
-        
-        .data-table-footer {
-          font-size: 0.75rem;
-          color: #667883;
-          padding: 0.75rem 1rem;
-          text-align: left;
-          background-color: #f9fafb;
-          border-top: 1px solid #e0e4e6;
-        }
-        
-        .data-table tbody tr:nth-child(even) {
-          background-color: #f9fafb;
-        }
-        
-        .data-table tbody tr:hover {
-          background-color: #f0f4f7;
-        }
-        
-        .data-table-truncated {
-          color: #8b9aa4;
-          font-style: italic;
-        }
-        </style>
+  <style>
+    /* Data table styling for Clarity template */
+    .data-table-container {
+      margin: 2rem 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      border: 1px solid #e0e4e6;
+      background-color: white;
+    }
+
+    .data-table-header {
+      padding: 0.75rem 1rem;
+      background-color: #f5f7f8;
+      color: #505a5f;
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-bottom: 2px solid #e0e4e6;
+    }
+
+    .data-table-datatype {
+      padding: 0.5rem 1rem;
+      color: #667883;
+      font-size: 0.75rem;
+      font-weight: normal;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #e0e4e6;
+      font-family: Menlo, Monaco, "Courier New", monospace;
+    }
+
+    .data-table-cell {
+      padding: 0.5rem 1rem;
+      border-top: 1px solid #e0e4e6;
+      color: #2a3439;
+      vertical-align: top;
+      font-size: 0.85rem;
+    }
+
+    .data-table-cell code {
+      font-family: Menlo, Monaco, "Courier New", monospace;
+      font-size: 0.8rem;
+      color: #505a5f;
+      background-color: #f5f7f8;
+      padding: 0.2rem;
+      border-radius: 3px;
+    }
+
+    .data-table-footer {
+      font-size: 0.75rem;
+      color: #667883;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      background-color: #f9fafb;
+      border-top: 1px solid #e0e4e6;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .data-table tbody tr:hover {
+      background-color: #f0f4f7;
+    }
+
+    .data-table-truncated {
+      color: #8b9aa4;
+      font-style: italic;
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Title Page -->
-    <!-- Dark Theme Example: Change the background colour dark and change the following div "blog-title" into "blog-title white". -->
-    <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
-        <!-- If you don't have a project cover: Change "blog-title" into "blog-title no-cover"  -->
-        <div class="blog-title">
-            <div class="blog-intro">
-                <div>
-                    <!-- <h1 class="title">
+  <!-- Title Page -->
+  <!-- Dark Theme Example: Change the background colour dark and change the following div "blog-title" into "blog-title white". -->
+  <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
+    <!-- If you don't have a project cover: Change "blog-title" into "blog-title no-cover"  -->
+    <div class="blog-title">
+      <div class="blog-intro">
+        <div>
+          <!-- <h1 class="title">
                         Learning to Listen: Decoding Nonverbal Vocal Intent in Autism Through Feature-Based Modeling
                     </h1> -->
-                    <h1 class="title">
-                        Machine Learning the Unspoken: Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations
-                    </h1>
-                    <p>Spring 2025 Data Science Project</p>
-                    <p class="author">Vishesh Narayan, Shivam Amin, Deval Bansal, Eric Yao, Eshan Khan</p>
-                    <p class="abstract">
-                        This project explores the use of machine learning to classify non-verbal vocalizations from autistic individuals into expressive intent categories (e.g., “yes”, “no”, “frustrated”, “delighted”). We develop a preprocessing pipeline to clean raw audio, extract acoustic features (pitch, MFCCs, spectral entropy), and generate normalized Mel spectrograms. Statistical analysis confirms that these features vary meaningfully across intent labels, motivating their use for supervised classification.
+          <h1 class="title">
+            Machine Learning the Unspoken: Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations
+          </h1>
+          <p>Spring 2025 Data Science Project</p>
+          <p class="author">Vishesh Narayan, Shivam Amin, Deval Bansal, Eric Yao, Eshan Khan</p>
+          <p class="abstract">
+            This project explores the use of machine learning to classify non-verbal vocalizations from autistic
+            individuals into expressive intent categories (e.g., “yes”, “no”, “frustrated”, “delighted”). We develop a
+            preprocessing pipeline to clean raw audio, extract acoustic features (pitch, MFCCs, spectral entropy), and
+            generate normalized Mel spectrograms. Statistical analysis confirms that these features vary meaningfully
+            across intent labels, motivating their use for supervised classification.
 
-                        We experiment with classical models (logistic regression, random forests) and deep learning architectures (CNNs, attention-based models) to assess classification performance and interpretability. The tutorial provides a reproducible walkthrough from data preparation to model evaluation, with a supplemental PDF detailing our exploratory data analysis. Our goal is to contribute toward tools that help decode communicative intent in nonverbal autism contexts.
-                    </p>
-                   
-                </div>
-               
-                <div class="info">
-                    <div>
-                        <a href="https://github.com/visheshnarayan/cmsc320-final" class="button icon" style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">Github <i class="fa-solid fa-code"></i></a>
-                    </div>
-                </div>
-            </div>
+            We experiment with classical models (logistic regression, random forests) and deep learning architectures
+            (CNNs, attention-based models) to assess classification performance and interpretability. The tutorial
+            provides a reproducible walkthrough from data preparation to model evaluation, with a supplemental PDF
+            detailing our exploratory data analysis. Our goal is to contribute toward tools that help decode
+            communicative intent in nonverbal autism contexts.
+          </p>
 
-            <div class="blog-cover">
-                <img class="foreground" src="assets/figures/clarity.png">
-                <img class="background" src="assets/figures/clarity.png">
-            </div>
         </div>
-    </div>
 
-
-    <div class="container blog main first" id="blog-main">
-
-        <!-- CONTRIBUTIONS -->
-
-        <h1>
-            Contributions
-        </h1>
-        <ol style="padding: 2em; display: flex; flex-direction: column; gap: 1em;">
-            <li>
-                <p class="text"><span style="font-weight: bold">Vishesh Narayan</span>: Helped conceive and define the project scope and objective (A). He developed the data preprocessing pipeline and extracted key audio features (B), conducted exploratory data analysis and visualizations (C), and contributed to the design and implementation of ML models including CNN, classical classifiers, and Attention-based models (D). Vishesh also ran training experiments and model evaluations (E), helped interpret results and refine insights (F), and contributed heavily to writing and formatting the final tutorial report (G).</p>
-            </li>
-            <li>
-                <p class="text"><span style="font-weight: bold">Shivam Amin</span>: Improved dataset loading by building parallel processing functions for faster and more efficient data handling along with waveform cleaning, spectrogram generation, and acoustic feature extraction (B). He contributed to exploratory data analysis and interpretation (C), helped design and implement ML models (D), participated in interpreting visualizations and results (F), and helped write and polish the final tutorial (G).</p>
-            </li>
-            <li>
-                <p class="text"><span style="font-weight: bold">Deval Bansal</span>: Contributed to EDA through feature summary statistics and comparative plots (C), helped build classification models and optimize hyperparameters using the elbow method (D), ran training and testing procedures on classical (E), created supporting visualizations and analysis summaries (F), and co-authored the final report (G).</p>
-            </li>
-            <li>
-                <p class="text"><span style="font-weight: bold">Eric Yao</span>: Assisted in audio feature extraction and comparative analysis of spectral signatures (C), developed deep learning models including CNN variants and preprocessing logic (D), supported model training and hyperparameter tuning (E), helped interpret results and plot visual comparisons (F), and contributed to the overall report structure and clarity (G).</p>
-            </li>
-            <li>
-                <p class="text"><span style="font-weight: bold">Eshan Khan</span>: Analyzed MFCC and pitch statistics across label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN architecture selection (D), supported training runs and validation of model outputs (E), assisted in visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial report (G).</p>
-            </li>
-        </ol>
+        <div class="info">
+          <div>
+            <a href="https://github.com/visheshnarayan/cmsc320-final" class="button icon"
+              style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">Github <i
+                class="fa-solid fa-code"></i></a>
+          </div>
+        </div>
       </div>
+
+      <div class="blog-cover">
+        <img class="foreground" src="assets/figures/clarity.png">
+        <img class="background" src="assets/figures/clarity.png">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container blog main first" id="blog-main">
+
+    <!-- CONTRIBUTIONS -->
+
+    <h1>
+      Contributions
+    </h1>
+    <ol style="padding: 2em; display: flex; flex-direction: column; gap: 1em;">
+      <li>
+        <p class="text"><span style="font-weight: bold">Vishesh Narayan</span>: Helped conceive and define the project
+          scope and objective (A). He developed the data preprocessing pipeline and extracted key audio features (B),
+          conducted exploratory data analysis and visualizations (C), and contributed to the design and implementation
+          of ML models including CNN, classical classifiers, and Attention-based models (D). Vishesh also ran training
+          experiments and model evaluations (E), helped interpret results and refine insights (F), and contributed
+          heavily to writing and formatting the final tutorial report (G).</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Shivam Amin</span>: Improved dataset loading by building
+          parallel processing functions for faster and more efficient data handling along with waveform cleaning,
+          spectrogram generation, and acoustic feature extraction (B). He contributed to exploratory data analysis and
+          interpretation (C), helped design and implement ML models (D), participated in interpreting visualizations and
+          results (F), and helped write and polish the final tutorial (G).</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Deval Bansal</span>: Contributed to EDA through feature summary
+          statistics and comparative plots (C), helped build classification models and optimize hyperparameters using
+          the elbow method (D), ran training and testing procedures on classical (E), created supporting visualizations
+          and analysis summaries (F), and co-authored the final report (G).</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Eric Yao</span>: Assisted in audio feature extraction and
+          comparative analysis of spectral signatures (C), developed deep learning models including CNN variants and
+          preprocessing logic (D), supported model training and hyperparameter tuning (E), helped interpret results and
+          plot visual comparisons (F), and contributed to the overall report structure and clarity (G).</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Eshan Khan</span>: Analyzed MFCC and pitch statistics across
+          label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN
+          architecture selection (D), supported training runs and validation of model outputs (E), assisted in
+          visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial
+          report (G).</p>
+      </li>
+    </ol>
+  </div>
 
   <div class="container blog main">
     <!-- DATASET CURATION -->
-        <h1>Data Curation</h1>
+    <h1>Data Curation</h1>
 
-        <p class="text">
-            In this section, we will go over details of the dataset and transforming our data into a indexable interactive data frame.
-        </p>
-        
-        <h2>Dataset</h2>
+    <p class="text">
+      In this section, we will go over details of the dataset and transforming our data into a indexable interactive
+      data frame.
+    </p>
 
-        <p class="text">
-            For this project, we use the <cite>ReCANVo</cite> dataset, which contains real-world vocalizations of non-verbal autistic children and young adults. Each vocalization is labeled with its intended expressive category—such as <i>happy</i>, <i>frustrated</i>, <i>hungry</i>, or <i>self-talk</i>—allowing for supervised learning approaches to intent classification.
-        </p>
-        <p class="text">
-            The dataset was compiled by Dr. Kristine Johnson at MIT as part of a study exploring how machine learning techniques can be used to interpret communicative vocal cues in autistic individuals. Audio samples were recorded in naturalistic settings, making this dataset especially valuable for research on real-world assistive technologies.
-        </p>
+    <h2>Dataset</h2>
 
-        <p class="text">
-            Dataset citation: <br>
-            <cite>Narain, J., & Johnson, K. T. (2021). ReCANVo: A Dataset of Real-World Communicative and Affective Nonverbal Vocalizations</cite> [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.5786860" target="_blank">https://doi.org/10.5281/zenodo.5786860</a>
-        </p>
+    <p class="text">
+      For this project, we use the <cite>ReCANVo</cite> dataset, which contains real-world vocalizations of non-verbal
+      autistic children and young adults. Each vocalization is labeled with its intended expressive category—such as
+      <i>happy</i>, <i>frustrated</i>, <i>hungry</i>, or <i>self-talk</i>—allowing for supervised learning approaches to
+      intent classification.
+    </p>
+    <p class="text">
+      The dataset was compiled by Dr. Kristine Johnson at MIT as part of a study exploring how machine learning
+      techniques can be used to interpret communicative vocal cues in autistic individuals. Audio samples were recorded
+      in naturalistic settings, making this dataset especially valuable for research on real-world assistive
+      technologies.
+    </p>
 
-        <h2>DataFrame creation</h2>
+    <p class="text">
+      Dataset citation: <br>
+      <cite>Narain, J., & Johnson, K. T. (2021). ReCANVo: A Dataset of Real-World Communicative and Affective Nonverbal
+        Vocalizations</cite> [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.5786860"
+        target="_blank">https://doi.org/10.5281/zenodo.5786860</a>
+    </p>
 
-        <p class="text">
-            We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV file that included labels, participant IDs, and file indices. All of this information was organized into a structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing 🥀).
-        </p>
+    <h2>DataFrame creation</h2>
+
+    <p class="text">
+      We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV
+      file that included labels, participant IDs, and file indices. All of this information was organized into a
+      structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused
+      RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization
+      significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing 🥀).
+    </p>
   </div>
   <div class="container blog main">
-        <details>
-            <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
-        <pre><code class="python">
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+      <pre><code class="python">
 def load_audio_metadata(csv_path: str,
             audio_dir: str,
             limit: Union[int, None] = None,
@@ -311,34 +355,39 @@ def load_audio_metadata(csv_path: str,
         audio_data,
         schema=["Filename", "Audio", "ID", "Label", "Duration", "Index"], orient='row'
     )
-        </code></pre> 
-    </details>  
+        </code></pre>
+    </details>
   </div>
-    <div class="container blog main">
-        <!-- EDA -->
+  <div class="container blog main">
+    <!-- EDA -->
 
-        <h1 style="padding-top: 1em">Exploratory Data Analysis</h1>
+    <h1 style="padding-top: 1em">Exploratory Data Analysis</h1>
 
-        <p class="text">
-            In this, we will overview all of our Exploratory Data Analysis (EDA) done to perform statistical tests on our features, develop assumption about signals in our data, and visualize it too of course. 
-        </p>
-    </div>
-    <div class="container blog main gray">
-        <h2>Audio Preprocessing Pipeline Overview</h2>
-        <p class="text">
-            Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs for downstream tasks. The steps are as follows:
-        </p>
+    <p class="text">
+      In this, we will overview all of our Exploratory Data Analysis (EDA) done to perform statistical tests on our
+      features, develop assumption about signals in our data, and visualize it too of course.
+    </p>
+  </div>
+  <div class="container blog main gray">
+    <h2>Audio Preprocessing Pipeline Overview</h2>
+    <p class="text">
+      Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs
+      for downstream tasks. The steps are as follows:
+    </p>
 
-        <img src="clarity/images/preprocessing_pipeline.png" alt="Preprocessing Pipeline Flowchart">
+    <img src="clarity/images/preprocessing_pipeline.png" alt="Preprocessing Pipeline Flowchart">
 
-        <p class="text">
-            This end-to-end pipeline ensures that raw audio recordings are systematically cleaned, transformed, and structured, making them ready for efficient modeling and analysis. We have provided the preprocessing code as well:
-        </p>
-    </div>
-    <div class="container blog main">
-        <details>
-            <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Pipeline Code</summary>          
-                <pre><code class="python">
+    <p class="text">
+      This end-to-end pipeline ensures that raw audio recordings are systematically cleaned, transformed, and
+      structured, making them ready for efficient modeling and analysis. We have provided the preprocessing code as
+      well:
+    </p>
+  </div>
+  <div class="container blog main">
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Pipeline Code
+      </summary>
+      <pre><code class="python">
 # ------------------- optional preprocessing ------------------- #
 def rename_audio_files(csv_path: str,
                        audio_dir: str,
@@ -660,24 +709,26 @@ def audio_to_spectrogram(y: np.ndarray,
         </code></pre>
     </details>
 
-        <p class="text">
-            This process results in the following DataFrame:
-        </p>
-        <p style="font-family: 'Courier New', Courier, monospace;">🚀 Starting preprocessing pipeline...</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">⏳ load_audio_metadata completed in 138.89 seconds</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">🗂️ Loading global stats from global_stats.json</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">🧮 compute_or_load_global_stats completed in 0.16 seconds</p>
+    <p class="text">
+      This process results in the following DataFrame:
+    </p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🚀 Starting preprocessing pipeline...</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">⏳ load_audio_metadata completed in 138.89 seconds</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🗂️ Loading global stats from global_stats.json</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🧮 compute_or_load_global_stats completed in 0.16 seconds
+    </p>
 
-        <p style="font-family: 'Courier New', Courier, monospace;">📈 Computed Statistics:</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">mean: -55.975612227106474</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">std: 18.55726476893056</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">📈 Computed Statistics:</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">mean: -55.975612227106474</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">std: 18.55726476893056</p>
 
-        <p style="font-family: 'Courier New', Courier, monospace;">🔊 Spectrogram generation completed in 29.24 seconds</p>
-        <p style="font-family: 'Courier New', Courier, monospace;">🏁 Full pipeline completed in 168.32 seconds</p>
-        </p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🔊 Spectrogram generation completed in 29.24 seconds</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">🏁 Full pipeline completed in 168.32 seconds</p>
+    </p>
 
     <p class="text">
-        We have also created a loading function for the <code>.pkl</code> so we don't have to rerun the whole pipeline every time we want to jump back into the notebook:
+      We have also created a loading function for the <code>.pkl</code> so we don't have to rerun the whole pipeline
+      every time we want to jump back into the notebook:
     </p>
     <pre><code class="python">
 def open_pickle(path: str) -> pl.DataFrame:
@@ -687,496 +738,501 @@ def open_pickle(path: str) -> pl.DataFrame:
     </code></pre>
 
     <h2>DataFrame Overview</h2>
-    
+
     <p class="text">
-        The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename, Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is stored as a list of lists of floats, and the rest are strings or floats.
+      The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename,
+      Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is
+      stored as a list of lists of floats, and the rest are strings or floats.
     </p>
   </div>
-  <div class="container blog main gray">  
+  <div class="container blog main gray">
     <div class="data-table-container">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th class="data-table-header">Filename</th>
-              <th class="data-table-header">Audio</th>
-              <th class="data-table-header">ID</th>
-              <th class="data-table-header">Label</th>
-              <th class="data-table-header">Duration</th>
-              <th class="data-table-header">Index</th>
-              <th class="data-table-header">Spectrogram</th>
-            </tr>
-            <tr>
-              <td class="data-table-datatype">str</td>
-              <td class="data-table-datatype">list[f64]</td>
-              <td class="data-table-datatype">str</td>
-              <td class="data-table-datatype">str</td>
-              <td class="data-table-datatype">f64</td>
-              <td class="data-table-datatype">i64</td>
-              <td class="data-table-datatype">list[list[f64]]</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="data-table-cell">P01_dysregulation-sick_1.wav</td>
-              <td class="data-table-cell">[-0.107705, -0.120444, ...]</td>
-              <td class="data-table-cell">P01</td>
-              <td class="data-table-cell">dysregulation-sick</td>
-              <td class="data-table-cell">0.25542</td>
-              <td class="data-table-cell">1</td>
-              <td class="data-table-cell">[[1.065977, 0.518101, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P01_dysregulation-sick_2.wav</td>
-              <td class="data-table-cell">[0.145759, 0.148596, ...]</td>
-              <td class="data-table-cell">P01</td>
-              <td class="data-table-cell">dysregulation-sick</td>
-              <td class="data-table-cell">0.928798</td>
-              <td class="data-table-cell">2</td>
-              <td class="data-table-cell">[[1.004109, 0.631097, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P01_dysregulation-sick_3.wav</td>
-              <td class="data-table-cell">[0.034167, 0.022343, ...]</td>
-              <td class="data-table-cell">P01</td>
-              <td class="data-table-cell">dysregulation-sick</td>
-              <td class="data-table-cell">1.137778</td>
-              <td class="data-table-cell">3</td>
-              <td class="data-table-cell">[[0.113385, -0.084511, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P01_dysregulation-sick_4.wav</td>
-              <td class="data-table-cell">[-0.005172, -0.009896, ...]</td>
-              <td class="data-table-cell">P01</td>
-              <td class="data-table-cell">dysregulation-sick</td>
-              <td class="data-table-cell">3.645533</td>
-              <td class="data-table-cell">4</td>
-              <td class="data-table-cell">[[-0.463286, -0.999457, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P01_dysregulation-sick_5.wav</td>
-              <td class="data-table-cell">[-0.0023, -0.001397, ...]</td>
-              <td class="data-table-cell">P01</td>
-              <td class="data-table-cell">dysregulation-sick</td>
-              <td class="data-table-cell">0.394739</td>
-              <td class="data-table-cell">5</td>
-              <td class="data-table-cell">[[0.945787, 0.609868, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell" colspan="7" class="data-table-truncated">...</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P16_delighted_135.wav</td>
-              <td class="data-table-cell">[0.000027, 0.000085, ...]</td>
-              <td class="data-table-cell">P16</td>
-              <td class="data-table-cell">delighted</td>
-              <td class="data-table-cell">1.044898</td>
-              <td class="data-table-cell">135</td>
-              <td class="data-table-cell">[[-1.28051, -1.294608, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P16_delighted_136.wav</td>
-              <td class="data-table-cell">[0.016696, 0.013343, ...]</td>
-              <td class="data-table-cell">P16</td>
-              <td class="data-table-cell">delighted</td>
-              <td class="data-table-cell">0.638549</td>
-              <td class="data-table-cell">136</td>
-              <td class="data-table-cell">[[0.801103, 0.513365, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P16_delighted_137.wav</td>
-              <td class="data-table-cell">[0.008781, 0.005037, ...]</td>
-              <td class="data-table-cell">P16</td>
-              <td class="data-table-cell">delighted</td>
-              <td class="data-table-cell">0.766259</td>
-              <td class="data-table-cell">137</td>
-              <td class="data-table-cell">[[0.40735, 0.053851, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P16_delighted_138.wav</td>
-              <td class="data-table-cell">[0.015408, 0.010745, ...]</td>
-              <td class="data-table-cell">P16</td>
-              <td class="data-table-cell">delighted</td>
-              <td class="data-table-cell">0.743039</td>
-              <td class="data-table-cell">138</td>
-              <td class="data-table-cell">[[0.439509, 0.102873, ...], ...]</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">P16_delighted_139.wav</td>
-              <td class="data-table-cell">[-0.00114, -0.003822, ...]</td>
-              <td class="data-table-cell">P16</td>
-              <td class="data-table-cell">delighted</td>
-              <td class="data-table-cell">1.277098</td>
-              <td class="data-table-cell">139</td>
-              <td class="data-table-cell">[[0.294103, -0.048475, ...], ...]</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="7" class="data-table-footer">
-                shape: (7,077, 7) | Dataset contains audio samples from multiple participants with various intent labels
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Filename</th>
+            <th class="data-table-header">Audio</th>
+            <th class="data-table-header">ID</th>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">Duration</th>
+            <th class="data-table-header">Index</th>
+            <th class="data-table-header">Spectrogram</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">list[f64]</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">f64</td>
+            <td class="data-table-datatype">i64</td>
+            <td class="data-table-datatype">list[list[f64]]</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">P01_dysregulation-sick_1.wav</td>
+            <td class="data-table-cell">[-0.107705, -0.120444, ...]</td>
+            <td class="data-table-cell">P01</td>
+            <td class="data-table-cell">dysregulation-sick</td>
+            <td class="data-table-cell">0.25542</td>
+            <td class="data-table-cell">1</td>
+            <td class="data-table-cell">[[1.065977, 0.518101, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P01_dysregulation-sick_2.wav</td>
+            <td class="data-table-cell">[0.145759, 0.148596, ...]</td>
+            <td class="data-table-cell">P01</td>
+            <td class="data-table-cell">dysregulation-sick</td>
+            <td class="data-table-cell">0.928798</td>
+            <td class="data-table-cell">2</td>
+            <td class="data-table-cell">[[1.004109, 0.631097, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P01_dysregulation-sick_3.wav</td>
+            <td class="data-table-cell">[0.034167, 0.022343, ...]</td>
+            <td class="data-table-cell">P01</td>
+            <td class="data-table-cell">dysregulation-sick</td>
+            <td class="data-table-cell">1.137778</td>
+            <td class="data-table-cell">3</td>
+            <td class="data-table-cell">[[0.113385, -0.084511, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P01_dysregulation-sick_4.wav</td>
+            <td class="data-table-cell">[-0.005172, -0.009896, ...]</td>
+            <td class="data-table-cell">P01</td>
+            <td class="data-table-cell">dysregulation-sick</td>
+            <td class="data-table-cell">3.645533</td>
+            <td class="data-table-cell">4</td>
+            <td class="data-table-cell">[[-0.463286, -0.999457, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P01_dysregulation-sick_5.wav</td>
+            <td class="data-table-cell">[-0.0023, -0.001397, ...]</td>
+            <td class="data-table-cell">P01</td>
+            <td class="data-table-cell">dysregulation-sick</td>
+            <td class="data-table-cell">0.394739</td>
+            <td class="data-table-cell">5</td>
+            <td class="data-table-cell">[[0.945787, 0.609868, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell" colspan="7" class="data-table-truncated">...</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P16_delighted_135.wav</td>
+            <td class="data-table-cell">[0.000027, 0.000085, ...]</td>
+            <td class="data-table-cell">P16</td>
+            <td class="data-table-cell">delighted</td>
+            <td class="data-table-cell">1.044898</td>
+            <td class="data-table-cell">135</td>
+            <td class="data-table-cell">[[-1.28051, -1.294608, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P16_delighted_136.wav</td>
+            <td class="data-table-cell">[0.016696, 0.013343, ...]</td>
+            <td class="data-table-cell">P16</td>
+            <td class="data-table-cell">delighted</td>
+            <td class="data-table-cell">0.638549</td>
+            <td class="data-table-cell">136</td>
+            <td class="data-table-cell">[[0.801103, 0.513365, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P16_delighted_137.wav</td>
+            <td class="data-table-cell">[0.008781, 0.005037, ...]</td>
+            <td class="data-table-cell">P16</td>
+            <td class="data-table-cell">delighted</td>
+            <td class="data-table-cell">0.766259</td>
+            <td class="data-table-cell">137</td>
+            <td class="data-table-cell">[[0.40735, 0.053851, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P16_delighted_138.wav</td>
+            <td class="data-table-cell">[0.015408, 0.010745, ...]</td>
+            <td class="data-table-cell">P16</td>
+            <td class="data-table-cell">delighted</td>
+            <td class="data-table-cell">0.743039</td>
+            <td class="data-table-cell">138</td>
+            <td class="data-table-cell">[[0.439509, 0.102873, ...], ...]</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">P16_delighted_139.wav</td>
+            <td class="data-table-cell">[-0.00114, -0.003822, ...]</td>
+            <td class="data-table-cell">P16</td>
+            <td class="data-table-cell">delighted</td>
+            <td class="data-table-cell">1.277098</td>
+            <td class="data-table-cell">139</td>
+            <td class="data-table-cell">[[0.294103, -0.048475, ...], ...]</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" class="data-table-footer">
+              shape: (7,077, 7) | Dataset contains audio samples from multiple participants with various intent labels
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
   <div class="container blog main">
-      <h2>Data Exploration</h2>
+    <h2>Data Exploration</h2>
 
-        <p class="text">
-        We explored the dataset to understand the distribution of labels and the characteristics of the audio samples. 
-        We visualized the distribution of labels using a bar plot, which showed that the dataset is relatively balanced across different intent categories.
-        </p>
-        <pre><code class="python">
+    <p class="text">
+      We explored the dataset to understand the distribution of labels and the characteristics of the audio samples.
+      We visualized the distribution of labels using a bar plot, which showed that the dataset is relatively balanced
+      across different intent categories.
+    </p>
+    <pre><code class="python">
 print(f"Dataframe shape: {df.shape}")
 df.describe()
         </code></pre>
   </div>
   <div class="container blog main gray">
-        <div class="data-table-container">
-            Dataframe shape: (7077, 7)
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th class="data-table-header">statistic</th>
-                  <th class="data-table-header">Filename</th>
-                  <th class="data-table-header">Audio</th>
-                  <th class="data-table-header">ID</th>
-                  <th class="data-table-header">Label</th>
-                  <th class="data-table-header">Duration</th>
-                  <th class="data-table-header">Index</th>
-                  <th class="data-table-header">Spectrogram</th>
-                </tr>
-                <tr>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">f64</td>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">f64</td>
-                  <td class="data-table-datatype">f64</td>
-                  <td class="data-table-datatype">f64</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="data-table-cell">"count"</td>
-                  <td class="data-table-cell">"7077"</td>
-                  <td class="data-table-cell">7077.0</td>
-                  <td class="data-table-cell">"7077"</td>
-                  <td class="data-table-cell">"7077"</td>
-                  <td class="data-table-cell">7077.0</td>
-                  <td class="data-table-cell">7077.0</td>
-                  <td class="data-table-cell">7077.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"null_count"</td>
-                  <td class="data-table-cell">"0"</td>
-                  <td class="data-table-cell">0.0</td>
-                  <td class="data-table-cell">"0"</td>
-                  <td class="data-table-cell">"0"</td>
-                  <td class="data-table-cell">0.0</td>
-                  <td class="data-table-cell">0.0</td>
-                  <td class="data-table-cell">0.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"mean"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">1.240378</td>
-                  <td class="data-table-cell">154.396637</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"std"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">1.012603</td>
-                  <td class="data-table-cell">158.147559</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"min"</td>
-                  <td class="data-table-cell">"P01_bathroom_1.wav"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">"P01"</td>
-                  <td class="data-table-cell">"affectionate"</td>
-                  <td class="data-table-cell">0.08127</td>
-                  <td class="data-table-cell">1.0</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"25%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">0.592109</td>
-                  <td class="data-table-cell">36.0</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"50%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">0.940408</td>
-                  <td class="data-table-cell">104.0</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"75%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">1.520907</td>
-                  <td class="data-table-cell">216.0</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"max"</td>
-                  <td class="data-table-cell">"P16_social_9.wav"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">"P16"</td>
-                  <td class="data-table-cell">"yes"</td>
-                  <td class="data-table-cell">14.048073</td>
-                  <td class="data-table-cell">781.0</td>
-                  <td class="data-table-cell">null</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="8" class="data-table-footer">
-                    shape: (9, 8) | Dataset statistics summary for audio samples collection
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-  </div>     
+    <div class="data-table-container">
+      Dataframe shape: (7077, 7)
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">statistic</th>
+            <th class="data-table-header">Filename</th>
+            <th class="data-table-header">Audio</th>
+            <th class="data-table-header">ID</th>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">Duration</th>
+            <th class="data-table-header">Index</th>
+            <th class="data-table-header">Spectrogram</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">f64</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">f64</td>
+            <td class="data-table-datatype">f64</td>
+            <td class="data-table-datatype">f64</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"count"</td>
+            <td class="data-table-cell">"7077"</td>
+            <td class="data-table-cell">7077.0</td>
+            <td class="data-table-cell">"7077"</td>
+            <td class="data-table-cell">"7077"</td>
+            <td class="data-table-cell">7077.0</td>
+            <td class="data-table-cell">7077.0</td>
+            <td class="data-table-cell">7077.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"null_count"</td>
+            <td class="data-table-cell">"0"</td>
+            <td class="data-table-cell">0.0</td>
+            <td class="data-table-cell">"0"</td>
+            <td class="data-table-cell">"0"</td>
+            <td class="data-table-cell">0.0</td>
+            <td class="data-table-cell">0.0</td>
+            <td class="data-table-cell">0.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"mean"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">1.240378</td>
+            <td class="data-table-cell">154.396637</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"std"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">1.012603</td>
+            <td class="data-table-cell">158.147559</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"min"</td>
+            <td class="data-table-cell">"P01_bathroom_1.wav"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">"P01"</td>
+            <td class="data-table-cell">"affectionate"</td>
+            <td class="data-table-cell">0.08127</td>
+            <td class="data-table-cell">1.0</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"25%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">0.592109</td>
+            <td class="data-table-cell">36.0</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"50%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">0.940408</td>
+            <td class="data-table-cell">104.0</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"75%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">1.520907</td>
+            <td class="data-table-cell">216.0</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"max"</td>
+            <td class="data-table-cell">"P16_social_9.wav"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">"P16"</td>
+            <td class="data-table-cell">"yes"</td>
+            <td class="data-table-cell">14.048073</td>
+            <td class="data-table-cell">781.0</td>
+            <td class="data-table-cell">null</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="8" class="data-table-footer">
+              shape: (9, 8) | Dataset statistics summary for audio samples collection
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
   <div class="container blog main">
-          <p class="text">
-              YIPEEEEE 🎉
-              The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
-          </p>
-          
-          <pre><code class="python">
+    <p class="text">
+      YIPEEEEE 🎉
+      The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
+    </p>
+
+    <pre><code class="python">
 df.null_count()
         </code></pre>
   </div>
   <div class="container blog main gray">
-        <div class="data-table-container">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th class="data-table-header">Filename</th>
-                  <th class="data-table-header">Audio</th>
-                  <th class="data-table-header">ID</th>
-                  <th class="data-table-header">Label</th>
-                  <th class="data-table-header">Duration</th>
-                  <th class="data-table-header">Index</th>
-                  <th class="data-table-header">Spectrogram</th>
-                </tr>
-                <tr>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                  <td class="data-table-datatype">u32</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                  <td class="data-table-cell">0</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="7" class="data-table-footer">
-                    shape: (1, 7) | Zero count table
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Filename</th>
+            <th class="data-table-header">Audio</th>
+            <th class="data-table-header">ID</th>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">Duration</th>
+            <th class="data-table-header">Index</th>
+            <th class="data-table-header">Spectrogram</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+            <td class="data-table-datatype">u32</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+            <td class="data-table-cell">0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" class="data-table-footer">
+              shape: (1, 7) | Zero count table
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
   <div class="container blog main">
-        <p class="text">We will now examine label distributions: </p>
+    <p class="text">We will now examine label distributions: </p>
 
-        <pre><code class="python">
+    <pre><code class="python">
 label_counts = df['Label'].value_counts()
 label_counts
         </code></pre>
   </div>
   <div class="container blog main gray">
-        <div class="data-table-container">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th class="data-table-header">Label</th>
-                  <th class="data-table-header">count</th>
-                </tr>
-                <tr>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">u32</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="data-table-cell">"bathroom"</td>
-                  <td class="data-table-cell">20</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"more"</td>
-                  <td class="data-table-cell">22</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"protest"</td>
-                  <td class="data-table-cell">21</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"social"</td>
-                  <td class="data-table-cell">634</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"request"</td>
-                  <td class="data-table-cell">419</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell" colspan="2" class="data-table-truncated">...</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"dysregulated"</td>
-                  <td class="data-table-cell">704</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"happy"</td>
-                  <td class="data-table-cell">61</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"delighted"</td>
-                  <td class="data-table-cell">1272</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"laugh"</td>
-                  <td class="data-table-cell">8</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"frustrated"</td>
-                  <td class="data-table-cell">1536</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2" class="data-table-footer">
-                    shape: (22, 2) | Count of audio samples by label category
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">count</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">u32</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"bathroom"</td>
+            <td class="data-table-cell">20</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"more"</td>
+            <td class="data-table-cell">22</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"protest"</td>
+            <td class="data-table-cell">21</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"social"</td>
+            <td class="data-table-cell">634</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"request"</td>
+            <td class="data-table-cell">419</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell" colspan="2" class="data-table-truncated">...</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"dysregulated"</td>
+            <td class="data-table-cell">704</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"happy"</td>
+            <td class="data-table-cell">61</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"delighted"</td>
+            <td class="data-table-cell">1272</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"laugh"</td>
+            <td class="data-table-cell">8</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"frustrated"</td>
+            <td class="data-table-cell">1536</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" class="data-table-footer">
+              shape: (22, 2) | Count of audio samples by label category
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
   <div class="container blog main">
-        <p class="text">
-            There are discrepencies of how many labels exist per group. The mean is approximately 320, but there is a high deviation of nearly 500
-        </p>
+    <p class="text">
+      There are discrepencies of how many labels exist per group. The mean is approximately 320, but there is a high
+      deviation of nearly 500
+    </p>
 
-        <pre><code class="python">
+    <pre><code class="python">
 label_counts.describe()
         </code></pre>
   </div>
   <div class="container blog main gray">
-        <div class="data-table-container">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th class="data-table-header">statistic</th>
-                  <th class="data-table-header">Label</th>
-                  <th class="data-table-header">count</th>
-                </tr>
-                <tr>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">str</td>
-                  <td class="data-table-datatype">f64</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="data-table-cell">"count"</td>
-                  <td class="data-table-cell">"22"</td>
-                  <td class="data-table-cell">22.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"null_count"</td>
-                  <td class="data-table-cell">"0"</td>
-                  <td class="data-table-cell">0.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"mean"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">321.681818</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"std"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">551.158208</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"min"</td>
-                  <td class="data-table-cell">"affectionate"</td>
-                  <td class="data-table-cell">3.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"25%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">12.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"50%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">61.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"75%"</td>
-                  <td class="data-table-cell">null</td>
-                  <td class="data-table-cell">419.0</td>
-                </tr>
-                <tr>
-                  <td class="data-table-cell">"max"</td>
-                  <td class="data-table-cell">"yes"</td>
-                  <td class="data-table-cell">1885.0</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="3" class="data-table-footer">
-                    shape: (9, 3) | Statistical summary for label distribution
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">statistic</th>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">count</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">f64</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"count"</td>
+            <td class="data-table-cell">"22"</td>
+            <td class="data-table-cell">22.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"null_count"</td>
+            <td class="data-table-cell">"0"</td>
+            <td class="data-table-cell">0.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"mean"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">321.681818</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"std"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">551.158208</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"min"</td>
+            <td class="data-table-cell">"affectionate"</td>
+            <td class="data-table-cell">3.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"25%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">12.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"50%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">61.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"75%"</td>
+            <td class="data-table-cell">null</td>
+            <td class="data-table-cell">419.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"max"</td>
+            <td class="data-table-cell">"yes"</td>
+            <td class="data-table-cell">1885.0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="data-table-footer">
+              shape: (9, 3) | Statistical summary for label distribution
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
   <div class="container blog main">
-          <p class="text">
-            The plot shows us that there is imbalance between labels. We should keep this into consideration during analysis and training. 
-          </p>
+    <p class="text">
+      The plot shows us that there is imbalance between labels. We should keep this into consideration during analysis
+      and training.
+    </p>
 
-          <pre><code class="python">
+    <pre><code class="python">
 colors = plt.cm.viridis(np.linspace(0, 1, len(label_counts))) # pretty colors 
 plt.figure(figsize=(10, 6))
 plt.bar(label_counts['Label'], label_counts['count'], color=colors)
@@ -1189,14 +1245,14 @@ plt.show()
         </code></pre>
   </div>
   <div class="container blog main">
-        <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
-        
-        <p class="text">
-          Let us examine the distribution of labels by each participant: 
-        </p>
+    <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
+
+    <p class="text">
+      Let us examine the distribution of labels by each participant:
+    </p>
   </div>
   <div class="container blog main">
-        <pre><code class="python">
+    <pre><code class="python">
 # Plot for each person
 participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count'))
 participant_label_counts = participant_label_counts.to_pandas()
@@ -1228,59 +1284,69 @@ plt.show()
       <ul id="slide-menu">
       </ul>
     </div>
-      <div class="slideshow">
-          <div class="navigation">
-              <!-- Using FontAwesome Pro -->
-              <!-- <a class="button icon" id="prev_btn"><i class="fa-solid fa-left" ></i></a>
+    <div class="slideshow">
+      <div class="navigation">
+        <!-- Using FontAwesome Pro -->
+        <!-- <a class="button icon" id="prev_btn"><i class="fa-solid fa-left" ></i></a>
               <a class="button icon" id="next_btn"><i class="fa-solid fa-right"></i></a> -->
-              <!-- Using FontAwesome Free -->
-              <a class="button icon" id="prev_btn"><i class="fa-solid fa-arrow-left"></i></a>
-              <a class="button icon" id="next_btn"><i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-          <div class="slider">
-              <div class="slider-item">
-                  <img src="clarity/images/P01LabelDistribution.png" alt="P01 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P02LabelDistribution.png" alt="P02 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P03LabelDistribution.png" alt="P03 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P05LabelDistribution.png" alt="P05 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P06LabelDistribution.png" alt="P06 Label Distribution">
-              </div>
-              <div class="slider-item">
-                <img src="clarity/images/P08LabelDistribution.png" alt="P08 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P11LabelDistribution.png" alt="P11 Label Distribution">
-              </div>
-              <div class="slider-item">
-                  <img src="clarity/images/P16LabelDistribution.png" alt="P16 Label Distribution">
-              </div>
-          </div>
+        <!-- Using FontAwesome Free -->
+        <a class="button icon" id="prev_btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class="button icon" id="next_btn"><i class="fa-solid fa-arrow-right"></i></a>
       </div>
+      <div class="slider">
+        <div class="slider-item">
+          <img src="clarity/images/P01LabelDistribution.png" alt="P01 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P02LabelDistribution.png" alt="P02 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P03LabelDistribution.png" alt="P03 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P05LabelDistribution.png" alt="P05 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P06LabelDistribution.png" alt="P06 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P08LabelDistribution.png" alt="P08 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P11LabelDistribution.png" alt="P11 Label Distribution">
+        </div>
+        <div class="slider-item">
+          <img src="clarity/images/P16LabelDistribution.png" alt="P16 Label Distribution">
+        </div>
+      </div>
+    </div>
   </div>
-  
+
   <div class="container blog main">
-        <p class="text">
-          Consider the distribution of labels by participant above. We find the following:
-        </p>
-        <ul style="padding: 2em; display: flex; flex-direction: column; gap: 1em;" class="text">
-            <li><p class="text">Label Distribution: The dataset contains a variety of labels, with "frustrated" and "delighted" being the most common.</p></li>
-            <li><p class="text">Label Variety: Some participants exhibit a wide range of labels, while others are more consistent in their responses.</p></li>
-            <li><p class="text">Customized Approaches: The differences in label distribution across participants suggest that personalized models might be more effective (depending on model type).</p></li>
-        </ul>
-        
-        <p class="text">
-          We also examine the distribution in audio lengths. The variation in lengths tells us we must pad our audio prior to feature analysis.
-        </p>
-        
-        <pre><code class="python">
+    <p class="text">
+      Consider the distribution of labels by participant above. We find the following:
+    </p>
+    <ul style="padding: 2em; display: flex; flex-direction: column; gap: 1em;" class="text">
+      <li>
+        <p class="text">Label Distribution: The dataset contains a variety of labels, with "frustrated" and "delighted"
+          being the most common.</p>
+      </li>
+      <li>
+        <p class="text">Label Variety: Some participants exhibit a wide range of labels, while others are more
+          consistent in their responses.</p>
+      </li>
+      <li>
+        <p class="text">Customized Approaches: The differences in label distribution across participants suggest that
+          personalized models might be more effective (depending on model type).</p>
+      </li>
+    </ul>
+
+    <p class="text">
+      We also examine the distribution in audio lengths. The variation in lengths tells us we must pad our audio prior
+      to feature analysis.
+    </p>
+
+    <pre><code class="python">
 df = df.with_columns([
     pl.col("Audio").map_elements(
       lambda a: len(a), return_dtype=pl.Float64
@@ -1290,82 +1356,479 @@ df['Audio Length'].describe()
       </code></pre>
   </div>
   <div class="container blog main gray">
-        <div class="data-table-container">
-          <table class="data-table">
-            <thead>
-            <tr>
-              <th class="data-table-header">statistic</th>
-              <th class="data-table-header">value</th>
-            </tr>
-            <tr>
-              <td class="data-table-datatype">str</td>
-              <td class="data-table-datatype">f64</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="data-table-cell">"count"</td>
-              <td class="data-table-cell">7077.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"null_count"</td>
-              <td class="data-table-cell">0.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"mean"</td>
-              <td class="data-table-cell">54700.662993</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"std"</td>
-              <td class="data-table-cell">44655.798259</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"min"</td>
-              <td class="data-table-cell">3584.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"25%"</td>
-              <td class="data-table-cell">26112.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"50%"</td>
-              <td class="data-table-cell">41472.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"75%"</td>
-              <td class="data-table-cell">67072.0</td>
-            </tr>
-            <tr>
-              <td class="data-table-cell">"max"</td>
-              <td class="data-table-cell">619520.0</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" class="data-table-footer">
-                shape: (9, 3) | Statistical summary for label distribution
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">statistic</th>
+            <th class="data-table-header">value</th>
+          </tr>
+          <tr>
+            <td class="data-table-datatype">str</td>
+            <td class="data-table-datatype">f64</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"count"</td>
+            <td class="data-table-cell">7077.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"null_count"</td>
+            <td class="data-table-cell">0.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"mean"</td>
+            <td class="data-table-cell">54700.662993</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"std"</td>
+            <td class="data-table-cell">44655.798259</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"min"</td>
+            <td class="data-table-cell">3584.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"25%"</td>
+            <td class="data-table-cell">26112.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"50%"</td>
+            <td class="data-table-cell">41472.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"75%"</td>
+            <td class="data-table-cell">67072.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"max"</td>
+            <td class="data-table-cell">619520.0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="data-table-footer">
+              shape: (9, 3) | Statistical summary for label distribution
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
+  </div>
+  <div class="container blog main">
+    <h1>Feature Extraction & Hypothesis Testing</h1>
+    <section style="font-family: sans-serif; line-height: 1.6;">
+      <p class="text">
+        In this section, we extract acoustic features from vocalizations and statistically evaluate whether they differ
+        significantly across expression labels. These tests aim to determine if vocal cues such as <span
+          style="font-weight: bold">pitch variability</span> and <span style="font-weight: bold">spectral shape</span>
+        (MFCCs) carry meaningful information that can distinguish between intents like <code>"yes"</code> and
+        <code>"no".</code>
+      </p>
+
+      <hr>
+
+      <h3>Tests Conducted:</h3>
+      <ol style="padding-left: 20px;">
+        <li>
+          <p class="text"><span style="font-weight: bold">Pitch Variability</span> – Mann-Whitney U test on pitch
+            standard deviation across samples.</p>
+        </li>
+        <li>
+          <p class="text"><span style="font-weight: bold">MFCC Differences</span> – Mann-Whitney U test on mean MFCC
+            coefficients (1–3).</p>
+        </li>
+        <li>
+          <p class="text"><span style="font-weight: bold">Entropy Differences</span> – ANOVA + Ad-Hoc Pairwise T tests
+            on Spectral Entropy.</p>
+        </li>
+      </ol>
+
+      <hr>
+
+      <h3>Results:</h3>
+      <p class="text">
+        Our statistical tests revealed <span style="font-weight: bold">significant acoustic differences</span> between
+        <code>"yes"</code> and <code>"no"</code> vocalizations:
+      </p>
+
+      <ul style="padding-left: 20px; list-style-type: disc;">
+        <li>
+          <p class="text"><span style="font-weight: bold">Pitch Variability</span>:</p>
+          <ul style="padding-left: 20px; list-style-type: circle;">
+            <li>
+              <p class="text"><code>"No"</code> vocalizations showed <span style="font-weight: bold">much higher pitch
+                  variability</span> (std = 119.13) compared to <code>"Yes"</code> (std = 22.46).</p>
+            </li>
+            <li>
+              <p class="text">Mann-Whitney U test confirmed this with <span style="font-weight: bold">p &lt;
+                  0.001</span> and a large effect size (<span style="font-weight: bold">Cohen's d = -2.38</span>).</p>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <p class="text"><span style="font-weight: bold">MFCCs (Spectral Shape)</span>:</p>
+          <ul style="padding-left: 20px; list-style-type: circle;">
+            <li>
+              <p class="text">Significant differences were found in <span style="font-weight: bold">MFCC-1</span> and
+                <span style="font-weight: bold">MFCC-3</span> (both <span style="font-weight: bold">p &lt; 0.001</span>,
+                Cohen's d &gt; 1.6), indicating differences in <span style="font-weight: bold">spectral slope</span> and
+                <span style="font-weight: bold">fine spectral variation</span>.</p>
+            </li>
+            <li>
+              <p class="text"><span style="font-weight: bold">MFCC-2</span> showed <span style="font-weight: bold">no
+                  significant difference</span>, suggesting similar mid-frequency emphasis in both groups.</p>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <p class="text"><span style="font-weight: bold">Spectral Entropy</span>:</p>
+          <ul style="padding-left: 20px; list-style-type: circle;">
+            <li>
+              <p class="text">Significant differences in spectral entropy were found between various vocalization
+                labels, indicating that certain emotional states could be distinguished based on their spectral
+                characteristics.</p>
+            </li>
+            <li>
+              <p class="text">Strong entropy differences were notably present between <code>"dysregulated"</code> and
+                <code>"delighted"</code>, and between <code>"selftalk"</code> and <code>"frustrated"</code>,
+                highlighting that spectral entropy can be a useful feature in distinguishing emotional states in
+                vocalizations.</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="text">
+        These findings suggest that both <span style="font-weight: bold">pitch dynamics</span> and <span
+          style="font-weight: bold">spectral shape</span> are promising features for distinguishing vocal intent in
+        non-verbal utterances for the model development phase.
+      </p>
+    </section>
+  </div>
+  <div class="container blog main">
+    <h2>Test 1: Pitch Variability Differences between "Yes" and "No" Vocalizations (Mann-Whitney U Test)</h2>
+
+    <p class="text">
+      This test evaluates whether there are statistically significant differences in <span
+        style="font-weight: bold">pitch variability</span> between vocalizations labeled as <code>yes</code> and
+      <code>no</code>. Pitch variability is measured as the <span style="font-weight: bold">standard deviation of
+        estimated pitch (f₀)</span> across time for each audio sample. This metric reflects how much the speaker's pitch
+      varies within a vocalization type, often tied to emotional expressiveness or vocal intent.
+    </p>
+
+    <h3>What is Pitch Variability?</h3>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text">Calculated using <span style="font-weight: bold">Librosa's PYIN algorithm</span>, which
+          estimates fundamental frequency (f₀) for voiced segments of an audio signal.</p>
+      </li>
+      <li>
+        <p class="text">We then compute the <span style="font-weight: bold">standard deviation</span> of those f₀ values
+          per sample.</p>
+      </li>
+      <li>
+        <p class="text">A <span style="font-weight: bold">higher pitch std</span> generally means more variation in
+          tone, while a lower std suggests more monotonic vocalization.</p>
+      </li>
+    </ul>
+
+    <h3>Test Setup</h3>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">Statistic</span>: Mann-Whitney U test (non-parametric)</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Effect Size</span>: Cohen's d</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Input Feature</span>: Standard deviation of pitch per sample</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Groups Compared</span>: <code>yes</code> vs <code>no</code>
+          vocalizations</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Sample Size</span>: 100 samples for <code>yes</code>, 12 samples
+          for <code>no</code></p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Alpha</span>: Will use a significance level of 0.05 </p>
+      </li>
+    </ul>
+
+    <hr>
+
+    <h2>Null Hypothesis (H₀):</h2>
+    <p class="text">
+      There is <span style="font-weight: bold">no difference</span> in pitch variability between vocalizations labeled
+      as <code>yes</code> and <code>no</code>. The distributions of pitch standard deviation are the same for both
+      groups.
+    </p>
+    <h2>Alternative Hypothesis (H₁):</h2>
+    <p class="text">
+      There is a <span style="font-weight: bold">difference</span> in pitch variability between vocalizations labeled as
+      <code>yes</code> and <code>no</code>. The distributions of pitch standard deviation are not the same for both
+      groups, indicating that one group may exhibit more pitch variation than the other.
+    </p>
+  </div>
+  <div class="container blog main gray">
+    <h2>Group Means & Standard Deviations</h2>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Label</th>
+            <th class="data-table-header">Pitch Std (Mean ± Std)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"Yes"</td>
+            <td class="data-table-cell">19.818 ± 20.91</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"No"</td>
+            <td class="data-table-cell">114.964 ± 110.339</td>
+          </tr>
+      </table>
+    </div>
+
+    <h2>Statistical Results Summary</h2>
+
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Metric</th>
+            <th class="data-table-header">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="data-table-cell">"U Statistic"</td>
+            <td class="data-table-cell">260.0</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"p-value"</td>
+            <td class="data-table-cell">0.001</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"Cohen's d"</td>
+            <td class="data-table-cell">-2.370</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"Mean Difference"</td>
+            <td class="data-table-cell">-95.147</td>
+          </tr>
+          <tr>
+            <td class="data-table-cell">"Significant"</td>
+            <td class="data-table-cell">Yes</td>
+          </tr>
+      </table>
+    </div>
+  </div>
+  <div class="container blog main">
+    <h2>Interpretation</h2>
+
+    <p class="text">
+      Since our p = 0.01 < alpha, we <span style="font-weight: bold">reject</span> the null hypothesis. We interpret
+        that:
+    </p>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text">The <span style="font-weight: bold">no</span> vocalizations exhibit <span
+            style="font-weight: bold">dramatically higher pitch variability</span> than <code>yes</code> samples —
+          almost <span style="font-weight: bold">5x higher on average</span></p>
+      </li>
+      <li>
+        <p class="text">The test yields a <span style="font-weight: bold">low p-value (0.01)</span> and a <span
+            style="font-weight: bold">large negative effect size (Cohen’s d = -2.38)</span>, indicating a strong and
+          statistically significant difference.</p>
+      </li>
+      <li>
+        <p class="text">This suggests that <span style="font-weight: bold">pitch dynamics</span> could be a powerful
+          feature in differentiating certain types of vocal intent, especially when classifying expressive vs. flat
+          responses.</p>
+      </li>
+    </ul>
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+    <pre><code class="python">
+def batch_pitch_extraction(audio_list: List,
+                           max_samples_per_batch: int=50,
+                           sr: int=SAMPLE_RATE) -> List[float]:
+    # Randomly sample if batch is too large
+    if len(audio_list) > max_samples_per_batch:
+        sample_indices = np.random.choice(len(audio_list), max_samples_per_batch, replace=False)
+        audio_list = [audio_list[i] for i in sample_indices]
+    
+    pitch_stds = []
+    for audio_array in audio_list:
+        audio_array = np.asarray(audio_array, dtype=np.float64)
+        
+        # Extract pitch using PYIN
+        f0, voiced_flag, _ = librosa.pyin(
+            audio_array, 
+            fmin=librosa.note_to_hz('C2'),
+            fmax=librosa.note_to_hz('C7'),
+            sr=sr
+        )
+        
+        # Filter for voiced segments
+        f0_voiced = f0[voiced_flag]
+        
+        # Calculate pitch std, handle empty case
+        pitch_std = float(np.std(f0_voiced)) if len(f0_voiced) > 0 else 0.0
+        pitch_stds.append(pitch_std)
+    
+    return pitch_stds
+
+def pitch_variability_test(df: pl.DataFrame,
+                           max_batch_size: int=50,
+                           target_labels: List[str]=['frustrated', 'delighted']) -> Dict[str, float]:
+    # Group audio by label
+    label_audio_groups = {}
+    for label in target_labels:
+        # Extract audio for each label
+        label_audio_groups[label] = df.filter(pl.col("Label") == label)["Audio"].to_list()
+    
+    # Batch pitch extraction
+    label_pitch_stds = {}
+    for label, audio_list in label_audio_groups.items():
+        label_pitch_stds[label] = batch_pitch_extraction(audio_list=audio_list, max_samples_per_batch=max_batch_size)
+        
+        # Print basic stats
+        pitch_array = np.array(label_pitch_stds[label])
+        print(f"{label} samples: {len(pitch_array)}")
+        print(f"  Mean pitch std: {np.mean(pitch_array):.4f}")
+        print(f"  Std of pitch std: {np.std(pitch_array):.4f}")
+    
+    # Perform statistical tests
+    label1_data = label_pitch_stds[target_labels[0]]
+    label2_data = label_pitch_stds[target_labels[1]]
+    
+    # Mann-Whitney U Test
+    u_statistic, p_value = scipy.stats.mannwhitneyu(
+        label1_data, 
+        label2_data, 
+        alternative='two-sided'
+    )
+    
+    # Effect size calculation (Cohen's d)
+    mean1, std1 = np.mean(label1_data), np.std(label1_data)
+    mean2, std2 = np.mean(label2_data), np.std(label2_data)
+    
+    # Pooled standard deviation
+    pooled_std = np.sqrt(((len(label1_data) - 1) * std1**2 + 
+                          (len(label2_data) - 1) * std2**2) / 
+                         (len(label1_data) + len(label2_data) - 2))
+    
+    # Cohen's d
+    cohens_d = (mean1 - mean2) / pooled_std
+    
+    # Prepare results
+    results = {
+        'Mann-Whitney U Statistic': u_statistic,
+        'p-value': p_value,
+        'Cohen\'s d': cohens_d,
+        'Mean Difference': mean1 - mean2,
+        'Significant': p_value < 0.05
+    }
+    
+    # Print results
+    print("\n=== Hypothesis Test Results ===")
+    for key, value in results.items():
+        print(f"{key}: {value}")
+    
+    return results
+
+# Spectogram plotting functions to compare labels 
+def plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=2):
+    fig, axes = plt.subplots(n_examples, 2, figsize=(12, 4 * n_examples))
+    label_map = {0: label1, 1: label2}
+
+    for i, label in enumerate([label1, label2]):
+        examples = df.filter(pl.col("Label") == label).head(n_examples).iter_rows(named=True)
+        for j, row in enumerate(examples):
+            y = np.array(row["Audio"])
+            S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
+            S_db = librosa.power_to_db(S, ref=np.max)
+            ax = axes[j, i] if n_examples > 1 else axes[i]
+            librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='mel', ax=ax)
+            ax.set_title(f"{label_map[i].upper()} Sample #{j+1}")
+            ax.set_xlabel("")
+            ax.set_ylabel("")
+
+    plt.suptitle("Mel Spectrogram Comparison: YES vs NO", fontsize=16)
+    plt.tight_layout()
+    plt.show()
+        </code></pre>
+    </details>
+    <pre><code class="python">
+t0 = time.time()
+results = pitch_variability_test(df=df, max_batch_size=100, target_labels=["yes", "no"])
+print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} seconds")
+  </code></pre>
+
+    <p class="text">
+      yes samples: 100<br>
+      Mean pitch std: 19.8174<br>
+      Std of pitch std: 20.9069<br>
+      no samples: 12<br>
+      Mean pitch std: 114.9644<br>
+      Std of pitch std: 110.3390<br><br>
+
+      === Hypothesis Test Results === <br>
+      Mann-Whitney U Statistic: 260.0 <br>
+      p-value: 0.0014043896888058 <br>
+      Cohen's d: -2.3706435406222472 <br>
+      Mean Difference: -95.14698434279867 <br>
+      Significant: True <br><br>
+
+      🎶 Pitch Variability Test completed in 30.40 seconds
+    </p>
+
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text">The <span style="font-weight: bold">YES Samples</span>: Show varied frequency patterns with
+          bright spots indicating dynamic changes in pitch.</p>
+      </li>
+      <li>
+        <p class="text">The <span style="font-weight: bold">NO Samples</span>: Display consistent and flat energy
+          patterns with fewer changes.</p>
+      </li>
+    </ul>
+
+    <pre><code class="python">
+plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4)
+            </code></pre>
+
+  </div>
   </div>
 
 
-    <!-- Footer Page -->
-    <footer>
-        <div class="container">
-            <p>
-                This website is built on the <a href="https://shikun.io/projects/clarity">Clarity Template</a>, designed by <a href="https://shikun.io/">Shikun Liu</a>.
-            </p>
-        </div>    
-    </footer>
-    
+  <!-- Footer Page -->
+  <footer>
+    <div class="container">
+      <p>
+        This website is built on the <a href="https://shikun.io/projects/clarity">Clarity Template</a>, designed by <a
+          href="https://shikun.io/">Shikun Liu</a>.
+      </p>
+    </div>
+  </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="clarity/clarity.js"></script>    
-    <script src="assets/scripts/main.js"></script>    
-    </html>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="clarity/clarity.js"></script>
+  <script src="assets/scripts/main.js"></script>
+
+</html>
 </body>
