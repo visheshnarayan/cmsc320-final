@@ -19,6 +19,7 @@ function initSlideDisplay(slideDisplayClass) {
   if (!contents.length) return; // Skip if no slide contents found
 
   // Set up click event for this specific slide menu
+
   slideMenu.addEventListener("click", function (e) {
     // Check if clicked on dot or li.dot
     const isLiDot =
@@ -51,8 +52,11 @@ function initSlideDisplay(slideDisplayClass) {
       for (var i = 0; i < contents.length; i++) {
         if (i == idx) {
           contents[i].style.display = "block";
+          contents[i].style.zoom = "1.0";
+          contents[i].style.visibility = "visible";
         } else {
           contents[i].style.display = "none";
+          // contents[i].style.visibility = "hidden";
         }
       }
     }
@@ -65,10 +69,13 @@ function initSlideDisplay(slideDisplayClass) {
       dots[0].classList.add("active");
       if (contents.length > 0) {
         contents[0].style.display = "block";
+        contents[0].style.zoom = "1.0";
+        contents[0].style.visibility = "visible";
 
         // Hide all other slides
         for (var i = 1; i < contents.length; i++) {
           contents[i].style.display = "none";
+          // contents[i].style.visibility = "hidden";
         }
       }
     }
