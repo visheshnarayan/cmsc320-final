@@ -2904,11 +2904,17 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
     <pre><code class="python">
   # Calculate spectral entropy for t test
   df = df.with_columns([
-      pl.col("Audio").map_elements(lambda y: compute_spectral_entropy(np.array(y)), return_dtype=pl.Float64).alias("Spectral Entropy")
+      pl.col("Audio").map_elements(
+        lambda y: compute_spectral_entropy(np.array(y)
+      ), return_dtype=pl.Float64).alias("Spectral Entropy")
   ])
   
   labels = df["Label"].unique()
-  t_test_results = pairwise_t_test(df, target_labels=target_labels, feature="Spectral Entropy")
+  t_test_results = pairwise_t_test(
+    df,
+    target_labels=target_labels,
+    feature="Spectral Entropy"
+  )
   format_t_test_results(t_test_results)
     </code></pre>
 
