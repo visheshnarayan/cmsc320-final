@@ -1260,6 +1260,8 @@ label_counts.describe()
       and training.
     </p>
 
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
     <pre><code class="python">
       # Viridis colors
       colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(label_counts)))
@@ -1286,6 +1288,7 @@ label_counts.describe()
       fig.write_html("label_distribution.html")
       
         </code></pre>
+    </details>
   </div>
 
   <div class="container blog main">
@@ -1296,6 +1299,8 @@ label_counts.describe()
     </p>
   </div>
   <div class="container blog main">
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
     <pre><code class="python">
       # Make sure output directory exists
       output_dir = "participant_barplots"
@@ -1339,6 +1344,7 @@ label_counts.describe()
           fig.write_html(filename)
       
         </code></pre>
+    </details>
   </div>
 
   <div class="container blog max gray">
