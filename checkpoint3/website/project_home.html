@@ -123,6 +123,21 @@
       color: #8b9aa4;
       font-style: italic;
     }
+    
+    .plot-container {
+      margin-bottom: 40px;
+      border: 1px solid #ccc;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 10px;
+      width: 100%
+    }
+        
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
   </style>
 </head>
 
@@ -1482,37 +1497,37 @@ df['Audio Length'].describe()
     <details>
       <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Spectrogram Plot Code</summary>
       <pre><code class="python">
-  def plot_unique_label_spectrograms_grid(df, n_rows=4, n_cols=6):
-      unique_labels = df.select("Label").unique().to_series().to_list()
-      total_plots = n_rows * n_cols
-      fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3))
-      axs = axs.flatten()
-      fig.suptitle("Unique Label Spectogram", fontsize=30)
-      
-      for idx, label in enumerate(unique_labels):
-          ax = axs[idx]
-          
-          # Get the first spectrogram for this label
-          row = df.filter(pl.col("Label") == label).row(0)
-          spectrogram = row[df.columns.index("Spectrogram")]
-          spectrogram_np = np.array(spectrogram, dtype=np.float32)
-          
-          if spectrogram_np.ndim == 2:
-              im = ax.imshow(spectrogram_np, aspect="auto", origin="lower", cmap="viridis")
-              ax.set_title(label.upper(), fontsize=18)
-              ax.set_xlabel("Time")
-              ax.set_ylabel("Freq")
-          else:
-              ax.axis("off")
-      
-      # Hide any unused axes
-      for j in range(len(unique_labels), len(axs)):
-          axs[j].axis("off")
-      
-      fig.tight_layout(rect=[0, 0, 1, 0.95])
-      plt.show()
-  
-  plot_unique_label_spectrograms_grid(df)
+def plot_unique_label_spectrograms_grid(df, n_rows=4, n_cols=6):
+    unique_labels = df.select("Label").unique().to_series().to_list()
+    total_plots = n_rows * n_cols
+    fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3))
+    axs = axs.flatten()
+    fig.suptitle("Unique Label Spectogram", fontsize=30)
+    
+    for idx, label in enumerate(unique_labels):
+        ax = axs[idx]
+        
+        # Get the first spectrogram for this label
+        row = df.filter(pl.col("Label") == label).row(0)
+        spectrogram = row[df.columns.index("Spectrogram")]
+        spectrogram_np = np.array(spectrogram, dtype=np.float32)
+        
+        if spectrogram_np.ndim == 2:
+            im = ax.imshow(spectrogram_np, aspect="auto", origin="lower", cmap="viridis")
+            ax.set_title(label.upper(), fontsize=18)
+            ax.set_xlabel("Time")
+            ax.set_ylabel("Freq")
+        else:
+            ax.axis("off")
+    
+    # Hide any unused axes
+    for j in range(len(unique_labels), len(axs)):
+        axs[j].axis("off")
+    
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.show()
+
+plot_unique_label_spectrograms_grid(df)
       </code></pre>
     </details>
     <pre><code class="python">
@@ -1634,163 +1649,217 @@ plot_unique_label_spectrograms_grid(df)
     <details>
       <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Feature Extraction Code</summary>
       <pre><code class="python">
-  # Get pitch variance as feature for audio projection
-  def get_pitch_var(y: List[float], sr: int=SAMPLE_RATE):
-      y_np = np.array(y, dtype=np.float64)
-      f0, voiced_flag, _ = librosa.pyin(
-          y_np,
-          sr=sr,
-          fmin=librosa.note_to_hz('C2'),
-          fmax=librosa.note_to_hz('C7')
-      )
-      if f0 is None:
-          return 0.0
-      f0_voiced = f0[voiced_flag]
-      return float(np.std(f0_voiced)) if len(f0_voiced) > 0 else 0.0
-  
-  # Gets MFCC means of signal (feature for audio projection)
-  def get_mfcc_means(y: List[float], sr: int = 16000, n_mfcc: int = 3) -> List[float]:
-      y_np = np.array(y, dtype=np.float32)
-      mfccs = librosa.feature.mfcc(y=y_np, sr=sr, n_mfcc=n_mfcc)
-      return np.mean(mfccs, axis=1).tolist()  # returns [mfcc-1, mfcc-2, mfcc-3]
-  
-  # Extract MFCC-1, MFCC-2, MFCC-3, and Pitch variance as features for PCA
-  df = df.with_columns([
-      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[0], return_dtype=pl.Float64).alias("MFCC-1"),
-      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[1], return_dtype=pl.Float64).alias("MFCC-2"),
-      pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[2], return_dtype=pl.Float64).alias("MFCC-3"),
-      pl.col("Audio").map_elements(lambda y: get_pitch_var(y), return_dtype=pl.Float64).alias("PitchVar")
-  ])
+# Get pitch variance as feature for audio projection
+def get_pitch_var(y: List[float], sr: int=SAMPLE_RATE):
+    y_np = np.array(y, dtype=np.float64)
+    f0, voiced_flag, _ = librosa.pyin(
+        y_np,
+        sr=sr,
+        fmin=librosa.note_to_hz('C2'),
+        fmax=librosa.note_to_hz('C7')
+    )
+    if f0 is None:
+        return 0.0
+    f0_voiced = f0[voiced_flag]
+    return float(np.std(f0_voiced)) if len(f0_voiced) > 0 else 0.0
+
+# Gets MFCC means of signal (feature for audio projection)
+def get_mfcc_means(y: List[float], sr: int = 16000, n_mfcc: int = 3) -> List[float]:
+    y_np = np.array(y, dtype=np.float32)
+    mfccs = librosa.feature.mfcc(y=y_np, sr=sr, n_mfcc=n_mfcc)
+    return np.mean(mfccs, axis=1).tolist()  # returns [mfcc-1, mfcc-2, mfcc-3]
+
+# Extract MFCC-1, MFCC-2, MFCC-3, and Pitch variance as features for PCA
+df = df.with_columns([
+    pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[0], return_dtype=pl.Float64).alias("MFCC-1"),
+    pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[1], return_dtype=pl.Float64).alias("MFCC-2"),
+    pl.col("Audio").map_elements(lambda y: get_mfcc_means(y)[2], return_dtype=pl.Float64).alias("MFCC-3"),
+    pl.col("Audio").map_elements(lambda y: get_pitch_var(y), return_dtype=pl.Float64).alias("PitchVar")
+])
       </code></pre>
     </details>
   
     <h3>Key Observations from 2D Projections</h3>
-    
-    <ul style="padding-left: 20px; list-style-type: disc;">
-      <li>
-        <p class="text"><span style="font-weight: bold">Correlations between Features</span>:</p>
-        <ul style="padding-left: 20px; list-style-type: circle;">
-          <li>
-            <p class="text">Displays varying correlation strengths between audio features.</p>
-          </li>
-          <li>
-            <p class="text">Notable strong negative correlation between MFCC-1 and MFCC-3.</p>
-          </li>
-          <li>
-            <p class="text">Other pairs show weak to moderate correlations.</p>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <p class="text"><span style="font-weight: bold">2D PCA of Audio Features</span>:</p>
-        <ul style="padding-left: 20px; list-style-type: circle;">
-          <li>
-            <p class="text">Data points are broadly dispersed.</p>
-          </li>
-          <li>
-            <p class="text">No clear clustering by labels, suggesting limited effectiveness of PCA in separating types.</p>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <p class="text"><span style="font-weight: bold">UMAP Projection of Audio Features</span>:</p>
-        <ul style="padding-left: 20px; list-style-type: circle;">
-          <li>
-            <p class="text">Shows improved clustering compared to PCA.</p>
-          </li>
-          <li>
-            <p class="text">Distinct groups suggest better separation of features.</p>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <p class="text"><span style="font-weight: bold">t-SNE Projection of Audio Features</span>:</p>
-        <ul style="padding-left: 20px; list-style-type: circle;">
-          <li>
-            <p class="text">Exhibits tight clustering and clear separation between different audio labels.</p>
-          </li>
-          <li>
-            <p class="text">Indicates strong capability of t-SNE in capturing local relationships in data.</p>
-          </li>
-        </ul>
-      </li>
-    </ul>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="data-table-header">Projection</th>
+          <th class="data-table-header">Dimensionality</th>
+          <th class="data-table-header">Clustering Quality</th>
+          <th class="data-table-header">Separation of Labels</th>
+          <th class="data-table-header">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-table-cell">PCA</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">Low</td>
+          <td class="data-table-cell">Poor</td>
+          <td class="data-table-cell">Broad dispersion, little label separation</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">PCA</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">Low</td>
+          <td class="data-table-cell">Poor</td>
+          <td class="data-table-cell">Added depth but still overlapping clusters</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">UMAP</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">Moderate</td>
+          <td class="data-table-cell">Better than PCA</td>
+          <td class="data-table-cell">Some visible clusters; improved separation</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">UMAP</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">Good</td>
+          <td class="data-table-cell">Improved</td>
+          <td class="data-table-cell">Neighborhood structure preserved in 3D space</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">t-SNE</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">High</td>
+          <td class="data-table-cell">Strong</td>
+          <td class="data-table-cell">Tight clusters and clear separation</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">t-SNE</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">Very High</td>
+          <td class="data-table-cell">Very Strong</td>
+          <td class="data-table-cell">Excellent local structure; highly interpretable</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="data-table-footer">
+            Summary of dimensionality reduction methods applied to audio features in both 2D and 3D projections
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p class="text">Additional Note: Examine the t-SNE 3D projection. It seems like the labels are in a layer/sheet formation. We can possibly apply kernel tricks to our data and use SVMs to see if there is a hyper place to split on.</p>
   
     <details>
-      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D Projection Code</summary>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D + 3D Projection Code</summary>
       <pre><code class="python">
-  # Selecting MFCCs and Pitch variance as features for 2d projection
-  features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
-  corr = df[features].corr()  # Correlation matrix
-  plt.figure(figsize=(16, 16)) 
-  
-  plt.subplot(221)  # Heat map
-  sns.heatmap(data=corr, annot=True, cmap="coolwarm", xticklabels=features, yticklabels=features)
-  plt.title("Correlations between Features")
-  
-  # Prepare data for PCA, UMAP, and t-SNE
-  mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
-  X = df[mfccs].to_numpy()
-  labels = df["Label"].to_numpy()
-  
-  # Scaling the data
-  scaler = StandardScaler()
-  X_scaled = scaler.fit_transform(X)
-  
-  # PCA
-  pca = PCA(n_components=2)
-  X_pca = pca.fit_transform(X_scaled)
-  
-  # UMAP
-  reducer = umap.UMAP(n_components=2, random_state=42)
-  X_umap = reducer.fit_transform(X_scaled)
-  
-  # t-SNE
-  tsne = TSNE(n_components=2, random_state=42)
-  X_tsne = tsne.fit_transform(X_scaled)
-  
-  # Plot PCA
-  plt.subplot(222)
-  unique_labels = np.unique(labels)
-  for label in unique_labels:
-      idx = labels == label
-      plt.scatter(X_pca[idx, 0], X_pca[idx, 1], label=label, alpha=0.6)
-  plt.xlabel("PCA Component 1")
-  plt.ylabel("PCA Component 2")
-  plt.title("2D PCA of Audio Features")
-  plt.legend(loc="best", fontsize="small")
-  plt.grid(True)
-  
-  # Plot UMAP
-  plt.subplot(223)
-  for label in unique_labels:
-      idx = labels == label
-      plt.scatter(X_umap[idx, 0], X_umap[idx, 1], label=label, alpha=0.6)
-  plt.xlabel("UMAP Component 1")
-  plt.ylabel("UMAP Component 2")
-  plt.title("UMAP Projection of Audio Features")
-  plt.legend(loc="best", fontsize="small")
-  plt.grid(True)
-  
-  # Plot t-SNE
-  plt.subplot(224)
-  for label in unique_labels:
-      idx = labels == label
-      plt.scatter(X_tsne[idx, 0], X_tsne[idx, 1], label=label, alpha=0.6)
-  plt.xlabel("t-SNE Component 1")
-  plt.ylabel("t-SNE Component 2")
-  plt.title("t-SNE Projection of Audio Features")
-  plt.legend(loc="best", fontsize="small")
-  plt.grid(True)
-  
-  plt.tight_layout()
-  plt.show()
+### Plotting the correlation matrix and 2D projections
+
+# Selecting MFCCs and Pitch variance as features for 2d projection
+features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
+corr = df[features].corr()  # Correlation matrix
+plt.figure(figsize=(16, 16)) 
+
+plt.subplot(221)  # Heat map
+sns.heatmap(data=corr, annot=True, cmap="coolwarm", xticklabels=features, yticklabels=features)
+plt.title("Correlations between Features")
+
+# Prepare data for PCA, UMAP, and t-SNE
+mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
+X = df[mfccs].to_numpy()
+labels = df["Label"].to_numpy()
+
+# Scaling the data
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+# UMAP
+reducer = umap.UMAP(n_components=2, random_state=42)
+X_umap = reducer.fit_transform(X_scaled)
+
+# t-SNE
+tsne = TSNE(n_components=2, random_state=42)
+X_tsne = tsne.fit_transform(X_scaled)
+
+# Plot PCA
+plt.subplot(222)
+unique_labels = np.unique(labels)
+for label in unique_labels:
+    idx = labels == label
+    plt.scatter(X_pca[idx, 0], X_pca[idx, 1], label=label, alpha=0.6)
+plt.xlabel("PCA Component 1")
+plt.ylabel("PCA Component 2")
+plt.title("2D PCA of Audio Features")
+plt.legend(loc="best", fontsize="small")
+plt.grid(True)
+
+# Plot UMAP
+plt.subplot(223)
+for label in unique_labels:
+    idx = labels == label
+    plt.scatter(X_umap[idx, 0], X_umap[idx, 1], label=label, alpha=0.6)
+plt.xlabel("UMAP Component 1")
+plt.ylabel("UMAP Component 2")
+plt.title("UMAP Projection of Audio Features")
+plt.legend(loc="best", fontsize="small")
+plt.grid(True)
+
+# Plot t-SNE
+plt.subplot(224)
+for label in unique_labels:
+    idx = labels == label
+    plt.scatter(X_tsne[idx, 0], X_tsne[idx, 1], label=label, alpha=0.6)
+plt.xlabel("t-SNE Component 1")
+plt.ylabel("t-SNE Component 2")
+plt.title("t-SNE Projection of Audio Features")
+plt.legend(loc="best", fontsize="small")
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+
+### Plotting the 3D projections
+
+# Prepare MFCC data
+mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
+X = df[mfccs].to_numpy()
+labels = df["Label"].to_numpy()
+
+# Scale features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Helper to make 3D plot and save HTML
+def save_3d_plot(X_3d, labels, title, filename):
+    fig = px.scatter_3d(
+        x=X_3d[:, 0], y=X_3d[:, 1], z=X_3d[:, 2],
+        color=labels.astype(str),
+        title=title,
+        labels={"x": "Component 1", "y": "Component 2", "z": "Component 3"},
+        opacity=0.7
+    )
+    fig.write_html(filename)
+
+# 2. PCA (3D)
+pca = PCA(n_components=3)
+X_pca = pca.fit_transform(X_scaled)
+save_3d_plot(X_pca, labels, "3D PCA of Audio Features", "pca_3d.html")
+
+# 3. UMAP (3D)
+reducer = umap.UMAP(n_components=3, random_state=42)
+X_umap = reducer.fit_transform(X_scaled)
+save_3d_plot(X_umap, labels, "3D UMAP Projection of Audio Features", "umap_3d.html")
+
+# 4. t-SNE (3D)
+tsne = TSNE(n_components=3, random_state=42)
+X_tsne = tsne.fit_transform(X_scaled)
+save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.html")
       </code></pre>
     </details>
   </div>
 
   <div class="container blog main gray">
-    <h3 style="text-align: center;">Correlation/Tsne/PCA/Umap</h3>
+    <h3 style="text-align: center;">Correlation/Tsne/PCA/Umap (Dimensions = 2)</h3>
     <div class="slide-display">
       <div class="slide-menu">
         <ul class="dots" id="slide-menu">
@@ -1825,6 +1894,40 @@ plot_unique_label_spectrograms_grid(df)
         <span style="font-weight: bold">Figure 4:</span> UMAP projection of audio features.
       </p>
     </div>
+  </div>
+  
+  <div class="container blog main gray">
+      <h3 style="text-align: center;">Correlation/Tsne/PCA/Umap (Dimensions = 3)</h3>
+      <div class="slide-display">
+        <div class="slide-menu">
+          <ul class="dots" id="slide-menu">
+            <li class="dot active"></li>
+            <li class="dot"></li>
+            <li class="dot"></li>
+          </ul>
+        </div>
+
+        <div class="slide-content", style="display: none;">
+          <div class="plot-container">
+            <h4>3D PCA</h4>
+            <iframe src="clarity/images/pca_3d.html"></iframe>
+          </div>
+        </div>
+        
+        <div class="slide-content", style="display: none;">
+          <div class="plot-container">
+            <h4>3D UMAP</h4>
+            <iframe src="clarity/images/umap_3d.html"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-content", style="display: none;">
+          <div class="plot-container">
+            <h4>3D t-SNE</h4>
+            <iframe src="clarity/images/tsne_3d.html"></iframe>
+          </div>
+        </div>
+      </div>
   </div>
 
   <div class="container blog main">

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Audio Feature Projections</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        .plot-container {
+            margin-bottom: 40px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Interactive 3D Projections of Audio Features</h1>
+
+    <div class="plot-container">
+        <h2>3D PCA</h2>
+        <iframe src="clarity/images/pca_3d.html"></iframe>
+    </div>
+
+    <div class="plot-container">
+        <h2>3D UMAP</h2>
+        <iframe src="clarity/images/umap_3d.html"></iframe>
+    </div>
+
+    <div class="plot-container">
+        <h2>3D t-SNE</h2>
+        <iframe src="clarity/images/tsne_3d.html"></iframe>
+    </div>
+
+</body>
+</html>
