@@ -726,9 +726,8 @@ def audio_to_spectrogram(y: np.ndarray,
                 lambda s: np.array(s, dtype=np.float64).tolist(), return_dtype=pl.List(pl.List(pl.Float64))
             )
         ])
-        # saves df to a pkl file to be cached and used later
-        with open("processed_data.pkl", "wb") as f:
-            pickle.dump(df, f)
+        # saves df to a parquet file to be cached and used later
+        df.write_parquet("processed_data.parquet")
         </code></pre>
     </details>
 
@@ -750,20 +749,21 @@ def audio_to_spectrogram(y: np.ndarray,
     </p>
 
     <p class="text">
-      We have also created a loading function for the <code>.pkl</code> so we don't have to rerun the whole pipeline
+      We have also created a loading function for the <code>.parquet</code> so we don't have to rerun the whole pipeline
       every time we want to jump back into the notebook:
     </p>
     <pre><code class="python">
-def open_pickle(path: str) -> pl.DataFrame:
-    with open(path, "rb") as f:
-        df = pickle.load(f)
-    return df
+def open_parquet(path: str) -> pl.DataFrame:
+    return pl.read_parquet(path)
+  
+df = open_parquet("./processed_data.parquet")
+df
     </code></pre>
 
     <h2>DataFrame Overview</h2>
 
     <p class="text">
-      The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename,
+      The Dataframe is stored as a <code>.parquet</code> containing key information about the audio including: Filename,
       Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is
       stored as a list of lists of floats, and the rest are strings or floats.
     </p>
