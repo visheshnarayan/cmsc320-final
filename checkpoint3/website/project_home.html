@@ -2381,27 +2381,6 @@ def pitch_variability_test(df: pl.DataFrame,
         print(f"{key}: {value}")
     
     return results
-
-# Spectogram plotting functions to compare labels 
-def plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=2):
-    fig, axes = plt.subplots(n_examples, 2, figsize=(12, 4 * n_examples))
-    label_map = {0: label1, 1: label2}
-
-    for i, label in enumerate([label1, label2]):
-        examples = df.filter(pl.col("Label") == label).head(n_examples).iter_rows(named=True)
-        for j, row in enumerate(examples):
-            y = np.array(row["Audio"])
-            S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
-            S_db = librosa.power_to_db(S, ref=np.max)
-            ax = axes[j, i] if n_examples > 1 else axes[i]
-            librosa.display.specshow(S_db, sr=sr, x_axis='time', y_axis='mel', ax=ax)
-            ax.set_title(f"{label_map[i].upper()} Sample #{j+1}")
-            ax.set_xlabel("")
-            ax.set_ylabel("")
-
-    plt.suptitle("Mel Spectrogram Comparison: YES vs NO", fontsize=16)
-    plt.tight_layout()
-    plt.show()
         </code></pre>
   </details>
   <pre><code class="python">
@@ -2441,12 +2420,96 @@ print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} second
     </li>
   </ul>
 
+  <details>
+    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Plot code</summary>
+    <pre><code class="python">
+def plot_plotly_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4, output_dir="comparison_spectrograms"):
+    """
+    Generate side-by-side Plotly spectrograms comparing 'yes' and 'no' labels and save as HTML files.
+    
+    Args:
+        df: Polars DataFrame containing 'Label' and 'Audio' columns
+        label1: First label to compare (default: "yes")
+        label2: Second label to compare (default: "no")
+        sr: Sample rate (default: 16000)
+        n_examples: Number of examples to plot (default: 4)
+        output_dir: Directory to save the HTML files (will be created if it doesn't exist)
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Get examples for each label
+    label1_examples = df.filter(pl.col("Label") == label1).head(n_examples).to_pandas()
+    label2_examples = df.filter(pl.col("Label") == label2).head(n_examples).to_pandas()
+    
+    # Create a separate HTML file for each pair of examples
+    for j in range(n_examples):
+        if j < len(label1_examples) and j < len(label2_examples):
+            # Create subplot figure with 1 row and 2 columns
+            fig = make_subplots(
+                rows=1, cols=2,
+                subplot_titles=(f"{label1.upper()} Sample #{j+1}", f"{label2.upper()} Sample #{j+1}")
+            )
+            
+            # Process first label example
+            y1 = np.array(label1_examples.iloc[j]["Audio"])
+            S1 = librosa.feature.melspectrogram(y=y1, sr=sr, n_mels=128)
+            S_db1 = librosa.power_to_db(S1, ref=np.max)
+            
+            # Process second label example
+            y2 = np.array(label2_examples.iloc[j]["Audio"])
+            S2 = librosa.feature.melspectrogram(y=y2, sr=sr, n_mels=128)
+            S_db2 = librosa.power_to_db(S2, ref=np.max)
+            
+            # Add spectrograms as heatmaps
+            fig.add_trace(
+                go.Heatmap(
+                    z=S_db1,
+                    colorscale='viridis',
+                    colorbar=dict(title="dB", x=0.46),
+                    name=label1.upper()
+                ),
+                row=1, col=1
+            )
+            
+            fig.add_trace(
+                go.Heatmap(
+                    z=S_db2,
+                    colorscale='viridis',
+                    colorbar=dict(title="dB", x=1.0),
+                    name=label2.upper()
+                ),
+                row=1, col=2
+            )
+            
+            # Update layout
+            fig.update_layout(
+                title_text=f"Mel Spectrogram Comparison: {label1.upper()} vs {label2.upper()} (Sample #{j+1})",
+                height=400,
+                width=1200
+            )
+            
+            # Update axes
+            fig.update_xaxes(title_text="Time", row=1, col=1)
+            fig.update_xaxes(title_text="Time", row=1, col=2)
+            fig.update_yaxes(title_text="Mel Frequency", row=1, col=1)
+            
+            # Save as HTML file
+            output_file = os.path.join(output_dir, f"comparison_{label1}_vs_{label2}_sample{j+1}.html")
+            fig.show()
+            fig.write_html(output_file)
+            print(f"Saved {output_file}")
+    
+    print(f"All comparison spectrograms saved to '{output_dir}' directory.")
+        </code></pre>
+  </details>
+
   <pre><code class="python">
 plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4)
             </code></pre>
 </div>
 
-<div class="container blog main gray">
+<div class="container blog large gray">
   <h3 style="text-align: center;">Yes/No Spectrograms</h3>
   <div class="slide-display">
     <div class="slide-menu">
@@ -2458,20 +2521,24 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
       </ul>
     </div>
 
-    <div class="slide-content" , style="display: block;">
-      <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1">
+    <div class="slide-content" style="display: block;">
+      <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample1.html" alt="Yes Vs No Sample 1"></iframe>
+      <!-- <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1"> -->
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample2.html" alt="Yes Vs No Sample 2"></iframe>
+      <!-- <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2"> -->
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample3.html" alt="Yes Vs No Sample 3"></iframe>
+      <!-- <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3"> -->
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample4.html" alt="Yes Vs No Sample 4"></iframe>
+      <!-- <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4"> -->
     </div>
 
     <p class="caption">
