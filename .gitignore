@@ -4,6 +4,9 @@ ReCANVo/
 # pickles
 *.pkl
 
+# parquets
+*.parquet
+
 # random 
 .DS_Store
 

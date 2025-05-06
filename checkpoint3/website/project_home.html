@@ -138,10 +138,17 @@
       height: 600px;
       border: none;
     }
+
+    .slider-item iframe {
+      width: 400px;
+      height: 400px;
+      border: none;
+    }
+
+
   </style>
 </head>
 
-<>
   <!-- Title Page -->
   <!-- Dark Theme Example: Change the background colour dark and change the following div "blog-title" into "blog-title white". -->
   <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
@@ -719,9 +726,8 @@ def audio_to_spectrogram(y: np.ndarray,
                 lambda s: np.array(s, dtype=np.float64).tolist(), return_dtype=pl.List(pl.List(pl.Float64))
             )
         ])
-        # saves df to a pkl file to be cached and used later
-        with open("processed_data.pkl", "wb") as f:
-            pickle.dump(df, f)
+        # saves df to a parquet file to be cached and used later
+        df.write_parquet("processed_data.parquet")
         </code></pre>
     </details>
 
@@ -743,20 +749,21 @@ def audio_to_spectrogram(y: np.ndarray,
     </p>
 
     <p class="text">
-      We have also created a loading function for the <code>.pkl</code> so we don't have to rerun the whole pipeline
+      We have also created a loading function for the <code>.parquet</code> so we don't have to rerun the whole pipeline
       every time we want to jump back into the notebook:
     </p>
     <pre><code class="python">
-def open_pickle(path: str) -> pl.DataFrame:
-    with open(path, "rb") as f:
-        df = pickle.load(f)
-    return df
+def open_parquet(path: str) -> pl.DataFrame:
+    return pl.read_parquet(path)
+  
+df = open_parquet("./processed_data.parquet")
+df
     </code></pre>
 
     <h2>DataFrame Overview</h2>
 
     <p class="text">
-      The Dataframe is stored as a <code>.pkl</code> containing key information about the audio including: Filename,
+      The Dataframe is stored as a <code>.parquet</code> containing key information about the audio including: Filename,
       Audio, ID, Label, Duration, Index, and Spectrogram. The audio is stored as a list of floats, the spectrogram is
       stored as a list of lists of floats, and the rest are strings or floats.
     </p>
@@ -1253,52 +1260,91 @@ label_counts.describe()
       and training.
     </p>
 
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
     <pre><code class="python">
-colors = plt.cm.viridis(np.linspace(0, 1, len(label_counts))) # pretty colors 
-plt.figure(figsize=(10, 6))
-plt.bar(label_counts['Label'], label_counts['count'], color=colors)
-plt.title('Distribution of Labels')
-plt.xlabel('Label')
-plt.ylabel('Count')
-plt.xticks(rotation=70) # so labels don't overlap
-plt.tight_layout()
-plt.show()
+      # Viridis colors
+      colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(label_counts)))
+      
+      # Interactive bar chart
+      fig = px.bar(
+          label_counts,
+          x='Label',
+          y='count',
+          title='Distribution of Labels',
+          color='Label',
+          color_discrete_sequence=colors
+      )
+      
+      fig.update_layout(
+          xaxis_title='Label',
+          yaxis_title='Count',
+          xaxis_tickangle=70,
+          margin=dict(l=40, r=40, t=60, b=100),
+          plot_bgcolor='white',
+      )
+      
+      # Save to HTML
+      fig.write_html("label_distribution.html")
+      
         </code></pre>
+    </details>
   </div>
 
   <div class="container blog main">
-    <img src="clarity/images/LabelDistribution.png" alt="LabelDistribution Distribution Bar Graph">
+    <iframe src="clarity/images/label_distribution.html"></iframe>
 
     <p class="text">
       Let us examine the distribution of labels by each participant:
     </p>
   </div>
   <div class="container blog main">
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
     <pre><code class="python">
-# Plot for each person
-participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count'))
-participant_label_counts = participant_label_counts.to_pandas()
-
-participant_ids = participant_label_counts['ID'].unique()
-n_cols = 4
-n_rows = 2
-
-# Create subplots
-fig, axes = plt.subplots(n_rows, n_cols, figsize=(n_cols * 5, n_rows * 4), constrained_layout=True)
-fig.suptitle('Label Distribution per Participant', fontsize=16)
-
-for idx, participant_id in enumerate(participant_ids):
-ax = axes[idx // n_cols, idx % n_cols]  # next subplot
-data = participant_label_counts[participant_label_counts['ID'] == participant_id]
-colors = plt.cm.viridis(np.linspace(0, 1, len(data['Label'])))
-ax.bar(data['Label'], data['Count'], color=colors)
-ax.set_title(f'Participant {participant_id}')
-ax.set_xlabel('Label')
-ax.set_ylabel('Count')
-ax.tick_params(axis='x', rotation=70)
+      # Make sure output directory exists
+      output_dir = "participant_barplots"
+      os.makedirs(output_dir, exist_ok=True)
+      
+      # Convert Polars groupby to pandas if not already done
+      # participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count')).to_pandas()
+      
+      participant_ids = participant_label_counts['ID'].unique()
+      
+      for participant_id in participant_ids:
+          data = participant_label_counts[participant_label_counts['ID'] == participant_id]
           
-plt.show()
+          # Generate Viridis colors
+          colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(data)))
+      
+          # Create interactive bar chart
+          fig = px.bar(
+              data,
+              x='Label',
+              y='Count',
+              title=f'Label Distribution for Participant {participant_id}',
+              color='Label',
+              color_discrete_sequence=colors
+          )
+      
+          fig.update_layout(
+              xaxis_title='Label',
+              yaxis_title='Count',
+              xaxis_tickangle=70,
+              margin=dict(l=40, r=40, t=60, b=100),
+              plot_bgcolor='white',
+              autosize=False,
+              width=400,    
+              height=400,
+          )
+      
+          # Save each plot as HTML
+          filename = os.path.join(output_dir, f"participant_{participant_id}.html")
+          fig.show()
+          fig.write_html(filename)
+      
         </code></pre>
+    </details>
   </div>
 
   <div class="container blog max gray">
@@ -1313,28 +1359,28 @@ plt.show()
       </div>
       <div class="slider">
         <div class="slider-item">
-          <img src="clarity/images/P01LabelDistribution.png" alt="P01 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P01.html" alt="P01 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P02LabelDistribution.png" alt="P02 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P02.html" alt="P02 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P03LabelDistribution.png" alt="P03 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P03.html" alt="P03 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P05LabelDistribution.png" alt="P05 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P05.html" alt="P05 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P06LabelDistribution.png" alt="P06 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P06.html" alt="P06 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P08LabelDistribution.png" alt="P08 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P08.html" alt="P08 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P11LabelDistribution.png" alt="P11 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P11.html" alt="P11 Label Distribution"></iframe>
         </div>
         <div class="slider-item">
-          <img src="clarity/images/P16LabelDistribution.png" alt="P16 Label Distribution">
+          <iframe src="clarity/images/participant_barplots/participant_P16.html" alt="P16 Label Distribution"></iframe>
         </div>
       </div>
     </div>
@@ -1616,7 +1662,7 @@ plot_unique_label_spectrograms_grid(df)
   </div>
   </div>
   <div class="container blog main">
-    <h2>2D Projection Setup for Audio Data Visualization</h2>
+    <h2>Projection Setup for Audio Data Visualization</h2>
   
     <p class="text">
       To visualize complex audio data, we extract key features, specifically Mel Frequency Cepstral Coefficients (MFCCs) and Pitch Variance, from the audio samples. These features are chosen for their ability to encapsulate the essential characteristics of sound.
@@ -1679,7 +1725,7 @@ df = df.with_columns([
       </code></pre>
     </details>
   
-    <h3>Key Observations from 2D Projections</h3>
+    <h3>Key Observations from Projections</h3>
 
     <table class="data-table">
       <thead>
@@ -1896,8 +1942,8 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
     </div>
   </div>
   
-  <div class="container blog main gray">
-      <h3 style="text-align: center;">Correlation/Tsne/PCA/Umap (Dimensions = 3)</h3>
+  <div class="container blog large gray">
+      <h3 style="text-align: center;">Tsne/PCA/Umap (Dimensions = 3)</h3>
       <div class="slide-display">
         <div class="slide-menu">
           <ul class="dots" id="slide-menu">
@@ -1907,26 +1953,31 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
           </ul>
         </div>
 
-        <div class="slide-content", style="display: none;">
+        <div class="slide-content" style="display: block;">
+          <div class="plot-container">
+            <h4>3D t-SNE</h4>
+            <iframe src="clarity/images/tsne_3d.html"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
           <div class="plot-container">
             <h4>3D PCA</h4>
             <iframe src="clarity/images/pca_3d.html"></iframe>
           </div>
         </div>
         
-        <div class="slide-content", style="display: none;">
+        <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
           <div class="plot-container">
             <h4>3D UMAP</h4>
             <iframe src="clarity/images/umap_3d.html"></iframe>
           </div>
         </div>
-
-        <div class="slide-content", style="display: none;">
-          <div class="plot-container">
-            <h4>3D t-SNE</h4>
-            <iframe src="clarity/images/tsne_3d.html"></iframe>
-          </div>
-        </div>
+        <p class="caption">
+          <span style="font-weight: bold">Figure 1:</span> 3d t-SNE projection of audio features. <br>
+          <span style="font-weight: bold">Figure 2:</span> 3d PCA projection of audio features. <br>
+          <span style="font-weight: bold">Figure 3:</span> 3d UMAP projection of audio features.
+        </p>
       </div>
   </div>
 
