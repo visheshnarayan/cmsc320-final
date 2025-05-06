@@ -1553,41 +1553,59 @@ df['Audio Length'].describe()
     <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Spectrogram Plot Code
     </summary>
     <pre><code class="python">
-def plot_unique_label_spectrograms_grid(df, n_rows=4, n_cols=6):
-    unique_labels = df.select("Label").unique().to_series().to_list()
-    total_plots = n_rows * n_cols
-    fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3))
-    axs = axs.flatten()
-    fig.suptitle("Unique Label Spectogram", fontsize=30)
+def plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms"):
+    """
+    Generate individual Plotly spectrograms for each unique label and save as HTML files.
     
-    for idx, label in enumerate(unique_labels):
-        ax = axs[idx]
-        
+    Args:
+        df: Polars DataFrame containing 'Label' and 'Spectrogram' columns
+        output_dir: Directory to save the HTML files (will be created if it doesn't exist)
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Get unique labels
+    unique_labels = df.select("Label").unique().to_series().to_list()
+    
+    for label in unique_labels:
         # Get the first spectrogram for this label
         row = df.filter(pl.col("Label") == label).row(0)
         spectrogram = row[df.columns.index("Spectrogram")]
         spectrogram_np = np.array(spectrogram, dtype=np.float32)
         
         if spectrogram_np.ndim == 2:
-            im = ax.imshow(spectrogram_np, aspect="auto", origin="lower", cmap="viridis")
-            ax.set_title(label.upper(), fontsize=18)
-            ax.set_xlabel("Time")
-            ax.set_ylabel("Freq")
+            # Create a Plotly figure
+            fig = go.Figure()
+            
+            # Add the spectrogram as a heatmap
+            fig.add_trace(go.Heatmap(
+                z=spectrogram_np,
+                colorscale='viridis',
+                showscale=True
+            ))
+            
+            # Update layout with title and axis labels
+            fig.update_layout(
+                title=f"{label.upper()} Spectrogram",
+                xaxis_title="Time",
+                yaxis_title="Frequency",
+                width=800,
+                height=600
+            )
+            
+            # Save as HTML file
+            output_file = os.path.join(output_dir, f"{label.lower()}_spectrogram.html")
+            fig.show()
+            fig.write_html(output_file)
+            print(f"Saved {output_file}")
         else:
-            ax.axis("off")
+            print(f"Skipping {label}: spectrogram is not 2-dimensional")
     
-    # Hide any unused axes
-    for j in range(len(unique_labels), len(axs)):
-        axs[j].axis("off")
-    
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
-    plt.show()
-
-plot_unique_label_spectrograms_grid(df)
+    print(f"All spectrograms saved to '{output_dir}' directory.")
       </code></pre>
   </details>
   <pre><code class="python">
-plot_unique_label_spectrograms_grid(df)
+plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
     </code></pre>
 </div>
 
@@ -1603,70 +1621,92 @@ plot_unique_label_spectrograms_grid(df)
     </div>
     <div class="slider">
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/affectionate.png" alt="Affectionate Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/affectionate_spectrogram.html" alt="Affectionate Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/affectionate.png" alt="Affectionate Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/bathroom.png" alt="Bathroom Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/bathroom_spectrogram.html" alt="Bathroom Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/bathroom.png" alt="Bathroom Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/delighted.png" alt="Delighted Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/delighted_spectrogram.html" alt="Delighted Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/delighted.png" alt="Delighted Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/dysregulated.png" alt="Dysregulated Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/dysregulated_spectrogram.html" alt="Dysregulated Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/dysregulated.png" alt="Dysregulated Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/dysregulation-bathroom.png" alt="Dysregulation-Bathroom Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/dysregulation-bathroom_spectrogram.html" alt="Dysregulation-Bathroom Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/dysregulation-bathroom.png" alt="Dysregulation-Bathroom Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/dysregulation-sick.png" alt="Dysregulation-Sick Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/dysregulation-sick_spectrogram.html" alt="Dysregulation-Sick Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/dysregulation-sick.png" alt="Dysregulation-Sick Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/frustrated.png" alt="Frustrated Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/frustrated_spectrogram.html" alt="Frustrated Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/frustrated.png" alt="Frustrated Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/glee.png" alt="Frustrated Glee">
+        <iframe src="clarity/images/spectrograms_plotly/glee_spectrogram.html" alt="Glee Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/glee.png" alt="Frustrated Glee"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/greeting.png" alt="Frustrated Greeting">
+        <iframe src="clarity/images/spectrograms_plotly/greeting_spectrogram.html" alt="Greeting Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/greeting.png" alt="Frustrated Greeting"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/happy.png" alt="Happy Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/happy_spectrogram.html" alt="Happy Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/happy.png" alt="Happy Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/help.png" alt="Help Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/help_spectrogram.html" alt="Help Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/help.png" alt="Help Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/hunger.png" alt="Hunger Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/hunger_spectrogram.html" alt="Hunger Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/hunger.png" alt="Hunger Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/laugh.png" alt="Laugh Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/laugh_spectrogram.html" alt="Laugh Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/laugh.png" alt="Laugh Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/laughter.png" alt="Laughter Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/laughter_spectrogram.html" alt="Laughter Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/laughter.png" alt="Laughter Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/more.png" alt="More Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/more_spectrogram.html" alt="More Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/more.png" alt="More Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/no.png" alt="No Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/no_spectrogram.html" alt="No Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/no.png" alt="No Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/protest.png" alt="Protest Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/protest_spectrogram.html" alt="Protest Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/protest.png" alt="Protest Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/request.png" alt="Request Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/request_spectrogram.html" alt="Request Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/request.png" alt="Request Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/selftalk.png" alt="Selftalk Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/selftalk_spectrogram.html" alt="Selftalk Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/selftalk.png" alt="Selftalk Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/social.png" alt="Social Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/social_spectrogram.html" alt="Social Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/social.png" alt="Social Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/tablet.png" alt="Tablet Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/tablet_spectrogram.html" alt="Tablet Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/tablet.png" alt="Tablet Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms/yes.png" alt="Yes Spectogram">
+        <iframe src="clarity/images/spectrograms_plotly/yes_spectrogram.html" alt="Yes Spectrogram"></iframe>
+        <!-- <img src="clarity/images/spectrograms/yes.png" alt="Yes Spectogram"> -->
       </div>
     </div>
   </div>
@@ -3164,9 +3204,9 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
 </div>
 
 <div class="container blog main gray">
-  <h2>Data Balancing Pipeline Overview</h2>
+  <h2>Pipeline Overview</h2>
   <p class="text">
-    Our data balancing pipeline works by generating synthetic audio samples for underrepresented classes
+    Our pipeline works by generating synthetic audio samples for underrepresented classes
     until we reach a target count per label. The process involves:
   </p>
 
