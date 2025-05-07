@@ -3641,6 +3641,87 @@ print(f"Balanced data shape: {balanced_df.shape}")
 
 </div>
 
+<div class="container blog main">
+  <h1 style="padding-top: 1em">Model Development, Evaluation, and Training</h1>
+  
+  <p class="text">
+    This section outlines the methodology for developing, selecting, and training machine learning models for audio classification tasks. The following techniques are explored:
+  </p>
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li>
+      <p class="text"><span style="font-weight: bold">Clustering</span> – Applying dimensionality reduction techniques such as PCA, UMAP, and t-SNE to project feature representations and cluster related label groups.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">CNN</span> – Training convolutional neural networks on spectrogram data to perform accurate classification of label categories.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Vision Transformer</span> – Utilizing transformer-based architectures on spectrogram inputs to enhance classification performance and model interpretability.</p>
+    </li>
+  </ul>
+</div>
+
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Clustering for Label Grouping</h2>
+
+  <p class="text">
+    Clustering was used as an unsupervised learning approach to explore the inherent structure of audio features and to guide the grouping of related labels. This process helped identify semantically or acoustically similar classes, which informed downstream classification strategies and reduced label complexity.
+  </p>
+
+  <p class="text">
+    Dimensionality reduction techniques such as <span style="font-weight: bold">Principal Component Analysis (PCA)</span>, <span style="font-weight: bold">t-Distributed Stochastic Neighbor Embedding (t-SNE)</span>, and <span style="font-weight: bold">Uniform Manifold Approximation and Projection (UMAP)</span> were applied to high-dimensional feature vectors extracted from spectrogram data. These projections enabled visual inspection and density-based clustering.
+  </p>
+
+  <p class="text">
+    To assess cluster quality, we experimented with <span style="font-weight: bold">K-Means</span>. Evaluation metrics such as silhouette score and cluster purity were used to quantify performance.
+  </p>
+
+  <h2 style="padding-top: 1em">Feature Engineering and Modeling Strategy</h2>
+
+  <p class="text">
+    To build effective audio classification models, we implemented a multi-stage pipeline that includes feature extraction, dimensionality reduction, unsupervised clustering, and supervised model training. This process is designed to evaluate different representations of audio data and identify label structures that can enhance model interpretability and performance.
+  </p>
+
+  <p class="text">
+    For feature extraction, we combined two sets of descriptors:
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">MFCCs</span>: Mel-frequency cepstral coefficients (MFCCs) were extracted and averaged across time to produce compact representations of each spectrogram.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Statistical Audio Features</span>: Time-domain features including RMS energy, zero-crossing rate (ZCR), mean, variance, and extremum values were computed over raw audio waveforms.</p>
+      </li>
+    </ul>
+  </p>
+
+  <p class="text">These features were concatenated and standardized using z-score normalization to create the input feature matrix.</p>
+
+  <p class="text">
+    To explore structural relationships between labels, we applied dimensionality reduction techniques—<span style="font-weight: bold">PCA</span>, <span style="font-weight: bold">UMAP</span>, and <span style="font-weight: bold">t-SNE</span>—to project the high-dimensional feature space into 2D and 3D visualizations. These projections were used both for exploratory analysis and as inputs to <span style="font-weight: bold">K-Means clustering</span> to assess separability across label categories.
+  </p>
+
+  <p class="text">
+    We evaluated the clustering quality using metrics such as silhouette score, Adjusted Rand Index (ARI), and Normalized Mutual Information (NMI), and plotted results in both static and interactive formats. These insights helped identify natural groupings of labels and informed the design of downstream classification models.
+  </p>
+
+  <p class="text">
+    For supervised classification, we conducted two complementary experiments:
+    <ul style="padding-left: 20px; list-style-type: disc;">
+      <li>
+        <p class="text"><span style="font-weight: bold">SVM Feature Evaluation</span>: Each individual feature was evaluated with SVM classifiers (linear, RBF, and sigmoid kernels) to assess its standalone discriminative power. We recorded accuracy, confusion matrices, and F1 scores.</p>
+      </li>
+      <li>
+        <p class="text"><span style="font-weight: bold">Hierarchical Ensemble</span>: We implemented a trickle-down binary ensemble using SVMs. The ensemble predicts the most frequent label first, and if the prediction fails, it passes to the next classifier in the hierarchy, cascading until a match is found or a default label is returned.</p>
+      </li>
+    </ul>
+  </p>
+
+  <p class="text">
+    Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance across all classes. Results were visualized to reveal both the strengths and error modes of our models.
+  </p>
+  
+</div>
+
+</div>
 
 <!-- Footer Page -->
 <footer>
