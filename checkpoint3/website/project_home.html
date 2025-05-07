@@ -3931,8 +3931,37 @@ print(f"Balanced data shape: {balanced_df.shape}")
     Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance across all classes. Results were visualized to reveal both the strengths and error modes of our models.
   </p>
 
-  <h2>K-Means Overview</h2>
+  <h2 style="padding-top: 1em">K-Means Clustering on Projected Features</h2>
+  
+  <p class="text">
+    After feature engineering and scaling, we explored the intrinsic structure of the dataset using unsupervised clustering. Our goal was to assess whether feature representations of audio samples naturally grouped according to their labeled categories.
+  </p>
 
+  <p class="text">
+    We first reduced the dimensionality of our 19-dimensional feature vectors using <span style="font-weight: bold">Principal Component Analysis (PCA)</span>, <span style="font-weight: bold">t-SNE</span>, and <span style="font-weight: bold">UMAP</span>. These methods were applied to produce both 2D and 3D projections, which were used for clustering and visualization. Projection quality was inspected for issues such as <code>NaNs</code>, infinities, or extreme value ranges.
+  </p>
+
+  <p class="text">
+    With these projections, we applied <span style="font-weight: bold">K-Means clustering</span> using the number of clusters equal to the number of unique labels in the dataset. This allowed us to evaluate how well the latent representations aligned with ground-truth classes. Each clustering run was evaluated using the following metrics:
+  </p>
+
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li><p class="text"><span style="font-weight: bold">Silhouette Score</span> – Internal cohesion vs. separation of clusters</p></li>
+    <li><p class="text"><span style="font-weight: bold">Adjusted Rand Index (ARI)</span> – Alignment of clustering with true labels</p></li>
+    <li><p class="text"><span style="font-weight: bold">Normalized Mutual Information (NMI)</span> – Information shared between cluster assignments and labels</p></li>
+  </ul>
+
+  <p class="text">
+    For each projection method and dimensionality, interactive visualizations were created. These included scatter plots and 3D plots colored by cluster and true label.
+  </p>
+
+  <p class="text">
+    After running clustering across all combinations, we compiled a performance summary and ranked projections by ARI and NMI. This analysis identified which projection best preserved label-based structure and provided valuable insights into which methods were most suitable for downstream classification or grouping.
+  </p>
+
+  <p class="text">
+    Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
+  </p>
   
   
 </div>
