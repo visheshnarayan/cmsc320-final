@@ -3449,6 +3449,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
     feature="Spectral Entropy"
   )
   format_t_test_results(t_test_results)
+  plot_spectral_entropy_comparison(df, target_labels=target_labels)
     </code></pre>
 
   <p class="text">
@@ -3468,9 +3469,55 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
     3.365473807647995e-44 True</p>
   <p style="font-family: 'Courier New', Courier, monospace;">delighted vs frustrated 10.485234
     3.053207937235983e-25 True</p><br>
+  </div>
 
-  <img src="clarity/images/SpectralEntropyAcrossLabels.png" alt="Spectral Entropy Across Labels">
+  <div class="container main blog">
+
+    <details>
+  <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code
+  </summary>
+  <pre><code class="python">
+def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entropy"):
+    data = [
+        {"Label": label, feature: val}
+        for label in target_labels
+        for val in df.filter(pl.col("Label") == label)[feature].to_list()
+    ]
+    df_plot = pd.DataFrame(data)
+
+    fig = px.box(
+        df_plot,
+        x="Label",
+        y=feature,
+        color="Label",
+        title=f"{feature} Comparison Across Labels",
+        points="all",
+        color_discrete_sequence=px.colors.qualitative.Set2
+    )
+    fig.update_layout(
+        yaxis_title=feature,
+        xaxis_title="Label",
+        width=1000,
+        height=600,
+    )
+
+    fig.show()
+    fig.write_html("spectral_entropy_boxplot.html")
+
+    </code></pre>
+</details>
 </div>
+
+  <div class="container large blog gray">
+    <div class="plot-container">
+      <iframe src="clarity/images/spectral_entropy_boxplot.html" alt="Spectral Entropy Box Plot"></iframe>
+    </div>
+    <p class="caption">
+      The boxplot shows the distribution of spectral entropy values for different vocalization labels. The
+      significant differences in entropy indicate varying levels of disorder or randomness in the audio signals.
+    </p>
+  </div>
+
 
 <div class="container blog main">
   <h1>Synthetic Data Generation</h1>
@@ -3527,13 +3574,6 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       Code</summary>
     </summary>
     <pre><code class="python">
-import polars as pl
-import numpy as np
-import random
-from typing import Dict, List
-import soundfile as sf
-import os
-
 def generate_synthetic_audio_data(
     df: pl.DataFrame,
     target_count_per_label: int = 150,
