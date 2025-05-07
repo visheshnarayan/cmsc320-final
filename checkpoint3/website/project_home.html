@@ -3307,8 +3307,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
     models that perform poorly on minority classes.
   </p>
   <p class="text">
-    We aim to balance the dataset by generating synthetic samples for the underrepresented labels until we reach a
-    target count of ? samples per label.
+    We aim to balance the dataset by generating synthetic samples for the underrepresented labels to a custom specified amount depending on the model/expirement we are performing. Here is an example of us having a target count of <code>500</code> samples per label.
   </p>
 
   <details>
@@ -3620,10 +3619,10 @@ def load_and_balance_audio_data(
       </code></pre>
   </details>
   <pre><code class="python">
-input_file = "../checkpoint2/processed_data.parquet"  # Path to your input data
+input_file = "../checkpoint2/processed_data.parquet"
     
 # Set target count per label
-target_samples_per_label = 150  # Adjust as needed
+target_samples_per_label = 500  # Adjust as needed
 
 # Load, balance, and save
 balanced_df = load_and_balance_audio_data(
@@ -3636,6 +3635,9 @@ balanced_df = load_and_balance_audio_data(
 print(f"Original data shape: {pl.read_parquet(input_file).shape}")
 print(f"Balanced data shape: {balanced_df.shape}")
     </code></pre>
+
+    <p style="font-family: 'Courier New', Courier, monospace;">Original data shape: (7077, 7)</p>
+    <p style="font-family: 'Courier New', Courier, monospace;">Balanced data shape: (14531, 7)</p>
 
 </div>
 
