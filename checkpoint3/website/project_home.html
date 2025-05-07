@@ -2164,7 +2164,7 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
 </div>
 
 <div class="container blog large gray">
-  <h3 style="text-align: center;">Tsne/PCA/Umap (Dimensions = 3)</h3>
+  <h3 style="text-align: center;">t-SNE/PCA/Umap (Dimensions = 3)</h3>
   <div class="slide-display">
     <div class="slide-menu">
       <ul class="dots" id="slide-menu">
@@ -4014,7 +4014,45 @@ print(f"Balanced data shape: {balanced_df.shape}")
     Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
   </p>
   
-  
+</div>
+
+<div class="container blog large gray">
+  <h3 style="text-align: center;">t-SNE/PCA/Umap (Dimensions = 3)</h3>
+  <div class="slide-display">
+    <div class="slide-menu">
+      <ul class="dots" id="slide-menu">
+        <li class="dot active"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+      </ul>
+    </div>
+
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+        <!-- <h4>3D t-SNE</h4> -->
+        <iframe src="clarity/images/projection_outputs/PCA_kmeans_clustering_3d_interactive.html"></iframe>
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D PCA</h4> -->
+        <iframe src="clarity/images/pca_3d.html"></iframe>
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <iframe src="clarity/images/umap_3d.html"></iframe>
+      </div>
+    </div>
+    <p class="caption">
+      <span style="font-weight: bold">Figure 1:</span> 3d t-SNE projection of audio features. <br>
+      <span style="font-weight: bold">Figure 2:</span> 3d PCA projection of audio features. <br>
+      <span style="font-weight: bold">Figure 3:</span> 3d UMAP projection of audio features.
+    </p>
+  </div>
 </div>
 
 </div>
