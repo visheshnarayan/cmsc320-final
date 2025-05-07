@@ -4013,11 +4013,514 @@ print(f"Balanced data shape: {balanced_df.shape}")
   <p class="text">
     Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
   </p>
-  
+  <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+<details>
+  <pre><code class="python">
+def extract_mfccs(spec_data, n_mfccs=13):
+    mfccs = []
+
+    for spec in spec_data:
+        if isinstance(spec, list):
+            spec_array = np.array(spec)
+            
+            # time x frequency
+            if spec_array.ndim == 2:
+                mfcc_features = np.mean(spec_array, axis=0)[:n_mfccs]
+                if len(mfcc_features) < n_mfccs:
+                    mfcc_features = np.pad(mfcc_features, (0, n_mfccs - len(mfcc_features)))
+                mfccs.append(mfcc_features)
+
+            else:
+                # Reshape if 1D (shouldn't be the case)
+                feat = spec_array[:n_mfccs] if len(spec_array) >= n_mfccs else np.pad(spec_array, (0, n_mfccs - len(spec_array)))
+                mfccs.append(feat)
+    
+    # numpy array with shape (n_samples, n_mfccs)
+    result = np.array(mfccs)
+    print(f"Extracted MFCC shape: {result.shape}")
+    return result
+
+def extract_audio_stats(audio_data):
+    
+    features = []
+    for audio in audio_data:
+        if isinstance(audio, list):
+            audio_array = np.array(audio)
+            
+            # Extract usual features + rms, zcr
+            mean = np.mean(audio_array)
+            std = np.std(audio_array)
+            max_val = np.max(audio_array)
+            min_val = np.min(audio_array)
+            rms = np.sqrt(np.mean(np.square(audio_array)))
+            zcr = np.sum(np.abs(np.diff(np.signbit(audio_array)))) / len(audio_array)
+            
+            features.append([mean, std, max_val, min_val, rms, zcr])
+        else:
+            # Fallback for non-list (also shouldn't be the case)
+            features.append([0, 0, 0, 0, 0, 0])
+    
+    # numpy array with shape (n_samples, 6)
+    result = np.array(features)
+    print(f"Extracted audio stats shape: {result.shape}")
+    return result
+
+def create_interactive_cluster_2d(data, cluster_labels, true_labels, projection_name, metrics):
+    distinct_colors = {
+        label: color for label, color in zip(
+            np.unique(true_labels), 
+            px.colors.qualitative.D3 + px.colors.qualitative.Bold + px.colors.qualitative.Safe
+        )
+    }
+
+
+    df_plot = pd.DataFrame({
+        'x': data[:, 0],
+        'y': data[:, 1],
+        'Cluster': [f'Cluster {label}' for label in cluster_labels],
+        'True Label': true_labels
+    })
+    
+    title_metrics = [
+        f"Silhouette: {metrics['silhouette']:.3f}",
+        f"ARI: {metrics['ari']:.3f}",
+        f"NMI: {metrics['nmi']:.3f}"
+    ]
+    
+    title = f"Interactive 2D {projection_name} with K-means Clustering<br><sub>{', '.join(title_metrics)}</sub>"
+    
+    fig = px.scatter(
+        df_plot, x='x', y='y', color='Cluster',
+        title=title,
+        labels={'x': f"{projection_name} Component 1", 'y': f"{projection_name} Component 2"},
+        color_discrete_map=distinct_colors,
+        hover_name='True Label',
+        opacity=0.7,
+        height=700,
+        width=1000,
+        hover_data=['True Label']
+    )
+    
+    fig.update_layout(
+        legend=dict(
+            orientation="v",
+            y=1,
+            x=1,
+            yanchor="top",
+            xanchor="right",
+            font=dict(size=12),
+            itemwidth=40,
+        ),
+        margin=dict(l=40, r=40, b=60, t=100),
+        plot_bgcolor='#F8F9FA'
+    )
+    
+    fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor='lightgray')
+    fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor='lightgray')
+    
+    file_path = os.path.join(save_dir, f"{projection_name}_kmeans_clustering_2d_interactive.html")
+    fig.write_html(file_path)
+    fig.show()
+
+def create_interactive_cluster_3d(data, cluster_labels, true_labels, projection_name, metrics):
+    distinct_colors = {
+        label: color for label, color in zip(
+            np.unique(true_labels), 
+            px.colors.qualitative.D3 + px.colors.qualitative.Bold + px.colors.qualitative.Safe
+        )
+    }
+
+    df_plot = pd.DataFrame({
+        'x': data[:, 0],
+        'y': data[:, 1],
+        'z': data[:, 2],
+        'Cluster': [f'Cluster {label}' for label in cluster_labels],
+        'True Label': true_labels
+    })
+    
+    title_metrics = [
+        f"Silhouette: {metrics['silhouette']:.3f}",
+        f"ARI: {metrics['ari']:.3f}",
+        f"NMI: {metrics['nmi']:.3f}"
+    ]
+    
+    title = f"Interactive 3D {projection_name} with K-means Clustering<br><sub>{', '.join(title_metrics)}</sub>"
+    
+    fig = px.scatter_3d(
+        df_plot, x='x', y='y', z='z', color='Cluster',
+        title=title,
+        labels={
+            'x': f"{projection_name} Component 1", 
+            'y': f"{projection_name} Component 2", 
+            'z': f"{projection_name} Component 3"
+        },
+        opacity=0.7,
+        hover_data=['True Label'], 
+        color_discrete_map=distinct_colors,
+        hover_name='True Label',
+    )
+    
+    fig.update_layout(
+        legend=dict(
+            orientation="v",
+            y=1,
+            x=1,
+            yanchor="top",
+            xanchor="right",
+            font=dict(size=12),
+            itemwidth=40,
+        ),
+        margin=dict(l=20, r=220, b=60, t=20),
+        plot_bgcolor='#F8F9FA'
+    )
+    
+    file_path = os.path.join(save_dir, f"{projection_name}_kmeans_clustering_3d_interactive.html")
+    fig.write_html(file_path)
+    fig.show()
+
+def apply_kmeans_clustering(projection_data, true_labels, projection_name, n_clusters):
+
+    print(f"Applying K-means clustering on {projection_name} projection...")
+    
+    # Create and fit K-means model
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+    cluster_labels = kmeans.fit_predict(projection_data)
+    
+    silhouette = silhouette_score(projection_data, cluster_labels)
+    ari = adjusted_rand_score(true_labels, cluster_labels)
+    nmi = normalized_mutual_info_score(true_labels, cluster_labels)
+    
+    print(f"  Silhouette Score: {silhouette:.4f}")
+    print(f"  ARI (vs true labels): {ari:.4f}")
+    print(f"  NMI (vs true labels): {nmi:.4f}")
+    
+    results = {
+        'labels': cluster_labels,
+        'silhouette': silhouette,
+        'ari': ari,
+        'nmi': nmi
+    }
+    
+    # create_interactive_cluster_2d(projection_data, cluster_labels, true_labels, projection_name, results)
+    create_interactive_cluster_3d(projection_data, cluster_labels, true_labels, projection_name, results)
+    
+    return results
+
+def create_clustering_summary(results_2d, results_3d):
+    summary_data = []
+    
+    for proj_name, metrics in results_2d.items():
+        row = {
+            'Projection': proj_name,
+            'Dimensions': '2D',
+            'Silhouette': metrics['silhouette'],
+            'ARI': metrics['ari'],
+            'NMI': metrics['nmi']
+        }
+        summary_data.append(row)
+    
+    for proj_name, metrics in results_3d.items():
+        row = {
+            'Projection': proj_name,
+            'Dimensions': '3D',
+            'Silhouette': metrics['silhouette'],
+            'ARI': metrics['ari'],
+            'NMI': metrics['nmi']
+        }
+        summary_data.append(row)
+    
+    # CSort df by ARI (higher is better)
+    summary_df = pd.DataFrame(summary_data)
+    summary_df = summary_df.sort_values(by=['ARI', 'NMI'], ascending=False)
+    
+    csv_path = os.path.join(save_dir, "kmeans_clustering_results_summary.csv")
+    summary_df.to_csv(csv_path, index=False)
+    print(f"\nSummary saved to {csv_path}")
+    
+    # Bar chart
+    plt.figure(figsize=(12, 8))
+    ax = sns.barplot(
+        data=summary_df.melt(id_vars=['Projection', 'Dimensions'], 
+                            value_vars=['Silhouette', 'ARI', 'NMI']),
+        x='Projection', y='value', hue='variable',
+        palette='viridis'
+    )
+    plt.title('K-means Clustering Performance across Projections')
+    plt.xlabel('Projection Method')
+    plt.ylabel('Score')
+    plt.xticks(rotation=45)
+    plt.legend(title='Metric')
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_dir, "kmeans_performance_comparison.png"), dpi=300)
+    plt.close()
+    
+    return summary_df
+
+spectrograms = df["Spectrogram"].to_list()
+audio_data = df["Audio"].to_list()
+labels = df["Label"].to_list()
+
+print(f"Extracted spectrograms: {len(spectrograms)}")
+print(f"Extracted audio data: {len(audio_data)}")
+print(f"Extracted labels: {len(labels)}")
+
+# Feature extraction
+print("Extracting features.")
+mfcc_features = extract_mfccs(spectrograms)
+audio_features = extract_audio_stats(audio_data)
+
+X_combined = np.hstack((mfcc_features, audio_features))
+print(f"Feature vector shape: {X_combined.shape}")
+
+print("Scaling features now.")
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_combined)
+
+print("Applying reduction techniques.")
+
+# PCA
+pca = PCA(n_components=2)
+pca_result = pca.fit_transform(X_scaled)
+print(f"PCA explained variance: {pca.explained_variance_ratio_.sum():.2f}")
+
+# t-SNE
+tsne = TSNE(n_components=2, random_state=42, perplexity=30)
+tsne_result = tsne.fit_transform(X_scaled)
+
+# UMAP
+reducer = umap.UMAP(random_state=42)
+umap_result = reducer.fit_transform(X_scaled)
+
+projections = {
+    'PCA': pca_result,
+    't-SNE': tsne_result,
+    'UMAP': umap_result
+}
+
+for name, result in projections.items():
+    print(f"{name} contains NaN: {np.isnan(result).any()}")
+    print(f"{name} contains inf: {np.isinf(result).any()}")
+    print(f"{name} min: {np.min(result)}, max: {np.max(result)}")
+
+print(f"Labels shape: {len(labels)}")
+print(f"Unique labels: {np.unique(labels)}")
+print(f"Label counts: {[(l, np.sum(np.array(labels) == l)) for l in np.unique(labels)]}")
+
+os.makedirs("projection_outputs", exist_ok=True)
+
+# Distinct colors for each label using Plotly palettes
+distinct_colors_list = (
+    px.colors.qualitative.D3 +
+    px.colors.qualitative.Bold +
+    px.colors.qualitative.Safe +
+    px.colors.qualitative.Alphabet
+)
+unique_labels_all = np.unique(labels)
+assert len(unique_labels_all) <= len(distinct_colors_list), "Too many labels for available distinct colors."
+
+# Map label to distinct color
+distinct_color_map = {
+    label: distinct_colors_list[i]
+    for i, label in enumerate(unique_labels_all)
+}
+
+# Loop through 2D projections
+print("Saving 2D projection images and interactive HTML...")
+
+for name, result in projections.items():
+    valid_indices = np.where(~np.isnan(result).any(axis=1) & ~np.isinf(result).any(axis=1))[0]
+    result_clean = result[valid_indices]
+    labels_clean = [labels[idx] for idx in valid_indices]
+
+    # --- Matplotlib static plot ---
+    plt.figure(figsize=(10, 8))
+    for label in np.unique(labels_clean):
+        mask = np.array(labels_clean) == label
+        if np.sum(mask) > 0:
+            plt.scatter(
+                result_clean[mask, 0],
+                result_clean[mask, 1],
+                c=[distinct_color_map[label]],
+                label=label,
+                alpha=0.7,
+                s=50
+            )
+
+    plt.title(f"2D {name} Projection")
+    plt.grid(True)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.savefig(f"projection_outputs/{name}_2d_projection.png", dpi=300)
+    plt.close()
+
+    # --- Plotly interactive plot ---
+    df_plot = pd.DataFrame({
+        'x': result_clean[:, 0],
+        'y': result_clean[:, 1],
+        'Label': labels_clean
+    })
+
+    fig = px.scatter(
+        df_plot, x='x', y='y', color='Label',
+        title=f"Interactive 2D {name} Projection",
+        color_discrete_map=distinct_color_map,
+        opacity=0.7,
+        width=1000,
+        height=800
+    )
+    fig.update_layout(
+        margin=dict(l=20, r=200, t=60, b=40),
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,
+            font=dict(size=12)
+        )
+    )
+    fig.write_html(f"projection_outputs/{name}_2d_interactive.html")
+
+print("All projections saved to PNG and HTML.")
+
+os.makedirs("projection_outputs", exist_ok=True)
+
+# Define distinct color map
+unique_labels_all = np.unique(labels)
+distinct_colors_list = (
+    px.colors.qualitative.D3 +
+    px.colors.qualitative.Bold +
+    px.colors.qualitative.Safe +
+    px.colors.qualitative.Alphabet
+)
+assert len(unique_labels_all) <= len(distinct_colors_list), "Too many labels for available distinct colors."
+
+distinct_color_map = {
+    label: distinct_colors_list[i]
+    for i, label in enumerate(unique_labels_all)
+}
+
+# --- Perform 3D Projections ---
+pca_3d = PCA(n_components=3)
+pca_result_3d = pca_3d.fit_transform(X_scaled)
+print(f"3D PCA explained variance: {pca_3d.explained_variance_ratio_.sum():.2f}")
+
+tsne_3d = TSNE(n_components=3, random_state=42, perplexity=30)
+tsne_result_3d = tsne_3d.fit_transform(X_scaled)
+
+reducer_3d = umap.UMAP(n_components=3, random_state=42)
+umap_result_3d = reducer_3d.fit_transform(X_scaled)
+
+projections_3d = {
+    'PCA': pca_result_3d,
+    't-SNE': tsne_result_3d,
+    'UMAP': umap_result_3d
+}
+
+print("Saving 3D projection images and HTMLs...")
+
+for name, result in projections_3d.items():
+    valid_indices = np.where(~np.isnan(result).any(axis=1) & ~np.isinf(result).any(axis=1))[0]
+    result_clean = result[valid_indices]
+    labels_clean = [labels[idx] for idx in valid_indices]
+
+    # --- Matplotlib Static Plot ---
+    fig = plt.figure(figsize=(12, 10))
+    ax = fig.add_subplot(111, projection='3d')
+
+    for label in np.unique(labels_clean):
+        mask = np.array(labels_clean) == label
+        if np.sum(mask) > 0:
+            ax.scatter(
+                result_clean[mask, 0], 
+                result_clean[mask, 1], 
+                result_clean[mask, 2],
+                c=[distinct_color_map[label]], 
+                label=label, 
+                alpha=0.7, 
+                s=50
+            )
+
+    ax.set_title(f"3D {name} Projection")
+    ax.set_xlabel(f"{name} Component 1")
+    ax.set_ylabel(f"{name} Component 2")
+    ax.set_zlabel(f"{name} Component 3")
+    ax.grid(True)
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+
+    plt.tight_layout()
+    plt.savefig(f"projection_outputs/{name}_3d_projection.png", bbox_inches='tight', dpi=300)
+    plt.close()
+
+    # --- Plotly Interactive Plot ---
+    df_3d = pd.DataFrame({
+        'x': result_clean[:, 0],
+        'y': result_clean[:, 1],
+        'z': result_clean[:, 2],
+        'Label': labels_clean
+    })
+
+    fig_3d = px.scatter_3d(
+        df_3d,
+        x='x', y='y', z='z',
+        color='Label',
+        color_discrete_map=distinct_color_map,
+        opacity=0.7,
+        title=f"Interactive 3D {name} Projection"
+    )
+
+    fig_3d.update_layout(
+        margin=dict(l=20, r=20, t=60, b=40),
+        legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01,
+            font=dict(size=12)
+        )
+    )
+
+    fig_3d.write_html(f"projection_outputs/{name}_3d_interactive.html")
+
+print("3D projections saved as both PNG and HTML.")
+
+save_dir = "projection_outputs"
+
+unique_labels = np.unique(labels)
+n_clusters = len(unique_labels)
+
+print(f"Applying K-means clustering with {n_clusters} clusters...")
+
+# For 2D
+clustering_results_2d = {}
+for name, projection in projections.items():
+    print(f"\nClustering on 2D {name} projection:")
+    clustering_results_2d[name] = apply_kmeans_clustering(projection, labels, name, n_clusters)
+
+# For 3D
+clustering_results_3d = {}
+for name, projection in projections_3d.items():
+    print(f"\nClustering on 3D {name} projection:")
+    clustering_results_3d[name] = apply_kmeans_clustering(projection, labels, name, n_clusters)
+
+summary_df = create_clustering_summary(clustering_results_2d, clustering_results_3d)
+
+best_method = summary_df.iloc[0]
+print("\n" + "="*50)
+print("Best K-means Clustering Method:")
+print(f"Projection: {best_method['Projection']} {best_method['Dimensions']}")
+print(f"ARI: {best_method['ARI']:.4f}")
+print(f"NMI: {best_method['NMI']:.4f}")
+print(f"Silhouette Score: {best_method['Silhouette']:.4f}")
+print("="*50)
+
+  </code></pre>
+</details>
+
 </div>
 
 <div class="container blog large gray">
-  <h3 style="text-align: center;">t-SNE/PCA/Umap (Dimensions = 3)</h3>
+  <h3 style="text-align: center;"> K-Means Clustering on t-SNE/PCA/Umap Projections (Dimensions = 3)</h3>
   <div class="slide-display">
     <div class="slide-menu">
       <ul class="dots" id="slide-menu">
@@ -4030,28 +4533,64 @@ print(f"Balanced data shape: {balanced_df.shape}")
     <div class="slide-content" style="display: block;">
       <div class="plot-container">
         <!-- <h4>3D t-SNE</h4> -->
-        <iframe src="clarity/images/projection_outputs/PCA_kmeans_clustering_3d_interactive.html"></iframe>
+        <iframe src="clarity/images/projection_outputs/t-SNE_kmeans_clustering_3d_interactive.html"></iframe>
       </div>
     </div>
 
     <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
       <div class="plot-container">
         <!-- <h4>3D PCA</h4> -->
-        <iframe src="clarity/images/pca_3d.html"></iframe>
+        <iframe src="clarity/images/projection_outputs/PCA_kmeans_clustering_3d_interactive.html"></iframe>
       </div>
     </div>
 
     <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
-        <iframe src="clarity/images/umap_3d.html"></iframe>
+        <iframe src="clarity/images/projection_outputs/UMAP_kmeans_clustering_3d_interactive.html"></iframe>
       </div>
     </div>
-    <p class="caption">
+    <!-- <p class="caption">
       <span style="font-weight: bold">Figure 1:</span> 3d t-SNE projection of audio features. <br>
       <span style="font-weight: bold">Figure 2:</span> 3d PCA projection of audio features. <br>
       <span style="font-weight: bold">Figure 3:</span> 3d UMAP projection of audio features.
-    </p>
+    </p> -->
+  </div>
+  <h3 style="text-align: center;"> K-Means Clustering on t-SNE/PCA/Umap Projections (Dimensions = 2)</h3>
+  <div class="slide-display">
+    <div class="slide-menu">
+      <ul class="dots" id="slide-menu">
+        <li class="dot active"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+      </ul>
+    </div>
+
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+        <!-- <h4>3D t-SNE</h4> -->
+        <iframe src="clarity/images/projection_outputs/t-SNE_kmeans_clustering_2d_interactive.html"></iframe>
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D PCA</h4> -->
+        <iframe src="clarity/images/projection_outputs/PCA_kmeans_clustering_2d_interactive.html"></iframe>
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <iframe src="clarity/images/projection_outputs/UMAP_kmeans_clustering_2d_interactive.html"></iframe>
+      </div>
+    </div>
+    <!-- <p class="caption">
+      <span style="font-weight: bold">Figure 1:</span> 3d t-SNE projection of audio features. <br>
+      <span style="font-weight: bold">Figure 2:</span> 3d PCA projection of audio features. <br>
+      <span style="font-weight: bold">Figure 3:</span> 3d UMAP projection of audio features.
+    </p> -->
   </div>
 </div>
 
