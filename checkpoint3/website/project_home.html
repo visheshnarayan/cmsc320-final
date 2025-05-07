@@ -1854,80 +1854,189 @@ df = df.with_columns([
     formation. We can possibly apply kernel tricks to our data and use SVMs to see if there is a hyper place to split
     on.</p>
 
-  <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D + 3D Projection Code
-    </summary>
-    <pre><code class="python">
-### Plotting the correlation matrix and 2D projections
-
-# Selecting MFCCs and Pitch variance as features for 2d projection
+    <details>
+      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D Projection Code
+      </summary>
+      <pre><code class="python">
+  # Features for correlation heatmap
 features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
-corr = df[features].corr()  # Correlation matrix
-plt.figure(figsize=(16, 16)) 
+corr = df[features].corr()
 
-plt.subplot(221)  # Heat map
-sns.heatmap(data=corr, annot=True, cmap="coolwarm", xticklabels=features, yticklabels=features)
-plt.title("Correlations between Features")
+# Convert Polars DataFrame to numpy array
+corr_array = corr.to_numpy()
+corr_rounded = np.round(corr_array, 2)
 
-# Prepare data for PCA, UMAP, and t-SNE
+# 1. Correlation Heatmap (Plotly)
+fig_heatmap = go.Figure(data=go.Heatmap(
+    z=corr_array,
+    x=features,
+    y=features,
+    zmin=-1, zmax=1,
+    colorscale='RdBu_r',
+    text=corr_rounded,
+    texttemplate='%{text}',
+    showscale=True,
+))
+
+fig_heatmap.update_layout(
+        title={
+            'text': "Correlation Heatmap of Audio Features",
+            'xanchor': 'left',
+            'yanchor': 'top',
+        },
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+            title='Correlations between Features'
+        )
+    )
+
+fig_heatmap.show()
+fig_heatmap.write_html("correlation_heatmap.html")
+
+# Prepare MFCC data
 mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
 X = df[mfccs].to_numpy()
 labels = df["Label"].to_numpy()
+unique_labels = np.unique(labels)
 
-# Scaling the data
+# Scale features
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# PCA
+# Create a distinct color map for the labels
+distinct_colors = {
+    label: color for label, color in zip(
+        unique_labels, 
+        px.colors.qualitative.D3 + px.colors.qualitative.Bold + px.colors.qualitative.Safe
+    )
+}
+
+# 2. PCA (Plotly)
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X_scaled)
 
-# UMAP
+# Create DataFrame for Plotly
+df_pca = pd.DataFrame({
+    'Component 1': X_pca[:, 0],
+    'Component 2': X_pca[:, 1],
+    'Label': labels.astype(str)
+})
+
+fig_pca = px.scatter(
+    df_pca, 
+    x='Component 1', 
+    y='Component 2', 
+    color='Label',
+    color_discrete_map=distinct_colors,
+    opacity=0.7,
+    title='2D PCA of Audio Features'
+)
+
+fig_pca.update_layout(
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        )
+    )
+
+fig_pca.show()
+fig_pca.write_html("pca_projection.html")
+
+# 3. UMAP (Plotly)
 reducer = umap.UMAP(n_components=2, random_state=42)
 X_umap = reducer.fit_transform(X_scaled)
 
-# t-SNE
+# Create DataFrame for Plotly
+df_umap = pd.DataFrame({
+    'Component 1': X_umap[:, 0],
+    'Component 2': X_umap[:, 1],
+    'Label': labels.astype(str)
+})
+
+fig_umap = px.scatter(
+    df_umap, 
+    x='Component 1', 
+    y='Component 2', 
+    color='Label',
+    color_discrete_map=distinct_colors,
+    opacity=0.7,
+    title='UMAP Projection of Audio Features'
+)
+
+fig_umap.update_layout(
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        )
+    )
+
+fig_umap.show()
+fig_umap.write_html("umap_projection.html")
+
+# 4. t-SNE (Plotly)
 tsne = TSNE(n_components=2, random_state=42)
 X_tsne = tsne.fit_transform(X_scaled)
 
-# Plot PCA
-plt.subplot(222)
-unique_labels = np.unique(labels)
-for label in unique_labels:
-    idx = labels == label
-    plt.scatter(X_pca[idx, 0], X_pca[idx, 1], label=label, alpha=0.6)
-plt.xlabel("PCA Component 1")
-plt.ylabel("PCA Component 2")
-plt.title("2D PCA of Audio Features")
-plt.legend(loc="best", fontsize="small")
-plt.grid(True)
+# Create DataFrame for Plotly
+df_tsne = pd.DataFrame({
+    'Component 1': X_tsne[:, 0],
+    'Component 2': X_tsne[:, 1],
+    'Label': labels.astype(str)
+})
 
-# Plot UMAP
-plt.subplot(223)
-for label in unique_labels:
-    idx = labels == label
-    plt.scatter(X_umap[idx, 0], X_umap[idx, 1], label=label, alpha=0.6)
-plt.xlabel("UMAP Component 1")
-plt.ylabel("UMAP Component 2")
-plt.title("UMAP Projection of Audio Features")
-plt.legend(loc="best", fontsize="small")
-plt.grid(True)
+fig_tsne = px.scatter(
+    df_tsne, 
+    x='Component 1', 
+    y='Component 2', 
+    color='Label',
+    color_discrete_map=distinct_colors,
+    opacity=0.7,
+    title='t-SNE Projection of Audio Features'
+)
 
-# Plot t-SNE
-plt.subplot(224)
-for label in unique_labels:
-    idx = labels == label
-    plt.scatter(X_tsne[idx, 0], X_tsne[idx, 1], label=label, alpha=0.6)
-plt.xlabel("t-SNE Component 1")
-plt.ylabel("t-SNE Component 2")
-plt.title("t-SNE Projection of Audio Features")
-plt.legend(loc="best", fontsize="small")
-plt.grid(True)
+fig_tsne.update_layout(
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        )
+    )
 
-plt.tight_layout()
-plt.show()
+fig_tsne.show()
+fig_tsne.write_html("tsne_projection.html")
 
-### Plotting the 3D projections
+        </code></pre>
+    </details>
+
+  <details>
+    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 3D Projection Code
+    </summary>
+    <pre><code class="python">
+features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
 
 # Prepare MFCC data
 mfccs = ["MFCC-" + str(i) for i in range(1, 4)]
@@ -1938,16 +2047,52 @@ labels = df["Label"].to_numpy()
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# Helper to make 3D plot and save HTML
+# Create a distinct color map for the labels
+unique_labels = np.unique(labels)
+# Distinct color palette - high contrast colors that are visually distinguishable
+distinct_colors = {
+    # Vibrant, distinct colors that work well for visualization
+    label: color for label, color in zip(
+        unique_labels, 
+        px.colors.qualitative.D3 + px.colors.qualitative.Bold + px.colors.qualitative.Safe
+    )
+}
+
+# Helper to make 3D plot and save HTML with distinct colors
 def save_3d_plot(X_3d, labels, title, filename):
+    # Create a dataframe for plotly
+    import pandas as pd
+    plot_df = pd.DataFrame({
+        'x': X_3d[:, 0],
+        'y': X_3d[:, 1],
+        'z': X_3d[:, 2],
+        'Label': labels.astype(str)
+    })
+    
     fig = px.scatter_3d(
-        x=X_3d[:, 0], y=X_3d[:, 1], z=X_3d[:, 2],
-        color=labels.astype(str),
+        plot_df,
+        x='x', y='y', z='z',
+        color='Label',
+        color_discrete_map=distinct_colors,  # Apply the custom color mapping
         title=title,
         labels={"x": "Component 1", "y": "Component 2", "z": "Component 3"},
         opacity=0.7
     )
-    fig.write_html(filename)
+    
+    fig.update_layout(
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        )
+    )
+    fig.show()
+    fig.write_html(f"../checkpoint3/website/clarity/images/{filename}")
 
 # 2. PCA (3D)
 pca = PCA(n_components=3)
@@ -1965,9 +2110,10 @@ X_tsne = tsne.fit_transform(X_scaled)
 save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.html")
       </code></pre>
   </details>
+
 </div>
 
-<div class="container blog main gray">
+<div class="container blog large gray">
   <h3 style="text-align: center;">Correlation/Tsne/PCA/Umap (Dimensions = 2)</h3>
   <div class="slide-display">
     <div class="slide-menu">
@@ -1979,20 +2125,29 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
       </ul>
     </div>
 
-    <div class="slide-content" , style="display: block;">
-      <img src="clarity/images/correlation_heatmap.png" alt="Correlation Heatmap">
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+        <!-- <h4>Correlation Heatmap</h4> -->
+        <iframe src="clarity/images/correlation_heatmap.html" alt="Correlation Heatmap"></iframe>
+      </div>
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/tsne_projection.png" alt="TSNE Projection">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <iframe src="clarity/images/tsne_projection.html" alt="t-SNE Projection"></iframe>
+      </div>
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/pca_projection.png" alt="PCA Projection">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <iframe src="clarity/images/pca_projection.html" alt="PCA Projection"></iframe>
+      </div>
     </div>
 
-    <div class="slide-content" , style="display: none;">
-      <img src="clarity/images/umap_projection.png" alt="UMAP Projection">
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <iframe src="clarity/images/umap_projection.html" alt="UMAP Projection"></iframe>
+      </div>
     </div>
 
 
@@ -2018,21 +2173,21 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
 
     <div class="slide-content" style="display: block;">
       <div class="plot-container">
-        <h4>3D t-SNE</h4>
+        <!-- <h4>3D t-SNE</h4> -->
         <iframe src="clarity/images/tsne_3d.html"></iframe>
       </div>
     </div>
 
     <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
       <div class="plot-container">
-        <h4>3D PCA</h4>
+        <!-- <h4>3D PCA</h4> -->
         <iframe src="clarity/images/pca_3d.html"></iframe>
       </div>
     </div>
 
     <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
       <div class="plot-container">
-        <h4>3D UMAP</h4>
+        <!-- <h4>3D UMAP</h4> -->
         <iframe src="clarity/images/umap_3d.html"></iframe>
       </div>
     </div>
