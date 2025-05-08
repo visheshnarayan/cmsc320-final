@@ -139,7 +139,7 @@
       border: none;
     }
 
-    .slider-item iframe img{
+    .slider-item iframe img {
       width: 400px;
       height: 400px;
       border: none;
@@ -156,20 +156,23 @@
       0% {
         transform: scale(1) rotate(0deg);
       }
+
       25% {
         transform: scale(1.1) rotate(3deg);
       }
+
       50% {
         transform: scale(1.2) rotate(-3deg);
       }
+
       75% {
         transform: scale(1.1) rotate(3deg);
       }
+
       100% {
         transform: scale(1) rotate(0deg);
       }
     }
-
   </style>
 </head>
 
@@ -189,7 +192,14 @@
         <p>Spring 2025 Data Science Project</p>
         <p class="author">Vishesh Narayan, Shivam Amin, Deval Bansal, Eric Yao, Eshan Khan</p>
         <p class="abstract">
-          This project applies machine learning to classify non-verbal vocalizations from autistic individuals into expressive intent categories (e.g., “yes”, “no”, “frustrated”, “delighted”). We develop a preprocessing pipeline to clean audio, extract acoustic features (pitch, MFCCs, spectral entropy), and generate normalized Mel spectrograms. Statistical analysis confirms that these features vary meaningfully across labels, supporting their use in supervised learning. We evaluate classical models (K-means, Hierachal Ensemble of SVMs) and deep learning approaches (CNNs, attention-based models) for classification accuracy and interpretability. The tutorial offers a reproducible workflow from preprocessing to evaluation, aiming to support tools that decode communicative intent in nonverbal autism.
+          This project applies machine learning to classify non-verbal vocalizations from autistic individuals into
+          expressive intent categories (e.g., “yes”, “no”, “frustrated”, “delighted”). We develop a preprocessing
+          pipeline to clean audio, extract acoustic features (pitch, MFCCs, spectral entropy), and generate normalized
+          Mel spectrograms. Statistical analysis confirms that these features vary meaningfully across labels,
+          supporting their use in supervised learning. We evaluate classical models (K-means, Hierachal Ensemble of
+          SVMs) and deep learning approaches (CNNs, attention-based models) for classification accuracy and
+          interpretability. The tutorial offers a reproducible workflow from preprocessing to evaluation, aiming to
+          support tools that decode communicative intent in nonverbal autism.
         </p>
 
       </div>
@@ -197,8 +207,8 @@
       <div class="info">
         <div>
           <a href="https://github.com/visheshnarayan/cmsc320-final" class="button icon"
-            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0; font-size: large;"><i class="fa-brands fa-github fa-xl"></i>Github<i
-              class="fa-solid fa-code"></i></a>
+            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0; font-size: large;"><i
+              class="fa-brands fa-github fa-xl"></i>Github<i class="fa-solid fa-code"></i></a>
         </div>
       </div>
     </div>
@@ -218,39 +228,45 @@
     Contributions
   </h1>
   <ol style="padding: 2em; display: flex; flex-direction: column; gap: 1em;">
-    <li>        
-      <p class="text"><a href="https://www.linkedin.com/in/visheshng/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Vishesh Narayan</span>: Helped conceive and define the project
-        scope and objective (A). He developed the data preprocessing pipeline and extracted key audio features (B),
-        conducted exploratory data analysis and visualizations (C), and contributed to the design and implementation
-        of ML models including CNN, classical classifiers, and Attention-based models (D). Vishesh also ran training
-        experiments and model evaluations (E), helped interpret results and refine insights (F), and contributed
-        heavily to writing and formatting the final tutorial report (G).</p>
+    <li>
+      <p class="text"><a href="https://www.linkedin.com/in/visheshng/"><i class="fa-brands fa-linkedin fa-2xl"></i><a
+            href=""></a> <span style="font-weight: bold"> Vishesh Narayan</span>: Helped conceive and define the project
+          scope and objective (A). He developed the data preprocessing pipeline and extracted key audio features (B),
+          conducted exploratory data analysis and visualizations (C), and contributed to the design and implementation
+          of ML models including CNN, classical classifiers, and Attention-based models (D). Vishesh also ran training
+          experiments and model evaluations (E), helped interpret results and refine insights (F), and contributed
+          heavily to writing and formatting the final tutorial report (G).</p>
     </li>
     <li>
-      <p class="text"><a href="https://www.linkedin.com/in/shivamamin05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Shivam Amin</span>: Improved dataset loading by building
-        parallel processing functions for faster and more efficient data handling along with waveform cleaning,
-        spectrogram generation, and acoustic feature extraction (B). He contributed to exploratory data analysis and
-        interpretation (C), helped design and implement ML models (D), participated in interpreting visualizations and
-        results (F), and helped write and polish the final tutorial (G).</p>
+      <p class="text"><a href="https://www.linkedin.com/in/shivamamin05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a
+            href=""></a> <span style="font-weight: bold"> Shivam Amin</span>: Improved dataset loading by building
+          parallel processing functions for faster and more efficient data handling along with waveform cleaning,
+          spectrogram generation, and acoustic feature extraction (B). He contributed to exploratory data analysis and
+          interpretation (C), helped design and implement ML models (D), participated in interpreting visualizations and
+          results (F), and helped write and polish the final tutorial (G).</p>
     </li>
     <li>
-      <p class="text"><a href="https://www.linkedin.com/in/devalbansal/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Deval Bansal</span>: Contributed to EDA through feature summary
-        statistics and comparative plots (C), helped build classification models and optimize hyperparameters using
-        the elbow method (D), ran training and testing procedures on classical (E), created supporting visualizations
-        and analysis summaries (F), and co-authored the final report (G).</p>
+      <p class="text"><a href="https://www.linkedin.com/in/devalbansal/"><i class="fa-brands fa-linkedin fa-2xl"></i><a
+            href=""></a> <span style="font-weight: bold"> Deval Bansal</span>: Contributed to EDA through feature
+          summary
+          statistics and comparative plots (C), helped build classification models and optimize hyperparameters using
+          the elbow method (D), ran training and testing procedures on classical (E), created supporting visualizations
+          and analysis summaries (F), and co-authored the final report (G).</p>
     </li>
     <li>
-      <p class="text"><a href="https://www.linkedin.com/in/eyao0815/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Eric Yao</span>: Assisted in audio feature extraction and
-        comparative analysis of spectral signatures (C), developed deep learning models including CNN variants and
-        preprocessing logic (D), supported model training and hyperparameter tuning (E), helped interpret results and
-        plot visual comparisons (F), and contributed to the overall report structure and clarity (G).</p>
+      <p class="text"><a href="https://www.linkedin.com/in/eyao0815/"><i class="fa-brands fa-linkedin fa-2xl"></i><a
+            href=""></a> <span style="font-weight: bold"> Eric Yao</span>: Assisted in audio feature extraction and
+          comparative analysis of spectral signatures (C), developed deep learning models including CNN variants and
+          preprocessing logic (D), supported model training and hyperparameter tuning (E), helped interpret results and
+          plot visual comparisons (F), and contributed to the overall report structure and clarity (G).</p>
     </li>
     <li>
-      <p class="text"><a href="https://www.linkedin.com/in/eshankhan05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Eshan Khan</span>: Analyzed MFCC and pitch statistics across
-        label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN
-        architecture selection (D), supported training runs and validation of model outputs (E), assisted in
-        visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial
-        report (G).</p>
+      <p class="text"><a href="https://www.linkedin.com/in/eshankhan05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a
+            href=""></a> <span style="font-weight: bold"> Eshan Khan</span>: Analyzed MFCC and pitch statistics across
+          label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN
+          architecture selection (D), supported training runs and validation of model outputs (E), assisted in
+          visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial
+          report (G).</p>
     </li>
   </ol>
 </div>
@@ -332,13 +348,15 @@
     file that included labels, participant IDs, and file indices. All of this information was organized into a
     structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused
     RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization
-    significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing <span class="animation">🥀</span>).
+    significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing <span
+      class="animation">🥀</span>).
   </p>
 </div>
 
 <div class="container blog main">
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading code</span></summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading
+        code</span></summary>
     <pre><code class="python">
 def load_audio_metadata(csv_path: str,
             audio_dir: str,
@@ -461,7 +479,8 @@ def load_audio_metadata(csv_path: str,
 </div>
 <div class="container blog main">
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Pipeline code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Pipeline
+        code</span>
     </summary>
     <pre><code class="python">
 # ------------------- optional preprocessing ------------------- #
@@ -1314,7 +1333,8 @@ label_counts.describe()
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span></summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span>
+    </summary>
     <pre><code class="python">
       # Viridis colors
       colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(label_counts)))
@@ -1355,7 +1375,8 @@ label_counts.describe()
 </div>
 <div class="container blog main">
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span></summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span>
+    </summary>
     <pre><code class="python">
 # Make sure output directory exists
 output_dir = "participant_barplots"
@@ -1448,15 +1469,18 @@ for participant_id in participant_ids:
   </p>
   <ul style="padding-left: 20px; list-style-type: disc;" class="text">
     <li>
-      <p class="text"><span style="font-weight: bold">Label Distribution</span>: The dataset contains a variety of labels, with <code>"frustrated"</code> and <code>"delighted"</code>
+      <p class="text"><span style="font-weight: bold">Label Distribution</span>: The dataset contains a variety of
+        labels, with <code>"frustrated"</code> and <code>"delighted"</code>
         being the most common.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Label Variety</span>: Some participants exhibit a wide range of labels, while others are more
+      <p class="text"><span style="font-weight: bold">Label Variety</span>: Some participants exhibit a wide range of
+        labels, while others are more
         consistent in their responses.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Customized Approaches</span>: The differences in label distribution across participants suggest that
+      <p class="text"><span style="font-weight: bold">Customized Approaches</span>: The differences in label
+        distribution across participants suggest that
         personalized models might be more effective (depending on model type).</p>
     </li>
   </ul>
@@ -1540,7 +1564,6 @@ df['Audio Length'].describe()
 
 <div class="container blog main">
   <h2><i class="fa-solid fa-industry"></i> Spectrograms of Unique Labels</h2>
-  <h2><i class="fa-solid fa-industry"></i> Spectograms of Unique Labels</h2>
 
   <p class="text">
     This grid displays one <span style="font-weight: bold">Mel spectrogram</span> for each unique vocalization label in
@@ -1609,7 +1632,8 @@ df['Audio Length'].describe()
   <hr>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Spectogram Plot Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Spectogram Plot
+        Code</span>
     </summary>
     <pre><code class="python">
 def plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms"):
@@ -1697,11 +1721,13 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
         <!-- <img src="clarity/images/spectrograms/dysregulated.png" alt="Dysregulated Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms_plotly/dysregulation-bathroom_spectrogram.png" alt="Dysregulation-Bathroom Spectrogram"></img>
+        <img src="clarity/images/spectrograms_plotly/dysregulation-bathroom_spectrogram.png"
+          alt="Dysregulation-Bathroom Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/dysregulation-bathroom.png" alt="Dysregulation-Bathroom Spectogram"> -->
       </div>
       <div class="slider-item">
-        <img src="clarity/images/spectrograms_plotly/dysregulation-sick_spectrogram.png" alt="Dysregulation-Sick Spectrogram"></img>
+        <img src="clarity/images/spectrograms_plotly/dysregulation-sick_spectrogram.png"
+          alt="Dysregulation-Sick Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/dysregulation-sick.png" alt="Dysregulation-Sick Spectogram"> -->
       </div>
       <div class="slider-item">
@@ -1812,7 +1838,8 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Feature Extraction Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Feature Extraction
+        Code</span>
     </summary>
     <pre><code class="python">
 # Get pitch variance as feature for audio projection
@@ -1914,10 +1941,11 @@ df = df.with_columns([
     formation. We can possibly apply kernel tricks to our data and use SVMs to see if there is a hyper place to split
     on.</p>
 
-    <details>
-      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 2D Projection Code</span>
-      </summary>
-      <pre><code class="python">
+  <details>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 2D Projection
+        Code</span>
+    </summary>
+    <pre><code class="python">
   # Features for correlation heatmap
 features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
 corr = df[features].corr()
@@ -2090,10 +2118,11 @@ fig_tsne.show()
 fig_tsne.write_html("tsne_projection.html")
 
         </code></pre>
-    </details>
+  </details>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 3D Projection Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 3D Projection
+        Code</span>
     </summary>
     <pre><code class="python">
 features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
@@ -2507,7 +2536,8 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
     </li>
   </ul>
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading
+        Code</span>
     </summary>
     <pre><code class="python">
 def batch_pitch_extraction(audio_list: List,
@@ -2740,28 +2770,32 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
 
     <div class="slide-content" style="display: block;">
       <div class="plot-container">
-        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample1.html" alt="Yes Vs No Sample 1"></iframe>
+        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample1.html"
+          alt="Yes Vs No Sample 1"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1"> -->
     </div>
 
     <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
-        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample2.html" alt="Yes Vs No Sample 2"></iframe>
+        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample2.html"
+          alt="Yes Vs No Sample 2"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2"> -->
     </div>
 
     <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
-        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample3.html" alt="Yes Vs No Sample 3"></iframe>
+        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample3.html"
+          alt="Yes Vs No Sample 3"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3"> -->
     </div>
 
     <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
-        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample4.html" alt="Yes Vs No Sample 4"></iframe>
+        <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample4.html"
+          alt="Yes Vs No Sample 4"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4"> -->
     </div>
@@ -3071,10 +3105,10 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
   <p style="font-family: 'Courier New', Courier, monospace; margin-left: 20px;">Significant: True<br><br></p>
   <p style="font-family: 'Courier New', Courier, monospace;">🎛️ MFCC Significance Test completed in 0.44
     seconds<br><br></p>
-    <details>
-      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot Code</span>
-      </summary>
-      <pre><code class="python">
+  <details>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot Code</span>
+    </summary>
+    <pre><code class="python">
 def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
     # Step 1: Prepare data
     data = []
@@ -3176,7 +3210,7 @@ def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
 
     
         </code></pre>
-    </details>
+  </details>
 
 
   <pre><code class="python">
@@ -3196,7 +3230,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
 
     <div class="slide-content" style="display: block;">
       <div class="plot-container">
-         <iframe src="clarity/images/mfcc_boxplot.html" alt="MFCC Distribution Box Plot"></iframe>
+        <iframe src="clarity/images/mfcc_boxplot.html" alt="MFCC Distribution Box Plot"></iframe>
       </div>
     </div>
 
@@ -3405,7 +3439,8 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Spectral Entropy Computation Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Spectral Entropy
+        Computation Code</span>
     </summary>
     <pre><code class="python">
   def compute_spectral_entropy(y):
@@ -3471,7 +3506,8 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Pairwise T-Test Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Pairwise T-Test
+        Code</span>
     </summary>
     <pre><code class="python">
   def pairwise_t_test(df, target_labels, feature="Spectral Entropy"):
@@ -3540,14 +3576,14 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
     3.365473807647995e-44 True</p>
   <p style="font-family: 'Courier New', Courier, monospace;">delighted vs frustrated 10.485234
     3.053207937235983e-25 True</p><br>
-  </div>
+</div>
 
-  <div class="container main blog">
+<div class="container main blog">
 
-    <details>
-      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Plot Code</span>
-      </summary>
-  <pre><code class="python">
+  <details>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Plot Code</span>
+    </summary>
+    <pre><code class="python">
 def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entropy"):
     data = [
         {"Label": label, feature: val}
@@ -3576,18 +3612,18 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
     fig.write_html("spectral_entropy_boxplot.html")
 
     </code></pre>
-</details>
+  </details>
 </div>
 
-  <div class="container large blog gray">
-    <div class="plot-container">
-      <iframe src="clarity/images/spectral_entropy_boxplot.html" alt="Spectral Entropy Box Plot"></iframe>
-    </div>
-    <p class="caption">
-      The boxplot shows the distribution of spectral entropy values for different vocalization labels. The
-      significant differences in entropy indicate varying levels of disorder or randomness in the audio signals.
-    </p>
+<div class="container large blog gray">
+  <div class="plot-container">
+    <iframe src="clarity/images/spectral_entropy_boxplot.html" alt="Spectral Entropy Box Plot"></iframe>
   </div>
+  <p class="caption">
+    The boxplot shows the distribution of spectral entropy values for different vocalization labels. The
+    significant differences in entropy indicate varying levels of disorder or randomness in the audio signals.
+  </p>
+</div>
 
 
 <div class="container blog main">
@@ -3637,11 +3673,14 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
     models that perform poorly on minority classes.
   </p>
   <p class="text">
-    We aim to balance the dataset by generating synthetic samples for the underrepresented labels to a custom specified amount depending on the model/expirement we are performing. Here is an example of us having a target count of <code>500</code> samples per label.
+    We aim to balance the dataset by generating synthetic samples for the underrepresented labels to a custom specified
+    amount depending on the model/expirement we are performing. Here is an example of us having a target count of
+    <code>500</code> samples per label.
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Synthetic Data Generation Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Synthetic Data Generation
+        Code</span>
     </summary>
     </summary>
     <pre><code class="python">
@@ -3959,26 +3998,30 @@ print(f"Original data shape: {pl.read_parquet(input_file).shape}")
 print(f"Balanced data shape: {balanced_df.shape}")
     </code></pre>
 
-    <p style="font-family: 'Courier New', Courier, monospace;">Original data shape: (7077, 7)</p>
-    <p style="font-family: 'Courier New', Courier, monospace;">Balanced data shape: (14531, 7)</p>
+  <p style="font-family: 'Courier New', Courier, monospace;">Original data shape: (7077, 7)</p>
+  <p style="font-family: 'Courier New', Courier, monospace;">Balanced data shape: (14531, 7)</p>
 
 </div>
 
 <div class="container blog main">
   <h1 style="padding-top: 1em"><i class="fa-solid fa-microchip"></i> Model Development, Evaluation, and Training</h1>
-  
+
   <p class="text">
-    This section outlines the methodology for developing, selecting, and training machine learning models for audio classification tasks. The following techniques are explored:
+    This section outlines the methodology for developing, selecting, and training machine learning models for audio
+    classification tasks. The following techniques are explored:
   </p>
   <ul style="padding-left: 20px; list-style-type: disc;">
     <li>
-      <p class="text"><span style="font-weight: bold">Clustering</span> – Applying dimensionality reduction techniques such as PCA, UMAP, and t-SNE to project feature representations and cluster related label groups.</p>
+      <p class="text"><span style="font-weight: bold">Clustering</span> – Applying dimensionality reduction techniques
+        such as PCA, UMAP, and t-SNE to project feature representations and cluster related label groups.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">CNN</span> – Training convolutional neural networks on spectrogram data to perform accurate classification of label categories.</p>
+      <p class="text"><span style="font-weight: bold">CNN</span> – Training convolutional neural networks on spectrogram
+        data to perform accurate classification of label categories.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Vision Transformer</span> – Utilizing transformer-based architectures on spectrogram inputs to enhance classification performance and model interpretability.</p>
+      <p class="text"><span style="font-weight: bold">Vision Transformer</span> – Utilizing transformer-based
+        architectures on spectrogram inputs to enhance classification performance and model interpretability.</p>
     </li>
   </ul>
 </div>
@@ -3987,96 +4030,142 @@ print(f"Balanced data shape: {balanced_df.shape}")
   <h3 class="toc" style="padding-top: 1em">K-Means for Clustering Label Grouping</h3>
 
   <p class="text">
-    Clustering was used as an unsupervised learning approach to explore the inherent structure of audio features and to guide the grouping of related labels. This process helped identify semantically or acoustically similar classes, which informed downstream classification strategies and reduced label complexity.
+    Clustering was used as an unsupervised learning approach to explore the inherent structure of audio features and to
+    guide the grouping of related labels. This process helped identify semantically or acoustically similar classes,
+    which informed downstream classification strategies and reduced label complexity.
   </p>
 
   <p class="text">
-    Dimensionality reduction techniques such as <span style="font-weight: bold">Principal Component Analysis (PCA)</span>, <span style="font-weight: bold">t-Distributed Stochastic Neighbor Embedding (t-SNE)</span>, and <span style="font-weight: bold">Uniform Manifold Approximation and Projection (UMAP)</span> were applied to high-dimensional feature vectors extracted from spectrogram data. These projections enabled visual inspection and density-based clustering.
+    Dimensionality reduction techniques such as <span style="font-weight: bold">Principal Component Analysis
+      (PCA)</span>, <span style="font-weight: bold">t-Distributed Stochastic Neighbor Embedding (t-SNE)</span>, and
+    <span style="font-weight: bold">Uniform Manifold Approximation and Projection (UMAP)</span> were applied to
+    high-dimensional feature vectors extracted from spectrogram data. These projections enabled visual inspection and
+    density-based clustering.
   </p>
 
   <p class="text">
-    To assess cluster quality, we experimented with <span style="font-weight: bold">K-Means</span>. Evaluation metrics such as silhouette score and cluster purity were used to quantify performance.
+    To assess cluster quality, we experimented with <span style="font-weight: bold">K-Means</span>. Evaluation metrics
+    such as silhouette score and cluster purity were used to quantify performance.
   </p>
 
   <h3 style="padding-top: 1em">Feature Engineering and Modeling Strategy</h3>
 
   <p class="text">
-    To build effective audio classification models, we implemented a multi-stage pipeline that includes feature extraction, dimensionality reduction, unsupervised clustering, and supervised model training. This process is designed to evaluate different representations of audio data and identify label structures that can enhance model interpretability and performance.
+    To build effective audio classification models, we implemented a multi-stage pipeline that includes feature
+    extraction, dimensionality reduction, unsupervised clustering, and supervised model training. This process is
+    designed to evaluate different representations of audio data and identify label structures that can enhance model
+    interpretability and performance.
   </p>
 
   <p class="text">
     For feature extraction, we combined two sets of descriptors:
-    <ul style="padding-left: 20px; list-style-type: disc;">
-      <li>
-        <p class="text"><span style="font-weight: bold">MFCCs</span>: Mel-frequency cepstral coefficients (MFCCs) were extracted and averaged across time to produce compact representations of each spectrogram.</p>
-      </li>
-      <li>
-        <p class="text"><span style="font-weight: bold">Statistical Audio Features</span>: Time-domain features including RMS energy, zero-crossing rate (ZCR), mean, variance, and extremum values were computed over raw audio waveforms.</p>
-      </li>
-    </ul>
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li>
+      <p class="text"><span style="font-weight: bold">MFCCs</span>: Mel-frequency cepstral coefficients (MFCCs) were
+        extracted and averaged across time to produce compact representations of each spectrogram.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Statistical Audio Features</span>: Time-domain features including
+        RMS energy, zero-crossing rate (ZCR), mean, variance, and extremum values were computed over raw audio
+        waveforms.</p>
+    </li>
+  </ul>
   </p>
 
-  <p class="text">These features were concatenated and standardized using z-score normalization to create the input feature matrix.</p>
+  <p class="text">These features were concatenated and standardized using z-score normalization to create the input
+    feature matrix.</p>
 
   <p class="text">
-    To explore structural relationships between labels, we applied dimensionality reduction techniques—<span style="font-weight: bold">PCA</span>, <span style="font-weight: bold">UMAP</span>, and <span style="font-weight: bold">t-SNE</span>—to project the high-dimensional feature space into 2D and 3D visualizations. These projections were used both for exploratory analysis and as inputs to <span style="font-weight: bold">K-Means clustering</span> to assess separability across label categories.
+    To explore structural relationships between labels, we applied dimensionality reduction techniques—<span
+      style="font-weight: bold">PCA</span>, <span style="font-weight: bold">UMAP</span>, and <span
+      style="font-weight: bold">t-SNE</span>—to project the high-dimensional feature space into 2D and 3D
+    visualizations. These projections were used both for exploratory analysis and as inputs to <span
+      style="font-weight: bold">K-Means clustering</span> to assess separability across label categories.
   </p>
 
   <p class="text">
-    We evaluated the clustering quality using metrics such as silhouette score, Adjusted Rand Index (ARI), and Normalized Mutual Information (NMI), and plotted results in both static and interactive formats. These insights helped identify natural groupings of labels and informed the design of downstream classification models.
+    We evaluated the clustering quality using metrics such as silhouette score, Adjusted Rand Index (ARI), and
+    Normalized Mutual Information (NMI), and plotted results in both static and interactive formats. These insights
+    helped identify natural groupings of labels and informed the design of downstream classification models.
   </p>
 
   <p class="text">
     For supervised classification, we conducted two complementary experiments:
-    <ul style="padding-left: 20px; list-style-type: disc;">
-      <li>
-        <p class="text"><span style="font-weight: bold">SVM Feature Evaluation</span>: Each individual feature was evaluated with SVM classifiers (linear, RBF, and sigmoid kernels) to assess its standalone discriminative power. We recorded accuracy, confusion matrices, and F1 scores.</p>
-      </li>
-      <li>
-        <p class="text"><span style="font-weight: bold">Hierarchical Ensemble</span>: We implemented a trickle-down binary ensemble using SVMs. The ensemble predicts the most frequent label first, and if the prediction fails, it passes to the next classifier in the hierarchy, cascading until a match is found or a default label is returned.</p>
-      </li>
-    </ul>
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li>
+      <p class="text"><span style="font-weight: bold">SVM Feature Evaluation</span>: Each individual feature was
+        evaluated with SVM classifiers (linear, RBF, and sigmoid kernels) to assess its standalone discriminative power.
+        We recorded accuracy, confusion matrices, and F1 scores.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Hierarchical Ensemble</span>: We implemented a trickle-down binary
+        ensemble using SVMs. The ensemble predicts the most frequent label first, and if the prediction fails, it passes
+        to the next classifier in the hierarchy, cascading until a match is found or a default label is returned.</p>
+    </li>
+  </ul>
   </p>
 
   <p class="text">
-    Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance across all classes. Results were visualized to reveal both the strengths and error modes of our models.
+    Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance
+    across all classes. Results were visualized to reveal both the strengths and error modes of our models.
   </p>
 
   <h2 style="padding-top: 1em"><i class="fa-solid fa-circle-nodes"></i> K-Means Clustering on Projected Features</h2>
-  
+
   <p class="text">
-    After feature engineering and scaling, we explored the intrinsic structure of the dataset using unsupervised clustering. Our goal was to assess whether feature representations of audio samples naturally grouped according to their labeled categories.
+    After feature engineering and scaling, we explored the intrinsic structure of the dataset using unsupervised
+    clustering. Our goal was to assess whether feature representations of audio samples naturally grouped according to
+    their labeled categories.
   </p>
 
   <p class="text">
-    We first reduced the dimensionality of our 19-dimensional feature vectors using <span style="font-weight: bold">Principal Component Analysis (PCA)</span>, <span style="font-weight: bold">t-SNE</span>, and <span style="font-weight: bold">UMAP</span>. These methods were applied to produce both 2D and 3D projections, which were used for clustering and visualization. Projection quality was inspected for issues such as <code>NaNs</code>, infinities, or extreme value ranges.
+    We first reduced the dimensionality of our 19-dimensional feature vectors using <span
+      style="font-weight: bold">Principal Component Analysis (PCA)</span>, <span style="font-weight: bold">t-SNE</span>,
+    and <span style="font-weight: bold">UMAP</span>. These methods were applied to produce both 2D and 3D projections,
+    which were used for clustering and visualization. Projection quality was inspected for issues such as
+    <code>NaNs</code>, infinities, or extreme value ranges.
   </p>
 
   <p class="text">
-    With these projections, we applied <span style="font-weight: bold">K-Means clustering</span> using the number of clusters equal to the number of unique labels in the dataset. This allowed us to evaluate how well the latent representations aligned with ground-truth classes. Each clustering run was evaluated using the following metrics:
+    With these projections, we applied <span style="font-weight: bold">K-Means clustering</span> using the number of
+    clusters equal to the number of unique labels in the dataset. This allowed us to evaluate how well the latent
+    representations aligned with ground-truth classes. Each clustering run was evaluated using the following metrics:
   </p>
 
   <ul style="padding-left: 20px; list-style-type: disc;">
-    <li><p class="text"><span style="font-weight: bold">Silhouette Score</span> – Internal cohesion vs. separation of clusters</p></li>
-    <li><p class="text"><span style="font-weight: bold">Adjusted Rand Index (ARI)</span> – Alignment of clustering with true labels</p></li>
-    <li><p class="text"><span style="font-weight: bold">Normalized Mutual Information (NMI)</span> – Information shared between cluster assignments and labels</p></li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Silhouette Score</span> – Internal cohesion vs. separation of
+        clusters</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Adjusted Rand Index (ARI)</span> – Alignment of clustering with
+        true labels</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Normalized Mutual Information (NMI)</span> – Information shared
+        between cluster assignments and labels</p>
+    </li>
   </ul>
 
   <p class="text">
-    For each projection method and dimensionality, interactive visualizations were created. These included scatter plots and 3D plots colored by cluster and true label.
+    For each projection method and dimensionality, interactive visualizations were created. These included scatter plots
+    and 3D plots colored by cluster and true label.
   </p>
 
   <p class="text">
-    After running clustering across all combinations, we compiled a performance summary and ranked projections by ARI and NMI. This analysis identified which projection best preserved label-based structure and provided valuable insights into which methods were most suitable for downstream classification or grouping.
+    After running clustering across all combinations, we compiled a performance summary and ranked projections by ARI
+    and NMI. This analysis identified which projection best preserved label-based structure and provided valuable
+    insights into which methods were most suitable for downstream classification or grouping.
   </p>
 
   <p class="text">
-    Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
+    Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later
+    modeling decisions by exposing latent relationships between labels.
   </p>
   <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading Code</span>
   </summary>
-<details>
-  <pre><code class="python">
+  <details>
+    <pre><code class="python">
 def extract_mfccs(spec_data, n_mfccs=13):
     mfccs = []
 
@@ -4576,7 +4665,7 @@ print(f"Silhouette Score: {best_method['Silhouette']:.4f}")
 print("="*50)
 
   </code></pre>
-</details>
+  </details>
 
 </div>
 
@@ -4737,34 +4826,49 @@ print("="*50)
 
 <div class="container blog main">
   <p class="text">
-    Among the evaluated clustering projections, <span style="font-weight: bold">UMAP (2D)</span> performed best overall. 
-    It achieved the highest silhouette score and led all methods in ARI and NMI, indicating the most coherent and label-aligned clusters. 
+    Among the evaluated clustering projections, <span style="font-weight: bold">UMAP (2D)</span> performed best overall.
+    It achieved the highest silhouette score and led all methods in ARI and NMI, indicating the most coherent and
+    label-aligned clusters.
     This suggests UMAP (2D) is the most effective projection for uncovering structure in the feature space.
   </p>
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em"><i class="fa-solid fa-sitemap"></i> Feature Evaluation and Hierarchical Classification with SVMs</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-sitemap"></i> Feature Evaluation and Hierarchical Classification
+    with SVMs</h2>
 
   <p class="text">
-    This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
+    This section describes how individual features were evaluated for classification performance and how a hierarchical
+    ensemble of binary classifiers was constructed to improve multi-class prediction.
   </p>
 
   <ul style="padding-left: 20px; list-style-type: disc;">
     <li>
-      <p class="text"><span style="font-weight: bold">Individual Feature Evaluation with SVM</span> – Each audio feature was tested independently using Support Vector Machines with <code>linear</code>, <code>rbf</code>, and <code>sigmoid</code> kernels. The feature was standardized, and a stratified train/test split was performed. For the RBF kernel, a grid search was used to tune hyperparameters. Accuracy and confusion matrices were recorded for each.</p>
+      <p class="text"><span style="font-weight: bold">Individual Feature Evaluation with SVM</span> – Each audio feature
+        was tested independently using Support Vector Machines with <code>linear</code>, <code>rbf</code>, and
+        <code>sigmoid</code> kernels. The feature was standardized, and a stratified train/test split was performed. For
+        the RBF kernel, a grid search was used to tune hyperparameters. Accuracy and confusion matrices were recorded
+        for each.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Top Feature Ranking</span> – After evaluating all features, the top five performing ones were listed with their respective best kernels and accuracy scores.</p>
+      <p class="text"><span style="font-weight: bold">Top Feature Ranking</span> – After evaluating all features, the
+        top five performing ones were listed with their respective best kernels and accuracy scores.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Hierarchical Ensemble Classification</span> – To improve accuracy across many classes, a trickle-down ensemble was built. It uses a sequence of binary SVM classifiers that progressively eliminate unlikely classes, predicting the most frequent label first and cascading if it fails.</p>
+      <p class="text"><span style="font-weight: bold">Hierarchical Ensemble Classification</span> – To improve accuracy
+        across many classes, a trickle-down ensemble was built. It uses a sequence of binary SVM classifiers that
+        progressively eliminate unlikely classes, predicting the most frequent label first and cascading if it fails.
+      </p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Model Performance Analysis</span> – We visualized the normalized confusion matrix, per-class precision, recall, and F1 scores, and identified the top 15 most frequent label confusion pairs in a bar chart.</p>
+      <p class="text"><span style="font-weight: bold">Model Performance Analysis</span> – We visualized the normalized
+        confusion matrix, per-class precision, recall, and F1 scores, and identified the top 15 most frequent label
+        confusion pairs in a bar chart.</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Model Comparison</span> – Finally, the ensemble classifier was compared with the best single-feature SVM model on macro F1-score and overall accuracy to assess which strategy yielded stronger predictive performance.</p>
+      <p class="text"><span style="font-weight: bold">Model Comparison</span> – Finally, the ensemble classifier was
+        compared with the best single-feature SVM model on macro F1-score and overall accuracy to assess which strategy
+        yielded stronger predictive performance.</p>
     </li>
   </ul>
 </div>
@@ -4773,23 +4877,27 @@ print("="*50)
   <h3 style="padding-top: 1em">Feature-Level SVM Evaluation</h3>
 
   <p class="text">
-    This experiment benchmarked each feature’s classification power by training 
+    This experiment benchmarked each feature’s classification power by training
     <span style="font-weight: bold">individual SVMs</span> (linear, RBF, and sigmoid) on single features.
   </p>
 
   <p class="text">
-    MFCCs generally outperformed time-domain features, with 
-    <span style="font-weight: bold">MFCC_9</span>, <span style="font-weight: bold">MFCC_8</span>, and <span style="font-weight: bold">MFCC_10</span> 
-    leading the accuracy rankings. In contrast, raw waveform descriptors such as 
-    <span style="font-weight: bold">Mean</span> and <span style="font-weight: bold">Min</span> contributed little to label separability.
+    MFCCs generally outperformed time-domain features, with
+    <span style="font-weight: bold">MFCC_9</span>, <span style="font-weight: bold">MFCC_8</span>, and <span
+      style="font-weight: bold">MFCC_10</span>
+    leading the accuracy rankings. In contrast, raw waveform descriptors such as
+    <span style="font-weight: bold">Mean</span> and <span style="font-weight: bold">Min</span> contributed little to
+    label separability.
   </p>
 
   <p class="text">
-    These results validated the use of cepstral features for intent prediction and informed the ensemble feature selection strategy.
+    These results validated the use of cepstral features for intent prediction and informed the ensemble feature
+    selection strategy.
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide SVM Feature Evaluation Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide SVM Feature Evaluation
+        Code</span>
     </summary>
     <pre><code>
 def evaluate_feature_importance(X_combined, labels, feature_names):
@@ -5139,14 +5247,15 @@ def plot_feature_performance(feature_performances, class_names):
         <img src="clarity/images/classifier_pics/svm_with_mfcc_9_metrics_by_class.png" alt="Best Feature F1 Scores">
       </div>
     </div>
-    
+
     <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
-        <img src="clarity/images/classifier_pics/svm_with_mfcc_9_norm_confusion_matrix.png" alt="Best Feature F1 Scores">
+        <img src="clarity/images/classifier_pics/svm_with_mfcc_9_norm_confusion_matrix.png"
+          alt="Best Feature F1 Scores">
       </div>
     </div>
-    
+
     <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
@@ -5161,28 +5270,31 @@ def plot_feature_performance(feature_performances, class_names):
       <span style="font-weight: bold">Figure 4:</span> Normalized confusion matrix for SVM with MFCC_9 feature. <br>
       <span style="font-weight: bold">Figure 5:</span> Top errors for SVM with MFCC_9 feature.
     </p>
-  </div>  
+  </div>
 </div>
 
 <div class="container blog main">
   <h3 style="padding-top: 1em">Hierarchical Ensemble Classification</h3>
 
   <p class="text">
-    This section evaluates a <span style="font-weight: bold">hierarchical trickle-down SVM ensemble</span> trained on the full feature set. 
+    This section evaluates a <span style="font-weight: bold">hierarchical trickle-down SVM ensemble</span> trained on
+    the full feature set.
     Each binary classifier was trained to isolate one label at a time, starting from the most frequent.
   </p>
 
   <p class="text">
-    The full confusion matrix and normalized confusion heatmap demonstrate significant improvements in 
-    label separability compared to single-feature SVMs. Notably, classes such as 
-    <span style="font-weight: bold">greeting</span>, <span style="font-weight: bold">hunger</span>, and <span style="font-weight: bold">laugh</span> 
+    The full confusion matrix and normalized confusion heatmap demonstrate significant improvements in
+    label separability compared to single-feature SVMs. Notably, classes such as
+    <span style="font-weight: bold">greeting</span>, <span style="font-weight: bold">hunger</span>, and <span
+      style="font-weight: bold">laugh</span>
     showed high recall and precision.
   </p>
 
   <p class="text">
-    Despite gains, misclassification patterns reveal that expressive overlap between 
-    <span style="font-weight: bold">selftalk</span>, <span style="font-weight: bold">laughter</span>, and <span style="font-weight: bold">social</span> 
-    continues to present a challenge. These insights suggest the model successfully leverages a broader feature space 
+    Despite gains, misclassification patterns reveal that expressive overlap between
+    <span style="font-weight: bold">selftalk</span>, <span style="font-weight: bold">laughter</span>, and <span
+      style="font-weight: bold">social</span>
+    continues to present a challenge. These insights suggest the model successfully leverages a broader feature space
     but still contends with class imbalance and semantic similarity.
   </p>
 
@@ -5353,17 +5465,19 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
     <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
-        <img src="clarity/images/classifier_pics/hierarchical_ensemble_metrics_by_class.png" alt="Ensemble Metrics by Class">
+        <img src="clarity/images/classifier_pics/hierarchical_ensemble_metrics_by_class.png"
+          alt="Ensemble Metrics by Class">
       </div>
     </div>
-    
+
     <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
-        <img src="clarity/images/classifier_pics/hierarchical_ensemble_norm_confusion_matrix.png" alt="Ensemble Normalized Confusion Matrix">
+        <img src="clarity/images/classifier_pics/hierarchical_ensemble_norm_confusion_matrix.png"
+          alt="Ensemble Normalized Confusion Matrix">
       </div>
     </div>
-    
+
     <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
@@ -5378,50 +5492,75 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
       <span style="font-weight: bold">Figure 4:</span> Ensemble Normalized Confusion Matrix<br>
       <span style="font-weight: bold">Figure 5:</span> Ensemble Top Errors<br>
     </p>
-  </div>  
+  </div>
 </div>
 
 <div class="container blog main">
   <h3 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h3>
-  <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p>
+  <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable
+    accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic
+    dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to
+    build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications.
+  </p>
+  <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of
+    minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct
+    labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive
+    intent in nonverbal vocalizations. </p>
 </div>
 
 <div class="container blog main">
   <h2 style="padding-top: 1em"><i class="fa-solid fa-share-nodes"></i> CNN Training on Mel Spectrograms</h2>
 
   <p class="text">
-    This section describes the training of a convolutional neural network (CNN) on Mel spectrograms derived from the audio dataset. 
-    The CNN was designed to classify vocalizations into three primary labels: <span style="font-weight: bold">frustrated</span>, 
-    <span style="font-weight: bold">delighted</span>, and <span style="font-weight: bold">selftalk</span>. Here are the key steps taken during the training process:
+    This section describes the training of a convolutional neural network (CNN) on Mel spectrograms derived from the
+    audio dataset.
+    The CNN was designed to classify vocalizations into three primary labels: <span
+      style="font-weight: bold">frustrated</span>,
+    <span style="font-weight: bold">delighted</span>, and <span style="font-weight: bold">selftalk</span>. Here are the
+    key steps taken during the training process:
   </p>
 
   <ul style="padding-left: 20px; list-style-type: disc;">
     <li>
-      <p class="text"><span style="font-weight: bold">Label Selection</span> – Due to severe class imbalance, we restricted training to the top 3 most frequent labels: <code>frustrated</code>, <code>delighted</code>, and <code>selftalk</code>, allowing for more balanced and meaningful training.</p>
+      <p class="text"><span style="font-weight: bold">Label Selection</span> – Due to severe class imbalance, we
+        restricted training to the top 3 most frequent labels: <code>frustrated</code>, <code>delighted</code>, and
+        <code>selftalk</code>, allowing for more balanced and meaningful training.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">Data Augmentation / Truncation</span> – Computed average spectrogram width by identifying the first column of all zeros. Truncated all spectrograms to a fixed shape (128 × mean length) for consistency across samples.</p>
+      <p class="text"><span style="font-weight: bold">Data Augmentation / Truncation</span> – Computed average
+        spectrogram width by identifying the first column of all zeros. Truncated all spectrograms to a fixed shape (128
+        × mean length) for consistency across samples.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">CNN Architecture Design</span> – Constructed a 3-layer convolutional neural network with batch normalization, max pooling, and a fully connected layer with dropout. The model expects input shape <code>[1, 128, mean_len]</code>.</p>
+      <p class="text"><span style="font-weight: bold">CNN Architecture Design</span> – Constructed a 3-layer
+        convolutional neural network with batch normalization, max pooling, and a fully connected layer with dropout.
+        The model expects input shape <code>[1, 128, mean_len]</code>.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">Training Setup</span> – Data was split into training (60%), validation (20%), and test (20%) subsets. Used weighted cross-entropy loss to account for residual imbalance and trained the model using the Adam optimizer.</p>
+      <p class="text"><span style="font-weight: bold">Training Setup</span> – Data was split into training (60%),
+        validation (20%), and test (20%) subsets. Used weighted cross-entropy loss to account for residual imbalance and
+        trained the model using the Adam optimizer.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">Hyperparameters</span> – Model trained for <code>100 epochs</code> with <code>batch size = 32</code> and <code>learning rate = 0.001</code>. Class weights were computed inversely proportional to label frequencies.</p>
+      <p class="text"><span style="font-weight: bold">Hyperparameters</span> – Model trained for <code>100 epochs</code>
+        with <code>batch size = 32</code> and <code>learning rate = 0.001</code>. Class weights were computed inversely
+        proportional to label frequencies.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">Model Evaluation</span> – Computed test loss and accuracy. Generated a classification report including precision, recall, and F1-scores per class. Plotted a final confusion matrix for performance diagnostics.</p>
+      <p class="text"><span style="font-weight: bold">Model Evaluation</span> – Computed test loss and accuracy.
+        Generated a classification report including precision, recall, and F1-scores per class. Plotted a final
+        confusion matrix for performance diagnostics.</p>
     </li>
 
     <li>
-      <p class="text"><span style="font-weight: bold">Model Saving</span> – Persisted the trained CNN model weights (<code>spectrogram_cnn.pth</code>) and label encoder class mapping (<code>label_encoder.npy</code>) for reproducibility and deployment.</p>
+      <p class="text"><span style="font-weight: bold">Model Saving</span> – Persisted the trained CNN model weights
+        (<code>spectrogram_cnn.pth</code>) and label encoder class mapping (<code>label_encoder.npy</code>) for
+        reproducibility and deployment.</p>
     </li>
   </ul>
 
@@ -5438,23 +5577,29 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 
 <div class="container blog main">
   <p class='text'>
-    This model takes a <span style="font-weight: bold;">128×50 Mel spectrogram</span> as input and processes it through 
-    a stack of convolutional layers to extract time-frequency features from vocal signals. 
-    The architecture consists of <span style="font-weight: bold;">three convolutional blocks</span>, each including a <code>Conv2D</code> layer, 
-    followed by <code>BatchNorm2D</code> for stable learning, and <code>MaxPool2D</code> to reduce spatial dimensions while preserving key patterns.
+    This model takes a <span style="font-weight: bold;">128×50 Mel spectrogram</span> as input and processes it through
+    a stack of convolutional layers to extract time-frequency features from vocal signals.
+    The architecture consists of <span style="font-weight: bold;">three convolutional blocks</span>, each including a
+    <code>Conv2D</code> layer,
+    followed by <code>BatchNorm2D</code> for stable learning, and <code>MaxPool2D</code> to reduce spatial dimensions
+    while preserving key patterns.
   </p>
   <p class="text">
-    The feature maps are progressively reduced from <span style="font-weight: bold;">128×50 → 64×25 → 32×12 → 16×6</span> over the layers, while channel depth 
-    increases from <code>1 → 32 → 64 → 128</code>. The final 3D feature volume (<code>128×16×6</code>) is <code>flattened</code> and passed through 
-    a fully connected (FC) layer of 512 units with a <code>Dropout(0.5)</code> regularization step. The last linear layer maps to the 
+    The feature maps are progressively reduced from <span style="font-weight: bold;">128×50 → 64×25 → 32×12 →
+      16×6</span> over the layers, while channel depth
+    increases from <code>1 → 32 → 64 → 128</code>. The final 3D feature volume (<code>128×16×6</code>) is
+    <code>flattened</code> and passed through
+    a fully connected (FC) layer of 512 units with a <code>Dropout(0.5)</code> regularization step. The last linear
+    layer maps to the
     number of classes, and the output is used with <code>CrossEntropyLoss</code> for classification.
   </p>
   <p class="text">
-    This hierarchical feature extraction enables the CNN to learn patterns from both spectral and temporal variations, 
+    This hierarchical feature extraction enables the CNN to learn patterns from both spectral and temporal variations,
     making it well-suited for intent classification based on nonverbal vocalizations.
   </p>
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Data Augmentation Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Data Augmentation
+        Code</span>
     </summary>
     <pre>
       <code class="python">
@@ -5491,7 +5636,8 @@ filtered_df = truncate_spectrograms(df, set(valid))
   </details>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Create and Train CNN Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Create and Train CNN
+        Code</span>
     </summary>
     <pre>
       <code class="python">
@@ -5625,7 +5771,8 @@ def train_model(df, num_epochs=100, batch_size=32, learning_rate=0.001):
   </details>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Evaluate CNN Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Evaluate CNN
+        Code</span>
     </summary>
     <pre>
       <code class="python">
@@ -5692,14 +5839,14 @@ if __name__ == "__main__":
     torch.save(model.state_dict(), "spectrogram_cnn.pth")
     np.save("label_encoder.npy", label_encoder.classes_)
     </code>
-  </pre>  
+  </pre>
 
 </div>
 
 <div class="container blog main gray">
 
   <h3 style="text-align: center;"">Classificaton Report</h3>
-  <div class="data-table-container">
+  <div class=" data-table-container">
     <table class="data-table">
       <thead>
         <tr>
@@ -5757,75 +5904,102 @@ if __name__ == "__main__":
       <tfoot>
         <tr>
           <td colspan="5" class="data-table-footer">
-            Note: Some class metrics may be missing due to underrepresented labels not appearing in the test split after stratification.
+            Note: Some class metrics may be missing due to underrepresented labels not appearing in the test split after
+            stratification.
           </td>
         </tr>
       </tfoot>
     </table>
-  </div>
+</div>
 
-  <h3 style="text-align: center;">Confusion Matrix</h3>
-  <div class="plot-container">
-    <img src="clarity/images/cnn_confusion_matrix.png" alt="Spectrogram CNN Confusion Matrix">
-  </div>
+<h3 style="text-align: center;">Confusion Matrix</h3>
+<div class="plot-container">
+  <img src="clarity/images/cnn_confusion_matrix.png" alt="Spectrogram CNN Confusion Matrix">
+</div>
 </div>
 
 <div class="container blog main">
   <p class="text">
-    The CNN model trained on <span style="font-weight: bold;">128x50 Mel spectrograms</span> achieved an overall <span style="font-weight: bold;">70% accuracy</span> across the top three classes: <em>delighted</em>, <em>frustrated</em>, and <em>selftalk</em>. 
-    The <span style="font-weight: bold;">frustrated</span> class performed best with an F1-score of <span style="font-weight: bold;">0.75</span>, with the others close behind.
+    The CNN model trained on <span style="font-weight: bold;">128x50 Mel spectrograms</span> achieved an overall <span
+      style="font-weight: bold;">70% accuracy</span> across the top three classes: <em>delighted</em>,
+    <em>frustrated</em>, and <em>selftalk</em>.
+    The <span style="font-weight: bold;">frustrated</span> class performed best with an F1-score of <span
+      style="font-weight: bold;">0.75</span>, with the others close behind.
     <br><br>
-    Due to <span style="font-weight: bold;">label imbalance</span>, we limited training to the most frequent classes. 
-    In future work, <span style="font-weight: bold;">synthetic spectrogram generation</span>—as explored in the Vision Transformers section—may help improve performance on lower-frequency classes by enhancing training diversity.
-  </p>  
+    Due to <span style="font-weight: bold;">label imbalance</span>, we limited training to the most frequent classes.
+    In future work, <span style="font-weight: bold;">synthetic spectrogram generation</span>—as explored in the Vision
+    Transformers section—may help improve performance on lower-frequency classes by enhancing training diversity.
+  </p>
 </div>
 
 <div class="container blog main">
   <h2 style="padding-top: 1em"><i class="fa-solid fa-eye"></i> Spectrogram Classification with Vision Transformers</h2>
   <p class="text">
-    <strong>Vision Transformers (ViTs)</strong> offer a powerful alternative to CNNs for image processing. Unlike CNNs with local convolutions, ViTs treat images as sequences of patches - similar to how language models process text. This approach excels at capturing connections between distant parts of spectrograms, helping identify audio patterns that might be separated in time but related in meaning.
+    <strong>Vision Transformers (ViTs)</strong> offer a powerful alternative to CNNs for image processing. Unlike CNNs
+    with local convolutions, ViTs treat images as sequences of patches - similar to how language models process text.
+    This approach excels at capturing connections between distant parts of spectrograms, helping identify audio patterns
+    that might be separated in time but related in meaning.
   </p>
 
   <p class="text">
-    A key advantage is <strong>positional embeddings</strong> - these preserve spatial information by telling the model where each patch belongs. For spectrograms, this maintains crucial time-frequency relationships. As highlighted in <em>"An Image is Worth 16x16 Words"</em> (Dosovitskiy et al., 2021), relative positional embeddings further enhance this by encoding distances between patches.
+    A key advantage is <strong>positional embeddings</strong> - these preserve spatial information by telling the model
+    where each patch belongs. For spectrograms, this maintains crucial time-frequency relationships. As highlighted in
+    <em>"An Image is Worth 16x16 Words"</em> (Dosovitskiy et al., 2021), relative positional embeddings further enhance
+    this by encoding distances between patches.
   </p>
 
   <p class="text">
-    ViTs handle variable-length inputs better than CNNs. Their attention mechanism naturally focuses on important areas while ignoring irrelevant ones (like silence in audio). This reduces the need for artificial padding or trimming, making them more adaptable to real-world audio data with varying durations.
+    ViTs handle variable-length inputs better than CNNs. Their attention mechanism naturally focuses on important areas
+    while ignoring irrelevant ones (like silence in audio). This reduces the need for artificial padding or trimming,
+    making them more adaptable to real-world audio data with varying durations.
   </p>
 
   <p class="text">Our ViT model features:</p>
 
   <div style="padding: 1em">
     <ul>
-      <li><p class="text">Patch embedding: Converts spectrogram sections into tokens</p></li>
-      <li><p class="text">Learnable positional encodings: Preserves spatial context</p></li>
-      <li><p class="text">Class token: Enables classification</p></li>
-      <li><p class="text">Multi-head attention with residual connections: Improves learning</p></li>
+      <li>
+        <p class="text">Patch embedding: Converts spectrogram sections into tokens</p>
+      </li>
+      <li>
+        <p class="text">Learnable positional encodings: Preserves spatial context</p>
+      </li>
+      <li>
+        <p class="text">Class token: Enables classification</p>
+      </li>
+      <li>
+        <p class="text">Multi-head attention with residual connections: Improves learning</p>
+      </li>
     </ul>
   </div>
 
   <p class="text">
-    This architecture has fewer image-specific assumptions than CNNs, making it more adaptable across different types of data when properly trained.
+    This architecture has fewer image-specific assumptions than CNNs, making it more adaptable across different types of
+    data when properly trained.
   </p>
 
   <p class="text">
-    To improve performance on underrepresented classes, we use <strong>synthetic data generation</strong> and <strong>class-balanced loss functions</strong>. Like language transformers, ViTs perform significantly better with larger, more diverse training datasets.
+    To improve performance on underrepresented classes, we use <strong>synthetic data generation</strong> and
+    <strong>class-balanced loss functions</strong>. Like language transformers, ViTs perform significantly better with
+    larger, more diverse training datasets.
   </p>
 
   <p class="text">
-    Our research shows that ViTs outperform traditional models for spectrogram classification when paired with proper preprocessing. Their self-attention mechanism learns global patterns without requiring manual feature engineering, making them especially valuable for processing noisy or irregular audio data.
+    Our research shows that ViTs outperform traditional models for spectrogram classification when paired with proper
+    preprocessing. Their self-attention mechanism learns global patterns without requiring manual feature engineering,
+    making them especially valuable for processing noisy or irregular audio data.
   </p>
 
   <h3><i class="fa-solid fa-circle-check"></i> Implementation Walkthrough</h3>
 
   <h3>1. Dataset Preparation</h3>
   <p class="text">
-    Our first step involves creating a <code>torch</code> dataset for handling the spectrograms. This helps us interface with a <code>torch</code> wrapped object model.
+    Our first step involves creating a <code>torch</code> dataset for handling the spectrograms. This helps us interface
+    with a <code>torch</code> wrapped object model.
   </p>
 
-    
-    <pre><code class="python">
+
+  <pre><code class="python">
 class SpectogramDataset(Dataset): 
     def __init__(self, spectograms, labels, transform=None, target_transform=None):
         self.spectograms = spectograms
@@ -5852,14 +6026,16 @@ class SpectogramDataset(Dataset):
         return spectrogram, label
     </code></pre>
 
-  
+
   <p class="text">
-    This custom dataset class provides the foundation for loading our spectrogram data. It accepts transformations for both input data and labels, making it flexible for various preprocessing needs.
+    This custom dataset class provides the foundation for loading our spectrogram data. It accepts transformations for
+    both input data and labels, making it flexible for various preprocessing needs.
   </p>
 
   <h3>2. Data Transformations</h3>
   <p class="text">
-    Vision Transformers require specific input formatting. We need to resize spectrograms to 224×224 (standard ViT input size) and convert grayscale spectrograms to 3-channel inputs compatible with pretrained ViT architectures.
+    Vision Transformers require specific input formatting. We need to resize spectrograms to 224×224 (standard ViT input
+    size) and convert grayscale spectrograms to 3-channel inputs compatible with pretrained ViT architectures.
   </p>
 
   <pre><code class="python">
@@ -5879,12 +6055,14 @@ vit_transform = transforms.Compose([
   </code></pre>
 
   <p class="text">
-    The transformation pipeline converts numpy arrays to tensors, ensures proper dimensionality, resizes to the required ViT input size, and handles channel conversion for grayscale spectrograms.
+    The transformation pipeline converts numpy arrays to tensors, ensures proper dimensionality, resizes to the required
+    ViT input size, and handles channel conversion for grayscale spectrograms.
   </p>
 
   <h3>3. Dataset Splitting and Preparation</h3>
   <p class="text">
-    To ensure robust training, we implement stratified splitting for train/validation/test sets while filtering out rare classes with insufficient samples.
+    To ensure robust training, we implement stratified splitting for train/validation/test sets while filtering out rare
+    classes with insufficient samples.
   </p>
 
   <pre><code class="python">
@@ -5925,35 +6103,49 @@ def prepare_spectrogram_dataset(
   </p>
   <div style="padding-left: 1em">
     <ul>
-      <li><p class="text">Filtering out classes with too few samples</p></li>
-      <li><p class="text">Encoding categorical labels to numerical values</p></li>
-      <li><p class="text">Stratified splitting of data while preserving class distribution</p></li>
-      <li><p class="text">Applying appropriate transformations to each split</p></li>
+      <li>
+        <p class="text">Filtering out classes with too few samples</p>
+      </li>
+      <li>
+        <p class="text">Encoding categorical labels to numerical values</p>
+      </li>
+      <li>
+        <p class="text">Stratified splitting of data while preserving class distribution</p>
+      </li>
+      <li>
+        <p class="text">Applying appropriate transformations to each split</p>
+      </li>
     </ul>
   </div>
 
   <h3>4. Model Architecture</h3>
   <p class="text">
-    We use a pretrained ViT-B/16 model and adapt it for our spectrogram classification task by replacing the classification head.
+    We use a pretrained ViT-B/16 model and adapt it for our spectrogram classification task by replacing the
+    classification head.
   </p>
 
 </div>
 
 <div class="container blog main">
   <img src="clarity/images/vit_architecture.png" alt="ViT Model Architecture">
-  
+
 </div>
 
 <div class="container blog main">
 
   <p class="text">
-    The Vision Transformer (ViT) splits an image into fixed-size patches, embeds them with positional information, and feeds the sequence into a standard Transformer encoder. A special learnable <code>[class]</code> token is added to represent the entire image, and its output is used for classification. Unlike CNNs, ViTs leverage global self-attention across all patches, enabling them to capture long-range dependencies without relying on convolutional priors.
+    The Vision Transformer (ViT) splits an image into fixed-size patches, embeds them with positional information, and
+    feeds the sequence into a standard Transformer encoder. A special learnable <code>[class]</code> token is added to
+    represent the entire image, and its output is used for classification. Unlike CNNs, ViTs leverage global
+    self-attention across all patches, enabling them to capture long-range dependencies without relying on convolutional
+    priors.
   </p>
-  
+
 
   <h3>5. Training Procedure</h3>
   <p class="text">
-    Our training pipeline includes class weighting to address imbalance, live performance visualization, and comprehensive logging.
+    Our training pipeline includes class weighting to address imbalance, live performance visualization, and
+    comprehensive logging.
   </p>
 
   <details>
@@ -6060,22 +6252,33 @@ def evaluate(model, loader, device):
   </p>
   <div style="padding-left: 1em">
     <ul>
-      <li><p class="text">Adam optimizer with learning rate scheduling</p></li>
-      <li><p class="text">Cross-entropy loss with class weighting</p></li>
-      <li><p class="text">Live visualization of training metrics</p></li>
-      <li><p class="text">Comprehensive logging of training progress</p></li>
-      <li><p class="text">Regular validation to monitor generalization</p></li>
+      <li>
+        <p class="text">Adam optimizer with learning rate scheduling</p>
+      </li>
+      <li>
+        <p class="text">Cross-entropy loss with class weighting</p>
+      </li>
+      <li>
+        <p class="text">Live visualization of training metrics</p>
+      </li>
+      <li>
+        <p class="text">Comprehensive logging of training progress</p>
+      </li>
+      <li>
+        <p class="text">Regular validation to monitor generalization</p>
+      </li>
     </ul>
   </div>
 
   <h3>6. Model Evaluation</h3>
   <p class="text">
-    After training, we evaluate model performance using accuracy metrics, classification reports, and confusion matrices.
+    After training, we evaluate model performance using accuracy metrics, classification reports, and confusion
+    matrices.
   </p>
   <details>
     <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Testing Code</span>
     </summary>
-  <pre><code class="python">
+    <pre><code class="python">
 def evaluate_test_set(
       model, test_loader, label_encoder=None,
       device="cuda" if torch.cuda.is_available() else "cpu",
@@ -6137,10 +6340,18 @@ def evaluate_test_set(
   </p>
   <div style="padding-left: 1em">
     <ul>
-      <li><p class="text">Overall test accuracy measurement</p></li>
-      <li><p class="text">Per-class precision, recall, and F1 scores</p></li>
-      <li><p class="text">Visual confusion matrix to identify problematic classes</p></li>
-      <li><p class="text">Export of results for further analysis</p></li>
+      <li>
+        <p class="text">Overall test accuracy measurement</p>
+      </li>
+      <li>
+        <p class="text">Per-class precision, recall, and F1 scores</p>
+      </li>
+      <li>
+        <p class="text">Visual confusion matrix to identify problematic classes</p>
+      </li>
+      <li>
+        <p class="text">Export of results for further analysis</p>
+      </li>
     </ul>
   </div>
 
@@ -6186,14 +6397,17 @@ def evaluate_test_set(
       </tr>
     </tfoot>
   </table>
-  
+
 </div>
 
 </div>
 
 <div class="container blog main">
   <p class="text">
-    Finally, we put everything together in a complete training pipeline with carefully selected hyperparameters. Our model was trained on high-performance hardware with dual NVIDIA Tesla K80 GPUs and an Intel Xeon E5-2690 v4 CPU with 256GB system memory, allowing us to experiment with various configurations. Note that we parallelized the model across both GPUs to maximize training efficiency.
+    Finally, we put everything together in a complete training pipeline with carefully selected hyperparameters. Our
+    model was trained on high-performance hardware with dual NVIDIA Tesla K80 GPUs and an Intel Xeon E5-2690 v4 CPU with
+    256GB system memory, allowing us to experiment with various configurations. Note that we parallelized the model
+    across both GPUs to maximize training efficiency.
   </p>
 
   <details>
@@ -6269,7 +6483,8 @@ print(f"Model saved at {path}")
   </code></pre>
 
   <p class="text">
-    Our training process was computationally intensive, with each epoch taking approximately 850 seconds (14 minutes). The complete training run of 80 epochs required approximately 18 hours (67,480 seconds) of compute time.
+    Our training process was computationally intensive, with each epoch taking approximately 850 seconds (14 minutes).
+    The complete training run of 80 epochs required approximately 18 hours (67,480 seconds) of compute time.
   </p>
 
   <p class="text">
@@ -6322,12 +6537,17 @@ print(f"Model saved at {path}")
       </tr>
     </tfoot>
   </table>
-  
+
 </div>
 
 <div class="container blog main">
   <p class="text">
-    Note that we intentionally use a small batch size despite having GPU resources. While larger batches can utilize GPU memory more efficiently, smaller batches introduce beneficial noise during training that helps Vision Transformers navigate the loss landscape more effectively. This stochasticity acts as an implicit regularization method, allowing the model to escape local minima and find solutions that generalize better to unseen data. For transformer architectures specifically, this small-batch approach often yields better performance than large-batch training, even at the cost of longer training times.
+    Note that we intentionally use a small batch size despite having GPU resources. While larger batches can utilize GPU
+    memory more efficiently, smaller batches introduce beneficial noise during training that helps Vision Transformers
+    navigate the loss landscape more effectively. This stochasticity acts as an implicit regularization method, allowing
+    the model to escape local minima and find solutions that generalize better to unseen data. For transformer
+    architectures specifically, this small-batch approach often yields better performance than large-batch training,
+    even at the cost of longer training times.
   </p>
 
   <h3>8. Results Visualization</h3>
@@ -6336,7 +6556,8 @@ print(f"Model saved at {path}")
   </p>
 
   <details>
-    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Training Metrics Code</span>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Training Metrics
+        Code</span>
     </summary>
     <pre><code class="python">
 history_path = Path("../../results/training/train_history.json")
@@ -6410,7 +6631,8 @@ fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
     </code></pre>
   </details>
   <p class="text">
-    The training metrics demonstrate the effectiveness of Vision Transformers for spectrogram classification, with training converging consistently and validation metrics showing strong generalization capabilities.
+    The training metrics demonstrate the effectiveness of Vision Transformers for spectrogram classification, with
+    training converging consistently and validation metrics showing strong generalization capabilities.
   </p>
 </div>
 
@@ -6423,7 +6645,8 @@ fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
 
 <div class="container blog main">
   <p class="text">
-    Training shows that our model was able to generalize on the validation set. Our testing results showed similar results and are summarized in the table below:
+    Training shows that our model was able to generalize on the validation set. Our testing results showed similar
+    results and are summarized in the table below:
   </p>
 </div>
 
@@ -6439,28 +6662,160 @@ fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
       </tr>
     </thead>
     <tbody>
-      <tr><td class="data-table-cell">affectionate</td><td class="data-table-cell">0.718750</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.807018</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">bathroom</td><td class="data-table-cell">0.881818</td><td class="data-table-cell">0.970000</td><td class="data-table-cell">0.923810</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">delighted</td><td class="data-table-cell">0.421053</td><td class="data-table-cell">0.345098</td><td class="data-table-cell">0.379310</td><td class="data-table-cell">255.0</td></tr>
-      <tr><td class="data-table-cell">dysregulated</td><td class="data-table-cell">0.593220</td><td class="data-table-cell">0.496454</td><td class="data-table-cell">0.540541</td><td class="data-table-cell">141.0</td></tr>
-      <tr><td class="data-table-cell">dysregulation-bathroom</td><td class="data-table-cell">0.891892</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.938389</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">dysregulation-sick</td><td class="data-table-cell">0.925532</td><td class="data-table-cell">0.870000</td><td class="data-table-cell">0.896907</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">frustrated</td><td class="data-table-cell">0.542955</td><td class="data-table-cell">0.514658</td><td class="data-table-cell">0.528428</td><td class="data-table-cell">307.0</td></tr>
-      <tr><td class="data-table-cell">glee</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">greeting</td><td class="data-table-cell">0.943396</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">0.970874</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">happy</td><td class="data-table-cell">0.786325</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.847926</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">help</td><td class="data-table-cell">0.866667</td><td class="data-table-cell">0.910000</td><td class="data-table-cell">0.887805</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">hunger</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">laugh</td><td class="data-table-cell">0.989691</td><td class="data-table-cell">0.960000</td><td class="data-table-cell">0.974619</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">laughter</td><td class="data-table-cell">0.681818</td><td class="data-table-cell">0.750000</td><td class="data-table-cell">0.714286</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">more</td><td class="data-table-cell">0.875000</td><td class="data-table-cell">0.980000</td><td class="data-table-cell">0.924528</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">no</td><td class="data-table-cell">0.900000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.942857</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">protest</td><td class="data-table-cell">0.828829</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.872038</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">request</td><td class="data-table-cell">0.277027</td><td class="data-table-cell">0.410000</td><td class="data-table-cell">0.330645</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">selftalk</td><td class="data-table-cell">0.551724</td><td class="data-table-cell">0.424403</td><td class="data-table-cell">0.479760</td><td class="data-table-cell">377.0</td></tr>
-      <tr><td class="data-table-cell">social</td><td class="data-table-cell">0.397959</td><td class="data-table-cell">0.307087</td><td class="data-table-cell">0.346667</td><td class="data-table-cell">127.0</td></tr>
-      <tr><td class="data-table-cell">tablet</td><td class="data-table-cell">0.970588</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.980198</td><td class="data-table-cell">100.0</td></tr>
-      <tr><td class="data-table-cell">yes</td><td class="data-table-cell">0.600000</td><td class="data-table-cell">0.840000</td><td class="data-table-cell">0.700000</td><td class="data-table-cell">100.0</td></tr>
+      <tr>
+        <td class="data-table-cell">affectionate</td>
+        <td class="data-table-cell">0.718750</td>
+        <td class="data-table-cell">0.920000</td>
+        <td class="data-table-cell">0.807018</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">bathroom</td>
+        <td class="data-table-cell">0.881818</td>
+        <td class="data-table-cell">0.970000</td>
+        <td class="data-table-cell">0.923810</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">delighted</td>
+        <td class="data-table-cell">0.421053</td>
+        <td class="data-table-cell">0.345098</td>
+        <td class="data-table-cell">0.379310</td>
+        <td class="data-table-cell">255.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">dysregulated</td>
+        <td class="data-table-cell">0.593220</td>
+        <td class="data-table-cell">0.496454</td>
+        <td class="data-table-cell">0.540541</td>
+        <td class="data-table-cell">141.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">dysregulation-bathroom</td>
+        <td class="data-table-cell">0.891892</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">0.938389</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">dysregulation-sick</td>
+        <td class="data-table-cell">0.925532</td>
+        <td class="data-table-cell">0.870000</td>
+        <td class="data-table-cell">0.896907</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">frustrated</td>
+        <td class="data-table-cell">0.542955</td>
+        <td class="data-table-cell">0.514658</td>
+        <td class="data-table-cell">0.528428</td>
+        <td class="data-table-cell">307.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">glee</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">greeting</td>
+        <td class="data-table-cell">0.943396</td>
+        <td class="data-table-cell">1.000000</td>
+        <td class="data-table-cell">0.970874</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">happy</td>
+        <td class="data-table-cell">0.786325</td>
+        <td class="data-table-cell">0.920000</td>
+        <td class="data-table-cell">0.847926</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">help</td>
+        <td class="data-table-cell">0.866667</td>
+        <td class="data-table-cell">0.910000</td>
+        <td class="data-table-cell">0.887805</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">hunger</td>
+        <td class="data-table-cell">1.000000</td>
+        <td class="data-table-cell">1.000000</td>
+        <td class="data-table-cell">1.000000</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">laugh</td>
+        <td class="data-table-cell">0.989691</td>
+        <td class="data-table-cell">0.960000</td>
+        <td class="data-table-cell">0.974619</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">laughter</td>
+        <td class="data-table-cell">0.681818</td>
+        <td class="data-table-cell">0.750000</td>
+        <td class="data-table-cell">0.714286</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">more</td>
+        <td class="data-table-cell">0.875000</td>
+        <td class="data-table-cell">0.980000</td>
+        <td class="data-table-cell">0.924528</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">no</td>
+        <td class="data-table-cell">0.900000</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">0.942857</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">protest</td>
+        <td class="data-table-cell">0.828829</td>
+        <td class="data-table-cell">0.920000</td>
+        <td class="data-table-cell">0.872038</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">request</td>
+        <td class="data-table-cell">0.277027</td>
+        <td class="data-table-cell">0.410000</td>
+        <td class="data-table-cell">0.330645</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">selftalk</td>
+        <td class="data-table-cell">0.551724</td>
+        <td class="data-table-cell">0.424403</td>
+        <td class="data-table-cell">0.479760</td>
+        <td class="data-table-cell">377.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">social</td>
+        <td class="data-table-cell">0.397959</td>
+        <td class="data-table-cell">0.307087</td>
+        <td class="data-table-cell">0.346667</td>
+        <td class="data-table-cell">127.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">tablet</td>
+        <td class="data-table-cell">0.970588</td>
+        <td class="data-table-cell">0.990000</td>
+        <td class="data-table-cell">0.980198</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">yes</td>
+        <td class="data-table-cell">0.600000</td>
+        <td class="data-table-cell">0.840000</td>
+        <td class="data-table-cell">0.700000</td>
+        <td class="data-table-cell">100.0</td>
+      </tr>
     </tbody>
     <tfoot>
       <tr>
@@ -6469,7 +6824,7 @@ fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
         </td>
       </tr>
     </tfoot>
-  </table>  
+  </table>
 </div>
 <div class="container blog main gray small">
   <h3 style="text-align: center;">Confusion Matrix</h3>
@@ -6480,22 +6835,38 @@ fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
 
 <div class="container blog main">
   <p class="text">
-    Our final model achieves significantly better performance than traditional CNN architectures, particularly for classes with fewer samples, demonstrating the power of the Vision Transformer's attention mechanism for capturing complex audio patterns in spectrograms.
+    Our final model achieves significantly better performance than traditional CNN architectures, particularly for
+    classes with fewer samples, demonstrating the power of the Vision Transformer's attention mechanism for capturing
+    complex audio patterns in spectrograms.
   </p>
 </div>
 
 <div class="container blog main">
-  <h2>Conclusion</h2>
-  <p class="text">With the power of friendship, we learned through machines in this project.</p>
+  <h1><i class="fa-solid fa-hourglass-end"></i> Conclusion</h1>
+  <p class="text">With the <span class="animation">power of friendship</span>, we learned through machines in this
+    project.</p>
+  <div style="width: 40px; height: 40px;">
+    <span class="animation"><img src="clarity/images/happy.png"></span>
+  </div>
   <p class="text">
-    In this project, we built an end-to-end pipeline for classifying nonverbal vocalizations from autistic individuals using both classical and deep learning models. Starting from raw audio, we implemented a robust preprocessing workflow—including cleaning, normalization, and spectrogram generation—followed by exploratory data analysis to understand label distributions and feature dynamics. We evaluated multiple modeling strategies, from ensemble SVMs to CNNs and Vision Transformers (ViTs), the latter of which showed strong promise due to their ability to capture global time-frequency patterns through self-attention mechanisms. Despite label imbalance and data sparsity in some classes, our use of synthetic augmentation, class weighting, and careful hyperparameter tuning led to competitive performance across key intent categories. This project not only demonstrates the feasibility of using machine learning for assistive communication but also establishes a modular framework for future work in affective audio classification.
+    In this project, we built an end-to-end pipeline for classifying nonverbal vocalizations from autistic individuals
+    using both classical and deep learning models. Starting from raw audio, we implemented a robust preprocessing
+    workflow—including cleaning, normalization, and spectrogram generation—followed by exploratory data analysis to
+    understand label distributions and feature dynamics. We evaluated multiple modeling strategies, from ensemble SVMs
+    to CNNs and Vision Transformers (ViTs), the latter of which showed strong promise due to their ability to capture
+    global time-frequency patterns through self-attention mechanisms. Despite label imbalance and data sparsity in some
+    classes, our use of synthetic augmentation, class weighting, and careful hyperparameter tuning led to competitive
+    performance across key intent categories. This project not only demonstrates the feasibility of using machine
+    learning for assistive communication but also establishes a modular framework for future work in affective audio
+    classification.
   </p>
   <p class="text">
-    We hope this project inspires further research in the field of assistive technology and machine learning for nonverbal communication.
+    We hope this project inspires further research in the field of assistive technology and machine learning for
+    nonverbal communication.
   </p>
   <p class="text">
     Thank you for making it this far. Now let's discuss grades...
-  </p>  
+  </p>
 </div>
 
 <!-- Footer Page -->
