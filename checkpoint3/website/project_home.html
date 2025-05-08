@@ -4518,6 +4518,83 @@ print("="*50)
 
 </div>
 
+<div class="container blog main gray">
+
+  <h2 style="text-align: center;">Clustering Results Summary</h2>
+
+  <div class="data-table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="data-table-header">Projection</th>
+          <th class="data-table-header">Dimensions</th>
+          <th class="data-table-header">Silhouette</th>
+          <th class="data-table-header">ARI</th>
+          <th class="data-table-header">NMI</th>
+        </tr>
+        <tr>
+          <td class="data-table-datatype">str</td>
+          <td class="data-table-datatype">str</td>
+          <td class="data-table-datatype">f64</td>
+          <td class="data-table-datatype">f64</td>
+          <td class="data-table-datatype">f64</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-table-cell">UMAP</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">0.3777</td>
+          <td class="data-table-cell">0.0315</td>
+          <td class="data-table-cell">0.1748</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">t-SNE</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">0.2963</td>
+          <td class="data-table-cell">0.0308</td>
+          <td class="data-table-cell">0.1741</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">t-SNE</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">0.3729</td>
+          <td class="data-table-cell">0.0296</td>
+          <td class="data-table-cell">0.1753</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">UMAP</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">0.3312</td>
+          <td class="data-table-cell">0.0286</td>
+          <td class="data-table-cell">0.1727</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">PCA</td>
+          <td class="data-table-cell">3D</td>
+          <td class="data-table-cell">0.2319</td>
+          <td class="data-table-cell">0.0173</td>
+          <td class="data-table-cell">0.1200</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">PCA</td>
+          <td class="data-table-cell">2D</td>
+          <td class="data-table-cell">0.3273</td>
+          <td class="data-table-cell">0.0143</td>
+          <td class="data-table-cell">0.1113</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="data-table-footer">
+            Clustering performance metrics across dimensionality reduction methods.
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
 <div class="container blog large gray">
   <h3 style="text-align: center;"> K-Means Clustering on t-SNE/PCA/Umap Projections (Dimensions = 3)</h3>
   <div class="slide-display">
@@ -4592,6 +4669,41 @@ print("="*50)
     </p> -->
   </div>
 </div>
+
+<div class="container blog main">
+  <p class="text">
+    Among the evaluated clustering projections, <span style="font-weight: bold">UMAP (2D)</span> performed best overall. 
+    It achieved the highest silhouette score and led all methods in ARI and NMI, indicating the most coherent and label-aligned clusters. 
+    This suggests UMAP (2D) is the most effective projection for uncovering structure in the feature space.
+  </p>
+</div>
+
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h2>
+
+  <p class="text">
+    This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
+  </p>
+
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li>
+      <p class="text"><span style="font-weight: bold">Individual Feature Evaluation with SVM</span> – Each audio feature was tested independently using Support Vector Machines with <code>linear</code>, <code>rbf</code>, and <code>sigmoid</code> kernels. The feature was standardized, and a stratified train/test split was performed. For the RBF kernel, a grid search was used to tune hyperparameters. Accuracy and confusion matrices were recorded for each.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Top Feature Ranking</span> – After evaluating all features, the top five performing ones were listed with their respective best kernels and accuracy scores.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Hierarchical Ensemble Classification</span> – To improve accuracy across many classes, a trickle-down ensemble was built. It uses a sequence of binary SVM classifiers that progressively eliminate unlikely classes, predicting the most frequent label first and cascading if it fails.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Model Performance Analysis</span> – We visualized the normalized confusion matrix, per-class precision, recall, and F1 scores, and identified the top 15 most frequent label confusion pairs in a bar chart.</p>
+    </li>
+    <li>
+      <p class="text"><span style="font-weight: bold">Model Comparison</span> – Finally, the ensemble classifier was compared with the best single-feature SVM model on macro F1-score and overall accuracy to assess which strategy yielded stronger predictive performance.</p>
+    </li>
+  </ul>
+</div>
+
 
 </div>
 
