@@ -3915,7 +3915,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Clustering for Label Grouping</h2>
+  <h3 class="toc" style="padding-top: 1em">K-Means for Clustering Label Grouping</h3>
 
   <p class="text">
     Clustering was used as an unsupervised learning approach to explore the inherent structure of audio features and to guide the grouping of related labels. This process helped identify semantically or acoustically similar classes, which informed downstream classification strategies and reduced label complexity.
@@ -3929,7 +3929,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
     To assess cluster quality, we experimented with <span style="font-weight: bold">K-Means</span>. Evaluation metrics such as silhouette score and cluster purity were used to quantify performance.
   </p>
 
-  <h2 style="padding-top: 1em">Feature Engineering and Modeling Strategy</h2>
+  <h3 style="padding-top: 1em">Feature Engineering and Modeling Strategy</h3>
 
   <p class="text">
     To build effective audio classification models, we implemented a multi-stage pipeline that includes feature extraction, dimensionality reduction, unsupervised clustering, and supervised model training. This process is designed to evaluate different representations of audio data and identify label structures that can enhance model interpretability and performance.
@@ -4512,7 +4512,7 @@ print("="*50)
 
 <div class="container blog main gray">
 
-  <h2 style="text-align: center;">Clustering Results Summary</h2>
+  <h3 style="text-align: center;">Clustering Results Summary</h3>
 
   <div class="data-table-container">
     <table class="data-table">
@@ -4674,7 +4674,7 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h2>
+  <h3 class="toc" style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h3>
 
   <p class="text">
     This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
@@ -4700,7 +4700,7 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Feature-Level SVM Evaluation</h2>
+  <h3 style="padding-top: 1em">Feature-Level SVM Evaluation</h3>
 
   <p class="text">
     This experiment benchmarked each feature’s classification power by training 
@@ -4962,6 +4962,76 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
     <span style="font-weight: bold">frustrated</span>, <span style="font-weight: bold">delighted</span>, and <span style="font-weight: bold">dysregulated</span>. 
     This indicates that MFCC_9 may encode general intensity or spectral sharpness but lacks emotional granularity.
   </p>
+
+  <details>
+    <summary>Show/Hide Performace Evaluation Code</summary>
+    <pre>
+      <code class="python">
+def plot_feature_performance(feature_performances, class_names):
+
+    features = list(feature_performances.keys())
+    accuracies = [data['best_accuracy'] for data in feature_performances.values()]
+    kernels = [data['best_kernel'] for data in feature_performances.values()]
+    
+    plot_data = pd.DataFrame({
+        'Feature': features,
+        'Accuracy': accuracies,
+        'Kernel': kernels
+    })
+    
+    plot_data = plot_data.sort_values('Accuracy', ascending=False)
+    
+    plt.figure(figsize=(14, 8))
+    ax = sns.barplot(x='Accuracy', y='Feature', hue='Kernel', data=plot_data)
+    plt.title('SVM Classification Accuracy by Individual Feature', fontsize=15)
+    plt.xlabel('Accuracy', fontsize=12)
+    plt.ylabel('Feature', fontsize=12)
+    plt.xlim(0, 1)
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig('feature_importance_svm.png', dpi=300)
+    plt.close()
+    
+    best_feature = plot_data.iloc[0]['Feature']
+    best_perf = feature_performances[best_feature]
+    
+    # Confusion matrix for the best feature
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        best_perf['confusion_matrix'], 
+        annot=True if len(class_names) <= 10 else False, 
+        fmt='d', 
+        cmap='Blues',
+        xticklabels=class_names, 
+        yticklabels=class_names
+    )
+    plt.title(f'Confusion Matrix for Best Feature: {best_feature}\nKernel: {best_perf["best_kernel"]}', fontsize=13)
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    plt.xticks(rotation=90)
+    plt.yticks(rotation=0)
+    plt.tight_layout()
+    plt.savefig(f'best_feature_confusion_matrix.png', dpi=300)
+    plt.close()
+
+    # F1 scores for the best feature
+    class_f1 = {
+        class_name: report['f1-score'] 
+        for class_name, report in best_perf['classification_report'].items() 
+        if class_name not in ['accuracy', 'macro avg', 'weighted avg']
+    }
+    
+    plt.figure(figsize=(12, 6))
+    pd.Series(class_f1).sort_values().plot(kind='barh', color='teal')
+    plt.title(f'F1-Scores by Class for Best Feature ({best_feature})', fontsize=13)
+    plt.xlabel('F1-Score')
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig(f'best_feature_f1_scores.png', dpi=300)
+    plt.close()
+      </code>
+    </pre>
+  </details>
 </div>
 
 <div class="container blog gray">
@@ -5023,7 +5093,7 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Hierarchical Ensemble Classification</h2>
+  <h3 style="padding-top: 1em">Hierarchical Ensemble Classification</h3>
 
   <p class="text">
     This section evaluates a <span style="font-weight: bold">hierarchical trickle-down SVM ensemble</span> trained on the full feature set. 
@@ -5043,6 +5113,140 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
     continues to present a challenge. These insights suggest the model successfully leverages a broader feature space 
     but still contends with class imbalance and semantic similarity.
   </p>
+
+  <details>
+    <pre>
+      <summary>Show/Hide Hierachal SVM Code</summary>
+      <code class="python">
+def create_hierarchical_ensemble(X_scaled, labels):
+
+    print("\nNext: hierarchical trickle-down ensemble classification.")
+    
+    labels_array = np.array(labels)
+    
+    le = LabelEncoder()
+    encoded_labels = le.fit_transform(labels_array)
+    
+    unique_labels = np.unique(labels_array)
+    label_counts = {label: np.sum(labels_array == label) for label in unique_labels}
+    
+    # Sort labels by frequency (most common first)
+    ordered_labels = sorted(label_counts.keys(), key=lambda x: label_counts[x], reverse=True)
+    print(f"Label hierarchy will be: {ordered_labels}")
+    
+    kernel = 'rbf'
+    
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_scaled, labels_array, test_size=0.25, random_state=42, stratify=labels_array
+    )
+    
+    binary_classifiers = {}
+    remaining_labels = ordered_labels.copy()
+    
+    # For each level (except the last one which doesn't need a classifier)
+    for i in range(len(ordered_labels) - 1):
+        current_label = remaining_labels[0]
+        remaining_labels = remaining_labels[1:]
+        
+        train_indices = [idx for idx, label in enumerate(y_train) if label == current_label or label in remaining_labels]
+        binary_X = X_train[train_indices]
+        binary_y = np.array([1 if y_train[idx] == current_label else 0 for idx in train_indices])
+        
+        print(f"Training binary classifier for: '{current_label}' vs rest")
+        classifier = SVC(kernel=kernel, probability=True, random_state=42)
+        classifier.fit(binary_X, binary_y)
+        
+        binary_classifiers[current_label] = classifier
+    
+    # Trickle-down prediction
+    def predict_trickle_down(X):
+        predictions = []
+        
+        for sample in X:
+            remaining = ordered_labels.copy()
+            sample_reshaped = sample.reshape(1, -1)
+            predicted = False
+            
+            # Trickle down through the binary classifiers
+            for level, label in enumerate(ordered_labels[:-1]):
+                classifier = binary_classifiers[label]
+                if classifier.predict(sample_reshaped)[0] == 1:
+                    predictions.append(label)
+                    predicted = True
+                    break
+            
+            if not predicted:
+                predictions.append(ordered_labels[-1])
+        
+        return np.array(predictions)
+    
+    print("\nEvaluating trickle-down ensemble...")
+    y_pred = predict_trickle_down(X_test)
+    
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Ensemble accuracy: {accuracy:.4f}")
+    
+    cm = confusion_matrix(y_test, y_pred)
+    
+    report_dict = classification_report(y_test, y_pred, output_dict=True)
+    report_text = classification_report(y_test, y_pred)
+    print("\nClassification Report:")
+    print(report_text)
+    
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=unique_labels, yticklabels=unique_labels)
+    plt.title("Confusion Matrix - Hierarchical Ensemble Classification")
+    plt.ylabel("True Label")
+    plt.xlabel("Predicted Label")
+    plt.tight_layout()
+    plt.savefig("ensemble_confusion_matrix.png", dpi=300)
+    plt.close()
+    
+    precision = {}
+    recall = {}
+    f1 = {}
+    
+    for label in unique_labels:
+        # Get class metrics from the classification report dict
+        if label in report_dict:
+            precision[label] = report_dict[label]['precision']
+            recall[label] = report_dict[label]['recall']
+            f1[label] = report_dict[label]['f1-score']
+    
+    plt.figure(figsize=(12, 6))
+    f1_series = pd.Series(f1)
+    f1_series.sort_values().plot(kind='barh', color='teal')
+    plt.title("F1-Scores by Class - Hierarchical Ensemble")
+    plt.xlabel("F1-Score")
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig("ensemble_f1_scores.png", dpi=300)
+    plt.close()
+    
+    return {
+        'classifiers': binary_classifiers,
+        'accuracy': accuracy, 
+        'label_hierarchy': ordered_labels,
+        'confusion_matrix': cm,
+        'classification_report': report_dict,
+        'precision': precision,
+        'recall': recall,
+        'f1': f1
+    }
+
+ensemble_results = create_hierarchical_ensemble(X_scaled, labels)
+
+print(f"\nTrickle-down hierarchy: {' → '.join(ensemble_results['label_hierarchy'])}")
+print(f"Final ensemble accuracy: {ensemble_results['accuracy']:.4f}")
+
+print("\n=== Performance Metrics Summary ===")
+print(f"Macro Avg Precision: {ensemble_results['classification_report']['macro avg']['precision']:.4f}")
+print(f"Macro Avg Recall: {ensemble_results['classification_report']['macro avg']['recall']:.4f}")  
+print(f"Macro Avg F1-Score: {ensemble_results['classification_report']['macro avg']['f1-score']:.4f}")
+print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weighted avg']['f1-score']:.4f}")
+      </code>
+    </pre>
+  </details>
 
 </div>
 
@@ -5096,10 +5300,10 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
 
     <p class="caption" style="padding: 4em">
       <span style="font-weight: bold">Figure 1:</span> Ensemble Confusion Matrix<br>
-      <span style="font-weight: bold">Figure 1:</span> Ensemble F1 Scores<br>
-      <span style="font-weight: bold">Figure 1:</span> Ensemble Metrics by Class<br>
-      <span style="font-weight: bold">Figure 1:</span> Ensemble Normalized Confusion Matrix<br>
-      <span style="font-weight: bold">Figure 1:</span> Ensemble Top Errors<br>
+      <span style="font-weight: bold">Figure 2:</span> Ensemble F1 Scores<br>
+      <span style="font-weight: bold">Figure 3:</span> Ensemble Metrics by Class<br>
+      <span style="font-weight: bold">Figure 4:</span> Ensemble Normalized Confusion Matrix<br>
+      <span style="font-weight: bold">Figure 5:</span> Ensemble Top Errors<br>
     </p>
   </div>  
 </div>
