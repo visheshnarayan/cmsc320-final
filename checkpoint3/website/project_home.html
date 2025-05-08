@@ -5115,8 +5115,8 @@ def plot_feature_performance(feature_performances, class_names):
   </p>
 
   <details>
+    <summary>Show/Hide Hierachal SVM Code</summary>
     <pre>
-      <summary>Show/Hide Hierachal SVM Code</summary>
       <code class="python">
 def create_hierarchical_ensemble(X_scaled, labels):
 
@@ -5309,13 +5309,129 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h2>
+  <h3 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h3>
   <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p>
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Convolutional Neural Networks on Spectrograms</h2>
+  <h3 style="padding-top: 1em">CNN Training on Mel Spectrograms</h3>
+
+  <ul style="padding-left: 20px; list-style-type: disc;">
+    <li>
+      <p class="text"><span style="font-weight: bold">Label Selection</span> – Due to severe class imbalance, we restricted training to the top 3 most frequent labels: <code>frustrated</code>, <code>delighted</code>, and <code>selftalk</code>, allowing for more balanced and meaningful training.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">Data Augmentation / Truncation</span> – Computed average spectrogram width by identifying the first column of all zeros. Truncated all spectrograms to a fixed shape (128 × mean length) for consistency across samples.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">CNN Architecture Design</span> – Constructed a 3-layer convolutional neural network with batch normalization, max pooling, and a fully connected layer with dropout. The model expects input shape <code>[1, 128, mean_len]</code>.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">Training Setup</span> – Data was split into training (60%), validation (20%), and test (20%) subsets. Used weighted cross-entropy loss to account for residual imbalance and trained the model using the Adam optimizer.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">Hyperparameters</span> – Model trained for <code>100 epochs</code> with <code>batch size = 32</code> and <code>learning rate = 0.001</code>. Class weights were computed inversely proportional to label frequencies.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">Model Evaluation</span> – Computed test loss and accuracy. Generated a classification report including precision, recall, and F1-scores per class. Plotted a final confusion matrix for performance diagnostics.</p>
+    </li>
+
+    <li>
+      <p class="text"><span style="font-weight: bold">Model Saving</span> – Persisted the trained CNN model weights (<code>spectrogram_cnn.pth</code>) and label encoder class mapping (<code>label_encoder.npy</code>) for reproducibility and deployment.</p>
+    </li>
+  </ul>
 </div>
+
+<div class="container blog main gray">
+
+  <h3 style="text-align: center;"">Classificaton Report</h3>
+  <div class="data-table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="data-table-header">Label</th>
+          <th class="data-table-header">Precision</th>
+          <th class="data-table-header">Recall</th>
+          <th class="data-table-header">F1-Score</th>
+          <th class="data-table-header">Support</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="data-table-cell">delighted</td>
+          <td class="data-table-cell">0.64</td>
+          <td class="data-table-cell">0.66</td>
+          <td class="data-table-cell">0.65</td>
+          <td class="data-table-cell">256</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">frustrated</td>
+          <td class="data-table-cell">0.77</td>
+          <td class="data-table-cell">0.74</td>
+          <td class="data-table-cell">0.75</td>
+          <td class="data-table-cell">322</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">selftalk</td>
+          <td class="data-table-cell">0.69</td>
+          <td class="data-table-cell">0.68</td>
+          <td class="data-table-cell">0.69</td>
+          <td class="data-table-cell">361</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell"><strong>accuracy</strong></td>
+          <td class="data-table-cell">-</td>
+          <td class="data-table-cell">-</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">939</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">macro avg</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">939</td>
+        </tr>
+        <tr>
+          <td class="data-table-cell">weighted avg</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">0.70</td>
+          <td class="data-table-cell">939</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="data-table-footer">
+            Note: Some class metrics may be missing due to underrepresented labels not appearing in the test split after stratification.
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <h3 style="text-align: center;">Confusion Matrix</h3>
+  <div class="plot-container">
+    <img src="clarity/images/cnn_confusion_matrix.png" alt="Spectrogram CNN Confusion Matrix">
+  </div>
+</div>
+
+<div class="container blog main">
+  <p class="text">
+    The CNN model trained on <span style="font-weight: bold;">128x50 Mel spectrograms</span> achieved an overall <span style="font-weight: bold;">70% accuracy</span> across the top three classes: <em>delighted</em>, <em>frustrated</em>, and <em>selftalk</em>. 
+    The <span style="font-weight: bold;">frustrated</span> class performed best with an F1-score of <span style="font-weight: bold;">0.75</span>, with the others close behind.
+    <br><br>
+    Due to <span style="font-weight: bold;">label imbalance</span>, we limited training to the most frequent classes. 
+    In future work, <span style="font-weight: bold;">synthetic spectrogram generation</span>—as explored in the Vision Transformers section—may help improve performance on lower-frequency classes by enhancing training diversity.
+  </p>  
+</div>
+
+
 
 </div>
 
