@@ -1,0 +1,32 @@
+Epoch 01 | Loss: 1.9409 | Train Acc: 0.3443 | Val Acc: 0.5038 | Time: 845.04s
+Epoch 02 | Loss: 1.1354 | Train Acc: 0.5481 | Val Acc: 0.5327 | Time: 845.37s
+Epoch 03 | Loss: 1.0180 | Train Acc: 0.5764 | Val Acc: 0.5822 | Time: 845.58s
+Epoch 04 | Loss: 0.9268 | Train Acc: 0.6116 | Val Acc: 0.5960 | Time: 845.71s
+Epoch 05 | Loss: 0.9070 | Train Acc: 0.6156 | Val Acc: 0.6153 | Time: 845.82s
+Epoch 06 | Loss: 0.8967 | Train Acc: 0.6200 | Val Acc: 0.6538 | Time: 847.16s
+Epoch 07 | Loss: 0.8631 | Train Acc: 0.6324 | Val Acc: 0.6387 | Time: 846.47s
+Epoch 08 | Loss: 0.8523 | Train Acc: 0.6328 | Val Acc: 0.5760 | Time: 846.77s
+Epoch 09 | Loss: 0.8326 | Train Acc: 0.6391 | Val Acc: 0.6765 | Time: 847.24s
+Epoch 10 | Loss: 0.8177 | Train Acc: 0.6418 | Val Acc: 0.6008 | Time: 846.81s
+Epoch 11 | Loss: 0.7976 | Train Acc: 0.6461 | Val Acc: 0.6456 | Time: 845.75s
+Epoch 12 | Loss: 0.7853 | Train Acc: 0.6510 | Val Acc: 0.6139 | Time: 845.92s
+Epoch 13 | Loss: 0.7570 | Train Acc: 0.6576 | Val Acc: 0.6332 | Time: 853.39s
+Epoch 14 | Loss: 0.7666 | Train Acc: 0.6634 | Val Acc: 0.6504 | Time: 849.53s
+Epoch 15 | Loss: 0.7683 | Train Acc: 0.6585 | Val Acc: 0.6456 | Time: 863.79s
+Epoch 16 | Loss: 0.7634 | Train Acc: 0.6610 | Val Acc: 0.6256 | Time: 852.99s
+Epoch 17 | Loss: 0.7880 | Train Acc: 0.6540 | Val Acc: 0.6559 | Time: 873.57s
+Epoch 18 | Loss: 0.7422 | Train Acc: 0.6670 | Val Acc: 0.6084 | Time: 846.89s
+Epoch 19 | Loss: 0.7555 | Train Acc: 0.6660 | Val Acc: 0.6676 | Time: 848.24s
+Epoch 20 | Loss: 0.7312 | Train Acc: 0.6702 | Val Acc: 0.6538 | Time: 845.70s
+Epoch 21 | Loss: 0.7164 | Train Acc: 0.6745 | Val Acc: 0.6820 | Time: 845.09s
+Epoch 22 | Loss: 0.6878 | Train Acc: 0.6854 | Val Acc: 0.6607 | Time: 844.22s
+Epoch 23 | Loss: 0.6920 | Train Acc: 0.6887 | Val Acc: 0.6449 | Time: 844.79s
+Epoch 24 | Loss: 0.6872 | Train Acc: 0.6877 | Val Acc: 0.6738 | Time: 844.11s
+Epoch 25 | Loss: 0.7127 | Train Acc: 0.6763 | Val Acc: 0.6731 | Time: 843.59s
+Epoch 26 | Loss: 0.7019 | Train Acc: 0.6834 | Val Acc: 0.6215 | Time: 843.58s
+Epoch 27 | Loss: 0.6991 | Train Acc: 0.6840 | Val Acc: 0.6428 | Time: 843.19s
+Epoch 28 | Loss: 0.6595 | Train Acc: 0.6978 | Val Acc: 0.6579 | Time: 843.10s
+Epoch 29 | Loss: 0.6403 | Train Acc: 0.7006 | Val Acc: 0.6813 | Time: 842.83s
+Epoch 30 | Loss: 0.6418 | Train Acc: 0.6994 | Val Acc: 0.6621 | Time: 842.97s
+
+Training complete in 25425.23 seconds.

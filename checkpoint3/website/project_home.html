@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clarity: A Minimalist Website Template for AI Research</title>
+  <title>ML the Unspoken: CMSC320 Final Project</title>
   <meta name="description"
     content="We've presented Clarity, a minimalist and elegant website template for AI research.">
   <meta name="referrer" content="no-referrer-when-downgrade">
@@ -12,8 +12,8 @@
   <meta content="en_EN" property="og:locale">
   <meta content="website" property="og:type">
   <meta content="https://shikun.io/projects/clarity" property="og:url">
-  <meta content="Clarity" property="og:title">
-  <meta content="Website Template for AI Research" property="og:description">
+  <meta content="Machine Learning the Unspoken" property="og:title">
+  <meta content="Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations" property="og:description">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@your_twitter_id">
@@ -145,6 +145,31 @@
       border: none;
     }
 
+    .animation {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.3em;
+      animation: explode 0.6s infinite ease-in-out;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      25% {
+        transform: scale(1.1) rotate(3deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-3deg);
+      }
+      75% {
+        transform: scale(1.1) rotate(3deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
   </style>
 </head>
 
@@ -172,7 +197,7 @@
       <div class="info">
         <div>
           <a href="https://github.com/visheshnarayan/cmsc320-final" class="button icon"
-            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">Github <i
+            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0; font-size: large;"><i class="fa-brands fa-github fa-xl"></i>Github<i
               class="fa-solid fa-code"></i></a>
         </div>
       </div>
@@ -193,8 +218,8 @@
     Contributions
   </h1>
   <ol style="padding: 2em; display: flex; flex-direction: column; gap: 1em;">
-    <li>
-      <p class="text"><span style="font-weight: bold">Vishesh Narayan</span>: Helped conceive and define the project
+    <li>        
+      <p class="text"><a href="https://www.linkedin.com/in/visheshng/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Vishesh Narayan</span>: Helped conceive and define the project
         scope and objective (A). He developed the data preprocessing pipeline and extracted key audio features (B),
         conducted exploratory data analysis and visualizations (C), and contributed to the design and implementation
         of ML models including CNN, classical classifiers, and Attention-based models (D). Vishesh also ran training
@@ -202,26 +227,26 @@
         heavily to writing and formatting the final tutorial report (G).</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Shivam Amin</span>: Improved dataset loading by building
+      <p class="text"><a href="https://www.linkedin.com/in/shivamamin05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Shivam Amin</span>: Improved dataset loading by building
         parallel processing functions for faster and more efficient data handling along with waveform cleaning,
         spectrogram generation, and acoustic feature extraction (B). He contributed to exploratory data analysis and
         interpretation (C), helped design and implement ML models (D), participated in interpreting visualizations and
         results (F), and helped write and polish the final tutorial (G).</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Deval Bansal</span>: Contributed to EDA through feature summary
+      <p class="text"><a href="https://www.linkedin.com/in/devalbansal/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Deval Bansal</span>: Contributed to EDA through feature summary
         statistics and comparative plots (C), helped build classification models and optimize hyperparameters using
         the elbow method (D), ran training and testing procedures on classical (E), created supporting visualizations
         and analysis summaries (F), and co-authored the final report (G).</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Eric Yao</span>: Assisted in audio feature extraction and
+      <p class="text"><a href="https://www.linkedin.com/in/eyao0815/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Eric Yao</span>: Assisted in audio feature extraction and
         comparative analysis of spectral signatures (C), developed deep learning models including CNN variants and
         preprocessing logic (D), supported model training and hyperparameter tuning (E), helped interpret results and
         plot visual comparisons (F), and contributed to the overall report structure and clarity (G).</p>
     </li>
     <li>
-      <p class="text"><span style="font-weight: bold">Eshan Khan</span>: Analyzed MFCC and pitch statistics across
+      <p class="text"><a href="https://www.linkedin.com/in/eshankhan05/"><i class="fa-brands fa-linkedin fa-2xl"></i><a href=""></a> <span style="font-weight: bold"> Eshan Khan</span>: Analyzed MFCC and pitch statistics across
         label groups and visualized feature correlations (C), contributed to classifier experimentation and CNN
         architecture selection (D), supported training runs and validation of model outputs (E), assisted in
         visualizing trends and summarizing results (F), and contributed to writing key sections of the final tutorial
@@ -230,16 +255,55 @@
   </ol>
 </div>
 
+<div class="container blog max gray">
+  <h1 style="text-align: center;">Tutorial</h1>
+  <div class="container blog max gray">
+    <div class="slideshow">
+      <div class="navigation">
+        <!-- Using FontAwesome Pro -->
+        <!-- <a class="button icon" id="prev_btn"><i class="fa-solid fa-left" ></i></a>
+                <a class="button icon" id="next_btn"><i class="fa-solid fa-right"></i></a> -->
+        <!-- Using FontAwesome Free -->
+        <a class="button icon" id="prev_btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class="button icon" id="next_btn"><i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="slider">
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/TOC-Vid.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/2dZoom.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/3dPlot.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/Buttons.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/Arrows.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/Code.mp4"></video>
+        </div>
+        <div class="slider-item">
+          <video loop playsinline muted autoplay src="clarity/images/Website Tutorial/Hover.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container blog main">
   <!-- DATASET CURATION -->
-  <h1>Data Curation</h1>
+  <h1><i class="fa-solid fa-database"></i> Data Curation</h1>
 
   <p class="text">
     In this section, we will go over details of the dataset and transforming our data into a indexable interactive
     data frame.
   </p>
 
-  <h2>Dataset</h2>
+  <h2><i class="fa-solid fa-file-audio"></i> Dataset</h2>
 
   <p class="text">
     For this project, we use the <cite>ReCANVo</cite> dataset, which contains real-world vocalizations of non-verbal
@@ -261,20 +325,20 @@
       target="_blank">https://doi.org/10.5281/zenodo.5786860</a>
   </p>
 
-  <h2>DataFrame creation</h2>
+  <h2><i class="fa-solid fa-table"></i> DataFrame Creation</h2>
 
   <p class="text">
     We loaded the audio files for our dataset using <code>librosa</code>, along with associated metadata from a CSV
     file that included labels, participant IDs, and file indices. All of this information was organized into a
     structured <code>polars</code> DataFrame. Because audio loading is computationally intensive and initially caused
     RAM issues, Shivam implemented a multi-threaded approach to parallelize the loading process. This optimization
-    significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing 🥀).
+    significantly reduced loading times and improved memory efficiency (and so our kernel stopped crashing <span class="animation">🥀</span>).
   </p>
 </div>
 
 <div class="container blog main">
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
     <pre><code class="python">
 def load_audio_metadata(csv_path: str,
             audio_dir: str,
@@ -373,7 +437,7 @@ def load_audio_metadata(csv_path: str,
 <div class="container blog main">
   <!-- EDA -->
 
-  <h1 style="padding-top: 1em">Exploratory Data Analysis</h1>
+  <h1 style="padding-top: 1em"><i class="fa-solid fa-magnifying-glass-chart"></i> Exploratory Data Analysis</h1>
 
   <p class="text">
     In this, we will overview all of our Exploratory Data Analysis (EDA) done to perform statistical tests on our
@@ -381,7 +445,7 @@ def load_audio_metadata(csv_path: str,
   </p>
 </div>
 <div class="container blog main gray">
-  <h2>Audio Preprocessing Pipeline Overview</h2>
+  <h2><i class="fa-solid fa-file-waveform"></i> Audio Preprocessing Pipeline Overview</h2>
   <p class="text">
     Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs
     for downstream tasks. The steps are as follows:
@@ -397,7 +461,7 @@ def load_audio_metadata(csv_path: str,
 </div>
 <div class="container blog main">
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Pipeline Code
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Pipeline Code
     </summary>
     <pre><code class="python">
 # ------------------- optional preprocessing ------------------- #
@@ -749,7 +813,7 @@ df = open_parquet("./processed_data.parquet")
 df
     </code></pre>
 
-  <h2>DataFrame Overview</h2>
+  <h2><i class="fa-solid fa-table"></i> DataFrame Overview</h2>
 
   <p class="text">
     The Dataframe is stored as a <code>.parquet</code> containing key information about the audio including: Filename,
@@ -888,7 +952,7 @@ df
 </div>
 
 <div class="container blog main">
-  <h2>Data Exploration</h2>
+  <h2><i class="fa-solid fa-map"></i> Data Exploration</h2>
 
   <p class="text">
     We explored the dataset to understand the distribution of labels and the characteristics of the audio samples.
@@ -1030,7 +1094,7 @@ df.describe()
 </div>
 <div class="container blog main">
   <p class="text">
-    YIPEEEEE 🎉
+    <span class="animation">YIPEEEEE 🎉</span>
     The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
   </p>
 
@@ -1250,7 +1314,7 @@ label_counts.describe()
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code</summary>
     <pre><code class="python">
       # Viridis colors
       colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(label_counts)))
@@ -1291,7 +1355,7 @@ label_counts.describe()
 </div>
 <div class="container blog main">
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code</summary>
     <pre><code class="python">
 # Make sure output directory exists
 output_dir = "participant_barplots"
@@ -1475,7 +1539,7 @@ df['Audio Length'].describe()
 </div>
 
 <div class="container blog main">
-  <h2>Spectograms of Unique Labels</h2>
+  <h2><i class="fa-solid fa-industry"></i> Spectrograms of Unique Labels</h2>
 
   <p class="text">
     This grid displays one <span style="font-weight: bold">Mel spectrogram</span> for each unique vocalization label in
@@ -1544,7 +1608,7 @@ df['Audio Length'].describe()
   <hr>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Spectrogram Plot Code
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Spectrogram Plot Code
     </summary>
     <pre><code class="python">
 def plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms"):
@@ -1707,7 +1771,7 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
   </div>
 </div>
 <div class="container blog main">
-  <h2>Projection Setup for Audio Data Visualization</h2>
+  <h2><i class="fa-solid fa-magnifying-glass-chart"></i> Projection Setup for Audio Data Visualization</h2>
 
   <p class="text">
     To visualize complex audio data, we extract key features, specifically Mel Frequency Cepstral Coefficients (MFCCs)
@@ -1747,7 +1811,7 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Feature Extraction Code
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Feature Extraction Code
     </summary>
     <pre><code class="python">
 # Get pitch variance as feature for audio projection
@@ -1850,7 +1914,7 @@ df = df.with_columns([
     on.</p>
 
     <details>
-      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 2D Projection Code
+      <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide 2D Projection Code
       </summary>
       <pre><code class="python">
   # Features for correlation heatmap
@@ -2028,7 +2092,7 @@ fig_tsne.write_html("tsne_projection.html")
     </details>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide 3D Projection Code
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide 3D Projection Code
     </summary>
     <pre><code class="python">
 features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
@@ -2195,7 +2259,7 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
 </div>
 
 <div class="container blog main">
-  <h1>Feature Extraction & Hypothesis Testing</h1>
+  <h1><i class="fa-solid fa-syringe"></i> Feature Extraction & Hypothesis Testing</h1>
   <section style="font-family: sans-serif; line-height: 1.6;">
     <p class="text">
       In this section, we extract acoustic features from vocalizations and statistically evaluate whether they differ
@@ -2442,7 +2506,7 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
     </li>
   </ul>
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
     <pre><code class="python">
 def batch_pitch_extraction(audio_list: List,
                            max_samples_per_batch: int=50,
@@ -2571,7 +2635,7 @@ print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} second
   </ul>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Plot code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Plot code</summary>
     <pre><code class="python">
 def plot_plotly_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4, output_dir="comparison_spectrograms"):
     """
@@ -2890,7 +2954,7 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full MFCC code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full MFCC code</summary>
     <pre><code class="python">
     def batch_mfcc_extraction(audio_list: List,
                                max_samples_per_batch: int=50,
@@ -3004,7 +3068,7 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
   <p style="font-family: 'Courier New', Courier, monospace;">🎛️ MFCC Significance Test completed in 0.44
     seconds<br><br></p>
     <details>
-      <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Plot code</summary>
+      <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Plot code</summary>
       <pre><code class="python">
 def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
     # Step 1: Prepare data
@@ -3217,7 +3281,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       </thead>
       <tbody>
         <tr>
-          <td class="data-table-cell"><strong>Spectral Entropy</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Spectral Entropy</span></td>
           <td class="data-table-cell">22.914</td>
           <td class="data-table-cell">1.067e-13</td>
           <td class="data-table-cell">Yes</td>
@@ -3244,37 +3308,37 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       </thead>
       <tbody>
         <tr>
-          <td class="data-table-cell"><strong>Dysregulated vs Selftalk</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Dysregulated vs Selftalk</span></td>
           <td class="data-table-cell">-15.48</td>
           <td class="data-table-cell">5.76e-50</td>
           <td class="data-table-cell">Yes</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>Dysregulated vs Delighted</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Dysregulated vs Delighted</span></td>
           <td class="data-table-cell">-11.94</td>
           <td class="data-table-cell">1.19e-31</td>
           <td class="data-table-cell">Yes</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>Dysregulated vs Frustrated</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Dysregulated vs Frustrated</span></td>
           <td class="data-table-cell">-2.10</td>
           <td class="data-table-cell">0.036</td>
           <td class="data-table-cell">No</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>Selftalk vs Delighted</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Selftalk vs Delighted</span></td>
           <td class="data-table-cell">+1.65</td>
           <td class="data-table-cell">0.100</td>
           <td class="data-table-cell">No</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>Selftalk vs Frustrated</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Selftalk vs Frustrated</span></td>
           <td class="data-table-cell">+14.18</td>
           <td class="data-table-cell">3.37e-44</td>
           <td class="data-table-cell">Yes</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>Delighted vs Frustrated</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">Delighted vs Frustrated</span></td>
           <td class="data-table-cell">+10.49</td>
           <td class="data-table-cell">3.05e-25</td>
           <td class="data-table-cell">Yes</td>
@@ -3336,7 +3400,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Spectral Entropy
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Spectral Entropy
       Computation
       Code</summary>
     <pre><code class="python">
@@ -3358,7 +3422,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       </code></pre>
   </details>
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide ANOVA Test Code</summary>
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide ANOVA Test Code</summary>
     <pre><code class="python">
   def spectral_entropy_anova_test(df, target_labels=["dysregulated", "hunger", "delighted"], max_samples_per_label=50):
       """Perform ANOVA on spectral entropy differences."""
@@ -3402,7 +3466,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Pairwise T-Test Code
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Pairwise T-Test Code
     </summary>
     <pre><code class="python">
   def pairwise_t_test(df, target_labels, feature="Spectral Entropy"):
@@ -3476,7 +3540,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   <div class="container main blog">
 
     <details>
-  <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code
+  <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code
   </summary>
   <pre><code class="python">
 def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entropy"):
@@ -3522,7 +3586,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 
 
 <div class="container blog main">
-  <h1>Synthetic Data Generation</h1>
+  <h1><i class="fa-solid fa-dna"></i> Synthetic Data Generation</h1>
 
   <p class="text">
     We faced an issue of class imbalance in our audio dataset. Using synthetic audio generation techniques, we ensure
@@ -3559,7 +3623,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 </div>
 
 <div class="container blog main">
-  <h2>Class Distribution Analysis</h2>
+  <h2><i class="fa-solid fa-diagram-project"></i> Class Distribution Analysis</h2>
   <p class="text">
     The original dataset has a <span style="font-weight: bold">significant imbalance</span> in the number of samples per
     emotion label. For example, the
@@ -3572,7 +3636,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
   </p>
 
   <details>
-    <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Synthetic Data Generation
+    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Synthetic Data Generation
       Code</summary>
     </summary>
     <pre><code class="python">
@@ -3896,7 +3960,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
 </div>
 
 <div class="container blog main">
-  <h1 style="padding-top: 1em">Model Development, Evaluation, and Training</h1>
+  <h1 style="padding-top: 1em"><i class="fa-solid fa-microchip"></i> Model Development, Evaluation, and Training</h1>
   
   <p class="text">
     This section outlines the methodology for developing, selecting, and training machine learning models for audio classification tasks. The following techniques are explored:
@@ -3973,7 +4037,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
     Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance across all classes. Results were visualized to reveal both the strengths and error modes of our models.
   </p>
 
-  <h2 style="padding-top: 1em">K-Means Clustering on Projected Features</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-circle-nodes"></i> K-Means Clustering on Projected Features</h2>
   
   <p class="text">
     After feature engineering and scaling, we explored the intrinsic structure of the dataset using unsupervised clustering. Our goal was to assess whether feature representations of audio samples naturally grouped according to their labeled categories.
@@ -4004,7 +4068,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
   <p class="text">
     Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
   </p>
-  <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Loading code</summary>
+  <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
 <details>
   <pre><code class="python">
 def extract_mfccs(spec_data, n_mfccs=13):
@@ -4674,7 +4738,7 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-sitemap"></i> Feature Evaluation and Hierarchical Classification with SVMs</h2>
 
   <p class="text">
     This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
@@ -4719,7 +4783,7 @@ print("="*50)
   </p>
 
   <details>
-    <summary>Show/Hide SVM Feature Evaluation Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide SVM Feature Evaluation Code</summary>
     <pre><code>
 def evaluate_feature_importance(X_combined, labels, feature_names):
 
@@ -4923,7 +4987,7 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
         <tfoot>
           <tr>
             <td colspan="6" class="data-table-footer">
-              Best overall feature: <strong>MFCC_9</strong> with <strong>RBF kernel</strong> | Accuracy: <strong>0.2641</strong>
+              Best overall feature: <span class="font-weight: bold;">MFCC_9</span> with <span class="font-weight: bold;">RBF kernel</span> | Accuracy: <span class="font-weight: bold;">0.2641</span>
             </td>
           </tr>
           <tr>
@@ -4964,7 +5028,7 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
   </p>
 
   <details>
-    <summary>Show/Hide Performace Evaluation Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Performace Evaluation Code</summary>
     <pre>
       <code class="python">
 def plot_feature_performance(feature_performances, class_names):
@@ -5054,28 +5118,28 @@ def plot_feature_performance(feature_performances, class_names):
       </div>
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D PCA</h4> -->
         <img src="clarity/images/classifier_pics/best_feature_f1_scores.png" alt="Best Feature F1 Scores">
       </div>
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/svm_with_mfcc_9_metrics_by_class.png" alt="Best Feature F1 Scores">
       </div>
     </div>
     
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/svm_with_mfcc_9_norm_confusion_matrix.png" alt="Best Feature F1 Scores">
       </div>
     </div>
     
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/svm_with_mfcc_9_top_errors.png" alt="Best Feature F1 Scores">
@@ -5115,7 +5179,7 @@ def plot_feature_performance(feature_performances, class_names):
   </p>
 
   <details>
-    <summary>Show/Hide Hierachal SVM Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Hierachal SVM Code</summary>
     <pre>
       <code class="python">
 def create_hierarchical_ensemble(X_scaled, labels):
@@ -5270,28 +5334,28 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
       </div>
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none;">
       <div class="plot-container">
         <!-- <h4>3D PCA</h4> -->
         <img src="clarity/images/classifier_pics/ensemble_f1_scores.png" alt="Ensemble F1 Scores">
       </div>
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/hierarchical_ensemble_metrics_by_class.png" alt="Ensemble Metrics by Class">
       </div>
     </div>
     
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/hierarchical_ensemble_norm_confusion_matrix.png" alt="Ensemble Normalized Confusion Matrix">
       </div>
     </div>
     
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: none">
       <div class="plot-container">
         <!-- <h4>3D UMAP</h4> -->
         <img src="clarity/images/classifier_pics/hierarchical_ensemble_top_errors.png" alt="Ensemble Top Errors">
@@ -5314,7 +5378,7 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">CNN Training on Mel Spectrograms</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-share-nodes"></i> CNN Training on Mel Spectrograms</h2>
 
   <p class="text">
     This section describes the training of a convolutional neural network (CNN) on Mel spectrograms derived from the audio dataset. 
@@ -5381,7 +5445,7 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
     making it well-suited for intent classification based on nonverbal vocalizations.
   </p>
   <details>
-    <summary>Show/Hide Data Augmentation Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Data Augmentation Code</summary>
     <pre>
       <code class="python">
 def find_first_all_zero_columns(matrix):
@@ -5417,7 +5481,7 @@ filtered_df = truncate_spectrograms(df, set(valid))
   </details>
 
   <details>
-    <summary>Show/Hide Create and Train CNN Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Create and Train CNN Code</summary>
     <pre>
       <code class="python">
 # 1. Define Dataset Class
@@ -5550,7 +5614,7 @@ def train_model(df, num_epochs=100, batch_size=32, learning_rate=0.001):
   </details>
 
   <details>
-    <summary>Show/Hide Evaluate CNN Code</summary>
+    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Evaluate CNN Code</summary>
     <pre>
       <code class="python">
 # 4. Evaluation functions
@@ -5657,7 +5721,7 @@ if __name__ == "__main__":
           <td class="data-table-cell">361</td>
         </tr>
         <tr>
-          <td class="data-table-cell"><strong>accuracy</strong></td>
+          <td class="data-table-cell"><span class="font-weight: bold;">accuracy</span></td>
           <td class="data-table-cell">-</td>
           <td class="data-table-cell">-</td>
           <td class="data-table-cell">0.70</td>
@@ -5707,12 +5771,704 @@ if __name__ == "__main__":
 <div class="container blog main">
   <h2 style="padding-top: 1em">Spectrogram Classification with Vision Transformers</h2>
   <p class="text">
-    Building on the success of CNN-based models, we explore the use of <span style="font-weight: bold;">Vision Transformers (ViTs)</span> for spectrogram classification. ViTs treat spectrograms as image patches, enabling the model to capture global context more effectively than local receptive fields in traditional CNNs. This approach is particularly promising for identifying subtle, long-range patterns across time-frequency dimensions.
+    <strong>Vision Transformers (ViTs)</strong> offer a powerful alternative to CNNs for image processing. Unlike CNNs with local convolutions, ViTs treat images as sequences of patches - similar to how language models process text. This approach excels at capturing connections between distant parts of spectrograms, helping identify audio patterns that might be separated in time but related in meaning.
   </p>
+
   <p class="text">
-    We implement a ViT-based architecture tailored to 2D Mel spectrograms resized to a fixed resolution. To address class imbalance and improve generalization, we incorporate data augmentation and train with weighted loss functions. This section outlines the preprocessing pipeline, model setup, training procedure, and evaluation results, and demonstrates how transformers can improve accuracy—especially when synthetic data is introduced to augment low-resource categories.
+    A key advantage is <strong>positional embeddings</strong> - these preserve spatial information by telling the model where each patch belongs. For spectrograms, this maintains crucial time-frequency relationships. As highlighted in <em>"An Image is Worth 16x16 Words"</em> (Dosovitskiy et al., 2021), relative positional embeddings further enhance this by encoding distances between patches.
+  </p>
+
+  <p class="text">
+    ViTs handle variable-length inputs better than CNNs. Their attention mechanism naturally focuses on important areas while ignoring irrelevant ones (like silence in audio). This reduces the need for artificial padding or trimming, making them more adaptable to real-world audio data with varying durations.
+  </p>
+
+  <p class="text">Our ViT model features:</p>
+
+  <div style="padding: 1em">
+    <ul>
+      <li><p class="text">Patch embedding: Converts spectrogram sections into tokens</p></li>
+      <li><p class="text">Learnable positional encodings: Preserves spatial context</p></li>
+      <li><p class="text">Class token: Enables classification</p></li>
+      <li><p class="text">Multi-head attention with residual connections: Improves learning</p></li>
+    </ul>
+  </div>
+
+  <p class="text">
+    This architecture has fewer image-specific assumptions than CNNs, making it more adaptable across different types of data when properly trained.
+  </p>
+
+  <p class="text">
+    To improve performance on underrepresented classes, we use <strong>synthetic data generation</strong> and <strong>class-balanced loss functions</strong>. Like language transformers, ViTs perform significantly better with larger, more diverse training datasets.
+  </p>
+
+  <p class="text">
+    Our research shows that ViTs outperform traditional models for spectrogram classification when paired with proper preprocessing. Their self-attention mechanism learns global patterns without requiring manual feature engineering, making them especially valuable for processing noisy or irregular audio data.
+  </p>
+
+  <h3>Implementation Walkthrough</h3>
+
+  <h3>1. Dataset Preparation</h3>
+  <p class="text">
+    Our first step involves creating a <code>torch</code> dataset for handling the spectrograms. This helps us interface with a <code>torch</code> wrapped object model.
+  </p>
+
+    
+    <pre><code class="python">
+class SpectogramDataset(Dataset): 
+    def __init__(self, spectograms, labels, transform=None, target_transform=None):
+        self.spectograms = spectograms
+        self.labels = labels
+        self.transform = transform
+        self.target_transform = target_transform
+    
+    def __len__(self):
+        return len(self.spectograms)
+    
+    def __getitem__(self, idx):
+        # stack or else numpy thinks inner list is sequence
+        spectrogram = np.stack(self.spectograms[idx])
+        label = self.labels[idx]
+
+        # Convert to float32 array
+        spectrogram = np.asarray(spectrogram, dtype=np.float32)
+
+        if self.transform:
+            spectrogram = self.transform(spectrogram)
+        if self.target_transform:
+            label = self.target_transform(label)
+
+        return spectrogram, label
+    </code></pre>
+
+  
+  <p class="text">
+    This custom dataset class provides the foundation for loading our spectrogram data. It accepts transformations for both input data and labels, making it flexible for various preprocessing needs.
+  </p>
+
+  <h3>2. Data Transformations</h3>
+  <p class="text">
+    Vision Transformers require specific input formatting. We need to resize spectrograms to 224×224 (standard ViT input size) and convert grayscale spectrograms to 3-channel inputs compatible with pretrained ViT architectures.
+  </p>
+
+  <pre><code class="python">
+vit_transform = transforms.Compose([
+    transforms.Lambda(
+      lambda x: torch.tensor(x, dtype=torch.float32)
+    ),       
+    transforms.Lambda(
+      lambda x: x.unsqueeze(0) if x.ndim == 2 else x
+    ),       
+    transforms.Resize((224, 224)),
+    transforms.Lambda(
+      lambda x: x.repeat(3, 1, 1) if x.shape[0] == 1 else x
+    ),
+    transforms.Normalize(mean=[0.5]*3, std=[0.5]*3)
+])
+  </code></pre>
+
+  <p class="text">
+    The transformation pipeline converts numpy arrays to tensors, ensures proper dimensionality, resizes to the required ViT input size, and handles channel conversion for grayscale spectrograms.
+  </p>
+
+  <h3>3. Dataset Splitting and Preparation</h3>
+  <p class="text">
+    To ensure robust training, we implement stratified splitting for train/validation/test sets while filtering out rare classes with insufficient samples.
+  </p>
+
+  <pre><code class="python">
+def prepare_spectrogram_dataset(
+        spectrograms, labels, 
+        min_samples=2,
+        test_size=0.2, val_size=0.1,
+        transform_train=None, transform_eval=None, seed=42
+    ):
+    # Filter out classes with too few samples
+    counts = Counter(labels)
+    valid_idxs = [i for i, lbl in enumerate(labels) if counts[lbl] >= min_samples]
+    specs = [spectrograms[i] for i in valid_idxs]
+    lbls = [labels[i] for i in valid_idxs]
+
+    # Encode labels
+    le = LabelEncoder()
+    y = le.fit_transform(lbls)
+
+    # Split
+    X_train, X_temp, y_train, y_temp = train_test_split(
+        specs, y, test_size=(test_size + val_size), stratify=y, random_state=seed
+    )
+    X_val, X_test, y_val, y_test = train_test_split(
+        X_temp, y_temp, test_size=test_size / (test_size + val_size), stratify=y_temp, random_state=seed
+    )
+
+    # Wrap in datasets
+    train_ds = SpectogramDataset(X_train, y_train, transform=transform_train)
+    val_ds   = SpectogramDataset(X_val,   y_val,   transform=transform_eval)
+    test_ds  = SpectogramDataset(X_test,  y_test,  transform=transform_eval)
+
+    return train_ds, val_ds, test_ds, le
+  </code></pre>
+
+  <p class="text">
+    This function handles several critical preprocessing steps:
+  </p>
+  <div style="padding-left: 1em">
+    <ul>
+      <li><p class="text">Filtering out classes with too few samples</p></li>
+      <li><p class="text">Encoding categorical labels to numerical values</p></li>
+      <li><p class="text">Stratified splitting of data while preserving class distribution</p></li>
+      <li><p class="text">Applying appropriate transformations to each split</p></li>
+    </ul>
+  </div>
+
+  <h3>4. Model Architecture</h3>
+  <p class="text">
+    We use a pretrained ViT-B/16 model and adapt it for our spectrogram classification task by replacing the classification head.
+  </p>
+
+</div>
+
+<div class="container blog main">
+  <img src="clarity/images/vit_architecture.png" alt="ViT Model Architecture">
+  
+</div>
+
+<div class="container blog main">
+
+  <p class="text">
+    The Vision Transformer (ViT) splits an image into fixed-size patches, embeds them with positional information, and feeds the sequence into a standard Transformer encoder. A special learnable <code>[class]</code> token is added to represent the entire image, and its output is used for classification. Unlike CNNs, ViTs leverage global self-attention across all patches, enabling them to capture long-range dependencies without relying on convolutional priors.
+  </p>
+  
+
+  <h3>5. Training Procedure</h3>
+  <p class="text">
+    Our training pipeline includes class weighting to address imbalance, live performance visualization, and comprehensive logging.
+  </p>
+
+  <details>
+    <summary>Show/Hide Training Code</summary>
+    <pre><code class="python">
+def train_model(
+    model,
+    train_loader,
+    val_loader,
+    num_epochs=25,
+    lr=1e-4,
+    class_weights=None,
+    device="cuda" if torch.cuda.is_available() else "cpu",
+    log_path="train_log.txt",
+    history_csv_path="training_history.csv"
+):
+    model = model.to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    criterion = nn.CrossEntropyLoss(weight=class_weights)
+
+    history = {
+        "epoch": [],
+        "train_loss": [],
+        "train_acc": [],
+        "val_acc": [],
+        "lr": []
+    }
+
+    # Live plot setup
+    plt.ion()
+    fig, ax = plt.subplots(1, 2, figsize=(10, 4))
+    train_line, = ax[0].plot([], [], label="Train Loss")
+    acc_line, = ax[1].plot([], [], label="Train Acc")
+    val_acc_line, = ax[1].plot([], [], label="Val Acc")
+    ax[0].set_title("Loss")
+    ax[1].set_title("Accuracy")
+    ax[0].legend()
+    ax[1].legend()
+
+    with open(log_path, "w") as log_file, redirect_stdout(log_file):
+        total_start = time.time()
+        for epoch in range(num_epochs):
+            start_time = time.time()
+            model.train()
+            total_loss, correct, total = 0.0, 0, 0
+
+            for inputs, labels in train_loader:
+                inputs, labels = inputs.to(device), labels.to(device)
+                optimizer.zero_grad()
+                outputs = model(inputs)
+                loss = criterion(outputs, labels)
+                loss.backward()
+                optimizer.step()
+
+                total_loss += loss.item() * inputs.size(0)
+                _, preds = torch.max(outputs, 1)
+                correct += (preds == labels).sum().item()
+                total += labels.size(0)
+
+            avg_loss = total_loss / total
+            train_acc = correct / total
+            val_acc = evaluate(model, val_loader, device)
+
+            history["epoch"].append(epoch + 1)
+            history["train_loss"].append(avg_loss)
+            history["train_acc"].append(train_acc)
+            history["val_acc"].append(val_acc)
+            history["lr"].append(optimizer.param_groups[0]["lr"])
+
+            # Update live plot
+            train_line.set_data(range(epoch + 1), history["train_loss"])
+            acc_line.set_data(range(epoch + 1), history["train_acc"])
+            val_acc_line.set_data(range(epoch + 1), history["val_acc"])
+            ax[0].relim(); ax[0].autoscale_view()
+            ax[1].relim(); ax[1].autoscale_view()
+            plt.pause(0.01)
+
+            epoch_duration = time.time() - start_time
+            print(f"Epoch {epoch+1:02d} | Loss: {avg_loss:.4f} | Train Acc: {train_acc:.4f} | Val Acc: {val_acc:.4f} | Time: {epoch_duration:.2f}s")
+
+        total_time = time.time() - total_start
+        print(f"\nTraining complete in {total_time:.2f} seconds.")
+
+    plt.ioff()
+    plt.show()
+
+@torch.no_grad()
+def evaluate(model, loader, device):
+    model.eval()
+    correct, total = 0, 0
+    for inputs, labels in loader:
+        inputs, labels = inputs.to(device), labels.to(device)
+        outputs = model(inputs)
+        _, preds = torch.max(outputs, 1)
+        correct += (preds == labels).sum().item()
+        total += labels.size(0)
+    return correct / total
+    </code></pre>
+  </details>
+
+  <p class="text">
+    The training function incorporates several best practices:
+  </p>
+  <div style="padding-left: 1em">
+    <ul>
+      <li><p class="text">Adam optimizer with learning rate scheduling</p></li>
+      <li><p class="text">Cross-entropy loss with class weighting</p></li>
+      <li><p class="text">Live visualization of training metrics</p></li>
+      <li><p class="text">Comprehensive logging of training progress</p></li>
+      <li><p class="text">Regular validation to monitor generalization</p></li>
+    </ul>
+  </div>
+
+  <h3>6. Model Evaluation</h3>
+  <p class="text">
+    After training, we evaluate model performance using accuracy metrics, classification reports, and confusion matrices.
+  </p>
+  <details>
+  <summary>Show/Hide Testing Code</summary>
+  <pre><code class="python">
+def evaluate_test_set(
+      model, test_loader, label_encoder=None,
+      device="cuda" if torch.cuda.is_available() else "cpu",
+      path="classification_report.csv"
+  ):
+      model.eval()
+      model.to(device)
+  
+      all_preds = []
+      all_targets = []
+  
+      with torch.no_grad():
+          for inputs, labels in test_loader:
+              inputs, labels = inputs.to(device), labels.to(device)
+              outputs = model(inputs)
+              preds = torch.argmax(outputs, dim=1)
+              all_preds.extend(preds.cpu().numpy())
+              all_targets.extend(labels.cpu().numpy())
+  
+      # Decode labels if encoder is provided
+      if label_encoder:
+          all_preds = label_encoder.inverse_transform(all_preds)
+          all_targets = label_encoder.inverse_transform(all_targets)
+  
+      # Accuracy
+      acc = accuracy_score(all_targets, all_preds)
+      print(f"Test Accuracy: {acc:.4f}")
+  
+      # Generate and format classification report
+      report_dict = classification_report(all_targets, all_preds, output_dict=True)
+      report_df = pd.DataFrame(report_dict).transpose()  # Proper format: class names as index
+      report_df.index.name = "Class"
+      print("\nClassification Report:")
+      print(report_df.round(3))
+  
+      # Plot confusion matrix
+      cm = confusion_matrix(all_targets, all_preds)
+      labels = label_encoder.classes_ if label_encoder else np.unique(all_targets)
+      plt.figure(figsize=(10, 7))
+      sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+      plt.xlabel("Predicted")
+      plt.ylabel("Actual")
+      plt.title("Confusion Matrix")
+      plt.tight_layout()
+      plt.savefig("vit_confusion_matrix.png")
+      plt.show()
+  
+      # Optional: Save classification report
+      report_df.to_csv(path)
+      print(f"Saved classification report to '{path}'")
+  
+      return report_df
+  
+  </code></pre>
+  </details>
+
+  <p class="text">
+    Our evaluation framework provides:
+  </p>
+  <div style="padding-left: 1em">
+    <ul>
+      <li><p class="text">Overall test accuracy measurement</p></li>
+      <li><p class="text">Per-class precision, recall, and F1 scores</p></li>
+      <li><p class="text">Visual confusion matrix to identify problematic classes</p></li>
+      <li><p class="text">Export of results for further analysis</p></li>
+    </ul>
+  </div>
+
+  <h3>7. Training Execution</h3>
+
+</div>
+
+<div class="container blog main">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="data-table-header">Component</th>
+        <th class="data-table-header">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="data-table-cell">GPU 0</td>
+        <td class="data-table-cell">NVIDIA Tesla K80 (46°C, 56W/149W)</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">GPU 1</td>
+        <td class="data-table-cell">NVIDIA Tesla K80 (25°C, 29W/149W)</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">CUDA Version</td>
+        <td class="data-table-cell">11.4</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">CPU</td>
+        <td class="data-table-cell">Intel Xeon E5-2690 v4</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">RAM</td>
+        <td class="data-table-cell">256 GB</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="data-table-footer">
+          Dual-GPU setup with shared memory space and thermal management—ideal for deep learning workloads.
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  
+</div>
+
+</div>
+
+<div class="container blog main">
+  <p class="text">
+    Finally, we put everything together in a complete training pipeline with carefully selected hyperparameters. Our model was trained on high-performance hardware with dual NVIDIA Tesla K80 GPUs and an Intel Xeon E5-2690 v4 CPU with 256GB system memory, allowing us to experiment with various configurations. Note that we parallelized the model across both GPUs to maximize training efficiency.
+  </p>
+
+  <details>
+    <summary>Show/Hide Parameters</summary>
+    <pre><code class="python">
+# ----------------- Macros --------------------
+batch_size = 4
+epochs = 80
+lr = 1e-4
+
+# ----------------- Device -----------------
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# ----------------- Load Data -----------------
+spectrograms = df["Spectrogram"]
+labels = df["Label"]
+
+# ----------------- Prepare Dataset -----------------
+train_ds, val_ds, test_ds, label_encoder = prepare_spectrogram_dataset(
+    spectrograms=spectrograms,
+    labels=labels,
+    min_samples=2,
+    transform_train=vit_transform,
+    transform_eval=vit_transform
+)
+
+# ----------------- Dataloaders -----------------
+train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+val_loader   = DataLoader(val_ds, batch_size=batch_size)
+test_loader  = DataLoader(test_ds, batch_size=batch_size)
+
+# ----------------- Class Weights -----------------
+y_train_labels = [label for _, label in train_ds]
+class_weights = compute_class_weight(
+    class_weight="balanced",
+    classes=np.unique(y_train_labels),
+    y=y_train_labels
+)
+
+class_weights_tensor = torch.tensor(
+    class_weights, 
+    dtype=torch.float32
+).to(device)
+
+
+# ----------------- Model -----------------
+model = ViTClassifier(num_classes=len(label_encoder.classes_))
+model = model.to(device)
+model = nn.DataParallel(model)
+    </code></pre>
+  </details>
+
+  <p class="text">
+    The final training loop is ecxecuted with the following code:
+  </p>
+
+  <pre><code class="python">
+model, history = train_model(
+    model,
+    train_loader,
+    val_loader,
+    num_epochs=epochs,
+    lr=lr,
+    class_weights=class_weights_tensor,
+    log_path="vit_model_exp2_run3_logs.txt",
+    history_csv_path="vit_model_exp2_run3_train_history.csv"
+)
+    
+# ----------------- Save -----------------
+torch.save(model.state_dict(), (path := "vit_model_exp2_run3.pth"))
+print(f"Model saved at {path}")    
+  </code></pre>
+
+  <p class="text">
+    Our training process was computationally intensive, with each epoch taking approximately 850 seconds (14 minutes). The complete training run of 80 epochs required approximately 18 hours (67,480 seconds) of compute time.
+  </p>
+
+  <p class="text">
+    Our hyperparameter configuration includes:
+  </p>
+
+</div>
+
+<div class="container blog main">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="data-table-header">Parameter</th>
+        <th class="data-table-header">Value</th>
+        <th class="data-table-header">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="data-table-cell">Batch Size</td>
+        <td class="data-table-cell">4</td>
+        <td class="data-table-cell">Small batch size used to improve generalization</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">Learning Rate</td>
+        <td class="data-table-cell">1e-4</td>
+        <td class="data-table-cell">Tuned for stability during small-batch training</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">Epochs</td>
+        <td class="data-table-cell">25–80</td>
+        <td class="data-table-cell">Early stopping or manual tuning based on convergence</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">Class Balancing</td>
+        <td class="data-table-cell">Weighted Loss</td>
+        <td class="data-table-cell">Weights computed based on label distribution</td>
+      </tr>
+      <tr>
+        <td class="data-table-cell">Model Parallelization</td>
+        <td class="data-table-cell">DataParallel</td>
+        <td class="data-table-cell">Uses <code>torch.nn.DataParallel</code> across two Tesla K80 GPUS</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="data-table-footer">
+          Training pipeline optimized for generalization with class imbalance and compute constraints in mind.
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  
+</div>
+
+<div class="container blog main">
+  <p class="text">
+    Note that we intentionally use a small batch size despite having GPU resources. While larger batches can utilize GPU memory more efficiently, smaller batches introduce beneficial noise during training that helps Vision Transformers navigate the loss landscape more effectively. This stochasticity acts as an implicit regularization method, allowing the model to escape local minima and find solutions that generalize better to unseen data. For transformer architectures specifically, this small-batch approach often yields better performance than large-batch training, even at the cost of longer training times.
+  </p>
+
+  <h3>8. Results Visualization</h3>
+  <p class="text">
+    After training completes, we analyze performance trends and generate visualization plots.
+  </p>
+
+  <details>
+    <summary>Show/Hide Training Metrics Code</summary>
+    <pre><code class="python">
+history_path = Path("../../results/training/train_history.json")
+
+# Load the training history
+with open(history_path, "r") as f:
+    history = json.load(f)
+
+fig = go.Figure()
+
+# Training Loss (y1)
+fig.add_trace(go.Scatter(
+    x=history["epoch"],
+    y=history["train_loss"],
+    name='Train Loss',
+    line=dict(color='crimson'),
+    yaxis='y1'
+))
+
+# Training Accuracy (y2)
+fig.add_trace(go.Scatter(
+    x=history["epoch"],
+    y=history["train_acc"],
+    name='Train Accuracy',
+    line=dict(color='blue', dash='dash'),
+    yaxis='y2'
+))
+
+# Validation Accuracy (y2)
+fig.add_trace(go.Scatter(
+    x=history["epoch"],
+    y=history["val_acc"],
+    name='Validation Accuracy',
+    line=dict(color='green', dash='dot'),
+    yaxis='y2'
+))
+
+# Add vertical line at ideal early stopping point
+fig.add_vline(
+    x=28,
+    line=dict(color="gray", width=2, dash="dash"),
+    annotation_text="Divergence Point", 
+    annotation_position="top left"
+)
+
+fig.update_layout(
+    title='Training Loss and Accuracy over Epochs',
+    xaxis=dict(title='Epoch'),
+    yaxis=dict(
+        title=dict(text='Train Loss', font=dict(color='crimson')),
+        tickfont=dict(color='crimson')
+    ),
+    yaxis2=dict(
+        title=dict(text='Accuracy', font=dict(color='blue')),
+        tickfont=dict(color='blue'),
+        anchor='x',
+        overlaying='y',
+        side='right'
+    ),
+    legend=dict(x=0.01, y=0.99),
+    template='plotly_white'
+)
+
+output_dir = "../../../website/clarity/images"
+os.makedirs(output_dir, exist_ok=True)
+
+# Save the figure
+fig.write_html(os.path.join(output_dir, "vit_training_metrics.html"))
+
+
+    </code></pre>
+  </details>
+  <p class="text">
+    The training metrics demonstrate the effectiveness of Vision Transformers for spectrogram classification, with training converging consistently and validation metrics showing strong generalization capabilities.
   </p>
 </div>
+
+<div class="container blog main gray large">
+  <h3 style="text-align: center;">Training Metrics</h3>
+  <div class="plot-container">
+    <iframe src="clarity/images/vit_training_metrics.html" frameborder="0"></iframe>
+  </div>
+</div>
+
+<div class="container blog main">
+  <p class="text">
+    Training shows that our model was able to generalize on the validation set. Our testing results showed similar results and are summarized in the table below:
+  </p>
+</div>
+
+<div class="container blog main gray large">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="data-table-header">Class</th>
+        <th class="data-table-header">Precision</th>
+        <th class="data-table-header">Recall</th>
+        <th class="data-table-header">F1-Score</th>
+        <th class="data-table-header">Support</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="data-table-cell">affectionate</td><td class="data-table-cell">0.718750</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.807018</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">bathroom</td><td class="data-table-cell">0.881818</td><td class="data-table-cell">0.970000</td><td class="data-table-cell">0.923810</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">delighted</td><td class="data-table-cell">0.421053</td><td class="data-table-cell">0.345098</td><td class="data-table-cell">0.379310</td><td class="data-table-cell">255.0</td></tr>
+      <tr><td class="data-table-cell">dysregulated</td><td class="data-table-cell">0.593220</td><td class="data-table-cell">0.496454</td><td class="data-table-cell">0.540541</td><td class="data-table-cell">141.0</td></tr>
+      <tr><td class="data-table-cell">dysregulation-bathroom</td><td class="data-table-cell">0.891892</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.938389</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">dysregulation-sick</td><td class="data-table-cell">0.925532</td><td class="data-table-cell">0.870000</td><td class="data-table-cell">0.896907</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">frustrated</td><td class="data-table-cell">0.542955</td><td class="data-table-cell">0.514658</td><td class="data-table-cell">0.528428</td><td class="data-table-cell">307.0</td></tr>
+      <tr><td class="data-table-cell">glee</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">greeting</td><td class="data-table-cell">0.943396</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">0.970874</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">happy</td><td class="data-table-cell">0.786325</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.847926</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">help</td><td class="data-table-cell">0.866667</td><td class="data-table-cell">0.910000</td><td class="data-table-cell">0.887805</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">hunger</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">1.000000</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">laugh</td><td class="data-table-cell">0.989691</td><td class="data-table-cell">0.960000</td><td class="data-table-cell">0.974619</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">laughter</td><td class="data-table-cell">0.681818</td><td class="data-table-cell">0.750000</td><td class="data-table-cell">0.714286</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">more</td><td class="data-table-cell">0.875000</td><td class="data-table-cell">0.980000</td><td class="data-table-cell">0.924528</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">no</td><td class="data-table-cell">0.900000</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.942857</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">protest</td><td class="data-table-cell">0.828829</td><td class="data-table-cell">0.920000</td><td class="data-table-cell">0.872038</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">request</td><td class="data-table-cell">0.277027</td><td class="data-table-cell">0.410000</td><td class="data-table-cell">0.330645</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">selftalk</td><td class="data-table-cell">0.551724</td><td class="data-table-cell">0.424403</td><td class="data-table-cell">0.479760</td><td class="data-table-cell">377.0</td></tr>
+      <tr><td class="data-table-cell">social</td><td class="data-table-cell">0.397959</td><td class="data-table-cell">0.307087</td><td class="data-table-cell">0.346667</td><td class="data-table-cell">127.0</td></tr>
+      <tr><td class="data-table-cell">tablet</td><td class="data-table-cell">0.970588</td><td class="data-table-cell">0.990000</td><td class="data-table-cell">0.980198</td><td class="data-table-cell">100.0</td></tr>
+      <tr><td class="data-table-cell">yes</td><td class="data-table-cell">0.600000</td><td class="data-table-cell">0.840000</td><td class="data-table-cell">0.700000</td><td class="data-table-cell">100.0</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="data-table-footer">
+          Precision, recall, and F1-score metrics for each class label based on final model evaluation.
+        </td>
+      </tr>
+    </tfoot>
+  </table>  
+</div>
+<div class="container blog main gray small">
+  <h3 style="text-align: center;">Confusion Matrix</h3>
+  <div class="plot-container">
+    <img src="clarity/images/vit_confusion_matrix.png" alt="ViT Confusion Matrix">
+  </div>
+</div>
+
+<div class="container blog main">
+  <p class="text">
+    Our final model achieves significantly better performance than traditional CNN architectures, particularly for classes with fewer samples, demonstrating the power of the Vision Transformer's attention mechanism for capturing complex audio patterns in spectrograms.
+  </p>
+</div>
+
+
 
 </div>
 
