@@ -145,6 +145,31 @@
       border: none;
     }
 
+    .animation {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.3em;
+      animation: explode 0.6s infinite ease-in-out;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      25% {
+        transform: scale(1.1) rotate(3deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-3deg);
+      }
+      75% {
+        transform: scale(1.1) rotate(3deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
   </style>
 </head>
 
@@ -278,7 +303,7 @@
     data frame.
   </p>
 
-  <h2>Dataset</h2>
+  <h2><i class="fa-solid fa-file-audio"></i> Dataset</h2>
 
   <p class="text">
     For this project, we use the <cite>ReCANVo</cite> dataset, which contains real-world vocalizations of non-verbal
@@ -420,7 +445,7 @@ def load_audio_metadata(csv_path: str,
   </p>
 </div>
 <div class="container blog main gray">
-  <h2>Audio Preprocessing Pipeline Overview</h2>
+  <h2><i class="fa-solid fa-file-waveform"></i> Audio Preprocessing Pipeline Overview</h2>
   <p class="text">
     Our preprocessing pipeline for audio data follows a structured and modular sequence to prepare high-quality inputs
     for downstream tasks. The steps are as follows:
@@ -788,7 +813,7 @@ df = open_parquet("./processed_data.parquet")
 df
     </code></pre>
 
-  <h2> DataFrame Overview</h2>
+  <h2><i class="fa-solid fa-table"></i> DataFrame Overview</h2>
 
   <p class="text">
     The Dataframe is stored as a <code>.parquet</code> containing key information about the audio including: Filename,
@@ -927,7 +952,7 @@ df
 </div>
 
 <div class="container blog main">
-  <h2>Data Exploration</h2>
+  <h2><i class="fa-solid fa-map"></i> Data Exploration</h2>
 
   <p class="text">
     We explored the dataset to understand the distribution of labels and the characteristics of the audio samples.
@@ -1069,7 +1094,7 @@ df.describe()
 </div>
 <div class="container blog main">
   <p class="text">
-    YIPEEEEE 🎉
+    <span class="animation">YIPEEEEE 🎉</span>
     The DataFrame contains no null values, indicating that all audio files are present and correctly labeled.
   </p>
 
