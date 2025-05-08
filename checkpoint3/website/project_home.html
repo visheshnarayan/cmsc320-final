@@ -5316,6 +5316,12 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 <div class="container blog main">
   <h3 style="padding-top: 1em">CNN Training on Mel Spectrograms</h3>
 
+  <p class="text">
+    This section describes the training of a convolutional neural network (CNN) on Mel spectrograms derived from the audio dataset. 
+    The CNN was designed to classify vocalizations into three primary labels: <span style="font-weight: bold">frustrated</span>, 
+    <span style="font-weight: bold">delighted</span>, and <span style="font-weight: bold">selftalk</span>. Here are the key steps taken during the training process:
+  </p>
+
   <ul style="padding-left: 20px; list-style-type: disc;">
     <li>
       <p class="text"><span style="font-weight: bold">Label Selection</span> – Due to severe class imbalance, we restricted training to the top 3 most frequent labels: <code>frustrated</code>, <code>delighted</code>, and <code>selftalk</code>, allowing for more balanced and meaningful training.</p>
@@ -5345,6 +5351,36 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
       <p class="text"><span style="font-weight: bold">Model Saving</span> – Persisted the trained CNN model weights (<code>spectrogram_cnn.pth</code>) and label encoder class mapping (<code>label_encoder.npy</code>) for reproducibility and deployment.</p>
     </li>
   </ul>
+
+  <p class="text">
+    Here is the architecture of the CNN model used for training on Mel spectrograms:
+  </p>
+
+</div>
+
+<div class="container blog main gray large">
+  <h3 style="text-align: center;">CNN Architecture</h3>
+  <img src="clarity/images/cnn.png" alt="CNN Model Architecture">
+</div>
+
+<div class="container blog main">
+  <p class='text'>
+    This model takes a <span style="font-weight: bold;">128×50 Mel spectrogram</span> as input and processes it through 
+    a stack of convolutional layers to extract time-frequency features from vocal signals. 
+    The architecture consists of <span style="font-weight: bold;">three convolutional blocks</span>, each including a <code>Conv2D</code> layer, 
+    followed by <code>BatchNorm2D</code> for stable learning, and <code>MaxPool2D</code> to reduce spatial dimensions while preserving key patterns.
+  </p>
+  <p class="text">
+    The feature maps are progressively reduced from <span style="font-weight: bold;">128×50 → 64×25 → 32×12 → 16×6</span> over the layers, while channel depth 
+    increases from <code>1 → 32 → 64 → 128</code>. The final 3D feature volume (<code>128×16×6</code>) is <code>flattened</code> and passed through 
+    a fully connected (FC) layer of 512 units with a <code>Dropout(0.5)</code> regularization step. The last linear layer maps to the 
+    number of classes, and the output is used with <code>CrossEntropyLoss</code> for classification.
+  </p>
+  <p class="text">
+    This hierarchical feature extraction enables the CNN to learn patterns from both spectral and temporal variations, 
+    making it well-suited for intent classification based on nonverbal vocalizations.
+  </p>
+
 </div>
 
 <div class="container blog main gray">
@@ -5431,7 +5467,15 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
   </p>  
 </div>
 
-
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Spectrogram Classification with Vision Transformers</h2>
+  <p class="text">
+    Building on the success of CNN-based models, we explore the use of <span style="font-weight: bold;">Vision Transformers (ViTs)</span> for spectrogram classification. ViTs treat spectrograms as image patches, enabling the model to capture global context more effectively than local receptive fields in traditional CNNs. This approach is particularly promising for identifying subtle, long-range patterns across time-frequency dimensions.
+  </p>
+  <p class="text">
+    We implement a ViT-based architecture tailored to 2D Mel spectrograms resized to a fixed resolution. To address class imbalance and improve generalization, we incorporate data augmentation and train with weighted loss functions. This section outlines the preprocessing pipeline, model setup, training procedure, and evaluation results, and demonstrates how transformers can improve accuracy—especially when synthetic data is introduced to augment low-resource categories.
+  </p>
+</div>
 
 </div>
 
