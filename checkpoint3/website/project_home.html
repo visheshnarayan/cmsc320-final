@@ -3532,7 +3532,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 </div>
 
 <div class="container blog main gray">
-  <h2>Pipeline Overview</h2>
+  <h3>Pipeline Overview</h3>
   <p class="text">
     Our pipeline works by generating synthetic audio samples for underrepresented classes
     until we reach a target count per label. The process involves:
@@ -3559,7 +3559,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 </div>
 
 <div class="container blog main">
-  <h3>Class Distribution Analysis</h3>
+  <h2>Class Distribution Analysis</h2>
   <p class="text">
     The original dataset has a <span style="font-weight: bold">significant imbalance</span> in the number of samples per
     emotion label. For example, the
@@ -4674,7 +4674,7 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h3 class="toc" style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h3>
+  <h2 style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h2>
 
   <p class="text">
     This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
@@ -4944,7 +4944,7 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Single Feature Performance: MFCC_9 (SVM)</h2>
+  <h3 style="padding-top: 1em">Single Feature Performance: MFCC_9 (SVM)</h3>
   
   <p class="text">
     This section explores the classification performance when using only a single acoustic feature: 
@@ -5309,7 +5309,7 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h2>
+  <h3 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h3>
   <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p>
 </div>
 
