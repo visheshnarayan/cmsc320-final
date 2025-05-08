@@ -338,7 +338,7 @@
 
 <div class="container blog main">
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading code</span></summary>
     <pre><code class="python">
 def load_audio_metadata(csv_path: str,
             audio_dir: str,
@@ -461,7 +461,7 @@ def load_audio_metadata(csv_path: str,
 </div>
 <div class="container blog main">
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Pipeline Code
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Pipeline code</span>
     </summary>
     <pre><code class="python">
 # ------------------- optional preprocessing ------------------- #
@@ -1314,7 +1314,7 @@ label_counts.describe()
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span></summary>
     <pre><code class="python">
       # Viridis colors
       colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(label_counts)))
@@ -1355,7 +1355,7 @@ label_counts.describe()
 </div>
 <div class="container blog main">
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot code</span></summary>
     <pre><code class="python">
 # Make sure output directory exists
 output_dir = "participant_barplots"
@@ -1612,7 +1612,7 @@ df['Audio Length'].describe()
   <hr>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Spectrogram Plot Code
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Spectogram Plot Code</span>
     </summary>
     <pre><code class="python">
 def plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms"):
@@ -1815,7 +1815,7 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Feature Extraction Code
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Feature Extraction Code</span>
     </summary>
     <pre><code class="python">
 # Get pitch variance as feature for audio projection
@@ -1918,7 +1918,7 @@ df = df.with_columns([
     on.</p>
 
     <details>
-      <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide 2D Projection Code
+      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 2D Projection Code</span>
       </summary>
       <pre><code class="python">
   # Features for correlation heatmap
@@ -2096,7 +2096,7 @@ fig_tsne.write_html("tsne_projection.html")
     </details>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide 3D Projection Code
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full 3D Projection Code</span>
     </summary>
     <pre><code class="python">
 features = ["PitchVar", "MFCC-1", "MFCC-2", "MFCC-3"]
@@ -2510,7 +2510,8 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
     </li>
   </ul>
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading Code</span>
+    </summary>
     <pre><code class="python">
 def batch_pitch_extraction(audio_list: List,
                            max_samples_per_batch: int=50,
@@ -2639,7 +2640,8 @@ print(f"\n🎶 Pitch Variability Test completed in {time.time() - t0:.2f} second
   </ul>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Plot code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot Code</span>
+    </summary>
     <pre><code class="python">
 def plot_plotly_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_examples=4, output_dir="comparison_spectrograms"):
     """
@@ -2958,7 +2960,8 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full MFCC code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full MFCC Code</span>
+    </summary>
     <pre><code class="python">
     def batch_mfcc_extraction(audio_list: List,
                                max_samples_per_batch: int=50,
@@ -3072,7 +3075,8 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
   <p style="font-family: 'Courier New', Courier, monospace;">🎛️ MFCC Significance Test completed in 0.44
     seconds<br><br></p>
     <details>
-      <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Plot code</summary>
+      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Plot Code</span>
+      </summary>
       <pre><code class="python">
 def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
     # Step 1: Prepare data
@@ -3404,9 +3408,8 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Spectral Entropy
-      Computation
-      Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Spectral Entropy Computation Code</span>
+    </summary>
     <pre><code class="python">
   def compute_spectral_entropy(y):
       # Compute power spectral density
@@ -3426,7 +3429,8 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       </code></pre>
   </details>
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide ANOVA Test Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide ANOVA Test Code</span>
+    </summary>
     <pre><code class="python">
   def spectral_entropy_anova_test(df, target_labels=["dysregulated", "hunger", "delighted"], max_samples_per_label=50):
       """Perform ANOVA on spectral entropy differences."""
@@ -3470,7 +3474,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Pairwise T-Test Code
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Pairwise T-Test Code</span>
     </summary>
     <pre><code class="python">
   def pairwise_t_test(df, target_labels, feature="Spectral Entropy"):
@@ -3544,8 +3548,8 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   <div class="container main blog">
 
     <details>
-  <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Plot Code
-  </summary>
+      <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Plot Code</span>
+      </summary>
   <pre><code class="python">
 def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entropy"):
     data = [
@@ -3640,8 +3644,8 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
   </p>
 
   <details>
-    <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Synthetic Data Generation
-      Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Synthetic Data Generation Code</span>
+    </summary>
     </summary>
     <pre><code class="python">
 def generate_synthetic_audio_data(
@@ -4072,7 +4076,8 @@ print(f"Balanced data shape: {balanced_df.shape}")
   <p class="text">
     Ultimately, the K-Means analysis provided a diagnostic lens for evaluating feature space quality and informed later modeling decisions by exposing latent relationships between labels.
   </p>
-  <summary class="text" style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Full Loading code</summary>
+  <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Full Loading Code</span>
+  </summary>
 <details>
   <pre><code class="python">
 def extract_mfccs(spec_data, n_mfccs=13):
@@ -4787,7 +4792,8 @@ print("="*50)
   </p>
 
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide SVM Feature Evaluation Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide SVM Feature Evaluation Code</span>
+    </summary>
     <pre><code>
 def evaluate_feature_importance(X_combined, labels, feature_names):
 
@@ -5032,7 +5038,8 @@ for i, (feature, kernel, accuracy) in enumerate(top_features):
   </p>
 
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Performace Evaluation Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide SVM Performace Evaluation Code</span>
+    </summary>
     <pre>
       <code class="python">
 def plot_feature_performance(feature_performances, class_names):
@@ -5183,7 +5190,8 @@ def plot_feature_performance(feature_performances, class_names):
   </p>
 
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Hierachal SVM Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Hierachal SVM Code</span>
+    </summary>
     <pre>
       <code class="python">
 def create_hierarchical_ensemble(X_scaled, labels):
@@ -5449,7 +5457,8 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
     making it well-suited for intent classification based on nonverbal vocalizations.
   </p>
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Data Augmentation Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Data Augmentation Code</span>
+    </summary>
     <pre>
       <code class="python">
 def find_first_all_zero_columns(matrix):
@@ -5485,7 +5494,8 @@ filtered_df = truncate_spectrograms(df, set(valid))
   </details>
 
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Create and Train CNN Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Create and Train CNN Code</span>
+    </summary>
     <pre>
       <code class="python">
 # 1. Define Dataset Class
@@ -5618,7 +5628,8 @@ def train_model(df, num_epochs=100, batch_size=32, learning_rate=0.001):
   </details>
 
   <details>
-    <summary class="text"><i class="fa-solid fa-code fa-flip"></i> Show/Hide Evaluate CNN Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Evaluate CNN Code</span>
+    </summary>
     <pre>
       <code class="python">
 # 4. Evaluation functions
@@ -5949,7 +5960,8 @@ def prepare_spectrogram_dataset(
   </p>
 
   <details>
-    <summary>Show/Hide Training Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Training Code</span>
+    </summary>
     <pre><code class="python">
 def train_model(
     model,
@@ -6064,7 +6076,8 @@ def evaluate(model, loader, device):
     After training, we evaluate model performance using accuracy metrics, classification reports, and confusion matrices.
   </p>
   <details>
-  <summary>Show/Hide Testing Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Testing Code</span>
+    </summary>
   <pre><code class="python">
 def evaluate_test_set(
       model, test_loader, label_encoder=None,
@@ -6187,7 +6200,8 @@ def evaluate_test_set(
   </p>
 
   <details>
-    <summary>Show/Hide Parameters</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Parameters Code</span>
+    </summary>
     <pre><code class="python">
 # ----------------- Macros --------------------
 batch_size = 4
@@ -6325,7 +6339,8 @@ print(f"Model saved at {path}")
   </p>
 
   <details>
-    <summary>Show/Hide Training Metrics Code</summary>
+    <summary><i class="fa-solid fa-code fa-flip"></i> <span style="font-weight: bold;">Show/Hide Training Metrics Code</span>
+    </summary>
     <pre><code class="python">
 history_path = Path("../../results/training/train_history.json")
 
