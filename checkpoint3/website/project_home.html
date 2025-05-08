@@ -4719,10 +4719,228 @@ print("="*50)
     These results validated the use of cepstral features for intent prediction and informed the ensemble feature selection strategy.
   </p>
 
+  <details>
+    <summary>Show/Hide SVM Feature Evaluation Code</summary>
+    <pre><code>
+def evaluate_feature_importance(X_combined, labels, feature_names):
+
+    print("Now: evaluating individual feature performance with SVM.")
+    
+    le = LabelEncoder()
+    y_encoded = le.fit_transform(labels)
+    feature_performances = {}
+    kernels = ['linear', 'rbf', 'sigmoid']
+    
+    # Test each feature individually
+    for i in range(X_combined.shape[1]):
+        feature_data = X_combined[:, i].reshape(-1, 1)  # Extract single feature as column vector
+        feature_name = feature_names[i] if i < len(feature_names) else f"Feature_{i}"
+        
+        print(f"\nTesting feature: {feature_name}")
+        
+        scaler = StandardScaler()
+        feature_scaled = scaler.fit_transform(feature_data)
+        
+        X_train, X_test, y_train, y_test = train_test_split(
+            feature_scaled, y_encoded, test_size=0.25, random_state=42, stratify=y_encoded
+        )
+        
+        best_kernel = None
+        best_accuracy = 0
+        best_model = None
+        best_predictions = None
+        
+        for kernel in kernels:
+            # Grid search for RBF kernel
+            if kernel == 'rbf':
+                param_grid = {
+                    'C': [0.1, 1, 10, 100],
+                    'gamma': ['scale', 'auto', 0.1, 0.01]
+                }
+                svm = GridSearchCV(
+                    SVC(kernel=kernel, random_state=42),
+                    param_grid=param_grid,
+                    scoring='accuracy',
+                    cv=3,
+                    n_jobs=-1
+                )
+                svm.fit(X_train, y_train)
+                model = svm.best_estimator_
+            else:
+                model = SVC(kernel=kernel, random_state=42)
+                model.fit(X_train, y_train)
+            
+            y_pred = model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            
+            print(f"  {kernel.upper()} kernel accuracy: {accuracy:.4f}")
+            
+            if accuracy > best_accuracy:
+                best_accuracy = accuracy
+                best_kernel = kernel
+                best_model = model
+                best_predictions = y_pred
+        
+        feature_performances[feature_name] = {
+            'best_kernel': best_kernel,
+            'best_accuracy': best_accuracy,
+            'confusion_matrix': confusion_matrix(y_test, best_predictions),
+            'classification_report': classification_report(y_test, best_predictions, 
+                                                          target_names=le.classes_, 
+                                                          output_dict=True),
+            'model': best_model
+        }
+        
+        print(f"  Best kernel for {feature_name}: {best_kernel.upper()} with accuracy {best_accuracy:.4f}")
+    
+    best_feature = max(feature_performances.items(), 
+                      key=lambda x: x[1]['best_accuracy'])
+    
+    print("\n" + "="*60)
+    print(f"Best single feature: {best_feature[0]} with {best_feature[1]['best_kernel']} kernel")
+    print(f"Accuracy: {best_feature[1]['best_accuracy']:.4f}")
+    print("="*60)
+    
+    plot_feature_performance(feature_performances, le.classes_)
+    
+    return feature_performances
+
+def plot_feature_performance(feature_performances, class_names):
+
+    features = list(feature_performances.keys())
+    accuracies = [data['best_accuracy'] for data in feature_performances.values()]
+    kernels = [data['best_kernel'] for data in feature_performances.values()]
+    
+    plot_data = pd.DataFrame({
+        'Feature': features,
+        'Accuracy': accuracies,
+        'Kernel': kernels
+    })
+    
+    plot_data = plot_data.sort_values('Accuracy', ascending=False)
+    
+    plt.figure(figsize=(14, 8))
+    ax = sns.barplot(x='Accuracy', y='Feature', hue='Kernel', data=plot_data)
+    plt.title('SVM Classification Accuracy by Individual Feature', fontsize=15)
+    plt.xlabel('Accuracy', fontsize=12)
+    plt.ylabel('Feature', fontsize=12)
+    plt.xlim(0, 1)
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig('feature_importance_svm.png', dpi=300)
+    plt.close()
+    
+    best_feature = plot_data.iloc[0]['Feature']
+    best_perf = feature_performances[best_feature]
+    
+    # Confusion matrix for the best feature
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        best_perf['confusion_matrix'], 
+        annot=True if len(class_names) <= 10 else False, 
+        fmt='d', 
+        cmap='Blues',
+        xticklabels=class_names, 
+        yticklabels=class_names
+    )
+    plt.title(f'Confusion Matrix for Best Feature: {best_feature}\nKernel: {best_perf["best_kernel"]}', fontsize=13)
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    plt.xticks(rotation=90)
+    plt.yticks(rotation=0)
+    plt.tight_layout()
+    plt.savefig(f'best_feature_confusion_matrix.png', dpi=300)
+    plt.close()
+
+    # F1 scores for the best feature
+    class_f1 = {
+        class_name: report['f1-score'] 
+        for class_name, report in best_perf['classification_report'].items() 
+        if class_name not in ['accuracy', 'macro avg', 'weighted avg']
+    }
+    
+    plt.figure(figsize=(12, 6))
+    pd.Series(class_f1).sort_values().plot(kind='barh', color='teal')
+    plt.title(f'F1-Scores by Class for Best Feature ({best_feature})', fontsize=13)
+    plt.xlabel('F1-Score')
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig(f'best_feature_f1_scores.png', dpi=300)
+    plt.close()
+
+mfcc_names = [f"MFCC_{i+1}" for i in range(13)]
+audio_stat_names = ["Mean", "StdDev", "Max", "Min", "RMS", "ZCR"]
+feature_names = mfcc_names + audio_stat_names
+
+print("Testing SVM on individual features...")
+feature_performances = evaluate_feature_importance(X_scaled, labels, feature_names)
+
+# Details about the best features
+top_features = sorted(
+    [(name, data['best_kernel'], data['best_accuracy']) 
+      for name, data in feature_performances.items()],
+    key=lambda x: x[2],
+    reverse=True
+)[:5]  # Top 5 features
+
+print("\nTop 5 Individual Features:")
+for i, (feature, kernel, accuracy) in enumerate(top_features):
+    print(f"{i+1}. {feature} with {kernel} kernel: {accuracy:.4f}")
+    </code>
+  </details>
+
+</div>
+
+<div class="container blog gray max">
+  <h3 style="text-align: center">Feature Importance Test with Kernel Projections</h3>
+  <div class="container blog main gray">
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="data-table-header">Feature</th>
+            <th class="data-table-header">Linear Acc</th>
+            <th class="data-table-header">RBF Acc</th>
+            <th class="data-table-header">Sigmoid Acc</th>
+            <th class="data-table-header">Best Kernel</th>
+            <th class="data-table-header">Best Acc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="data-table-cell">MFCC_8</td><td class="data-table-cell">0.2621
+          </td><td class="data-table-cell">0.2631</td><td class="data-table-cell">0.1930</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2631</td></tr>
+          <tr><td class="data-table-cell">MFCC_9</td><td class="data-table-cell">0.2636</td><td class="data-table-cell">0.2641</td><td class="data-table-cell">0.1565</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2641</td></tr>
+          <tr><td class="data-table-cell">MFCC_10</td><td class="data-table-cell">0.2631</td><td class="data-table-cell">0.2537</td><td class="data-table-cell">0.1441</td><td class="data-table-cell">Linear</td><td class="data-table-cell">0.2631</td></tr>
+          <tr><td class="data-table-cell">MFCC_11</td><td class="data-table-cell">0.2591</td><td class="data-table-cell">0.2468</td><td class="data-table-cell">0.1476</td><td class="data-table-cell">Linear</td><td class="data-table-cell">0.2591</td></tr>
+          <tr><td class="data-table-cell">MFCC_12</td><td class="data-table-cell">0.2591</td><td class="data-table-cell">0.2443</td><td class="data-table-cell">0.1787</td><td class="data-table-cell">Linear</td><td class="data-table-cell">0.2591</td></tr>
+          <tr><td class="data-table-cell">MFCC_13</td><td class="data-table-cell">0.2552</td><td class="data-table-cell">0.2488</td><td class="data-table-cell">0.1619</td><td class="data-table-cell">Linear</td><td class="data-table-cell">0.2552</td></tr>
+          <tr><td class="data-table-cell">Mean</td><td class="data-table-cell">0.2325</td><td class="data-table-cell">0.2335</td><td class="data-table-cell">0.1841</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2335</td></tr>
+          <tr><td class="data-table-cell">StdDev</td><td class="data-table-cell">0.2384</td><td class="data-table-cell">0.2409</td><td class="data-table-cell">0.1678</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2409</td></tr>
+          <tr><td class="data-table-cell">Max</td><td class="data-table-cell">0.2325</td><td class="data-table-cell">0.2453</td><td class="data-table-cell">0.1737</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2453</td></tr>
+          <tr><td class="data-table-cell">Min</td><td class="data-table-cell">0.2325</td><td class="data-table-cell">0.2325</td><td class="data-table-cell">0.1678</td><td class="data-table-cell">Linear</td><td class="data-table-cell">0.2325</td></tr>
+          <tr><td class="data-table-cell">RMS</td><td class="data-table-cell">0.2384</td><td class="data-table-cell">0.2409</td><td class="data-table-cell">0.1678</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2409</td></tr>
+          <tr><td class="data-table-cell">ZCR</td><td class="data-table-cell">0.2512</td><td class="data-table-cell">0.2552</td><td class="data-table-cell">0.1550</td><td class="data-table-cell">RBF</td><td class="data-table-cell">0.2552</td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6" class="data-table-footer">
+              Best overall feature: <strong>MFCC_9</strong> with <strong>RBF kernel</strong> | Accuracy: <strong>0.2641</strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" class="data-table-footer">
+              Top 5 features: MFCC_9, MFCC_8, MFCC_10, MFCC_7, MFCC_11
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
 </div>
 
 <div class="container blog gray large">
-  <h3>Feature Importance in SVM</h3>
+  <h3 style="text-align: center">Feature Importance in SVM</h3>
   <img src="clarity/images/classifier_pics/feature_importance_svm.png" alt="Feature Importance SVM">
 </div>
 
@@ -4887,7 +5105,14 @@ print("="*50)
   </div>  
 </div>
 
-<div class="container blog main"> <h2 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h2> <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p> </div>
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h2>
+  <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p>
+</div>
+
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Convolutional Neural Networks on Spectrograms</h2>
+</div>
 
 </div>
 
