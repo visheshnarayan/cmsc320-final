@@ -4701,13 +4701,39 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Single Feature Performance: MFCC_9 (SVM)</h2>
+  <h2 style="padding-top: 1em">Feature-Level SVM Evaluation</h2>
 
+  <p class="text">
+    This experiment benchmarked each feature’s classification power by training 
+    <span style="font-weight: bold">individual SVMs</span> (linear, RBF, and sigmoid) on single features.
+  </p>
+
+  <p class="text">
+    MFCCs generally outperformed time-domain features, with 
+    <span style="font-weight: bold">MFCC_9</span>, <span style="font-weight: bold">MFCC_8</span>, and <span style="font-weight: bold">MFCC_10</span> 
+    leading the accuracy rankings. In contrast, raw waveform descriptors such as 
+    <span style="font-weight: bold">Mean</span> and <span style="font-weight: bold">Min</span> contributed little to label separability.
+  </p>
+
+  <p class="text">
+    These results validated the use of cepstral features for intent prediction and informed the ensemble feature selection strategy.
+  </p>
+
+</div>
+
+<div class="container blog gray large">
+  <h3>Feature Importance in SVM</h3>
+  <img src="clarity/images/classifier_pics/feature_importance_svm.png" alt="Feature Importance SVM">
+</div>
+
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Single Feature Performance: MFCC_9 (SVM)</h2>
+  
   <p class="text">
     This section explores the classification performance when using only a single acoustic feature: 
     <span style="font-weight: bold">MFCC_9</span>. An SVM was trained to predict expressive intent using just this dimension.
   </p>
-
+  
   <p class="text">
     While MFCC_9 outperformed other individual features in accuracy, it tended to overfit dominant classes such as 
     <span style="font-weight: bold">selftalk</span> and <span style="font-weight: bold">frustrated</span>, as seen in the confusion matrix and F1 scores. 
@@ -4769,7 +4795,7 @@ print("="*50)
       </div>
     </div>
 
-    <p class="caption">
+    <p class="caption" style="padding: 4em">
       <span style="font-weight: bold">Figure 1:</span> Confusion matrix for SVM with MFCC_9 feature. <br>
       <span style="font-weight: bold">Figure 2:</span> F1 scores for SVM with MFCC_9 feature. <br>
       <span style="font-weight: bold">Figure 3:</span> Per-class metrics for SVM with MFCC_9 feature. <br>
@@ -4779,7 +4805,89 @@ print("="*50)
   </div>  
 </div>
 
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Hierarchical Ensemble Classification</h2>
 
+  <p class="text">
+    This section evaluates a <span style="font-weight: bold">hierarchical trickle-down SVM ensemble</span> trained on the full feature set. 
+    Each binary classifier was trained to isolate one label at a time, starting from the most frequent.
+  </p>
+
+  <p class="text">
+    The full confusion matrix and normalized confusion heatmap demonstrate significant improvements in 
+    label separability compared to single-feature SVMs. Notably, classes such as 
+    <span style="font-weight: bold">greeting</span>, <span style="font-weight: bold">hunger</span>, and <span style="font-weight: bold">laugh</span> 
+    showed high recall and precision.
+  </p>
+
+  <p class="text">
+    Despite gains, misclassification patterns reveal that expressive overlap between 
+    <span style="font-weight: bold">selftalk</span>, <span style="font-weight: bold">laughter</span>, and <span style="font-weight: bold">social</span> 
+    continues to present a challenge. These insights suggest the model successfully leverages a broader feature space 
+    but still contends with class imbalance and semantic similarity.
+  </p>
+
+</div>
+
+<div class="container blog gray medium">
+  <h3 style="text-align: center;"> Ensemble SVM Performance Metrics</h3>
+  <div class="slide-display">
+    <div class="slide-menu">
+      <ul class="dots" id="slide-menu">
+        <li class="dot active"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+      </ul>
+    </div>
+
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+        <!-- <h4>3D t-SNE</h4> -->
+        <img src="clarity/images/classifier_pics/ensemble_confusion_matrix.png" alt="Ensemble Confusion Matrix">
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D PCA</h4> -->
+        <img src="clarity/images/classifier_pics/ensemble_f1_scores.png" alt="Ensemble F1 Scores">
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/hierarchical_ensemble_metrics_by_class.png" alt="Ensemble Metrics by Class">
+      </div>
+    </div>
+    
+    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/hierarchical_ensemble_norm_confusion_matrix.png" alt="Ensemble Normalized Confusion Matrix">
+      </div>
+    </div>
+    
+    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/hierarchical_ensemble_top_errors.png" alt="Ensemble Top Errors">
+      </div>
+    </div>
+
+    <p class="caption" style="padding: 4em">
+      <span style="font-weight: bold">Figure 1:</span> Ensemble Confusion Matrix<br>
+      <span style="font-weight: bold">Figure 1:</span> Ensemble F1 Scores<br>
+      <span style="font-weight: bold">Figure 1:</span> Ensemble Metrics by Class<br>
+      <span style="font-weight: bold">Figure 1:</span> Ensemble Normalized Confusion Matrix<br>
+      <span style="font-weight: bold">Figure 1:</span> Ensemble Top Errors<br>
+    </p>
+  </div>  
+</div>
+
+<div class="container blog main"> <h2 style="padding-top: 1em">Final Verdict: Single Feature vs. Hierarchical Ensemble</h2> <p class="text"> While the single-feature SVM using <span style="font-weight: bold">MFCC_9</span> showed reasonable accuracy and class-level separation, its performance was ultimately limited by the expressiveness of one acoustic dimension. The hierarchical ensemble, in contrast, leveraged the full feature space and label frequency priors to build a cascading classifier that substantially improved class-wise F1 scores and reduced top misclassifications. </p> <p class="text"> Specifically, the ensemble achieved a higher macro F1-score and demonstrated more robust handling of minority classes. Error analysis also revealed fewer critical misclassifications between semantically distinct labels. These results support the ensemble's role as a more holistic and scalable approach for decoding expressive intent in nonverbal vocalizations. </p> </div>
 
 </div>
 
