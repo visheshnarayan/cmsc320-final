@@ -4694,6 +4694,86 @@ print("="*50)
   </ul>
 </div>
 
+<div class="container blog main">
+  <h2 style="padding-top: 1em">Single Feature Performance: MFCC_9 (SVM)</h2>
+
+  <p class="text">
+    This section explores the classification performance when using only a single acoustic feature: 
+    <span style="font-weight: bold">MFCC_9</span>. An SVM was trained to predict expressive intent using just this dimension.
+  </p>
+
+  <p class="text">
+    While MFCC_9 outperformed other individual features in accuracy, it tended to overfit dominant classes such as 
+    <span style="font-weight: bold">selftalk</span> and <span style="font-weight: bold">frustrated</span>, as seen in the confusion matrix and F1 scores. 
+    The model struggled with rare or semantically similar labels, leading to many misclassifications.
+  </p>
+
+  <p class="text">
+    The top error chart reveals a strong confusion bias toward <span style="font-weight: bold">selftalk</span>, especially from semantically adjacent classes like 
+    <span style="font-weight: bold">frustrated</span>, <span style="font-weight: bold">delighted</span>, and <span style="font-weight: bold">dysregulated</span>. 
+    This indicates that MFCC_9 may encode general intensity or spectral sharpness but lacks emotional granularity.
+  </p>
+</div>
+
+<div class="container blog gray">
+  <h3 style="text-align: center;"> Single Feature SVM Performance Metrics</h3>
+  <div class="slide-display">
+    <div class="slide-menu">
+      <ul class="dots" id="slide-menu">
+        <li class="dot active"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+        <li class="dot"></li>
+      </ul>
+    </div>
+
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+        <!-- <h4>3D t-SNE</h4> -->
+        <img src="clarity/images/classifier_pics/best_feature_confusion_matrix.png" alt="Best Feature Confusion Matrix">
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D PCA</h4> -->
+        <img src="clarity/images/classifier_pics/best_feature_f1_scores.png" alt="Best Feature F1 Scores">
+      </div>
+    </div>
+
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/svm_with_mfcc_9_metrics_by_class.png" alt="Best Feature F1 Scores">
+      </div>
+    </div>
+    
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/svm_with_mfcc_9_norm_confusion_matrix.png" alt="Best Feature F1 Scores">
+      </div>
+    </div>
+    
+    <div class="slide-content" style="display: block; zoom: 0.1%; visibility: hidden;">
+      <div class="plot-container">
+        <!-- <h4>3D UMAP</h4> -->
+        <img src="clarity/images/classifier_pics/svm_with_mfcc_9_top_errors.png" alt="Best Feature F1 Scores">
+      </div>
+    </div>
+
+    <p class="caption">
+      <span style="font-weight: bold">Figure 1:</span> Confusion matrix for SVM with MFCC_9 feature. <br>
+      <span style="font-weight: bold">Figure 2:</span> F1 scores for SVM with MFCC_9 feature. <br>
+      <span style="font-weight: bold">Figure 3:</span> Per-class metrics for SVM with MFCC_9 feature. <br>
+      <span style="font-weight: bold">Figure 4:</span> Normalized confusion matrix for SVM with MFCC_9 feature. <br>
+      <span style="font-weight: bold">Figure 5:</span> Top errors for SVM with MFCC_9 feature.
+    </p>
+  </div>  
+</div>
+
+
 
 </div>
 
