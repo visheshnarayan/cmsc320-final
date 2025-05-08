@@ -53,7 +53,7 @@ function initSlideDisplay(slideDisplayClass) {
         if (i == idx) {
           contents[i].style.display = "block";
           contents[i].style.width = "100%";
-          contents[i].style.height = "100%";
+          contents[i].style.height = "auto";
           contents[i].style.visibility = "visible";
         } else {
           contents[i].style.display = "none";

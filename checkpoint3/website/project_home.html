@@ -2678,31 +2678,30 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
       <!-- <img src="clarity/images/YesVsNoSample1.png" alt="Yes Vs No Sample 1"> -->
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
         <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample2.html" alt="Yes Vs No Sample 2"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample2.png" alt="Yes Vs No Sample 2"> -->
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
         <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample3.html" alt="Yes Vs No Sample 3"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample3.png" alt="Yes Vs No Sample 3"> -->
     </div>
 
-    <div class="slide-content" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
+    <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
       <div class="plot-container">
         <iframe src="clarity/images/comparison_spectrograms/comparison_yes_vs_no_sample4.html" alt="Yes Vs No Sample 4"></iframe>
       </div>
       <!-- <img src="clarity/images/YesVsNoSample4.png" alt="Yes Vs No Sample 4"> -->
     </div>
-
-    <p class="caption">
-      The spectrograms above illustrate the differences in pitch variability between "yes" and "no" vocalizations.
-    </p>
   </div>
+  <p class="caption">
+    The spectrograms above illustrate the differences in pitch variability between "yes" and "no" vocalizations.
+  </p>
 </div>
 
 <div class="container blog main">
@@ -3007,108 +3006,105 @@ plot_spectrogram_comparison(df, label1="yes", label2="no", sr=SAMPLE_RATE, n_exa
     <details>
       <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Full Plot code</summary>
       <pre><code class="python">
-        def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
-        # Step 1: Prepare data
-        data = []
-        mfcc_data = {label: [] for label in labels}
-    
-        for label in labels:
-            for row in df.filter(pl.col("Label") == label).iter_rows(named=True):
-                y = np.array(row["Audio"])
-                mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
-                mfcc_mean = np.mean(mfccs, axis=1)
-    
-                # For boxplot
-                for i in range(n_mfcc):
-                    data.append({
-                        "MFCC": f"MFCC-{i+1}",
-                        "Value": float(mfcc_mean[i]),
-                        "Label": label
-                    })
-    
-                # For heatmap
-                mfcc_data[label].append(mfcc_mean)
-    
-        # Convert to pandas DataFrame for Plotly
-        df_plot = pd.DataFrame(data)
-    
-        # Prepare heatmap data
-        heat_data = []
-        for label in labels:
-            means = np.mean(np.stack(mfcc_data[label]), axis=0)
-            row = [float(means[i]) for i in range(n_mfcc)]
-            heat_data.append(row)
-    
-        # Color mapping
-        colors = px.colors.qualitative.D3[:len(labels)]
-        color_dict = {label: color for label, color in zip(labels, colors)}
-    
-        # Step 2: Create Boxplot Figure
-        box_fig = go.Figure()
-        for label in labels:
-            label_data = df_plot[df_plot["Label"] == label]
-            box_fig.add_trace(
-                go.Box(
-                    x=label_data["MFCC"],
-                    y=label_data["Value"],
-                    name=label,
-                    marker_color=color_dict[label],
-                    boxmean=True
-                )
-            )
-        box_fig.update_layout(
-            title="MFCC Distribution (Boxplot)",
-            xaxis_title="MFCC Coefficient",
-            yaxis_title="Value",
-            boxmode='group',
-            margin=dict(l=20, r=220, t=60, b=20),  # More right margin
-            legend=dict(
-                orientation="v",
-                yanchor="top",
-                y=1,
-                xanchor="left",
-                x=1,  # Push legend further right outside the plot
-                font=dict(size=12),
-                itemwidth=40,  # Force horizontal space per legend item
-            ),
-            width=800,
-            height=600
-        )
-    
-        # Step 3: Create Heatmap Figure
-        heatmap_fig = go.Figure(
-            go.Heatmap(
-                z=heat_data,
-                x=[f"MFCC-{i+1}" for i in range(n_mfcc)],
-                y=[label.upper() for label in labels],
-                colorscale='Viridis',
-                text=[[f"{val:.1f}" for val in row] for row in heat_data],
-                texttemplate="%{text}",
-                colorbar=dict(title="Value")
+def box_and_heat_mfcc_comparison(df, labels=["yes", "no"], sr=22050, n_mfcc=3):
+    # Step 1: Prepare data
+    data = []
+    mfcc_data = {label: [] for label in labels}
+
+    for label in labels:
+        for row in df.filter(pl.col("Label") == label).iter_rows(named=True):
+            y = np.array(row["Audio"])
+            mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
+            mfcc_mean = np.mean(mfccs, axis=1)
+
+            # For boxplot
+            for i in range(n_mfcc):
+                data.append({
+                    "MFCC": f"MFCC-{i+1}",
+                    "Value": float(mfcc_mean[i]),
+                    "Label": label
+                })
+
+            # For heatmap
+            mfcc_data[label].append(mfcc_mean)
+
+    # Convert to pandas DataFrame for Plotly
+    df_plot = pd.DataFrame(data)
+
+    # Prepare heatmap data
+    heat_data = []
+    for label in labels:
+        means = np.mean(np.stack(mfcc_data[label]), axis=0)
+        row = [float(means[i]) for i in range(n_mfcc)]
+        heat_data.append(row)
+
+    # Color mapping
+    colors = px.colors.qualitative.D3[:len(labels)]
+    color_dict = {label: color for label, color in zip(labels, colors)}
+
+    # Step 2: Create Boxplot Figure
+    box_fig = go.Figure()
+    for label in labels:
+        label_data = df_plot[df_plot["Label"] == label]
+        box_fig.add_trace(
+            go.Box(
+                x=label_data["MFCC"],
+                y=label_data["Value"],
+                name=label,
+                marker_color=color_dict[label],
+                boxmean=True
             )
         )
-        heatmap_fig.update_layout(
-            title="MFCC Mean Comparison (Heatmap)",
-            xaxis_title="MFCC Coefficient",
-            yaxis_title="Label",
-            margin=dict(l=20, r=220, t=60, b=20),  # More right margin
-            legend=dict(
-                orientation="v",
-                yanchor="top",
-                y=1,
-                xanchor="left",
-                x=1,  # Push legend further right outside the plot
-                font=dict(size=12),
-                itemwidth=40,  # Force horizontal space per legend item
-            ),
-            width=800,
-            height=600
+    box_fig.update_layout(
+        title="MFCC Distribution (Boxplot)",
+        xaxis_title="MFCC Coefficient",
+        yaxis_title="Value",
+        boxmode='group',
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        ),
+    )
+
+    # Step 3: Create Heatmap Figure
+    heatmap_fig = go.Figure(
+        go.Heatmap(
+            z=heat_data,
+            x=[f"MFCC-{i+1}" for i in range(n_mfcc)],
+            y=[label.upper() for label in labels],
+            colorscale='Viridis',
+            text=[[f"{val:.1f}" for val in row] for row in heat_data],
+            texttemplate="%{text}",
+            colorbar=dict(title="Value")
         )
-    
-        box_fig.show()
-        box_fig.write_html("mfcc_boxplot.html")
-        heatmap_fig.show()
-        heatmap_fig.write_html("mfcc_heatmap.html")
+    )
+    heatmap_fig.update_layout(
+        title="MFCC Mean Comparison (Heatmap)",
+        xaxis_title="MFCC Coefficient",
+        yaxis_title="Label",
+        margin=dict(l=20, r=220, t=60, b=20),  # More right margin
+        legend=dict(
+            orientation="v",
+            yanchor="top",
+            y=1,
+            xanchor="left",
+            x=1,  # Push legend further right outside the plot
+            font=dict(size=12),
+            itemwidth=40,  # Force horizontal space per legend item
+        ),
+    )
+
+    box_fig.show()
+    box_fig.write_html("mfcc_boxplot.html")
+    heatmap_fig.show()
+    heatmap_fig.write_html("mfcc_heatmap.html")
+
     
         </code></pre>
     </details>
@@ -3119,7 +3115,7 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
   </code></pre>
 </div>
 
-<div class="container blog main gray">
+<div class="container blog large gray">
   <h3 style="text-align: center;">Boxplot/Heatmap</h3>
   <div class="slide-display">
     <div class="slide-menu">
@@ -3129,19 +3125,22 @@ box_and_heat_mfcc_comparison(df, labels=["yes", "no"], n_mfcc=3)
       </ul>
     </div>
 
-    <div class="slide-content plot-container" style="display: block;">
-      <iframe src="clarity/images/mfcc_boxplot.html" alt="MFCC Distribution Box Plot"></iframe>
+    <div class="slide-content" style="display: block;">
+      <div class="plot-container">
+         <iframe src="clarity/images/mfcc_boxplot.html" alt="MFCC Distribution Box Plot"></iframe>
+      </div>
     </div>
 
-    <div class="slide-content plot-container" style="display: block; width: 0.1px; height: 0.1px; visibility: hidden;">
-      <iframe src="clarity/images/mfcc_heatmap.html" alt="MFCC Mean Comparison Heat Map"></iframe>
+    <div class="slide-content" style="display: block; width: 0px; height: 0px; visibility: hidden;">
+      <div class="plot-container">
+        <iframe src="clarity/images/mfcc_heatmap.html" alt="MFCC Mean Comparison Heat Map"></iframe>
+      </div>
     </div>
-
-    <p class="caption">
-      The boxplot shows the distribution of MFCC values for "yes" and "no" vocalizations, while the heatmap shows the
-      similartity between the means
-    </p>
   </div>
+  <p class="caption">
+    The boxplot shows the distribution of MFCC values for "yes" and "no" vocalizations, while the heatmap shows the
+    similartity between the means
+  </p>
 </div>
 
 <div class="container blog main">
