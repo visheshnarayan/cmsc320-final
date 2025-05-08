@@ -139,11 +139,12 @@
       border: none;
     }
 
-    .slider-item iframe {
+    .slider-item iframe img{
       width: 400px;
       height: 400px;
       border: none;
     }
+
   </style>
 </head>
 
@@ -1292,47 +1293,48 @@ label_counts.describe()
   <details>
     <summary style="padding-top: 1em; font-family:Arial, Helvetica, sans-serif;">Show/Hide Plot Code</summary>
     <pre><code class="python">
-      # Make sure output directory exists
-      output_dir = "participant_barplots"
-      os.makedirs(output_dir, exist_ok=True)
-      
-      # Convert Polars groupby to pandas if not already done
-      # participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count')).to_pandas()
-      
-      participant_ids = participant_label_counts['ID'].unique()
-      
-      for participant_id in participant_ids:
-          data = participant_label_counts[participant_label_counts['ID'] == participant_id]
-          
-          # Generate Viridis colors
-          colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(data)))
-      
-          # Create interactive bar chart
-          fig = px.bar(
-              data,
-              x='Label',
-              y='Count',
-              title=f'Label Distribution for Participant {participant_id}',
-              color='Label',
-              color_discrete_sequence=colors
-          )
-      
-          fig.update_layout(
-              xaxis_title='Label',
-              yaxis_title='Count',
-              xaxis_tickangle=70,
-              margin=dict(l=40, r=40, t=60, b=100),
-              plot_bgcolor='white',
-              autosize=False,
-              width=400,    
-              height=400,
-          )
-      
-          # Save each plot as HTML
-          filename = os.path.join(output_dir, f"participant_{participant_id}.html")
-          fig.show()
-          fig.write_html(filename)
-      
+# Make sure output directory exists
+output_dir = "participant_barplots"
+os.makedirs(output_dir, exist_ok=True)
+
+# Convert Polars groupby to pandas if not already done
+# participant_label_counts = df.group_by(['ID', 'Label']).agg(pl.len().alias('Count')).to_pandas()
+
+participant_ids = participant_label_counts['ID'].unique()
+
+for participant_id in participant_ids:
+    data = participant_label_counts[participant_label_counts['ID'] == participant_id]
+    
+    # Generate Viridis colors
+    colors = px.colors.sample_colorscale('Viridis', np.linspace(0, 1, len(data)))
+
+    # Create interactive bar chart
+    fig = px.bar(
+        data,
+        x='Label',
+        y='Count',
+        title=f'Label Distribution for Participant {participant_id}',
+        color='Label',
+        color_discrete_sequence=colors
+    )
+
+    fig.update_layout(
+        xaxis_title='Label',
+        yaxis_title='Count',
+        xaxis_tickangle=70,
+        margin=dict(l=40, r=40, t=60, b=100),
+        plot_bgcolor='white',
+        autosize=False,
+        width=800,    
+        height=800,
+    )
+
+    # Save each plot as HTML
+    filename = os.path.join(output_dir, f"participant_{participant_id}.png")
+    fig.show()
+    fig.write_image(filename, width=800, height=800)
+    # fig.write_html(filename)
+
         </code></pre>
   </details>
 </div>
@@ -1349,28 +1351,28 @@ label_counts.describe()
     </div>
     <div class="slider">
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P01.html" alt="P01 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P01.png" style="max-width: 100%; max-height: 100%;"  alt="P01 Label Distribution"></i>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P02.html" alt="P02 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P02.png" alt="P02 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P03.html" alt="P03 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P03.png" alt="P03 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P05.html" alt="P05 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P05.png" alt="P05 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P06.html" alt="P06 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P06.png" alt="P06 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P08.html" alt="P08 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P08.png" alt="P08 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P11.html" alt="P11 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P11.png" alt="P11 Label Distribution"></img>
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/participant_barplots/participant_P16.html" alt="P16 Label Distribution"></iframe>
+        <img src="clarity/images/participant_barplots/participant_P16.png" alt="P16 Label Distribution"></img>
       </div>
     </div>
   </div>
@@ -1581,14 +1583,15 @@ def plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms"):
                 title=f"{label.upper()} Spectrogram",
                 xaxis_title="Time",
                 yaxis_title="Frequency",
-                width=800,
-                height=600
+                width=400,
+                height=400
             )
             
             # Save as HTML file
-            output_file = os.path.join(output_dir, f"{label.lower()}_spectrogram.html")
+            output_file = os.path.join(output_dir, f"{label.lower()}_spectrogram.png")
             fig.show()
-            fig.write_html(output_file)
+            fig.write_image(output_file, width=800, height=800)
+            # fig.write_html(output_file)
             print(f"Saved {output_file}")
         else:
             print(f"Skipping {label}: spectrogram is not 2-dimensional")
@@ -1613,91 +1616,91 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
     </div>
     <div class="slider">
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/affectionate_spectrogram.html" alt="Affectionate Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/affectionate_spectrogram.png" alt="Affectionate Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/affectionate.png" alt="Affectionate Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/bathroom_spectrogram.html" alt="Bathroom Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/bathroom_spectrogram.png" alt="Bathroom Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/bathroom.png" alt="Bathroom Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/delighted_spectrogram.html" alt="Delighted Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/delighted_spectrogram.png" alt="Delighted Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/delighted.png" alt="Delighted Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/dysregulated_spectrogram.html" alt="Dysregulated Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/dysregulated_spectrogram.png" alt="Dysregulated Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/dysregulated.png" alt="Dysregulated Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/dysregulation-bathroom_spectrogram.html" alt="Dysregulation-Bathroom Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/dysregulation-bathroom_spectrogram.png" alt="Dysregulation-Bathroom Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/dysregulation-bathroom.png" alt="Dysregulation-Bathroom Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/dysregulation-sick_spectrogram.html" alt="Dysregulation-Sick Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/dysregulation-sick_spectrogram.png" alt="Dysregulation-Sick Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/dysregulation-sick.png" alt="Dysregulation-Sick Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/frustrated_spectrogram.html" alt="Frustrated Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/frustrated_spectrogram.png" alt="Frustrated Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/frustrated.png" alt="Frustrated Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/glee_spectrogram.html" alt="Glee Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/glee_spectrogram.png" alt="Glee Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/glee.png" alt="Frustrated Glee"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/greeting_spectrogram.html" alt="Greeting Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/greeting_spectrogram.png" alt="Greeting Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/greeting.png" alt="Frustrated Greeting"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/happy_spectrogram.html" alt="Happy Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/happy_spectrogram.png" alt="Happy Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/happy.png" alt="Happy Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/help_spectrogram.html" alt="Help Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/help_spectrogram.png" alt="Help Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/help.png" alt="Help Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/hunger_spectrogram.html" alt="Hunger Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/hunger_spectrogram.png" alt="Hunger Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/hunger.png" alt="Hunger Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/laugh_spectrogram.html" alt="Laugh Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/laugh_spectrogram.png" alt="Laugh Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/laugh.png" alt="Laugh Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/laughter_spectrogram.html" alt="Laughter Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/laughter_spectrogram.png" alt="Laughter Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/laughter.png" alt="Laughter Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/more_spectrogram.html" alt="More Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/more_spectrogram.png" alt="More Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/more.png" alt="More Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/no_spectrogram.html" alt="No Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/no_spectrogram.png" alt="No Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/no.png" alt="No Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/protest_spectrogram.html" alt="Protest Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/protest_spectrogram.png" alt="Protest Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/protest.png" alt="Protest Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/request_spectrogram.html" alt="Request Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/request_spectrogram.png" alt="Request Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/request.png" alt="Request Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/selftalk_spectrogram.html" alt="Selftalk Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/selftalk_spectrogram.png" alt="Selftalk Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/selftalk.png" alt="Selftalk Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/social_spectrogram.html" alt="Social Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/social_spectrogram.png" alt="Social Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/social.png" alt="Social Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/tablet_spectrogram.html" alt="Tablet Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/tablet_spectrogram.png" alt="Tablet Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/tablet.png" alt="Tablet Spectogram"> -->
       </div>
       <div class="slider-item">
-        <iframe src="clarity/images/spectrograms_plotly/yes_spectrogram.html" alt="Yes Spectrogram"></iframe>
+        <img src="clarity/images/spectrograms_plotly/yes_spectrogram.png" alt="Yes Spectrogram"></img>
         <!-- <img src="clarity/images/spectrograms/yes.png" alt="Yes Spectogram"> -->
       </div>
     </div>
