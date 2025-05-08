@@ -5314,7 +5314,7 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
 </div>
 
 <div class="container blog main">
-  <h3 style="padding-top: 1em">CNN Training on Mel Spectrograms</h3>
+  <h2 style="padding-top: 1em">CNN Training on Mel Spectrograms</h2>
 
   <ul style="padding-left: 20px; list-style-type: disc;">
     <li>
@@ -5345,6 +5345,245 @@ print(f"Weighted Avg F1-Score: {ensemble_results['classification_report']['weigh
       <p class="text"><span style="font-weight: bold">Model Saving</span> – Persisted the trained CNN model weights (<code>spectrogram_cnn.pth</code>) and label encoder class mapping (<code>label_encoder.npy</code>) for reproducibility and deployment.</p>
     </li>
   </ul>
+
+  <details>
+    <summary>Show/Hide Data Augmentation Code</summary>
+    <pre>
+      <code class="python">
+def find_first_all_zero_columns(matrix):
+    # Convert to numpy array if not already
+    arr = np.array(matrix, dtype=np.float32)
+    zero_cols = np.all(arr == 0, axis=0)
+    for c in range(len(zero_cols)):
+        if np.all(zero_cols[c:]):
+            return int(c)  # Explicitly convert to Python int
+    return -1  # Return -1 if no trailing zeros
+
+    def find_mean_len(df):
+    mean_len = 0
+    for mel_spec in df['Spectrogram']:
+        mel_spec = mel_spec.to_list()
+        mean_len += find_first_all_zero_columns(mel_spec)
+    mean_len = mean_len // len(df['Spectrogram'])
+    print(f"The mean length of the mel spectrograms is: {mean_len}")
+    return mean_len
+
+def truncate_spectrograms(df, valid):
+    filtered_df = df.filter(pl.col("Label").is_in(valid))
+    mean_len = find_mean_len(filtered_df)
+    filtered_df = filtered_df.with_columns(
+        truncated_spectrograms = pl.col("Spectrogram").map_elements(lambda x: [row[:mean_len] for row in x])
+    )
+    return filtered_df
+
+valid = ['frustrated', 'delighted', 'selftalk']
+filtered_df = truncate_spectrograms(df, set(valid))
+      </code>
+    </pre>
+  </details>
+
+  <details>
+    <summary>Show/Hide Create and Train CNN Code</summary>
+    <pre>
+      <code class="python">
+# 1. Define Dataset Class
+class SpectrogramDataset(Dataset):
+    def __init__(self, df):
+        self.spectrograms = df["truncated_spectrograms"].to_list()
+        self.labels = df["Label"].to_list()
+        
+        self.label_encoder = LabelEncoder()
+        self.encoded_labels = self.label_encoder.fit_transform(self.labels)
+        
+    def __len__(self):
+        return len(self.spectrograms)
+    
+    def __getitem__(self, idx):
+        spectrogram = np.array(self.spectrograms[idx], dtype=np.float32)
+        spectrogram = np.expand_dims(spectrogram, axis=0)
+        label = self.encoded_labels[idx]
+        return torch.from_numpy(spectrogram), torch.tensor(label, dtype=torch.long)
+
+# 2. Define CNN Model
+class SpectrogramCNN(nn.Module):
+    def __init__(self, num_classes=len(valid)):
+        super(SpectrogramCNN, self).__init__()
+        
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
+        
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
+        self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)
+        
+        self.fc1 = nn.Linear(128 * 16 * 6, 512)
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(512, num_classes)
+        
+    def forward(self, x):
+        x = self.pool1(F.relu(self.bn1(self.conv1(x))))
+        x = self.pool2(F.relu(self.bn2(self.conv2(x))))
+        x = self.pool3(F.relu(self.bn3(self.conv3(x))))
+        
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)
+        return x
+
+# 3. Training Setup
+def evaluate_model(model, data_loader, criterion, device):
+    model.eval()
+    loss = 0.0
+    correct = 0
+    total = 0
+    
+    with torch.no_grad():
+        for inputs, labels in data_loader:
+            inputs, labels = inputs.to(device), labels.to(device)
+            
+            outputs = model(inputs)
+            loss += criterion(outputs, labels).item() * inputs.size(0)
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+    
+    return loss / len(data_loader.dataset), correct / total
+
+def train_model(df, num_epochs=100, batch_size=32, learning_rate=0.001):
+    # Split data into train (60%), validation (20%), and test (20%)
+    train_df, temp_df = train_test_split(df, test_size=0.4, random_state=42)
+    val_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=42)
+    
+    # Create datasets
+    train_dataset = SpectrogramDataset(train_df)
+    val_dataset = SpectrogramDataset(val_df)
+    test_dataset = SpectrogramDataset(test_df)
+    
+    # Create dataloaders
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    
+    # Initialize model
+    model = SpectrogramCNN(num_classes=len(valid))
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    
+    class_counts = torch.tensor([label_counts[label] for label in valid])
+    class_weights = 1. / class_counts.float()
+    class_weights = class_weights / class_weights.sum()
+
+    # Modify your criterion
+    criterion = nn.CrossEntropyLoss(weight=class_weights.to(device))
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    
+    # Training loop
+    for epoch in range(num_epochs):
+        model.train()
+        running_loss = 0.0
+        
+        for inputs, labels in train_loader:
+            inputs, labels = inputs.to(device), labels.to(device)
+            
+            optimizer.zero_grad()
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+            
+            running_loss += loss.item() * inputs.size(0)
+        
+        epoch_loss = running_loss / len(train_loader.dataset)
+        
+        # Validation
+        model.eval()
+        val_loss, val_acc = evaluate_model(model, val_loader, criterion, device)
+        
+        print(f"Epoch {epoch+1}/{num_epochs} - "
+              f"Train Loss: {epoch_loss:.4f} - "
+              f"Val Loss: {val_loss:.4f} - "
+              f"Val Acc: {val_acc:.4f}")
+    
+    return model, train_dataset.label_encoder, test_loader
+      </code>
+    </pre>
+  </details>
+
+  <details>
+    <summary>Show/Hide Evaluate CNN Code</summary>
+    <pre>
+      <code class="python">
+# 4. Evaluation functions
+def generate_classification_report(model, data_loader, label_encoder, device):
+    model.eval()
+    all_preds = []
+    all_labels = []
+    
+    with torch.no_grad():
+        for inputs, labels in data_loader:
+            inputs = inputs.to(device)
+            outputs = model(inputs)
+            _, preds = torch.max(outputs, 1)
+            
+            all_preds.extend(preds.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+    
+    # Convert numerical labels back to original strings
+    pred_classes = label_encoder.inverse_transform(all_preds)
+    true_classes = label_encoder.inverse_transform(all_labels)
+    
+    print("Classification Report:")
+    print(classification_report(true_classes, pred_classes, target_names=label_encoder.classes_))
+    
+    return true_classes, pred_classes
+
+def plot_confusion_matrix(true_classes, pred_classes, label_encoder):
+    cm = confusion_matrix(true_classes, pred_classes, labels=label_encoder.classes_)
+    
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=label_encoder.classes_,
+                yticklabels=label_encoder.classes_)
+    plt.title('Confusion Matrix')
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    plt.show()
+      </code>
+    </pre>
+  </details>
+
+  <pre>
+    <code class="python">
+# 5. Main execution
+if __name__ == "__main__":
+    # Train the model and get test loader
+    model, label_encoder, test_loader = train_model(df)
+    
+    # Evaluate on test set
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    test_loss, test_acc = evaluate_model(model, test_loader, nn.CrossEntropyLoss(), device)
+    print(f"\nTest Loss: {test_loss:.4f} - Test Accuracy: {test_acc:.4f}")
+    
+    # Generate and display classification metrics
+    true_classes, pred_classes = generate_classification_report(
+        model, test_loader, label_encoder, device
+    )
+    
+    # Plot confusion matrix
+    plot_confusion_matrix(true_classes, pred_classes, label_encoder)
+    
+    # Save the model and label encoder
+    torch.save(model.state_dict(), "spectrogram_cnn.pth")
+    np.save("label_encoder.npy", label_encoder.classes_)
+    </code>
+  </pre>  
+
 </div>
 
 <div class="container blog main gray">
