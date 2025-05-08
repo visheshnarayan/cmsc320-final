@@ -1539,7 +1539,7 @@ df['Audio Length'].describe()
 </div>
 
 <div class="container blog main">
-  <h2>Spectograms of Unique Labels</h2>
+  <h2><i class="fa-solid fa-industry"></i> Spectograms of Unique Labels</h2>
 
   <p class="text">
     This grid displays one <span style="font-weight: bold">Mel spectrogram</span> for each unique vocalization label in
@@ -1771,7 +1771,7 @@ plot_unique_label_spectrograms_plotly(df, output_dir="spectrograms")
   </div>
 </div>
 <div class="container blog main">
-  <h2>Projection Setup for Audio Data Visualization</h2>
+  <h2><i class="fa-solid fa-magnifying-glass-chart"></i> Projection Setup for Audio Data Visualization</h2>
 
   <p class="text">
     To visualize complex audio data, we extract key features, specifically Mel Frequency Cepstral Coefficients (MFCCs)
@@ -2259,7 +2259,7 @@ save_3d_plot(X_tsne, labels, "3D t-SNE Projection of Audio Features", "tsne_3d.h
 </div>
 
 <div class="container blog main">
-  <h1>Feature Extraction & Hypothesis Testing</h1>
+  <h1><i class="fa-solid fa-syringe"></i> Feature Extraction & Hypothesis Testing</h1>
   <section style="font-family: sans-serif; line-height: 1.6;">
     <p class="text">
       In this section, we extract acoustic features from vocalizations and statistically evaluate whether they differ
@@ -3586,7 +3586,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 
 
 <div class="container blog main">
-  <h1>Synthetic Data Generation</h1>
+  <h1><i class="fa-solid fa-dna"></i> Synthetic Data Generation</h1>
 
   <p class="text">
     We faced an issue of class imbalance in our audio dataset. Using synthetic audio generation techniques, we ensure
@@ -3623,7 +3623,7 @@ def plot_spectral_entropy_comparison(df, target_labels, feature="Spectral Entrop
 </div>
 
 <div class="container blog main">
-  <h2>Class Distribution Analysis</h2>
+  <h2><i class="fa-solid fa-diagram-project"></i> Class Distribution Analysis</h2>
   <p class="text">
     The original dataset has a <span style="font-weight: bold">significant imbalance</span> in the number of samples per
     emotion label. For example, the
@@ -4037,7 +4037,7 @@ print(f"Balanced data shape: {balanced_df.shape}")
     Finally, confusion matrices and class-wise precision, recall, and F1 scores were computed to analyze performance across all classes. Results were visualized to reveal both the strengths and error modes of our models.
   </p>
 
-  <h2 style="padding-top: 1em">K-Means Clustering on Projected Features</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-circle-nodes"></i> K-Means Clustering on Projected Features</h2>
   
   <p class="text">
     After feature engineering and scaling, we explored the intrinsic structure of the dataset using unsupervised clustering. Our goal was to assess whether feature representations of audio samples naturally grouped according to their labeled categories.
@@ -4738,7 +4738,7 @@ print("="*50)
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Feature Evaluation and Hierarchical Classification with SVMs</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-sitemap"></i> Feature Evaluation and Hierarchical Classification with SVMs</h2>
 
   <p class="text">
     This section describes how individual features were evaluated for classification performance and how a hierarchical ensemble of binary classifiers was constructed to improve multi-class prediction.
@@ -5769,7 +5769,7 @@ if __name__ == "__main__":
 </div>
 
 <div class="container blog main">
-  <h2 style="padding-top: 1em">Spectrogram Classification with Vision Transformers</h2>
+  <h2 style="padding-top: 1em"><i class="fa-solid fa-eye"></i> Spectrogram Classification with Vision Transformers</h2>
   <p class="text">
     Building on the success of CNN-based models, we explore the use of <span style="font-weight: bold;">Vision Transformers (ViTs)</span> for spectrogram classification. ViTs treat spectrograms as image patches, enabling the model to capture global context more effectively than local receptive fields in traditional CNNs. This approach is particularly promising for identifying subtle, long-range patterns across time-frequency dimensions.
   </p>
