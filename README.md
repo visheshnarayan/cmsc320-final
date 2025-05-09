@@ -76,10 +76,7 @@ ViTs were particularly effective due to their ability to learn global features a
 
 ## Project Assets
 
-- [Final Report Website](https://github.com/visheshnarayan/cmsc320-final)
-- [Notebook](./notebooks/vit_plots.ipynb)
-- [Interactive Charts](./clarity/images/label_distribution.html)
-- [Participant Analysis Plots](./clarity/images/participant_barplots)
+- [Final Report Website]([https://github.com/visheshnarayan/cmsc320-final](https://visheshnarayan.github.io/))
 
 ---
 
