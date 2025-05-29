@@ -1,6 +1,5 @@
 # Machine Learning the Unspoken  
 **Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations**  
-Spring 2025 Data Science Project  
 
 ### Authors  
 - Vishesh Narayan  
