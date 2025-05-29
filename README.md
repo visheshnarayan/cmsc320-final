@@ -2,11 +2,11 @@
 **Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations**  
 
 ### Authors  
-- Vishesh Narayan  
-- Shivam Amin  
-- Deval Bansal  
-- Eric Yao  
-- Eshan Khan  
+- Vishesh Narayan: [`git@visheshnarayan`](https://github.com/visheshnarayan)  
+- Shivam Amin: [`git@ShivAmamin05`](https://github.com/ShivAmamin05)  
+- Deval Bansal[`git@devnban`](https://github.com/devnban)  
+- Eric Yao[`git@eyao6`](https://github.com/eyao6)  
+- Eshan Khan [`git@eshan327`](https://github.com/eshan327)
 
 ---
 
