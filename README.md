@@ -1,4 +1,4 @@
-# Machine Learning the Unspoken  
+# (Machine) Learning the Unspoken  
 **Acoustic Feature Analysis for Classifying Intent in Nonverbal Vocalizations**  
 
 ### Authors  
